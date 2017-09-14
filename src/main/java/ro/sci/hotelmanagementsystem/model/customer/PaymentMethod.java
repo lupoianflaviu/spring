@@ -1,4 +1,8 @@
 package ro.sci.hotelmanagementsystem.model.customer;
 
-public class PaymentMethod {
+/**
+ * Payment methods constants
+ */
+public enum PaymentMethod {
+    CASH, CREDITCARD, PAYPAL
 }
