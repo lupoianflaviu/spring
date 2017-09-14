@@ -3,7 +3,7 @@ package ro.sci.hotel;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Hotel Management System
+ * Hotel Management
  * @version 1.0
  * @author Andrei Vintila, Darius Petricele, Flaviu Lupoian, Tudor Radovici
  */

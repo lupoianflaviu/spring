@@ -4,6 +4,9 @@ import java.util.Date;
 
 import ro.sci.hotel.model.util.Price;
 
+/**
+ * Customer Booking model
+ */
 public class Booking {
 
     private int id;
