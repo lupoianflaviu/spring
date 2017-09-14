@@ -19,6 +19,7 @@ public class Room {
     private boolean booked = false;
     private Price pricePerNight;
     private Date startDate;
+
     private Date endDate;
 
     public int getRoomNumber() {
