@@ -1,4 +1,9 @@
 package ro.sci.hotelmanagementsystem.model.room;
 
-public class RoomType {
+/**
+ * Room types constants
+ */
+public enum RoomType {
+
+    SINGLE, DOUBLE, STUDIO, SUPERIOR_DOUBLE
 }
