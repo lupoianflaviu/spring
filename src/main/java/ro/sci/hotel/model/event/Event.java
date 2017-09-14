@@ -1,5 +1,7 @@
 package ro.sci.hotel.model.event;
 
+import ro.sci.hotel.model.util.Price;
+
 import java.util.Date;
 
 public class Event {

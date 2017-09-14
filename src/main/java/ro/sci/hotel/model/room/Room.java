@@ -1,6 +1,6 @@
 package ro.sci.hotel.model.room;
 
-import ro.sci.hotel.model.event.Price;
+import ro.sci.hotel.model.util.Price;
 
 import java.util.Date;
 
