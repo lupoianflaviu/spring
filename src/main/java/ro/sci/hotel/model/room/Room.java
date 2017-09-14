@@ -1,5 +1,7 @@
 package ro.sci.hotel.model.room;
 
+import java.util.Date;
+
 /**
  * Hotel room model
  */
@@ -14,6 +16,8 @@ public class Room {
     private boolean balcony = false;
     private boolean booked = false;
     private PricePerNight pricePerNight;
+    private Date startDate;
+    private Date endDate;
 
     public int getRoomNumber() {
         return roomNumber;
@@ -85,5 +89,21 @@ public class Room {
 
     public void setPricePerNight(PricePerNight pricePerNight) {
         this.pricePerNight = pricePerNight;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }
