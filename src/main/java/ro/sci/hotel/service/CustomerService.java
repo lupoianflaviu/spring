@@ -1,4 +1,4 @@
-package ro.sci.hotelmanagementsystem.service;
+package ro.sci.hotel.service;
 
 /**
  * Customer service interface for repository manipulation

@@ -1,10 +1,8 @@
-package ro.sci.hotelmanagementsystem.model.room;
+package ro.sci.hotel.model.event;
 
-/**
- * Price per night model
- */
-public class PricePerNight {
+import ro.sci.hotel.model.room.Currency;
 
+public class Price {
     private double value = 0;
     private Currency currency;
 

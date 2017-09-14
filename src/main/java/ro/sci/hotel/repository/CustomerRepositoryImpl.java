@@ -1,4 +1,4 @@
-package ro.sci.hotelmanagementsystem.repository;
+package ro.sci.hotel.repository;
 
 
 import org.springframework.stereotype.Repository;

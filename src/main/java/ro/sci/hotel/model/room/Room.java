@@ -1,4 +1,4 @@
-package ro.sci.hotelmanagementsystem.model.room;
+package ro.sci.hotel.model.room;
 
 import java.util.Date;
 
