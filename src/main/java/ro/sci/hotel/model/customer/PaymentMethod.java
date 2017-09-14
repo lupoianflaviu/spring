@@ -1,4 +1,4 @@
-package ro.sci.hotelmanagementsystem.model.customer;
+package ro.sci.hotel.model.customer;
 
 /**
  * Payment methods constants

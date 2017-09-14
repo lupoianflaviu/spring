@@ -1,4 +1,4 @@
-package ro.sci.hotelmanagementsystem.controller;
+package ro.sci.hotel.controller;
 
 import org.springframework.stereotype.Controller;
 

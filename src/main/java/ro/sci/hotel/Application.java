@@ -1,4 +1,4 @@
-package ro.sci.hotelmanagementsystem;
+package ro.sci.hotel;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

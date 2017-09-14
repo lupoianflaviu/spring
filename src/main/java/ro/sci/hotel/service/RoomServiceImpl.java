@@ -1,4 +1,4 @@
-package ro.sci.hotelmanagementsystem.service;
+package ro.sci.hotel.service;
 
 import org.springframework.stereotype.Service;
 

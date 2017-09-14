@@ -1,4 +1,4 @@
-package ro.sci.hotelmanagementsystem.repository;
+package ro.sci.hotel.repository;
 
 /**
  * Abstract class for database connection
