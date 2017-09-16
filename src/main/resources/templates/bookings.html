@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Saved Bookings</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="webjars/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen"> </link>
+</head>
+<body>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<table>
+    <p th:text="'ID ' + 'Price' + 'Currency' + 'StartDate' + 'EndDate' + ' Room Number ' + ' Customer Id'"/>
+    <th:block th:each="booking : ${bookings}">
+    <tr>
+        <td th:text="${booking.id}">...</td>
+        <td th:text="${booking.customerId}">...</td>
+        <td th:text="${booking.roomNumber}">...</td>
+        <td th:text="${booking.startDate}">...</td>
+        <td th:text="${booking.endDate}">...</td>
+        <td th:text="${booking.pricePerDay}">...</td>
+        <td th:text="${booking.currency}">...</td>
+    </tr>
+    </th:block>
+</table>
+<div class="btn-group">
+    <button type="button" class="btn btn-success">This is a success button</button>
+    <button type="button" class="btn btn-warning">This is a warning button</button>
+    <button type="button" class="btn btn-danger">This is a danger button</button>
+</div>
+</body>
+</html>

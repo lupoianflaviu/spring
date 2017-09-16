@@ -2,6 +2,7 @@ package ro.sci.hotel.model.booking;
 
 import java.sql.Date;
 
+import ro.sci.hotel.model.util.Currency;
 import ro.sci.hotel.model.util.Price;
 
 /**
@@ -15,6 +16,7 @@ public class Booking {
     private Date endDate;
     private int roomNumber;
     private int customerId;
+    private Currency currency;
 
     public int getId() {
         return id;
@@ -100,5 +102,13 @@ public class Booking {
     @Override
     public String toString() {
         return "\n" + id + " , " + pricePerDay + " , " + startDate + " , " + endDate + " , " + roomNumber + " , " + customerId;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 }
