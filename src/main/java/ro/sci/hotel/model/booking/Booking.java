@@ -15,7 +15,6 @@ public class Booking {
     private Date endDate;
     private int roomNumber;
     private int customerId;
-    private int eventId;
 
     public int getId() {
         return id;
@@ -65,14 +64,6 @@ public class Booking {
         this.customerId = customerId;
     }
 
-    public int getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -87,8 +78,6 @@ public class Booking {
         if (roomNumber != booking.roomNumber)
             return false;
         if (customerId != booking.customerId)
-            return false;
-        if (eventId != booking.eventId)
             return false;
         if (!pricePerDay.equals(booking.pricePerDay))
             return false;
@@ -105,12 +94,11 @@ public class Booking {
         result = 31 * result + endDate.hashCode();
         result = 31 * result + roomNumber;
         result = 31 * result + customerId;
-        result = 31 * result + eventId;
         return result;
     }
 
     @Override
     public String toString() {
-        return "\n" + id + " , " + pricePerDay + " , " + startDate + " , " + endDate + " , " + roomNumber + " , " + customerId + " , " + eventId;
+        return "\n" + id + " , " + pricePerDay + " , " + startDate + " , " + endDate + " , " + roomNumber + " , " + customerId;
     }
 }

@@ -16,7 +16,6 @@ public class Room {
     private boolean oceanView = false;
     private boolean airConditioning = false;
     private boolean balcony = false;
-    private boolean booked = false;
     private Price pricePerNight;
     private Date startDate;
     private Date endDate;
@@ -75,14 +74,6 @@ public class Room {
 
     public void setBalcony(boolean balcony) {
         this.balcony = balcony;
-    }
-
-    public boolean isBooked() {
-        return booked;
-    }
-
-    public void setBooked(boolean booked) {
-        this.booked = booked;
     }
 
     public Price getPricePerNight() {
