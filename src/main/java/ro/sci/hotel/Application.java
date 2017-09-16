@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.sql.Date;
 
-import ro.sci.hotel.model.customer.Customer;
-import ro.sci.hotel.model.customer.CustomerAddress;
-import ro.sci.hotel.model.customer.PaymentMethod;
+import ro.sci.hotel.model.booking.Booking;
 import ro.sci.hotel.model.room.BedType;
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
@@ -45,16 +43,25 @@ public class Application {
         room.setRoomType(RoomType.DOUBLE);
         room.setStartDate(Date.valueOf("2017-01-01"));
         room.setEndDate(Date.valueOf("2017-01-01"));
-//
-//        Customer customer = new Customer();
-//        customer.setId(3);
-//        customer.setFirstName("sdsd");
-//        customer.setLastName("sdsdsd");
-//        customer.setEmail("sdsdsdsd");
-//        customer.setPhoneNumber("223232323");
-//        customer.setPaymentMethod(PaymentMethod.CREDITCARD);
-//        customer.setCustomerAddress(new CustomerAddress("afadfas", "Cluj-Napoca", "Romania"));
 
-        bookingService.create(3, "2017-05-03", "2017-06-04", 1);
+        //        Customer customer = new Customer();
+        //        customer.setId(3);
+        //        customer.setFirstName("sdsd");
+        //        customer.setLastName("sdsdsd");
+        //        customer.setEmail("sdsdsdsd");
+        //        customer.setPhoneNumber("223232323");
+        //        customer.setPaymentMethod(PaymentMethod.CREDITCARD);
+        //        customer.setCustomerAddress(new CustomerAddress("afadfas", "Cluj-Napoca", "Romania"));
+
+        Booking booking = new Booking();
+        booking.setId(8);
+        booking.setCustomerId(2);
+        booking.setPricePerDay(new Price(20, Currency.EUR));
+        booking.setRoomNumber(2);
+        booking.setStartDate(Date.valueOf("2017-11-11"));
+        booking.setEndDate(Date.valueOf("2017-12-11"));
+
+        bookingService.update(booking);
+        System.out.println(bookingService.getAll().toString());
     }
 }

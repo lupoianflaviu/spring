@@ -3,6 +3,8 @@ package ro.sci.hotel.repository;
 import java.sql.Date;
 import java.util.List;
 
+import ro.sci.hotel.model.booking.Booking;
+
 /**
  * Booking repository interface for DAO
  */
@@ -17,12 +19,10 @@ public interface BookingRepository<T> {
 
     /**
      * Create a new booking and set startDAte and endDate in desired room
-     * @param customerId Id of customer from db
-     * @param startDate Arrival date
-     * @param endDate Departure date
-     * @param roomNumber Room number from db
+     *
+     * @param booking to be added in db
      */
-    void create(Integer customerId, String startDate, String endDate, Integer roomNumber);
+    void create(Booking booking);
 
     /**
      * Detele a booking entry from db
@@ -40,6 +40,7 @@ public interface BookingRepository<T> {
 
     /**
      * Search bookings by customer id
+     *
      * @param customerId searched
      * @return List<T> searched bookings list
      */
@@ -47,6 +48,7 @@ public interface BookingRepository<T> {
 
     /**
      * Search bookings by room number
+     *
      * @param roomNumber searched
      * @return List<T> searched bookings list
      */
@@ -54,14 +56,16 @@ public interface BookingRepository<T> {
 
     /**
      * Search booking by interval
+     *
      * @param startDate date of arrival
-     * @param endDate date of departure
+     * @param endDate   date of departure
      * @return List<T> searched bookings list
      */
     List<T> searchByDate(Date startDate, Date endDate);
 
     /**
      * Search bookings by price
+     *
      * @param price seached
      * @return List<T> searched bookings list
      */
@@ -69,6 +73,7 @@ public interface BookingRepository<T> {
 
     /**
      * Search bookings by event id
+     *
      * @param eventId searched
      * @return List<T> searched bookings list
      */
@@ -76,6 +81,7 @@ public interface BookingRepository<T> {
 
     /**
      * Search bookings by customer id and room number
+     *
      * @param customerId searched
      * @param roomNumber searched
      * @return List<T> searched bookings list

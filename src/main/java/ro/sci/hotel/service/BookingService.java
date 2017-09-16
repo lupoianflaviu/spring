@@ -21,12 +21,9 @@ public interface BookingService<T> {
     /**
      * Create a new booking and set startDAte and endDate in desired room
      *
-     * @param customerId Id of customer from db
-     * @param startDate  Arrival date
-     * @param endDate    Departure date
-     * @param roomNumber Room number from db
+     * @param booking to be added in db
      */
-    void create(Integer customerId, String startDate, String endDate, Integer roomNumber);
+    void create(Booking booking);
 
     /**
      * Detele a booking entry from repository
