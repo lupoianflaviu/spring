@@ -22,8 +22,8 @@ public class BookingServiceImpl implements BookingService<Booking> {
     }
 
     @Override
-    public void create(Integer customerId, String startDate, String endDate, Integer roomNumber) {
-        this.bookingRepository.create(customerId, startDate, endDate, roomNumber);
+    public void create(Booking booking) {
+        this.bookingRepository.create(booking);
     }
 
     @Override

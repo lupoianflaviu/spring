@@ -33,4 +33,9 @@ public class Price {
     public void setCurrency(ro.sci.hotel.model.util.Currency currency) {
         this.currency = currency;
     }
+
+    @Override
+    public String toString() {
+        return value + " , " + currency;
+    }
 }
