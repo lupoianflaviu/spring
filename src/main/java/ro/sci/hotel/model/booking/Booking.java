@@ -1,6 +1,6 @@
 package ro.sci.hotel.model.booking;
 
-import java.util.Date;
+import java.sql.Date;
 
 import ro.sci.hotel.model.util.Price;
 

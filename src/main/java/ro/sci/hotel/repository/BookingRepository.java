@@ -1,6 +1,6 @@
 package ro.sci.hotel.repository;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -16,11 +16,13 @@ public interface BookingRepository<T> {
     List<T> getAll();
 
     /**
-     * Create a booking
-     *
-     * @param t new Booking
+     * Create a new booking and set startDAte and endDate in desired room
+     * @param customerId Id of customer from db
+     * @param startDate Arrival date
+     * @param endDate Departure date
+     * @param roomNumber Room number from db
      */
-    void create(T t);
+    void create(Integer customerId, Date startDate, Date endDate, Integer roomNumber);
 
     /**
      * Detele a booking entry from db
