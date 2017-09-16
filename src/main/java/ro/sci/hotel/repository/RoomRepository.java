@@ -3,7 +3,7 @@ package ro.sci.hotel.repository;
 import ro.sci.hotel.model.room.BedType;
 import ro.sci.hotel.model.room.RoomType;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**

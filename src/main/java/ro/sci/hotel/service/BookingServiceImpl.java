@@ -2,7 +2,7 @@ package ro.sci.hotel.service;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import ro.sci.hotel.model.booking.Booking;
@@ -22,8 +22,8 @@ public class BookingServiceImpl implements BookingService<Booking> {
     }
 
     @Override
-    public void create(Booking booking) {
-        this.bookingRepository.create(booking);
+    public void create(Integer customerId, Date startDate, Date endDate, Integer roomNumber) {
+        this.bookingRepository.create(customerId, startDate, endDate, roomNumber);
     }
 
     @Override

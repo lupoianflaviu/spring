@@ -6,7 +6,7 @@ import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
 import ro.sci.hotel.repository.RoomRepository;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
