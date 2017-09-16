@@ -81,21 +81,24 @@ public class Booking {
             return false;
         if (customerId != booking.customerId)
             return false;
-        if (!pricePerDay.equals(booking.pricePerDay))
+        if (pricePerDay != null ? !pricePerDay.equals(booking.pricePerDay) : booking.pricePerDay != null)
             return false;
-        if (!startDate.equals(booking.startDate))
+        if (startDate != null ? !startDate.equals(booking.startDate) : booking.startDate != null)
             return false;
-        return endDate.equals(booking.endDate);
+        if (endDate != null ? !endDate.equals(booking.endDate) : booking.endDate != null)
+            return false;
+        return currency == booking.currency;
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + pricePerDay.hashCode();
-        result = 31 * result + startDate.hashCode();
-        result = 31 * result + endDate.hashCode();
+        result = 31 * result + (pricePerDay != null ? pricePerDay.hashCode() : 0);
+        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
         result = 31 * result + roomNumber;
         result = 31 * result + customerId;
+        result = 31 * result + (currency != null ? currency.hashCode() : 0);
         return result;
     }
 
