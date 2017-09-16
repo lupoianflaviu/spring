@@ -20,7 +20,7 @@ import ro.sci.hotel.model.util.Price;
 /**
  * Implementation of Booking Repository Interface
  */
-@Repository
+@Repository("bookingRepository")
 public class BookingRepositoryImpl extends BaseRepository implements BookingRepository<Booking> {
 
     private static final String DATABASE_ERROR = "Database error!";

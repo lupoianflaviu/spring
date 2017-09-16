@@ -11,7 +11,7 @@ import ro.sci.hotel.repository.BookingRepository;
 /**
  * Implementation for Booking Service interface
  */
-@Service
+@Service("bookingService")
 public class BookingServiceImpl implements BookingService<Booking> {
 
     private BookingRepository<Booking> bookingRepository;
