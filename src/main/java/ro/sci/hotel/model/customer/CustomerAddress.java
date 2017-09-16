@@ -5,6 +5,16 @@ package ro.sci.hotel.model.customer;
  */
 public class CustomerAddress {
 
+    public CustomerAddress(String city) {
+        this.city = city;
+    }
+
+    public CustomerAddress(String streetAddress, String city, String country) {
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.country = country;
+    }
+
     private String streetAddress;
     private String city;
     private String country;

@@ -9,6 +9,15 @@ public class Price {
     private double value = 0;
     private Currency currency;
 
+    public Price(Currency currency) {
+        this.currency = currency;
+    }
+
+    public Price(double value, Currency currency) {
+        this.value = value;
+        this.currency = currency;
+    }
+
     public double getValue() {
         return value;
     }

@@ -3,6 +3,9 @@ package ro.sci.hotel.service;
 import java.sql.Date;
 import java.util.List;
 
+import ro.sci.hotel.model.booking.Booking;
+import ro.sci.hotel.repository.BookingRepository;
+
 /**
  * Service interface for Booking Repository manipulation
  */
@@ -17,12 +20,13 @@ public interface BookingService<T> {
 
     /**
      * Create a new booking and set startDAte and endDate in desired room
+     *
      * @param customerId Id of customer from db
-     * @param startDate Arrival date
-     * @param endDate Departure date
+     * @param startDate  Arrival date
+     * @param endDate    Departure date
      * @param roomNumber Room number from db
      */
-    void create(Integer customerId, Date startDate, Date endDate, Integer roomNumber);
+    void create(Integer customerId, String startDate, String endDate, Integer roomNumber);
 
     /**
      * Detele a booking entry from repository
@@ -40,6 +44,7 @@ public interface BookingService<T> {
 
     /**
      * Search bookings by customer id
+     *
      * @param customerId searched
      * @return List<T> searched bookings list
      */
@@ -47,6 +52,7 @@ public interface BookingService<T> {
 
     /**
      * Search bookings by room number
+     *
      * @param roomNumber searched
      * @return List<T> searched bookings list
      */
@@ -54,14 +60,16 @@ public interface BookingService<T> {
 
     /**
      * Search booking by interval
+     *
      * @param startDate date of arrival
-     * @param endDate date of departure
+     * @param endDate   date of departure
      * @return List<T> searched bookings list
      */
     List<T> searchByDate(Date startDate, Date endDate);
 
     /**
      * Search bookings by price
+     *
      * @param price seached
      * @return List<T> searched bookings list
      */
@@ -69,6 +77,7 @@ public interface BookingService<T> {
 
     /**
      * Search bookings by event id
+     *
      * @param eventId searched
      * @return List<T> searched bookings list
      */
@@ -76,9 +85,17 @@ public interface BookingService<T> {
 
     /**
      * Search bookings by customer id and room number
+     *
      * @param customerId searched
      * @param roomNumber searched
      * @return List<T> searched bookings list
      */
     List<T> searchByCustomerIdAndRoomNumber(Integer customerId, Integer roomNumber);
+
+    /**
+     * Setter for booking repository injection
+     *
+     * @param bookingRepository Booking repository
+     */
+    void setBookingRepository(BookingRepository<Booking> bookingRepository);
 }

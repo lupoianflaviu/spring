@@ -22,7 +22,7 @@ public class BookingServiceImpl implements BookingService<Booking> {
     }
 
     @Override
-    public void create(Integer customerId, Date startDate, Date endDate, Integer roomNumber) {
+    public void create(Integer customerId, String startDate, String endDate, Integer roomNumber) {
         this.bookingRepository.create(customerId, startDate, endDate, roomNumber);
     }
 
@@ -66,6 +66,7 @@ public class BookingServiceImpl implements BookingService<Booking> {
         return this.bookingRepository.searchByCustomerIdAndRoomNumber(customerId, roomNumber);
     }
 
+    @Override
     public void setBookingRepository(BookingRepository<Booking> bookingRepository) {
         this.bookingRepository = bookingRepository;
     }

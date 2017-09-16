@@ -22,7 +22,7 @@ public interface BookingRepository<T> {
      * @param endDate Departure date
      * @param roomNumber Room number from db
      */
-    void create(Integer customerId, Date startDate, Date endDate, Integer roomNumber);
+    void create(Integer customerId, String startDate, String endDate, Integer roomNumber);
 
     /**
      * Detele a booking entry from db
