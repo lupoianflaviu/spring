@@ -25,8 +25,13 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
     private static final String EXCEPTION_THROWN = "Exception thrown";
 
     private static final Logger LOGGER = Logger.getLogger("Hotel");
-    private static final String WRITING_IN_OUTCARS_HAS_FINISHED = "Writing in db has finished!";
-    private static final String ROOM_IS_ALREADY_BOOKED = "Room is already booked";
+
+    private static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
+
+    private static final String SQL_INSERT_INTO_BOOKING_ROOMNUMBER_CUSTOMERID_STARTDATE_ENDDATE_VALUES =
+            "INSERT INTO booking(roomnumber,customerid,startdate,enddate) values(?,?,?,?)";
+
+    private static final String SQL_UPDATE_ROOM_SET_STARTDATE_ENDDATE_WHERE_ID = "UPDATE room SET (startdate,enddate)=(?,?) WHERE id = ?";
 
     @Override
     public List<Booking> getAll() {
@@ -34,19 +39,19 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
     }
 
     @Override
-    public void create(Integer customerId, Date startDate, Date endDate, Integer roomNumber) {
+    public void create(Integer customerId, String startDate, String endDate, Integer roomNumber) {
 
         Room room = new Room();
         Customer customer = new Customer();
 
         try (Connection conn = newConnection();
-                PreparedStatement stm = conn.prepareStatement("INSERT INTO booking(roomnumber,customerid,startdate,enddate) values(?,?,?,?)")) {
+                PreparedStatement stm = conn.prepareStatement(SQL_INSERT_INTO_BOOKING_ROOMNUMBER_CUSTOMERID_STARTDATE_ENDDATE_VALUES)) {
 
 
             stm.setInt(1, roomNumber);
             stm.setInt(2, customerId);
-            stm.setDate(3, startDate);
-            stm.setDate(4, endDate);
+            stm.setDate(3, Date.valueOf(startDate));
+            stm.setDate(4, Date.valueOf(endDate));
 
             stm.execute();
 
@@ -55,29 +60,22 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
             throw new RuntimeException(EXCEPTION_THROWN);
         }
 
-        LOGGER.log(Level.INFO, WRITING_IN_OUTCARS_HAS_FINISHED);
+        LOGGER.log(Level.INFO, WRITING_IN_DB_HAS_FINISHED);
 
         //ToDo check room is not booked by comparing enddate; needs refactoring
-        if (Integer.valueOf(endDate.toString()) > Integer.valueOf(room.getEndDate()
-                                                                      .toString())) {
 
-            //write booking interval to room
-            try (Connection conn = newConnection();
-                    PreparedStatement stm = conn.prepareStatement("INSERT INTO room(startdate,enddate) values(?,?) WHERE id = ?")) {
+        //write booking interval to room
+        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_UPDATE_ROOM_SET_STARTDATE_ENDDATE_WHERE_ID)) {
 
+            stm.setDate(1, Date.valueOf(startDate));
+            stm.setDate(2, Date.valueOf(endDate));
+            stm.setInt(3, roomNumber);
 
-                stm.setDate(1, startDate);
-                stm.setDate(2, endDate);
-                stm.setInt(3, roomNumber);
+            stm.execute();
 
-                stm.execute();
-
-            } catch (SQLException ex) {
-                LOGGER.log(Level.WARNING, DATABASE_ERROR);
-                throw new RuntimeException(EXCEPTION_THROWN);
-            }
-        } else {
-            LOGGER.log(Level.WARNING, ROOM_IS_ALREADY_BOOKED);
+        } catch (SQLException ex) {
+            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+            throw new RuntimeException(EXCEPTION_THROWN);
         }
     }
 
