@@ -2,6 +2,8 @@ package ro.sci.hotel.model.employee;
 
 import ro.sci.hotel.model.util.Price;
 
+import java.util.Date;
+
 /**
  * Created by tudorradovici on 14/09/17.
  */
@@ -13,7 +15,7 @@ public class Employee {
     private String email;
     private EmployeeAddress employeeAddress;
     private String employeePhoneNumber;
-    private String employmentDate;
+    private Date employmentDate;
     private Price salary;
     private String employeeRole;
 
@@ -65,11 +67,11 @@ public class Employee {
         this.employeePhoneNumber = employeePhoneNumber;
     }
 
-    public String getEmploymentDate() {
+    public Date getEmploymentDate() {
         return employmentDate;
     }
 
-    public void setEmploymentDate(String employmentDate) {
+    public void setEmploymentDate(Date employmentDate) {
         this.employmentDate = employmentDate;
     }
 
