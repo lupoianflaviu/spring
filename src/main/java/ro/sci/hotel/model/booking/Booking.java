@@ -16,7 +16,7 @@ public class Booking {
     private Date endDate;
     private int roomNumber;
     private int customerId;
-    private Currency currency;
+//    private Currency currency;
 
     public int getId() {
         return id;
@@ -66,6 +66,21 @@ public class Booking {
         this.customerId = customerId;
     }
 
+
+    @Override
+    public String toString() {
+        return "\n" + id + " , " + pricePerDay + " , " + startDate + " , " + endDate + " , " + roomNumber + " , " + customerId;
+    }
+
+//    public Currency getCurrency() {
+//        return currency;
+//    }
+//
+//    public void setCurrency(Currency currency) {
+//        this.currency = currency;
+//    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -85,9 +100,7 @@ public class Booking {
             return false;
         if (startDate != null ? !startDate.equals(booking.startDate) : booking.startDate != null)
             return false;
-        if (endDate != null ? !endDate.equals(booking.endDate) : booking.endDate != null)
-            return false;
-        return currency == booking.currency;
+        return endDate != null ? endDate.equals(booking.endDate) : booking.endDate == null;
     }
 
     @Override
@@ -98,20 +111,6 @@ public class Booking {
         result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
         result = 31 * result + roomNumber;
         result = 31 * result + customerId;
-        result = 31 * result + (currency != null ? currency.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "\n" + id + " , " + pricePerDay + " , " + startDate + " , " + endDate + " , " + roomNumber + " , " + customerId;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
     }
 }
