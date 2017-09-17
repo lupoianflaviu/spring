@@ -2,7 +2,7 @@ package ro.sci.hotel.model.room;
 
 import ro.sci.hotel.model.util.Price;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Hotel room model
@@ -16,7 +16,6 @@ public class Room {
     private boolean oceanView = false;
     private boolean airConditioning = false;
     private boolean balcony = false;
-    private boolean booked = false;
     private Price pricePerNight;
     private Date startDate;
 
@@ -76,14 +75,6 @@ public class Room {
 
     public void setBalcony(boolean balcony) {
         this.balcony = balcony;
-    }
-
-    public boolean isBooked() {
-        return booked;
-    }
-
-    public void setBooked(boolean booked) {
-        this.booked = booked;
     }
 
     public Price getPricePerNight() {

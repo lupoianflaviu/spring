@@ -9,6 +9,14 @@ public class Price {
     private double value = 0;
     private Currency currency;
 
+    public Price() {
+    }
+
+    public Price(double value, Currency currency) {
+        this.value = value;
+        this.currency = currency;
+    }
+
     public double getValue() {
         return value;
     }
@@ -23,5 +31,10 @@ public class Price {
 
     public void setCurrency(ro.sci.hotel.model.util.Currency currency) {
         this.currency = currency;
+    }
+
+    @Override
+    public String toString() {
+        return value + " , " + currency;
     }
 }
