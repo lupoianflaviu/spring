@@ -18,6 +18,7 @@ public class Room {
     private boolean balcony = false;
     private Price pricePerNight;
     private Date startDate;
+
     private Date endDate;
 
     public int getRoomNumber() {
