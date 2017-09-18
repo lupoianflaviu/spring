@@ -43,11 +43,6 @@ public class RoomServiceImpl implements RoomService<Room> {
     }
 
     @Override
-    public List<Room> searchByDate(Date startDate, Date endDate) {
-        return this.roomRepository.searchByDate(startDate, endDate);
-    }
-
-    @Override
     public List<Room> searchByPrice(Double price) {
         return this.roomRepository.searchByPrice(price);
     }
@@ -55,30 +50,5 @@ public class RoomServiceImpl implements RoomService<Room> {
     @Override
     public List<Room> searchByType(RoomType roomType) {
         return this.roomRepository.searchByType(roomType);
-    }
-
-    @Override
-    public List<Room> searchByBedType(BedType bedType) {
-        return this.roomRepository.searchByBedType(bedType);
-    }
-
-    @Override
-    public List<Room> searchByBedNumber(Integer bedNumber) {
-        return this.roomRepository.searchByBedNumber(bedNumber);
-    }
-
-    @Override
-    public List<Room> searchByAC(boolean isAirConditioning) {
-        return this.roomRepository.searchByAC(isAirConditioning);
-    }
-
-    @Override
-    public List<Room> searchByBalcony(boolean isBalcony) {
-        return this.roomRepository.searchByBalcony(isBalcony);
-    }
-
-    @Override
-    public List<Room> searchByBooked(boolean isBooked) {
-        return this.roomRepository.searchByBooked(isBooked);
     }
 }
