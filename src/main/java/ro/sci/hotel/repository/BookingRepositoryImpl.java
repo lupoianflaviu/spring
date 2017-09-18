@@ -14,8 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import ro.sci.hotel.model.booking.Booking;
-import ro.sci.hotel.model.util.Currency;
-import ro.sci.hotel.model.util.Price;
+import ro.sci.hotel.model.customer.Customer;
+import ro.sci.hotel.model.room.Room;
 
 /**
  * Implementation of Booking Repository Interface
@@ -32,14 +32,11 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
     private static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
 
     private static final String SQL_INSERT_INTO_BOOKING_ROOMNUMBER_CUSTOMERID_STARTDATE_ENDDATE_VALUES =
-            "INSERT INTO booking(roomnumber,customerid,startdate,enddate,price,currency) values(?,?,?,?,?,?)";
-
-    private static final String SQL_UPDATE_ROOM_SET_STARTDATE_ENDDATE_WHERE_ID = "UPDATE room SET (startdate,enddate)=(?,?) WHERE id = ?";
+            "INSERT INTO booking(roomnumber,customerid,startdate,enddate) values(?,?,?,?)";
 
     private static final String BOOKING_DELETE_HAS_COMPLETED = "Deletion of booking completed";
 
-    private static final String SQL_UPDATE_BOOKING_WHERE_ID =
-            "UPDATE booking " + "SET roomnumber=?, customerid=?, startdate=?, enddate=?, price=?, currency=? WHERE id = ?";
+    private static final String SQL_UPDATE_BOOKING_WHERE_ID = "UPDATE booking " + "SET roomnumber=?, customerid=?, startdate=?, enddate=? WHERE id = ?";
 
     private static final String BOOKING_UPDATE_IN_DB_HAS_COMPLETED = "Booking update in db has completed";
 
@@ -55,9 +52,8 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
 
     private static final String ENDDATE = "enddate";
 
-    private static final String PRICE = "price";
+    private static final String SQL_DELETE_FROM_BOOKING_WHERE_ID = "DELETE FROM booking where id=?";
 
-    private static final String CURRENCY = "currency";
 
     @Override
     public List<Booking> getAll() {
@@ -68,12 +64,14 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
             while (rs.next()) {
 
                 Booking booking = new Booking();
+                Room room = new Room();
+                Customer customer = new Customer();
                 booking.setId(rs.getInt(ID));
-                booking.setRoomNumber(rs.getInt(ROOMNUMBER));
-                booking.setCustomerId(rs.getInt(CUSTOMERID));
+                //to verify these 2 initializations
+                room.setRoomNumber(rs.getInt(ROOMNUMBER));
+                customer.setId(rs.getInt(CUSTOMERID));
                 booking.setStartDate(rs.getDate(STARTDATE));
                 booking.setEndDate(rs.getDate(ENDDATE));
-                booking.setPricePerDay(new Price(rs.getDouble(PRICE), Currency.valueOf(rs.getString(CURRENCY))));
 
                 bookings.add(booking);
             }
@@ -86,21 +84,16 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
     }
 
     @Override
-    public void create(Booking booking) {
+    public void create(Booking booking, Room room, Customer customer) {
 
         try (Connection conn = newConnection();
                 PreparedStatement stm = conn.prepareStatement(SQL_INSERT_INTO_BOOKING_ROOMNUMBER_CUSTOMERID_STARTDATE_ENDDATE_VALUES)) {
 
 
-            stm.setInt(1, booking.getRoomNumber());
-            stm.setInt(2, booking.getCustomerId());
+            stm.setInt(1, room.getRoomNumber());
+            stm.setInt(2, customer.getId());
             stm.setDate(3, booking.getStartDate());
             stm.setDate(4, booking.getEndDate());
-            stm.setDouble(5, booking.getPricePerDay()
-                                    .getValue());
-            stm.setString(6, booking.getPricePerDay()
-                                    .getCurrency()
-                                    .toString());
 
             stm.execute();
 
@@ -110,26 +103,12 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
         }
 
         LOGGER.log(Level.INFO, WRITING_IN_DB_HAS_FINISHED);
-
-        //write booking interval to room
-        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_UPDATE_ROOM_SET_STARTDATE_ENDDATE_WHERE_ID)) {
-
-            stm.setDate(1, booking.getStartDate());
-            stm.setDate(2, booking.getEndDate());
-            stm.setInt(3, booking.getRoomNumber());
-
-            stm.execute();
-
-        } catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, DATABASE_ERROR);
-            throw new RuntimeException(EXCEPTION_THROWN);
-        }
     }
 
     @Override
     public void delete(Booking booking) {
         //delete by id
-        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement("DELETE FROM booking where id=?")) {
+        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_DELETE_FROM_BOOKING_WHERE_ID)) {
 
             stm.setInt(1, booking.getId());
             stm.executeUpdate();
@@ -146,17 +125,14 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
     public void update(Booking booking) {
         try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_UPDATE_BOOKING_WHERE_ID)) {
 
-            stm.setInt(1, booking.getRoomNumber());
-            stm.setInt(2, booking.getRoomNumber());
+            stm.setInt(1, booking.getRoom()
+                                 .getRoomNumber());
+            stm.setInt(2, booking.getCustomer()
+                                 .getId());
             stm.setDate(3, booking.getStartDate());
             stm.setDate(4, booking.getEndDate());
-            stm.setDouble(5, booking.getPricePerDay()
-                                    .getValue());
-            stm.setString(6, booking.getPricePerDay()
-                                    .getCurrency()
-                                    .toString());
 
-            stm.setInt(7, booking.getId());
+            stm.setInt(5, booking.getId());
 
             stm.executeUpdate();
 

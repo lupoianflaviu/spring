@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 
 import ro.sci.hotel.model.booking.Booking;
+import ro.sci.hotel.model.customer.Customer;
+import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.repository.BookingRepository;
 
 /**
@@ -23,7 +25,7 @@ public interface BookingService<T> {
      *
      * @param booking to be added in db
      */
-    void create(Booking booking);
+    void create(Booking booking, Room room, Customer customer);
 
     /**
      * Detele a booking entry from repository

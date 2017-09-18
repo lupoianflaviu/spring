@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.util.List;
 
 import ro.sci.hotel.model.booking.Booking;
+import ro.sci.hotel.model.customer.Customer;
+import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.repository.BookingRepository;
 
 /**
@@ -22,8 +24,8 @@ public class BookingServiceImpl implements BookingService<Booking> {
     }
 
     @Override
-    public void create(Booking booking) {
-        this.bookingRepository.create(booking);
+    public void create(Booking booking, Room room, Customer customer) {
+        this.bookingRepository.create(booking, room, customer);
     }
 
     @Override
