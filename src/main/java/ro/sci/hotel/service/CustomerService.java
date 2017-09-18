@@ -38,14 +38,14 @@ public interface CustomerService<T> {
     /**
      * Search customer by id
      * @param id searched
-     * @return List<T> searched room list
+     * @return List<T> searched customer list
      */
     List<T> searchByCustomerId(int id);
 
     /**
      * Search room by price
-     * @param firstName seached
-     * @return List<T> searched room list
+     * @param firstName searched
+     * @return List<T> searched customer list
      */
     List<T> searchByFirstName(String firstName);
 }
