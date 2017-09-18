@@ -17,9 +17,6 @@ public class Room {
     private boolean airConditioning = false;
     private boolean balcony = false;
     private Price pricePerNight;
-    private Date startDate;
-
-    private Date endDate;
 
     public int getRoomNumber() {
         return roomNumber;
@@ -83,21 +80,5 @@ public class Room {
 
     public void setPricePerNight(Price pricePerNight) {
         this.pricePerNight = pricePerNight;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
     }
 }
