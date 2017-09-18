@@ -7,8 +7,8 @@
 <body>
 <h1>Form</h1>
 <form action="#" th:action="@{/submit}" method="post">
-    <p>Room Number: <input type="text" th:value="*{booking.roomNumber}" /></p>
-    <p>Customer Id: <input type="text" th:field="*{booking.customerId}" /></p>
+    <p>Room Number: <input type="text" th:value="*{booking.room}" /></p>
+    <p>Customer Id: <input type="text" th:field="*{booking.customer}" /></p>
     <p>Price: <input type="text" th:field="*{booking.pricePerDay.value}" /></p>
     <p>Currency: <input type="text" th:field="*{booking.pricePerDay.currency}" /></p>
     <p>StartDate: <input type="text" th:field="*{booking.startDate}" /></p>

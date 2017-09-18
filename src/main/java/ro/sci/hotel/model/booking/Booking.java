@@ -2,7 +2,8 @@ package ro.sci.hotel.model.booking;
 
 import java.sql.Date;
 
-import ro.sci.hotel.model.util.Currency;
+import ro.sci.hotel.model.customer.Customer;
+import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.util.Price;
 
 /**
@@ -14,9 +15,8 @@ public class Booking {
     private Price pricePerDay;
     private Date startDate;
     private Date endDate;
-    private int roomNumber;
-    private int customerId;
-//    private Currency currency;
+    private Room room;
+    private Customer customer;
 
     public int getId() {
         return id;
@@ -50,36 +50,27 @@ public class Booking {
         this.endDate = endDate;
     }
 
-    public int getRoomNumber() {
-        return roomNumber;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
 
     @Override
     public String toString() {
-        return "\n" + id + " , " + pricePerDay + " , " + startDate + " , " + endDate + " , " + roomNumber + " , " + customerId;
+        return "\n" + id + " , " + pricePerDay + " , " + startDate + " , " + endDate + " , " + room + " , " + customer;
     }
-
-//    public Currency getCurrency() {
-//        return currency;
-//    }
-//
-//    public void setCurrency(Currency currency) {
-//        this.currency = currency;
-//    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -92,15 +83,15 @@ public class Booking {
 
         if (id != booking.id)
             return false;
-        if (roomNumber != booking.roomNumber)
-            return false;
-        if (customerId != booking.customerId)
-            return false;
         if (pricePerDay != null ? !pricePerDay.equals(booking.pricePerDay) : booking.pricePerDay != null)
             return false;
         if (startDate != null ? !startDate.equals(booking.startDate) : booking.startDate != null)
             return false;
-        return endDate != null ? endDate.equals(booking.endDate) : booking.endDate == null;
+        if (endDate != null ? !endDate.equals(booking.endDate) : booking.endDate != null)
+            return false;
+        if (room != null ? !room.equals(booking.room) : booking.room != null)
+            return false;
+        return customer != null ? customer.equals(booking.customer) : booking.customer == null;
     }
 
     @Override
@@ -109,8 +100,8 @@ public class Booking {
         result = 31 * result + (pricePerDay != null ? pricePerDay.hashCode() : 0);
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
         result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
-        result = 31 * result + roomNumber;
-        result = 31 * result + customerId;
+        result = 31 * result + (room != null ? room.hashCode() : 0);
+        result = 31 * result + (customer != null ? customer.hashCode() : 0);
         return result;
     }
 }

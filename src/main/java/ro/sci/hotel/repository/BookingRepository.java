@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 
 import ro.sci.hotel.model.booking.Booking;
+import ro.sci.hotel.model.customer.Customer;
+import ro.sci.hotel.model.room.Room;
 
 /**
  * Booking repository interface for DAO
@@ -18,11 +20,13 @@ public interface BookingRepository<T> {
     List<T> getAll();
 
     /**
-     * Create a new booking and set startDAte and endDate in desired room
+     * Create a new booking
      *
      * @param booking to be added in db
+     * @param room that is booked
+     * @param customer that is booking the room
      */
-    void create(Booking booking);
+    void create(Booking booking, Room room, Customer customer);
 
     /**
      * Detele a booking entry from db
