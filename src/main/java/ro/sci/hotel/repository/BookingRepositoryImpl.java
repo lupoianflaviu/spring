@@ -76,6 +76,7 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
                 bookings.add(booking);
             }
         } catch (SQLException ex) {
+            ex.printStackTrace();
             LOGGER.log(Level.WARNING, DATABASE_ERROR);
             throw new RuntimeException(EXCEPTION_THROWN);
         }

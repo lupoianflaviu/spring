@@ -1,5 +1,8 @@
 package ro.sci.hotel.model.util;
 
+/**
+ * Price model
+ */
 public class Price {
     private int id;
     private double value = 0;
