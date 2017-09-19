@@ -3,7 +3,6 @@ package ro.sci.hotel.repository;
 import ro.sci.hotel.model.room.BedType;
 import ro.sci.hotel.model.room.RoomType;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -47,14 +46,6 @@ public interface RoomRepository<T> {
     List<T> searchByRoomNumber(Integer roomNumber);
 
     /**
-     * Search room by interval
-     * @param startDate date of arrival
-     * @param endDate date of departure
-     * @return List<T> searched room list
-     */
-    List<T> searchByDate(Date startDate, Date endDate);
-
-    /**
      * Search room by price
      * @param price seached
      * @return List<T> searched room list
@@ -67,39 +58,4 @@ public interface RoomRepository<T> {
      * @return List<T> searched room list
      */
     List<T> searchByType(RoomType roomType);
-
-    /**
-     * Search room by bed type
-     * @param bedType seached
-     * @return List<T> searched room list
-     */
-    List<T> searchByBedType(BedType bedType);
-
-    /**
-     * Search room by bed number
-     * @param bedNumber seached
-     * @return List<T> searched room list
-     */
-    List<T> searchByBedNumber(Integer bedNumber);
-
-    /**
-     * Search room by air conditioning
-     * @param isAirConditioning seached
-     * @return List<T> searched room list
-     */
-    List<T> searchByAC(boolean isAirConditioning);
-
-    /**
-     * Search room by balcony
-     * @param isBalcony seached
-     * @return List<T> searched room list
-     */
-    List<T> searchByBalcony(boolean isBalcony);
-
-    /**
-     * Search room by booked
-     * @param isBooked seached
-     * @return List<T> searched room list
-     */
-    List<T> searchByBooked(boolean isBooked);
 }

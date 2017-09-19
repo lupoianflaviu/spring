@@ -1,11 +1,10 @@
 package ro.sci.hotel.model.util;
 
-import ro.sci.hotel.model.room.*;
-
 /**
- * Created by tudorradovici on 14/09/17.
+ * Price model
  */
 public class Price {
+    private int id;
     private double value = 0;
     private Currency currency;
 
@@ -33,8 +32,16 @@ public class Price {
         this.currency = currency;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return value + " , " + currency;
+        return "\n" + id + " , " + value + " , " + currency;
     }
 }

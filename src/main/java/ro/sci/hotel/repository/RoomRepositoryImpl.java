@@ -43,42 +43,12 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
     }
 
     @Override
-    public List<Room> searchByDate(Date startDate, Date endDate) {
-        return null;
-    }
-
-    @Override
     public List<Room> searchByPrice(Double price) {
         return null;
     }
 
     @Override
     public List<Room> searchByType(RoomType roomType) {
-        return null;
-    }
-
-    @Override
-    public List<Room> searchByBedType(BedType bedType) {
-        return null;
-    }
-
-    @Override
-    public List<Room> searchByBedNumber(Integer bedNumber) {
-        return null;
-    }
-
-    @Override
-    public List<Room> searchByAC(boolean isAirConditioning) {
-        return null;
-    }
-
-    @Override
-    public List<Room> searchByBalcony(boolean isBalcony) {
-        return null;
-    }
-
-    @Override
-    public List<Room> searchByBooked(boolean isBooked) {
         return null;
     }
 }
