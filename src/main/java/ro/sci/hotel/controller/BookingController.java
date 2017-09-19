@@ -1,18 +1,15 @@
 package ro.sci.hotel.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ro.sci.hotel.model.booking.Booking;
-import ro.sci.hotel.model.util.Currency;
-import ro.sci.hotel.model.util.Price;
+import ro.sci.hotel.model.customer.Customer;
+import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.repository.BookingRepository;
 import ro.sci.hotel.repository.BookingRepositoryImpl;
 import ro.sci.hotel.service.BookingService;
@@ -40,39 +37,23 @@ public class BookingController {
         return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }
 
-    //not working
-//    @GetMapping(value = "/submit")
-//    public String createBooking(Model model) {
-//        init();
-//
-//        model.addAttribute("booking", new Booking());
-//
-//        return "submit";
-//    }
-
-    @RequestMapping(value="/submit", method=RequestMethod.GET)
+    //not tested
+    @RequestMapping(value = "/submit", method = RequestMethod.GET)
     public String bookingForm(Model model) {
         model.addAttribute("booking", new Booking());
-        model.addAttribute("price", new Price());
-//        model.addAttribute("currency", Currency.values());
+        model.addAttribute("room", new Room());
+        model.addAttribute("customer", new Customer());
         return "submit";
     }
 
-    @RequestMapping(value="/submit", method = RequestMethod.POST)
-    public String createBooking(@ModelAttribute Booking booking, @ModelAttribute Price price, Model model) {
+    //not tested
+    @RequestMapping(value = "/submit", method = RequestMethod.POST)
+    public String createBooking(@ModelAttribute Booking booking, @ModelAttribute Room room, @ModelAttribute Customer customer, Model model) {
         model.addAttribute("booking", booking);
-        model.addAttribute("price", price);
-//        model.addAttribute("currency", currency);
-        bookingService.create(booking);
+        model.addAttribute("room", room);
+        model.addAttribute("customer", customer);
+        bookingService.create(booking, room, customer);
 
         return "results";
     }
-
-//    //not working
-//    @PostMapping
-//    public String showBookingResult(@ModelAttribute Booking booking) {
-//        init();
-//
-//        return "results";
-//    }
 }
