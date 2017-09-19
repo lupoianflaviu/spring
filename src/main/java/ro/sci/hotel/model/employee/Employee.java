@@ -2,7 +2,7 @@ package ro.sci.hotel.model.employee;
 
 import ro.sci.hotel.model.util.Price;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by tudorradovici on 14/09/17.

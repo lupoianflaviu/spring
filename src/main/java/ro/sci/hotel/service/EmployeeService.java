@@ -1,13 +1,10 @@
-package ro.sci.hotel.repository;
+package ro.sci.hotel.service;
 
 import ro.sci.hotel.model.employee.Employee;
 
 import java.util.List;
 
-/**
- * Created by tudorradovici on 17/09/17.
- */
-public interface EmployeeRepository<T>{
+public interface EmployeeService<T> {
     /**
      *
      * @return List of all employees.
@@ -45,5 +42,4 @@ public interface EmployeeRepository<T>{
      * @return list of employee with a certain firstName;
      */
     List<T>searchByFirstName(String firstName);
-
 }

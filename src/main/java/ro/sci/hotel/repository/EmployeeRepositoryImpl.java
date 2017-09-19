@@ -160,7 +160,7 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
     }
 
     @Override
-    public List<Employee> searchByEmpoyeeId(Integer employeeId) {
+    public List<Employee> searchByEmployeeId(Integer employeeId) {
 
         List<Employee> employees = new ArrayList<>();
 
