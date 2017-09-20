@@ -24,7 +24,7 @@ public class Price {
         this.value = value;
     }
 
-    public ro.sci.hotel.model.util.Currency getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 
