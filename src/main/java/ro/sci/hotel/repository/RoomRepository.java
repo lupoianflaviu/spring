@@ -41,9 +41,9 @@ public interface RoomRepository<T> {
     /**
      * Search room by room number
      * @param roomNumber searched
-     * @return List<T> searched room list
+     * @return T searched room
      */
-    List<T> searchByRoomNumber(Integer roomNumber);
+    T searchByRoomNumber(Integer roomNumber);
 
     /**
      * Search room by price

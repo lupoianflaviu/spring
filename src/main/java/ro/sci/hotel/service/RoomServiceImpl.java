@@ -1,12 +1,10 @@
 package ro.sci.hotel.service;
 
 import org.springframework.stereotype.Service;
-import ro.sci.hotel.model.room.BedType;
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
 import ro.sci.hotel.repository.RoomRepository;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -38,7 +36,7 @@ public class RoomServiceImpl implements RoomService<Room> {
     }
 
     @Override
-    public List<Room> searchByRoomNumber(Integer roomNumber) {
+    public Room searchByRoomNumber(Integer roomNumber) {
         return this.roomRepository.searchByRoomNumber(roomNumber);
     }
 

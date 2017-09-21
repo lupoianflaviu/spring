@@ -38,9 +38,9 @@ public interface CustomerService<T> {
     /**
      * Search customer by id
      * @param id searched
-     * @return List<T> searched customer list
+     * @return T searched customer
      */
-    List<T> searchByCustomerId(int id);
+    T searchByCustomerId(int id);
 
     /**
      * Search room by price
