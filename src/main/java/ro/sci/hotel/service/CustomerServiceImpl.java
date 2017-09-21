@@ -1,5 +1,6 @@
 package ro.sci.hotel.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.repository.CustomerRepository;
@@ -11,7 +12,7 @@ import java.util.List;
  */
 @Service
 public class CustomerServiceImpl implements CustomerService<Customer> {
-
+    @Autowired
     private CustomerRepository<Customer> customerRepository;
 
     @Override
@@ -42,5 +43,10 @@ public class CustomerServiceImpl implements CustomerService<Customer> {
     @Override
     public List<Customer> searchByFirstName(String firstName) {
         return this.customerRepository.searchByFirstName(firstName);
+    }
+
+    @Override
+    public void setCustomerRepository(CustomerRepository<Customer> customerRepository) {
+this.customerRepository=customerRepository;
     }
 }

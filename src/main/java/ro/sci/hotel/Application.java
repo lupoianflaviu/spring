@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.sql.Date;
 
+import org.springframework.context.annotation.ComponentScan;
 import ro.sci.hotel.model.booking.Booking;
 import ro.sci.hotel.model.room.BedType;
 import ro.sci.hotel.model.room.Room;
@@ -23,6 +24,7 @@ import ro.sci.hotel.service.BookingServiceImpl;
  * @version 1.1
  */
 @SpringBootApplication
+@ComponentScan("ro.sci.hotel")
 public class Application {
 
     public static void main(String[] args) {
