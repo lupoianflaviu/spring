@@ -2,6 +2,7 @@ package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -104,7 +105,31 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
     @Override
     public Room searchByRoomNumber(Integer roomNumber) {
-        return null;
+        Room room = new Room();
+
+        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement("SELECT * FROM room WHERE id=?")) {
+                stm.setInt(1, roomNumber);
+
+                ResultSet rs = stm.executeQuery();
+
+                Price price = new Price();
+                room.setRoomNumber(rs.getInt(ROOMNUMBER));
+                room.setRoomType(RoomType.valueOf(rs.getString(ROOMTYPE)));
+                room.setBedType(BedType.valueOf(rs.getString(BEDTYPE)));
+                room.setBedNumber(rs.getInt(BEDNUMBER));
+                room.setOceanView(rs.getBoolean(OCEANVIEW));
+                room.setAirConditioning(rs.getBoolean(AIRCONDITIONING));
+                room.setBalcony(rs.getBoolean(BALCONY));
+                price.setValue(rs.getInt(PRICEID));
+                room.setPricePerNight(price);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+            throw new RuntimeException(EXCEPTION_THROWN);
+        }
+
+        return room;
     }
 
     @Override
