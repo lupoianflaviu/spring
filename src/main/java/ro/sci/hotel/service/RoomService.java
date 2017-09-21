@@ -1,7 +1,9 @@
 package ro.sci.hotel.service;
 
 import ro.sci.hotel.model.room.BedType;
+import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
+import ro.sci.hotel.repository.RoomRepository;
 
 import java.sql.Date;
 import java.util.List;
@@ -59,4 +61,6 @@ public interface RoomService<T> {
      * @return List<T> searched room list
      */
     List<T> searchByType(RoomType roomType);
+
+    void setRoomRepository(RoomRepository<T> roomRepository);
 }
