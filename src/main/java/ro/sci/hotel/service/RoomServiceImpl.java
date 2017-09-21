@@ -1,8 +1,10 @@
 package ro.sci.hotel.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
+import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.repository.RoomRepository;
 
 import java.util.List;
@@ -12,8 +14,10 @@ import java.util.List;
  */
 @Service
 public class RoomServiceImpl implements RoomService<Room> {
-
+    @Autowired
     private RoomRepository<Room> roomRepository;
+    @Autowired
+    private PriceService<Price> priceService;
 
     @Override
     public List<Room> getAll() {
@@ -37,7 +41,10 @@ public class RoomServiceImpl implements RoomService<Room> {
 
     @Override
     public Room searchByRoomNumber(Integer roomNumber) {
-        return this.roomRepository.searchByRoomNumber(roomNumber);
+        Room room = this.roomRepository.searchByRoomNumber(roomNumber);
+
+        this.priceService.searchById(room.getPriceId());
+        return room;
     }
 
     @Override
