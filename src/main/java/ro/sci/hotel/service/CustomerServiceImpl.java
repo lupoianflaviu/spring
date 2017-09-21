@@ -35,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService<Customer> {
     }
 
     @Override
-    public List<Customer> searchByCustomerId(int id) {
+    public Customer searchByCustomerId(int id) {
         return this.customerRepository.searchByCustomerId(id);
     }
 

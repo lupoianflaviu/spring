@@ -2,8 +2,6 @@ package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -39,7 +37,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
     private static final String BOOKING_UPDATE_IN_DB_HAS_COMPLETED = "Booking update in db has completed";
 
-    private static final String SQL_SELECT_ALL__FROM_ROOMS = "SELECT * FROM rooms";
+    private static final String SQL_SELECT_ALL__FROM_ROOMS = "SELECT * FROM customers";
 
     private static final String ROOMNUMBER = "roomnumber";
 
@@ -56,7 +54,6 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
     private static final String BALCONY = "balcony";
 
     private static final String SQL_DELETE_FROM_BOOKING_WHERE_ID = "DELETE FROM booking where id=?";
-
 
     @Override
     public List<Room> getAll() {
@@ -102,7 +99,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
     }
 
     @Override
-    public List<Room> searchByRoomNumber(Integer roomNumber) {
+    public Room searchByRoomNumber(Integer roomNumber) {
         return null;
     }
 
