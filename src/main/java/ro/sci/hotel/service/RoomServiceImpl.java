@@ -43,7 +43,8 @@ public class RoomServiceImpl implements RoomService<Room> {
     public Room searchByRoomNumber(Integer roomNumber) {
         Room room = this.roomRepository.searchByRoomNumber(roomNumber);
 
-        this.priceService.searchById(room.getPriceId());
+        Price price = this.priceService.searchById(room.getPricePerNight().getId());
+
         return room;
     }
 
