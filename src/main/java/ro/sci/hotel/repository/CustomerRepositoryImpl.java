@@ -2,11 +2,9 @@ package ro.sci.hotel.repository;
 
 
 import org.springframework.stereotype.Repository;
-import ro.sci.hotel.model.customer.Customer;
-import ro.sci.hotel.model.customer.CustomerAddress;
-import ro.sci.hotel.model.customer.PaymentMethod;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,11 +13,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import ro.sci.hotel.model.customer.Customer;
+import ro.sci.hotel.model.customer.CustomerAddress;
+import ro.sci.hotel.model.customer.PaymentMethod;
+
 /**
  * Customer repository implementation
  */
 @Repository("customerRepository")
-public class CustomerRepositoryImpl extends BaseRepository implements CustomerRepository<Customer>{
+public class CustomerRepositoryImpl extends BaseRepository implements CustomerRepository<Customer> {
 
     private static final String DATABASE_ERROR = "Database error!";
 
@@ -73,7 +75,7 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
                 customer.setLastName(rs.getString(LASTNAME));
                 customer.setEmail(rs.getString(EMAIL));
                 customer.setPhoneNumber(rs.getString(PHONENUMBER));
-                customer.setCustomerAddress(new CustomerAddress(rs.getString(STREETADRESS),rs.getString(CITY),rs.getString(COUNTRY)));
+                customer.setCustomerAddress(new CustomerAddress(rs.getString(STREETADRESS), rs.getString(CITY), rs.getString(COUNTRY)));
                 customer.setPaymentMethod(PaymentMethod.valueOf(rs.getString(PAYMENTMETHOD)));
                 customers.add(customer);
             }
@@ -104,7 +106,28 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
 
     @Override
     public Customer searchByCustomerId(int id) {
-        return null;
+        Customer customer = new Customer();
+
+        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement("SELECT * FROM customer WHERE id=?")) {
+            stm.setInt(1, id);
+
+            ResultSet rs = stm.executeQuery();
+
+            customer.setId(rs.getInt(ID));
+            customer.setFirstName(rs.getString(FIRSTNAME));
+            customer.setLastName(rs.getString(LASTNAME));
+            customer.setEmail(rs.getString(EMAIL));
+            customer.setPhoneNumber(rs.getString(PHONENUMBER));
+            customer.setCustomerAddress(new CustomerAddress(rs.getString(STREETADRESS), rs.getString(CITY), rs.getString(COUNTRY)));
+            customer.setPaymentMethod(PaymentMethod.valueOf(rs.getString(PAYMENTMETHOD)));
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+            throw new RuntimeException(EXCEPTION_THROWN);
+        }
+
+        return customer;
     }
 
     @Override
