@@ -31,7 +31,7 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
     private static final String Employee_DELETED="Deletion of employee by ID successful";
 
-    private static final String ID = "id";
+    private static final String ID = "employee_id";
 
     private static final String FIRSTNAME = "first_name";
 
@@ -49,15 +49,7 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
     private static final String CURRENCY = "currency";
 
-    private static final String SQL_SELECT_ALL_FROM_EMPLOYEE = "SELECT" +
-            "first_name" +
-            "last_name" +
-            "email" +
-            "employee_phone_number" +
-            "employee_date" +
-            "salary" +
-            "employee_role" +
-            "FROM employee";
+    private static final String SQL_SELECT_ALL_FROM_EMPLOYEE = "SELECT employee_id, first_name, last_name, email, employee_phone_number, employment_date, price, employee_role FROM employee";
     private static final String SQL_INSERT_EMPLOYEE= "INSERT INTO employees " +
             "(first_name," +
             "last_name" +
@@ -91,14 +83,14 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             while (rs.next()) {
 
                 Employee employee = new Employee();
-                employee.setId(rs.getInt(ID));
+                employee.setEmployeeId(rs.getInt(ID));
                 employee.setFirstName(rs.getString(FIRSTNAME));
                 employee.setLastName(rs.getString(LASTNAME));
                 employee.setEmail(EMAIL);
                 //employee.setEmployeeAddress();
                 employee.setEmployeePhoneNumber(rs.getString(PHONENUMBER));
-                employee.setEmploymentDate(rs.getDate(EMPLOYMENTDATE));
-                employee.setSalary(new Price(rs.getDouble(PRICE), Currency.valueOf(rs.getString(CURRENCY))));
+           //     employee.setEmploymentDate(rs.getDate(EMPLOYMENTDATE));
+              //  employee.setSalary(new Price(rs.getDouble(PRICE), Currency.valueOf(rs.getString(CURRENCY))));
                 employee.setEmployeeRole(rs.getString(EMPLOYEEROLE));
 
                 employees.add(employee);
@@ -106,7 +98,8 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             }
         } catch (SQLException e) {
             LOGGER.log(Level.WARNING, DATABASE_ERROR);
-            throw new RuntimeException(EXCEPTION_THROWN);
+            e.printStackTrace();
+            //throw new RuntimeException(EXCEPTION_THROWN);
         }
         return employees;
     }
@@ -142,7 +135,7 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
         try(Connection conn = newConnection();
         PreparedStatement stm=conn.prepareStatement(DELETE_EMPLOYEE)){
 
-            stm.setInt(1,employee.getId());
+            stm.setInt(1,employee.getEmployeeId());
             stm.execute();
 
 

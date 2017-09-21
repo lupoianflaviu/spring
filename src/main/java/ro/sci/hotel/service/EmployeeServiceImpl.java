@@ -11,8 +11,7 @@ public class EmployeeServiceImpl implements EmployeeService<Employee>{
     private EmployeeRepository<Employee> employeeRepository;
 
     @Override
-    public List<Employee> getAll() {
-        return this.employeeRepository.getAll();
+    public List<Employee> getAll() { return this.employeeRepository.getAll();
     }
 
     @Override
@@ -38,5 +37,10 @@ public class EmployeeServiceImpl implements EmployeeService<Employee>{
     @Override
     public List<Employee> searchByFirstName(String firstName) {
         return this.employeeRepository.searchByFirstName(firstName);
+    }
+
+    @Override
+    public void setEmployeeRepository(EmployeeRepository<Employee> employeeRepository) {
+        this.employeeRepository =employeeRepository;
     }
 }

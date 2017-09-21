@@ -9,7 +9,7 @@ import java.sql.Date;
  */
 public class Employee {
 
-    private int id;
+    private int employeeId;
     private String firstName;
     private String lastName;
     private String email;
@@ -19,12 +19,12 @@ public class Employee {
     private Price salary;
     private String employeeRole;
 
-    public int getId() {
-        return id;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEmployeeId(int id) {
+        this.employeeId = id;
     }
 
     public String getFirstName() {

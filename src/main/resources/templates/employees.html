@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
 <body>
@@ -17,14 +17,14 @@
         + 'employeeRole'"/>
         <th:block th:each="employee : ${employees}">
             <tr>
-                <td th:text="${employee.id}">...</td>
+                <td th:text="${employee.employeeId}">...</td>
                 <td th:text="${employee.firstName}">...</td>
                 <td th:text="${employee.lastName}">...</td>
                 <td th:text="${employee.email}">...</td>
                 <td th:text="${employee.employeeAddress}">...</td>
                 <td th:text="${employee.employeePhoneNumber}">...</td>
-                <td th:text="${employee.employmentDate}">...</td>
-                <td th:text="${employee.price}">...</td>
+                <!--<td th:text="${employee.employmentDate}">...</td>-->
+                <!--<td th:text="${employee.price}">...</td>-->
                 <td th:text="${employee.employeeRole}">...</td>
             </tr>
         </th:block>
