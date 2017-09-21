@@ -51,4 +51,9 @@ public class RoomServiceImpl implements RoomService<Room> {
     public List<Room> searchByType(RoomType roomType) {
         return this.roomRepository.searchByType(roomType);
     }
+
+    @Override
+    public void setRoomRepository(RoomRepository<Room> roomRepository) {
+        this.roomRepository=roomRepository;
+    }
 }
