@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import ro.sci.hotel.model.room.BedType;
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
+import ro.sci.hotel.model.util.Price;
 
 /**
  * Room repository implementation
@@ -54,6 +55,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
     private static final String BALCONY = "balcony";
 
     private static final String SQL_DELETE_FROM_BOOKING_WHERE_ID = "DELETE FROM booking where id=?";
+    private static final String PRICEID = "priceid";
 
     @Override
     public List<Room> getAll() {
@@ -64,6 +66,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
             while (rs.next()) {
 
                 Room room = new Room();
+                Price price = new Price();
                 room.setRoomNumber(rs.getInt(ROOMNUMBER));
                 room.setRoomType(RoomType.valueOf(rs.getString(ROOMTYPE)));
                 room.setBedType(BedType.valueOf(rs.getString(BEDTYPE)));
@@ -71,7 +74,8 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
                 room.setOceanView(rs.getBoolean(OCEANVIEW));
                 room.setAirConditioning(rs.getBoolean(AIRCONDITIONING));
                 room.setBalcony(rs.getBoolean(BALCONY));
-
+                price.setValue(rs.getInt(PRICEID));
+                room.setPricePerNight(price);
                 rooms.add(room);
             }
         } catch (SQLException ex) {

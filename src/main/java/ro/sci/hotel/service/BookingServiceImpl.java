@@ -26,8 +26,6 @@ public class BookingServiceImpl implements BookingService<Booking> {
     @Autowired
     private CustomerService<Customer> customerService;
 
-
-
     @Override
     public List<Booking> getAll() {
         //add room and customer
