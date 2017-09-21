@@ -1,5 +1,8 @@
 package ro.sci.hotel.service;
 
+import ro.sci.hotel.model.customer.Customer;
+import ro.sci.hotel.repository.CustomerRepository;
+
 import java.util.List;
 
 /**
@@ -48,4 +51,6 @@ public interface CustomerService<T> {
      * @return List<T> searched customer list
      */
     List<T> searchByFirstName(String firstName);
+
+    void setCustomerRepository(CustomerRepository<T> customerRepository);
 }

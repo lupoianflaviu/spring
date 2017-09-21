@@ -39,7 +39,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
     private static final String BOOKING_UPDATE_IN_DB_HAS_COMPLETED = "Booking update in db has completed";
 
-    private static final String SQL_SELECT_ALL__FROM_ROOMS = "SELECT * FROM customers";
+    private static final String SQL_SELECT_ALL__FROM_ROOMS = "SELECT * FROM rooms";
 
     private static final String ROOMNUMBER = "roomnumber";
 
