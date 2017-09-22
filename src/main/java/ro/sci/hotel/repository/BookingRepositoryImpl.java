@@ -146,7 +146,7 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
         LOGGER.log(Level.INFO, BOOKING_UPDATE_IN_DB_HAS_COMPLETED);
     }
 
-    @Override
+    @Override //to update
     public List<Booking> searchByCustomerId(Integer customerId) {
 
         List<Booking> searchedBookings = new ArrayList<>();
@@ -181,7 +181,7 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
         return searchedBookings;
     }
 
-    @Override
+    @Override //to update
     public List<Booking> searchByRoomNumber(Integer roomNumber) {
         List<Booking> searchedBookings = new ArrayList<>();
 
@@ -215,7 +215,7 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
         return searchedBookings;
     }
 
-    @Override
+    @Override //to update
     public List<Booking> searchByDate(Date startDate, Date endDate) {
         List<Booking> searchedBookings = new ArrayList<>();
 
@@ -250,7 +250,7 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
         return searchedBookings;
     }
 
-    @Override
+    @Override //to update
     public List<Booking> searchByPrice(Double price) {
         List<Booking> searchedBookings = new ArrayList<>();
 

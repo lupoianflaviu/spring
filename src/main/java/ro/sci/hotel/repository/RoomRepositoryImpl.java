@@ -2,6 +2,7 @@ package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,6 +14,7 @@ import java.util.logging.Logger;
 import ro.sci.hotel.model.room.BedType;
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
+import ro.sci.hotel.model.util.Price;
 
 /**
  * Room repository implementation
@@ -37,7 +39,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
     private static final String BOOKING_UPDATE_IN_DB_HAS_COMPLETED = "Booking update in db has completed";
 
-    private static final String SQL_SELECT_ALL__FROM_ROOMS = "SELECT * FROM customers";
+    private static final String SQL_SELECT_ALL__FROM_ROOMS = "SELECT * FROM rooms";
 
     private static final String ROOMNUMBER = "roomnumber";
 
@@ -54,6 +56,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
     private static final String BALCONY = "balcony";
 
     private static final String SQL_DELETE_FROM_BOOKING_WHERE_ID = "DELETE FROM booking where id=?";
+    private static final String PRICEID = "priceid";
 
     @Override
     public List<Room> getAll() {
@@ -64,6 +67,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
             while (rs.next()) {
 
                 Room room = new Room();
+                Price price = new Price();
                 room.setRoomNumber(rs.getInt(ROOMNUMBER));
                 room.setRoomType(RoomType.valueOf(rs.getString(ROOMTYPE)));
                 room.setBedType(BedType.valueOf(rs.getString(BEDTYPE)));
@@ -71,7 +75,8 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
                 room.setOceanView(rs.getBoolean(OCEANVIEW));
                 room.setAirConditioning(rs.getBoolean(AIRCONDITIONING));
                 room.setBalcony(rs.getBoolean(BALCONY));
-
+                price.setValue(rs.getInt(PRICEID));
+                room.setPricePerNight(price);
                 rooms.add(room);
             }
         } catch (SQLException ex) {
@@ -100,7 +105,31 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
     @Override
     public Room searchByRoomNumber(Integer roomNumber) {
-        return null;
+        Room room = new Room();
+
+        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement("SELECT * FROM room WHERE id=?")) {
+                stm.setInt(1, roomNumber);
+
+                ResultSet rs = stm.executeQuery();
+
+                Price price = new Price();
+                room.setRoomNumber(rs.getInt(ROOMNUMBER));
+                room.setRoomType(RoomType.valueOf(rs.getString(ROOMTYPE)));
+                room.setBedType(BedType.valueOf(rs.getString(BEDTYPE)));
+                room.setBedNumber(rs.getInt(BEDNUMBER));
+                room.setOceanView(rs.getBoolean(OCEANVIEW));
+                room.setAirConditioning(rs.getBoolean(AIRCONDITIONING));
+                room.setBalcony(rs.getBoolean(BALCONY));
+                price.setValue(rs.getInt(PRICEID));
+                room.setPricePerNight(price);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+            throw new RuntimeException(EXCEPTION_THROWN);
+        }
+
+        return room;
     }
 
     @Override
