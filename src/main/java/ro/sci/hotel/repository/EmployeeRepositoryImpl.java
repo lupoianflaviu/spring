@@ -87,10 +87,10 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
                 employee.setFirstName(rs.getString(FIRSTNAME));
                 employee.setLastName(rs.getString(LASTNAME));
                 employee.setEmail(EMAIL);
-                //employee.setEmployeeAddress();
+//              employee.setEmployeeAddress();
                 employee.setEmployeePhoneNumber(rs.getString(PHONENUMBER));
-           //     employee.setEmploymentDate(rs.getDate(EMPLOYMENTDATE));
-              //  employee.setSalary(new Price(rs.getDouble(PRICE), Currency.valueOf(rs.getString(CURRENCY))));
+//              employee.setEmploymentDate(rs.getDate(EMPLOYMENTDATE));
+//              employee.setSalary(new Price(rs.getDouble(PRICE), Currency.valueOf(rs.getString(CURRENCY))));
                 employee.setEmployeeRole(rs.getString(EMPLOYEEROLE));
 
                 employees.add(employee);
@@ -153,11 +153,11 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
     }
 
     @Override
-    public List<Employee> searchByEmployeeId(Integer employeeId) {
+    public Employee searchByEmployeeId(Integer employeeId) {
 
-        List<Employee> employees = new ArrayList<>();
+        Employee employee= new Employee();
 
-        return employees;
+        return employee;
     }
 
     @Override

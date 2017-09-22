@@ -1,6 +1,8 @@
 package ro.sci.hotel.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ro.sci.hotel.model.employee.Address;
 import ro.sci.hotel.model.employee.Employee;
 import ro.sci.hotel.repository.EmployeeRepository;
 
@@ -8,10 +10,22 @@ import java.util.List;
 
 @Service("employeeService")
 public class EmployeeServiceImpl implements EmployeeService<Employee>{
+
+
     private EmployeeRepository<Employee> employeeRepository;
 
+    private AddressService<Address> addressService;
+
     @Override
-    public List<Employee> getAll() { return this.employeeRepository.getAll();
+    public List<Employee> getAll() {
+        List<Employee> employees = this.employeeRepository.getAll();
+
+        for (Employee employee : employees) {
+
+            Address address = addressService.searchByEmployeeId(employee.getEmployeeId());
+            employee.setAddress(address);
+        }
+        return employees;
     }
 
     @Override
@@ -30,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService<Employee>{
     }
 
     @Override
-    public List<Employee> searchByEmployeeId(Integer employeeId) {
+    public Employee searchByEmployeeId(Integer employeeId) {
         return this.employeeRepository.searchByEmployeeId(employeeId);
     }
 

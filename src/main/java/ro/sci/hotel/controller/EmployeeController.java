@@ -29,4 +29,16 @@ public class EmployeeController {
         init();
         return new ModelAndView("employees","employees",employeeService.getAll());
     }
+
+//    email check field
+
+//    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.refs.email.value)) {
+//        this.setState({
+//                active : true
+//            });
+//    } else {
+//        this.setState({
+//                active : false
+//            });
+//    }
 }

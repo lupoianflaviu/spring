@@ -35,7 +35,7 @@ public interface EmployeeService<T> {
      * @param employeeId
      * @return employee with a certain ID
      */
-    List<T> searchByEmployeeId(Integer employeeId);
+    T searchByEmployeeId(Integer employeeId);
 
     /**
      * Searches the DB by firstName;
