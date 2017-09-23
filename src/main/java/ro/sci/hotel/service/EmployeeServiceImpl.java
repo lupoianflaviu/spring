@@ -1,5 +1,6 @@
 package ro.sci.hotel.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.sci.hotel.model.employee.Employee;
 import ro.sci.hotel.repository.EmployeeRepository;
@@ -8,6 +9,8 @@ import java.util.List;
 
 @Service("employeeService")
 public class EmployeeServiceImpl implements EmployeeService<Employee>{
+
+    @Autowired
     private EmployeeRepository<Employee> employeeRepository;
 
     @Override

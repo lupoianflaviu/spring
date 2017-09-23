@@ -13,12 +13,14 @@ import ro.sci.hotel.repository.RoomRepository;
 /**
  * Room service implementation
  */
-@Service
+@Service("roomService")
 public class RoomServiceImpl implements RoomService<Room> {
-    @Autowired
-    private RoomRepository<Room> roomRepository;
+
     @Autowired
     private PriceService<Price> priceService;
+
+    @Autowired
+    private RoomRepository<Room> roomRepository;
 
     @Override
     public List<Room> getAll() {

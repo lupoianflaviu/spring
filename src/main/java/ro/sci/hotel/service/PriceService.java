@@ -2,6 +2,9 @@ package ro.sci.hotel.service;
 
 import java.util.List;
 
+import ro.sci.hotel.model.util.Price;
+import ro.sci.hotel.repository.PriceRepository;
+
 /**
  * Service Interface for Price DAO
  * @param <T> generic
@@ -38,4 +41,6 @@ public interface PriceService<T> {
      * @return Price
      */
     T searchById(Integer id);
+
+    void setPriceRepository(PriceRepository<Price> priceRepository);
 }

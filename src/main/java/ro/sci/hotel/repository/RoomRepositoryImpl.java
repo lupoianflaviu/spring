@@ -28,20 +28,9 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
     private static final Logger LOGGER = Logger.getLogger("Hotel");
 
-    private static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
-
-    private static final String SQL_INSERT_INTO_BOOKING_ROOMNUMBER_CUSTOMERID_STARTDATE_ENDDATE_VALUES =
-            "INSERT INTO booking(roomnumber,customerid,startdate,enddate) values(?,?,?,?)";
-
-    private static final String BOOKING_DELETE_HAS_COMPLETED = "Deletion of booking completed";
-
-    private static final String SQL_UPDATE_BOOKING_WHERE_ID = "UPDATE booking " + "SET roomnumber=?, customerid=?, startdate=?, enddate=? WHERE id = ?";
-
-    private static final String BOOKING_UPDATE_IN_DB_HAS_COMPLETED = "Booking update in db has completed";
-
     private static final String SQL_SELECT_ALL__FROM_ROOMS = "SELECT * FROM rooms";
 
-    private static final String ROOMNUMBER = "roomnumber";
+    private static final String id = "id";
 
     private static final String ROOMTYPE = "roomtype";
 
@@ -56,6 +45,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
     private static final String BALCONY = "balcony";
 
     private static final String SQL_DELETE_FROM_BOOKING_WHERE_ID = "DELETE FROM booking where id=?";
+
     private static final String PRICEID = "priceid";
 
     @Override
@@ -68,7 +58,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
                 Room room = new Room();
                 Price price = new Price();
-                room.setRoomNumber(rs.getInt(ROOMNUMBER));
+                room.setRoomNumber(rs.getInt(id));
                 room.setRoomType(RoomType.valueOf(rs.getString(ROOMTYPE)));
                 room.setBedType(BedType.valueOf(rs.getString(BEDTYPE)));
                 room.setBedNumber(rs.getInt(BEDNUMBER));
@@ -112,8 +102,9 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
                 ResultSet rs = stm.executeQuery();
 
+            while (rs.next()) {
                 Price price = new Price();
-                room.setRoomNumber(rs.getInt(ROOMNUMBER));
+                room.setRoomNumber(roomNumber);
                 room.setRoomType(RoomType.valueOf(rs.getString(ROOMTYPE)));
                 room.setBedType(BedType.valueOf(rs.getString(BEDTYPE)));
                 room.setBedNumber(rs.getInt(BEDNUMBER));
@@ -122,7 +113,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
                 room.setBalcony(rs.getBoolean(BALCONY));
                 price.setValue(rs.getInt(PRICEID));
                 room.setPricePerNight(price);
-
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
             LOGGER.log(Level.WARNING, DATABASE_ERROR);

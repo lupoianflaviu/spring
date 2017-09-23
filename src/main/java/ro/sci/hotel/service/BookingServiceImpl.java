@@ -98,4 +98,12 @@ public class BookingServiceImpl implements BookingService<Booking> {
     public void setBookingRepository(BookingRepository<Booking> bookingRepository) {
         this.bookingRepository = bookingRepository;
     }
+
+    public void setRoomService(RoomService<Room> roomService) {
+        this.roomService = roomService;
+    }
+
+    public void setCustomerService(CustomerService<Customer> customerService) {
+        this.customerService = customerService;
+    }
 }
