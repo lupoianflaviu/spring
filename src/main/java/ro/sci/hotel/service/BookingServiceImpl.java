@@ -32,15 +32,18 @@ public class BookingServiceImpl implements BookingService<Booking> {
 
     @Override
     public List<Booking> getAll() {
-        //add room and customer
+
 
         List<Booking> bookings = this.bookingRepository.getAll();
 
         for (Booking booking : bookings) {
+            Price price = new Price();
 
             int roomNumber = booking.getRoom()
                                     .getRoomNumber();
+
             Room resultRoom = roomService.searchByRoomNumber(roomNumber);
+
             booking.setRoom(resultRoom);
 
             int customerId = booking.getCustomer()
