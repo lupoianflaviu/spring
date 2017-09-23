@@ -9,6 +9,7 @@ import java.util.List;
 import ro.sci.hotel.model.booking.Booking;
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.room.Room;
+import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.repository.BookingRepository;
 
 /**
@@ -26,6 +27,9 @@ public class BookingServiceImpl implements BookingService<Booking> {
     @Autowired
     private CustomerService<Customer> customerService;
 
+    @Autowired
+    private PriceService<Price> priceService;
+
     @Override
     public List<Booking> getAll() {
         //add room and customer
@@ -36,7 +40,6 @@ public class BookingServiceImpl implements BookingService<Booking> {
 
             int roomNumber = booking.getRoom()
                                     .getRoomNumber();
-
             Room resultRoom = roomService.searchByRoomNumber(roomNumber);
             booking.setRoom(resultRoom);
 
