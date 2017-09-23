@@ -1,5 +1,6 @@
 package ro.sci.hotel.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,10 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 import ro.sci.hotel.model.booking.Booking;
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.room.Room;
-import ro.sci.hotel.repository.BookingRepository;
-import ro.sci.hotel.repository.BookingRepositoryImpl;
+import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.service.BookingService;
-import ro.sci.hotel.service.BookingServiceImpl;
+import ro.sci.hotel.service.CustomerService;
+import ro.sci.hotel.service.PriceService;
+import ro.sci.hotel.service.RoomService;
 
 /**
  * Booking model controller
@@ -21,18 +23,20 @@ import ro.sci.hotel.service.BookingServiceImpl;
 @Controller
 public class BookingController {
 
-    private BookingRepository<Booking> bookingRepository;
+    @Autowired
     private BookingService<Booking> bookingService;
 
-    private void init() {
-        this.bookingRepository = new BookingRepositoryImpl();
-        this.bookingService = new BookingServiceImpl();
-        this.bookingService.setBookingRepository(bookingRepository);
-    }
+    @Autowired
+    private CustomerService<Customer> customerService;
+
+    @Autowired
+    private PriceService<Price> priceService;
+
+    @Autowired
+    private RoomService<Room> roomService;
 
     @RequestMapping(value = "/bookings", method = RequestMethod.GET)
     public ModelAndView showBookings() {
-        init();
 
         return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }

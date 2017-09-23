@@ -2,16 +2,18 @@ package ro.sci.hotel.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ro.sci.hotel.model.customer.Customer;
-import ro.sci.hotel.repository.CustomerRepository;
 
 import java.util.List;
+
+import ro.sci.hotel.model.customer.Customer;
+import ro.sci.hotel.repository.CustomerRepository;
 
 /**
  * Customer service implementation
  */
 @Service
 public class CustomerServiceImpl implements CustomerService<Customer> {
+
     @Autowired
     private CustomerRepository<Customer> customerRepository;
 
@@ -47,6 +49,6 @@ public class CustomerServiceImpl implements CustomerService<Customer> {
 
     @Override
     public void setCustomerRepository(CustomerRepository<Customer> customerRepository) {
-this.customerRepository=customerRepository;
+        this.customerRepository = customerRepository;
     }
 }
