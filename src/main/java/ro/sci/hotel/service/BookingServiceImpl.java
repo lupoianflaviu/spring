@@ -37,7 +37,6 @@ public class BookingServiceImpl implements BookingService<Booking> {
         List<Booking> bookings = this.bookingRepository.getAll();
 
         for (Booking booking : bookings) {
-            Price price = new Price();
 
             int roomNumber = booking.getRoom()
                                     .getRoomNumber();
