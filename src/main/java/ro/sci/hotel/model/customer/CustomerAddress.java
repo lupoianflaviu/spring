@@ -42,4 +42,9 @@ public class CustomerAddress {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    @Override
+    public String toString() {
+        return streetAddress + " , " + city + " , " + country;
+    }
 }

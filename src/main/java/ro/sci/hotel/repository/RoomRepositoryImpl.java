@@ -104,14 +104,14 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
             while (rs.next()) {
                 Price price = new Price();
-                room.setRoomNumber(roomNumber);
+                room.setRoomNumber(rs.getInt("id"));
                 room.setRoomType(RoomType.valueOf(rs.getString(ROOMTYPE)));
                 room.setBedType(BedType.valueOf(rs.getString(BEDTYPE)));
                 room.setBedNumber(rs.getInt(BEDNUMBER));
                 room.setOceanView(rs.getBoolean(OCEANVIEW));
                 room.setAirConditioning(rs.getBoolean(AIRCONDITIONING));
                 room.setBalcony(rs.getBoolean(BALCONY));
-                price.setValue(rs.getInt(PRICEID));
+                price.setId(rs.getInt(PRICEID));
                 room.setPricePerNight(price);
             }
         } catch (SQLException ex) {

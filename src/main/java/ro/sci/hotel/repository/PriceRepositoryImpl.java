@@ -128,7 +128,7 @@ public class PriceRepositoryImpl extends BaseRepository implements PriceReposito
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
-                price.setId(id);
+                price.setId(rs.getInt("id"));
                 price.setValue(rs.getDouble(VALUE));
                 price.setCurrency(Currency.valueOf(rs.getString(CURRENCY)));
             }
