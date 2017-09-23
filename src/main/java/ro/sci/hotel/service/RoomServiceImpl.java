@@ -47,7 +47,6 @@ public class RoomServiceImpl implements RoomService<Room> {
         Room room = this.roomRepository.searchByRoomNumber(roomNumber);
         Price resultPrice = priceService.searchById(room.getPricePerNight()
                                                         .getId());
-        //        Price resultPrice = priceService.searchById(price.getId());
         room.setPricePerNight(resultPrice);
 
         return room;
