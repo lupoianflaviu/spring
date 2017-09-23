@@ -21,8 +21,7 @@ import ro.sci.hotel.service.RoomService;
 /**
  * Booking model controller
  */
-//@Controller
-    @RestController
+@Controller
 public class BookingController {
 
     @Autowired
@@ -47,8 +46,8 @@ public class BookingController {
     @RequestMapping(value = "/submit", method = RequestMethod.GET)
     public String bookingForm(Model model) {
         model.addAttribute("booking", new Booking());
-        model.addAttribute("room", new Room());
-        model.addAttribute("customer", new Customer());
+//        model.addAttribute("room", new Room());
+//        model.addAttribute("customer", new Customer());
         return "submit";
     }
 
@@ -56,8 +55,7 @@ public class BookingController {
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     public String createBooking(@ModelAttribute Booking booking, @ModelAttribute Room room, @ModelAttribute Customer customer, Model model) {
         model.addAttribute("booking", booking);
-        model.addAttribute("room", room);
-        model.addAttribute("customer", customer);
+
         bookingService.create(booking, room, customer);
 
         return "results";
