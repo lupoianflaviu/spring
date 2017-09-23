@@ -44,11 +44,10 @@ public class RoomServiceImpl implements RoomService<Room> {
 
     @Override
     public Room searchByRoomNumber(Integer roomNumber) {
-        Price price = new Price();
         Room room = this.roomRepository.searchByRoomNumber(roomNumber);
-        Price resultPrice = priceService.searchById(price.getId());
-//        Price resultPrice = this.priceService.searchById(room.getPricePerNight()
-//                                                             .getId());
+        Price resultPrice = priceService.searchById(room.getPricePerNight()
+                                                        .getId());
+        //        Price resultPrice = priceService.searchById(price.getId());
         room.setPricePerNight(resultPrice);
 
         return room;
