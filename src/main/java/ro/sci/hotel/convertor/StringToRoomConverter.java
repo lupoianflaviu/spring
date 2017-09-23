@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 
 import ro.sci.hotel.model.room.Room;
+import ro.sci.hotel.model.util.Price;
+import ro.sci.hotel.service.PriceService;
 import ro.sci.hotel.service.RoomService;
 
 /**
@@ -20,9 +22,17 @@ public class StringToRoomConverter implements Converter<String, Room> {
     @Autowired
     private RoomService<Room> roomService;
 
+    @Autowired
+    private PriceService<Price> priceService;
+
     @Override
     public Room convert(String roomNumber) {
+        Room room = roomService.searchByRoomNumber(Integer.valueOf(roomNumber));
+//        Price resultPrice = priceService.searchById(room.getPricePerNight()
+//                                                        .getId());
+//
+//        room.setPricePerNight(resultPrice);
 
-        return roomService.searchByRoomNumber(Integer.valueOf(roomNumber));
+        return room;
     }
 }
