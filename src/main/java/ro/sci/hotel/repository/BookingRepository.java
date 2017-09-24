@@ -94,4 +94,6 @@ public interface BookingRepository<T> {
      * @return List<T> searched bookings list
      */
     List<T> searchByCustomerIdAndRoomNumber(Integer customerId, Integer roomNumber);
+
+    T searchById(Integer bookingId);
 }

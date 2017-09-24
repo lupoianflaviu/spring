@@ -104,6 +104,12 @@ public class BookingServiceImpl implements BookingService<Booking> {
         this.bookingRepository = bookingRepository;
     }
 
+    @Override
+    public Booking searchById(Integer bookingId) {
+
+        return this.bookingRepository.searchById(bookingId);
+    }
+
     public void setRoomService(RoomService<Room> roomService) {
         this.roomService = roomService;
     }
