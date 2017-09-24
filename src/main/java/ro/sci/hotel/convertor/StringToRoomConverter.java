@@ -5,12 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 
 import ro.sci.hotel.model.room.Room;
-import ro.sci.hotel.model.util.Price;
-import ro.sci.hotel.service.PriceService;
 import ro.sci.hotel.service.RoomService;
 
 /**
- * Covertor for submit form Converts room number string to Room type
+ * Converter for submit form Converts room number string to Room type
  *
  * @author flaviu.lupoian@jpard.com
  *
@@ -23,8 +21,8 @@ public class StringToRoomConverter implements Converter<String, Room> {
     private RoomService<Room> roomService;
 
     @Override
-    public Room convert(String roomNumber) {
+    public Room convert(String id) {
 
-        return roomService.searchByRoomNumber(Integer.valueOf(roomNumber));
+        return roomService.searchByRoomNumber(Integer.valueOf(id));
     }
 }
