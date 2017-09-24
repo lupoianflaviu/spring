@@ -1,11 +1,9 @@
 package ro.sci.hotel.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,14 +49,14 @@ public class BookingController {
         return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }
 
-    @RequestMapping(value = "/submit", method = RequestMethod.GET)
+    @RequestMapping(value = "/bookings/submit", method = RequestMethod.GET)
     public String bookingForm(Model model) {
         model.addAttribute("booking", new Booking());
         return "submit";
     }
 
     //Room is null
-    @RequestMapping(value = "/submit", method = RequestMethod.POST)
+    @RequestMapping(value = "/bookings/submit", method = RequestMethod.POST)
     public String createBooking(@ModelAttribute Booking booking, @ModelAttribute Room room, @ModelAttribute Customer customer, Model model) {
 
         bookingService.create(booking, room, customer);
@@ -67,6 +65,7 @@ public class BookingController {
         return "results";
     }
 
+    //not working
     @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public String deleteBooking(@PathVariable("id") Integer id, Model model) {
@@ -81,6 +80,7 @@ public class BookingController {
         return "results";
     }
 
+    //not working
     @RequestMapping(value = "/bookings/update", method = RequestMethod.GET)
     public String updateBooking(Model model) {
 
@@ -89,11 +89,12 @@ public class BookingController {
         return "updatebooking";
     }
 
+    //not working
     @RequestMapping(value = "/bookings/update", method = RequestMethod.PUT)
     public String updateBooking(@ModelAttribute Booking booking, Model model) {
 
         LOGGER.log(Level.INFO, "Updating booking");
-        
+
         bookingService.update(booking);
 
         model.addAttribute("booking", booking);
