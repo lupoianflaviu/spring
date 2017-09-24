@@ -43,19 +43,29 @@ public class BookingController {
     @Autowired
     private RoomService<Room> roomService;
 
+    // ------------------- Show All Bookings ------------------------------------------------
     @RequestMapping(value = "/bookings", method = RequestMethod.GET)
     public ModelAndView showBookings() {
 
         return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }
 
+    // ------------------- Show Desired Bookings ------------------------------------------------
+    @RequestMapping(value = "/bookings/{id}", method = RequestMethod.GET)
+    public ModelAndView showForm(@PathVariable("id") Integer id) {
+
+        Booking booking = bookingService.searchById(id);
+
+        return new ModelAndView("viewbooking", "booking", booking);
+    }
+
+    // ------------------- Submit New Booking ------------------------------------------------
     @RequestMapping(value = "/bookings/submit", method = RequestMethod.GET)
     public String bookingForm(Model model) {
         model.addAttribute("booking", new Booking());
         return "submit";
     }
 
-    //Room is null
     @RequestMapping(value = "/bookings/submit", method = RequestMethod.POST)
     public String createBooking(@ModelAttribute Booking booking, @ModelAttribute Room room, @ModelAttribute Customer customer, Model model) {
 
@@ -65,8 +75,9 @@ public class BookingController {
         return "results";
     }
 
+    // ------------------- Delete a Booking ------------------------------------------------
     //not working
-    @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     public String deleteBooking(@PathVariable("id") Integer id, Model model) {
 
@@ -80,6 +91,7 @@ public class BookingController {
         return "results";
     }
 
+    // ------------------- Update a Booking ------------------------------------------------
     //not working
     @RequestMapping(value = "/bookings/update", method = RequestMethod.GET)
     public String updateBooking(Model model) {
@@ -89,16 +101,20 @@ public class BookingController {
         return "updatebooking";
     }
 
-    //not working
-    @RequestMapping(value = "/bookings/update", method = RequestMethod.PUT)
-    public String updateBooking(@ModelAttribute Booking booking, Model model) {
-
-        LOGGER.log(Level.INFO, "Updating booking");
-
-        bookingService.update(booking);
-
-        model.addAttribute("booking", booking);
-
-        return "results";
-    }
+    //    @RequestMapping(value = "/bookings/{id}", method = RequestMethod.PUT)
+    //    public ResponseEntity<Booking> updateBooking(@PathVariable("id") Integer id, @RequestBody Booking booking) {
+    //        LOGGER.log(Level.INFO, "Updating booking");
+    //
+    //        Booking currentBooking = bookingService.searchById(id);
+    //
+    //        currentBooking.setCustomer(booking.getCustomer());
+    //        currentBooking.setRoom(booking.getRoom());
+    //        currentBooking.setStartDate(booking.getStartDate());
+    //        currentBooking.setEndDate(booking.getEndDate());
+    //        currentBooking.setPricePerDay(booking.getPricePerDay());
+    //
+    //        bookingService.update(currentBooking);
+    //
+    //        return new ResponseEntity<Booking>(currentBooking, HttpStatus.OK);
+    //    }
 }
