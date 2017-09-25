@@ -3,7 +3,7 @@ package ro.sci.hotel.model.event;
 import ro.sci.hotel.model.util.Price;
 
 public class EventRoom {
-
+private int id;
     private String roomnName;
     private int roomCapacity;
     private String roomOrientation;
@@ -51,4 +51,8 @@ public class EventRoom {
     public void setPricePerDay(Price pricePerDay) {
         this.pricePerDay = pricePerDay;
     }
-}
+
+    public int getId() {       return id;   }
+
+    public void setId(int id) {        this.id = id;    }}
+

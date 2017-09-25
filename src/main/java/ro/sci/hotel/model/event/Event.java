@@ -5,6 +5,8 @@ import ro.sci.hotel.model.util.Price;
 import java.util.Date;
 
 public class Event {
+    private int id;
+
 
     private Date startDate;
     private Date endDate;
@@ -42,5 +44,9 @@ public class Event {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    public int getId() {  return id;    }
+
+    public void setId(int id) { this.id = id;    }
 
 }
