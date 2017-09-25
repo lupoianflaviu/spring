@@ -1,6 +1,9 @@
 package ro.sci.hotel.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import ro.sci.hotel.model.employee.Address;
 import ro.sci.hotel.model.employee.Employee;
@@ -8,13 +11,17 @@ import ro.sci.hotel.repository.EmployeeRepository;
 
 import java.util.List;
 
+@SpringBootApplication
+@ComponentScan({"com.delivery.request"})
+@EntityScan("ro.sci.hotel.model.employee.Address")
+
 @Service("employeeService")
 public class EmployeeServiceImpl implements EmployeeService<Employee>{
 
 
     private EmployeeRepository<Employee> employeeRepository;
 
-    private AddressService<Address> addressService;
+    private AddressService<Address> addressService = new AddressServiceImpl();
 
     @Override
     public List<Employee> getAll() {
@@ -22,8 +29,17 @@ public class EmployeeServiceImpl implements EmployeeService<Employee>{
 
         for (Employee employee : employees) {
 
-            Address address = addressService.searchByEmployeeId(employee.getEmployeeId());
-            employee.setAddress(address);
+            int idAdresa = employee.getEmployeeId();
+
+            Address address = addressService.searchByEmployeeId(idAdresa);
+            employee.setEmployeeAddress(address);
+//
+////            int roomNumber = booking.getRoom()
+////                    .getRoomNumber();
+////
+//            Room resultRoom = roomService.searchByRoomNumber(roomNumber);
+//            booking.setRoom(resultRoom);
+
         }
         return employees;
     }

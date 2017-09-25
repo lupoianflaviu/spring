@@ -12,7 +12,7 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String email;
-    private Address address;
+    private Address employeeAddress;
     private String employeePhoneNumber;
     private Date employmentDate;
     private Price salary;
@@ -50,12 +50,12 @@ public class Employee {
         this.email = email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Address getEmployeeAddress() {
+        return employeeAddress;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setEmployeeAddress(Address employeeAddress) {
+        this.employeeAddress = employeeAddress;
     }
 
     public String getEmployeePhoneNumber() {
@@ -89,5 +89,4 @@ public class Employee {
     public void setEmployeeRole(String employeeRole) {
         this.employeeRole = employeeRole;
     }
-
 }

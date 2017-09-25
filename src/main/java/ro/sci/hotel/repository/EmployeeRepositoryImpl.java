@@ -19,6 +19,7 @@ import static javax.swing.UIManager.getInt;
  * Created by tudorradovici on 17/09/17.
  */
 @Repository("employeeRepository")
+
 public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRepository<Employee> {
 
     private static final Logger LOGGER = Logger.getLogger("Employee");
@@ -98,8 +99,6 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             }
         } catch (SQLException e) {
             LOGGER.log(Level.WARNING, DATABASE_ERROR);
-            e.printStackTrace();
-            //throw new RuntimeException(EXCEPTION_THROWN);
         }
         return employees;
     }

@@ -30,8 +30,8 @@ public class AddressServiceImpl implements AddressService<Address> {
     }
 
     @Override
-    public Address searchByEmployeeId(Integer EmployeeId) {
-        return null;
+    public Address searchByEmployeeId(Integer employeeId) {
+        return this.addressRepository.searchByEmployeeId(employeeId);
     }
 
     @Override
