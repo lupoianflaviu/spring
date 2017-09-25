@@ -1,5 +1,6 @@
 package ro.sci.hotel.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,11 +17,14 @@ import ro.sci.hotel.service.EmployeeServiceImpl;
 @Controller
 public class EmployeeController {
     private EmployeeRepository<Employee> employeeRepository;
+    @Autowired
     private EmployeeService<Employee> employeeService;
+
+
 
     private void init(){
         this.employeeRepository= new EmployeeRepositoryImpl();
-        this.employeeService=new EmployeeServiceImpl();
+//        this.employeeService=new EmployeeServiceImpl();
         this.employeeService.setEmployeeRepository(employeeRepository);
     }
 

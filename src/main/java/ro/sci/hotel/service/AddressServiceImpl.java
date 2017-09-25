@@ -1,12 +1,15 @@
 package ro.sci.hotel.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ro.sci.hotel.model.employee.Address;
 import ro.sci.hotel.repository.AddressRepository;
 
 import java.util.List;
-
+@Service
 public class AddressServiceImpl implements AddressService<Address> {
 
+    @Autowired
     private AddressRepository<Address> addressRepository;
 
     @Override

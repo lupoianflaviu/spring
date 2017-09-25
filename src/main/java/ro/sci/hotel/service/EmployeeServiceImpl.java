@@ -11,17 +11,15 @@ import ro.sci.hotel.repository.EmployeeRepository;
 
 import java.util.List;
 
-@SpringBootApplication
-@ComponentScan({"com.delivery.request"})
-@EntityScan("ro.sci.hotel.model.employee.Address")
-
 @Service("employeeService")
 public class EmployeeServiceImpl implements EmployeeService<Employee>{
 
 
     private EmployeeRepository<Employee> employeeRepository;
 
-    private AddressService<Address> addressService = new AddressServiceImpl();
+
+    @Autowired
+    private AddressService<Address> addressService;
 
     @Override
     public List<Employee> getAll() {
@@ -33,13 +31,6 @@ public class EmployeeServiceImpl implements EmployeeService<Employee>{
 
             Address address = addressService.searchByEmployeeId(idAdresa);
             employee.setEmployeeAddress(address);
-//
-////            int roomNumber = booking.getRoom()
-////                    .getRoomNumber();
-////
-//            Room resultRoom = roomService.searchByRoomNumber(roomNumber);
-//            booking.setRoom(resultRoom);
-
         }
         return employees;
     }

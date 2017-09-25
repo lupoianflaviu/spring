@@ -88,7 +88,7 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
                 employee.setFirstName(rs.getString(FIRSTNAME));
                 employee.setLastName(rs.getString(LASTNAME));
                 employee.setEmail(EMAIL);
-//              employee.setEmployeeAddress();
+//                employee.setEmployeeAddress();
                 employee.setEmployeePhoneNumber(rs.getString(PHONENUMBER));
 //              employee.setEmploymentDate(rs.getDate(EMPLOYMENTDATE));
 //              employee.setSalary(new Price(rs.getDouble(PRICE), Currency.valueOf(rs.getString(CURRENCY))));

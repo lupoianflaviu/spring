@@ -1,5 +1,6 @@
 package ro.sci.hotel.repository;
 
+import org.springframework.stereotype.Repository;
 import ro.sci.hotel.model.employee.Address;
 import ro.sci.hotel.model.employee.Employee;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Repository
 public class AddressRepositoryImpl extends BaseRepository  implements AddressRepository<Address> {
 
     private static final Logger LOGGER = Logger.getLogger("AddressRepositoryImpl");
@@ -21,10 +23,12 @@ public class AddressRepositoryImpl extends BaseRepository  implements AddressRep
 
     private static final String SQL_SELECT_ALL_FROM_ADDRESS="SELECT employee_id, street_address, city, country FROM employee_address";
     private static final String SQL_INSERT_ADDRESS="INSERT INTO EMPLOYEE(employee_id, street_address, city, country) VALUES (?,?,?,?)";
-    private static final String ID="employeeID";
-    private static final String STREET_ADDRESS="streetAddress";
+    private static final String ID="employee_id";
+    private static final String STREET_ADDRESS="street_address";
     private static final String CITY="city";
     private static final String COUNTRY="country";
+
+
     @Override
     public List<Address> getAll() {
 
@@ -86,26 +90,23 @@ public class AddressRepositoryImpl extends BaseRepository  implements AddressRep
     @Override
     public Address searchByEmployeeId(Integer employee_id) {
 
-        List <Address> addresses = new ArrayList<>();
+        Address address = new Address();
 
         try(Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement("select * from employee_address WHERE employee_id=?")){
             stm.setInt(1,employee_id);
 
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
-                Address address = new Address();
 
                 address.setEmployeeId(rs.getInt(ID));
                 address.setStreetAddress(rs.getString(STREET_ADDRESS));
                 address.setCity(rs.getString(CITY));
                 address.setCountry(rs.getString(COUNTRY));
 
-                addresses.add(address);
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return address;
     }
 }
