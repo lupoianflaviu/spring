@@ -68,4 +68,9 @@ public class Customer {
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
+
+    @Override
+    public String toString() {
+        return id + " , " + firstName + " , " + lastName + " , " + email + " , " + phoneNumber + " , " + customerAddress + " , " + paymentMethod;
+    }
 }

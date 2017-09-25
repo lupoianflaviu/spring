@@ -97,4 +97,6 @@ public interface BookingService<T> {
      * @param bookingRepository Booking repository
      */
     void setBookingRepository(BookingRepository<Booking> bookingRepository);
+
+    T searchById(Integer bookingId);
 }

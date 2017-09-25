@@ -22,19 +22,18 @@ import ro.sci.hotel.model.util.Price;
 public class PriceRepositoryImpl extends BaseRepository implements PriceRepository<Price> {
 
     private static final Logger LOGGER = Logger.getLogger("Hotel");
-
     private static final String DATABASE_ERROR = "Database error!";
-
     private static final String EXCEPTION_THROWN = "Exception thrown";
     private static final String WRITING_PRICE_HAS_FINISHED = "Writing Price has finished";
     private static final String SQL_INSERT_INTO_PRICE_VALUE_CURRENCY_VALUES = "INSERT INTO price(value,currency) values(?,?)";
-    private static final String PRICE_UPDATE_HAS_FISNISHED = "Price update has fisnished";
+    private static final String PRICE_UPDATE_HAS_FINISHED = "Price update has finished";
     private static final String SQL_UPDATE_PRICE = "UPDATE price " + "SET value=?, currency=? WHERE id = ?";
     private static final String SQL_DELETE_FROM_PRICE_WHERE_ID = "DELETE FROM price where id=?";
     private static final String PRICE_ROW_HAS_BEEN_DELETED = "Price row has been deleted";
     private static final String SQL_SELECT_FROM_PRICE_WHERE_ID = "SELECT * FROM price WHERE id=?";
     private static final String VALUE = "value";
     private static final String CURRENCY = "currency";
+    private static final String ID = "id";
 
     @Override
     public List<Price> getAll() {
@@ -45,7 +44,7 @@ public class PriceRepositoryImpl extends BaseRepository implements PriceReposito
             while (rs.next()) {
 
                 Price price = new Price();
-                price.setId(rs.getInt("id"));
+                price.setId(rs.getInt(ID));
                 price.setValue(rs.getDouble(VALUE));
                 price.setCurrency(Currency.valueOf(rs.getString(CURRENCY)));
 
@@ -97,7 +96,7 @@ public class PriceRepositoryImpl extends BaseRepository implements PriceReposito
             throw new RuntimeException(EXCEPTION_THROWN);
         }
 
-        LOGGER.log(Level.INFO, PRICE_UPDATE_HAS_FISNISHED);
+        LOGGER.log(Level.INFO, PRICE_UPDATE_HAS_FINISHED);
     }
 
     @Override
@@ -127,9 +126,11 @@ public class PriceRepositoryImpl extends BaseRepository implements PriceReposito
 
             ResultSet rs = stm.executeQuery();
 
-            price.setValue(rs.getDouble(VALUE));
-            price.setCurrency(Currency.valueOf(rs.getString(CURRENCY)));
-
+            while (rs.next()) {
+                price.setId(rs.getInt(ID));
+                price.setValue(rs.getDouble(VALUE));
+                price.setCurrency(Currency.valueOf(rs.getString(CURRENCY)));
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
             LOGGER.log(Level.WARNING, DATABASE_ERROR);

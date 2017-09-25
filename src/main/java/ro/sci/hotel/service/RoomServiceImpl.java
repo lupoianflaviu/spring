@@ -13,12 +13,14 @@ import ro.sci.hotel.repository.RoomRepository;
 /**
  * Room service implementation
  */
-@Service
+@Service("roomService")
 public class RoomServiceImpl implements RoomService<Room> {
-    @Autowired
-    private RoomRepository<Room> roomRepository;
+
     @Autowired
     private PriceService<Price> priceService;
+
+    @Autowired
+    private RoomRepository<Room> roomRepository;
 
     @Override
     public List<Room> getAll() {
@@ -42,11 +44,9 @@ public class RoomServiceImpl implements RoomService<Room> {
 
     @Override
     public Room searchByRoomNumber(Integer roomNumber) {
-
         Room room = this.roomRepository.searchByRoomNumber(roomNumber);
-        Price resultPrice = this.priceService.searchById(room.getPricePerNight()
-                                                             .getId());
-
+        Price resultPrice = priceService.searchById(room.getPricePerNight()
+                                                        .getId());
         room.setPricePerNight(resultPrice);
 
         return room;

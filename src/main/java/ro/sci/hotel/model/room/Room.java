@@ -2,8 +2,6 @@ package ro.sci.hotel.model.room;
 
 import ro.sci.hotel.model.util.Price;
 
-import java.sql.Date;
-
 /**
  * Hotel room model
  */
@@ -84,32 +82,33 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room{" +
-                "roomNumber=" + roomNumber +
-                ", roomType=" + roomType +
-                ", bedType=" + bedType +
-                ", bedNumber=" + bedNumber +
-                ", oceanView=" + oceanView +
-                ", airConditioning=" + airConditioning +
-                ", balcony=" + balcony +
-                ", pricePerNight=" + pricePerNight +
-                '}';
+        return roomNumber + " , " + roomType + " , " + bedType + " , " + bedNumber + " , " + oceanView + " , " + airConditioning + " , " + balcony + " , "
+                + pricePerNight;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         Room room = (Room) o;
 
-        if (roomNumber != room.roomNumber) return false;
-        if (bedNumber != room.bedNumber) return false;
-        if (oceanView != room.oceanView) return false;
-        if (airConditioning != room.airConditioning) return false;
-        if (balcony != room.balcony) return false;
-        if (roomType != room.roomType) return false;
-        if (bedType != room.bedType) return false;
+        if (roomNumber != room.roomNumber)
+            return false;
+        if (bedNumber != room.bedNumber)
+            return false;
+        if (oceanView != room.oceanView)
+            return false;
+        if (airConditioning != room.airConditioning)
+            return false;
+        if (balcony != room.balcony)
+            return false;
+        if (roomType != room.roomType)
+            return false;
+        if (bedType != room.bedType)
+            return false;
         return pricePerNight != null ? pricePerNight.equals(room.pricePerNight) : room.pricePerNight == null;
     }
 

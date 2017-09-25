@@ -1,19 +1,27 @@
 package ro.sci.hotel.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import ro.sci.hotel.model.booking.Booking;
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.room.Room;
-import ro.sci.hotel.repository.BookingRepository;
-import ro.sci.hotel.repository.BookingRepositoryImpl;
+import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.service.BookingService;
-import ro.sci.hotel.service.BookingServiceImpl;
+import ro.sci.hotel.service.CustomerService;
+import ro.sci.hotel.service.PriceService;
+import ro.sci.hotel.service.RoomService;
 
 /**
  * Booking model controller
@@ -21,39 +29,92 @@ import ro.sci.hotel.service.BookingServiceImpl;
 @Controller
 public class BookingController {
 
-    private BookingRepository<Booking> bookingRepository;
+    private static final Logger LOGGER = Logger.getLogger("Hotel");
+
+    @Autowired
     private BookingService<Booking> bookingService;
 
-    private void init() {
-        this.bookingRepository = new BookingRepositoryImpl();
-        this.bookingService = new BookingServiceImpl();
-        this.bookingService.setBookingRepository(bookingRepository);
-    }
+    @Autowired
+    private CustomerService<Customer> customerService;
 
+    @Autowired
+    private PriceService<Price> priceService;
+
+    @Autowired
+    private RoomService<Room> roomService;
+
+    // ------------------- Show All Bookings ------------------------------------------------
     @RequestMapping(value = "/bookings", method = RequestMethod.GET)
     public ModelAndView showBookings() {
-        init();
 
         return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }
 
-    //not tested
-    @RequestMapping(value = "/submit", method = RequestMethod.GET)
+    // ------------------- Show Desired Bookings ------------------------------------------------
+    @RequestMapping(value = "/bookings/{id}", method = RequestMethod.GET)
+    public ModelAndView showForm(@PathVariable("id") Integer id) {
+
+        Booking booking = bookingService.searchById(id);
+
+        return new ModelAndView("viewbooking", "booking", booking);
+    }
+
+    // ------------------- Submit New Booking ------------------------------------------------
+    @RequestMapping(value = "/bookings/submit", method = RequestMethod.GET)
     public String bookingForm(Model model) {
         model.addAttribute("booking", new Booking());
-        model.addAttribute("room", new Room());
-        model.addAttribute("customer", new Customer());
         return "submit";
     }
 
-    //not tested
-    @RequestMapping(value = "/submit", method = RequestMethod.POST)
+    @RequestMapping(value = "/bookings/submit", method = RequestMethod.POST)
     public String createBooking(@ModelAttribute Booking booking, @ModelAttribute Room room, @ModelAttribute Customer customer, Model model) {
-        model.addAttribute("booking", booking);
-        model.addAttribute("room", room);
-        model.addAttribute("customer", customer);
+
         bookingService.create(booking, room, customer);
+        model.addAttribute("booking", booking);
 
         return "results";
     }
+
+    // ------------------- Delete a Booking ------------------------------------------------
+    //not working
+    @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.OK)
+    public String deleteBooking(@PathVariable("id") Integer id, Model model) {
+
+        LOGGER.log(Level.INFO, "Deleting booking with id " + id);
+
+        Booking booking = bookingService.searchById(id);
+        bookingService.delete(booking);
+
+        model.addAttribute("booking", booking);
+
+        return "results";
+    }
+
+    // ------------------- Update a Booking ------------------------------------------------
+    //not working
+    @RequestMapping(value = "/bookings/update", method = RequestMethod.GET)
+    public String updateBooking(Model model) {
+
+        model.addAttribute("booking", new Booking());
+
+        return "updatebooking";
+    }
+
+    //    @RequestMapping(value = "/bookings/{id}", method = RequestMethod.PUT)
+    //    public ResponseEntity<Booking> updateBooking(@PathVariable("id") Integer id, @RequestBody Booking booking) {
+    //        LOGGER.log(Level.INFO, "Updating booking");
+    //
+    //        Booking currentBooking = bookingService.searchById(id);
+    //
+    //        currentBooking.setCustomer(booking.getCustomer());
+    //        currentBooking.setRoom(booking.getRoom());
+    //        currentBooking.setStartDate(booking.getStartDate());
+    //        currentBooking.setEndDate(booking.getEndDate());
+    //        currentBooking.setPricePerDay(booking.getPricePerDay());
+    //
+    //        bookingService.update(currentBooking);
+    //
+    //        return new ResponseEntity<Booking>(currentBooking, HttpStatus.OK);
+    //    }
 }

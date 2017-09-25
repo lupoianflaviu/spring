@@ -9,6 +9,7 @@ import java.util.List;
 import ro.sci.hotel.model.booking.Booking;
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.room.Room;
+import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.repository.BookingRepository;
 
 /**
@@ -26,9 +27,12 @@ public class BookingServiceImpl implements BookingService<Booking> {
     @Autowired
     private CustomerService<Customer> customerService;
 
+    @Autowired
+    private PriceService<Price> priceService;
+
     @Override
     public List<Booking> getAll() {
-        //add room and customer
+
 
         List<Booking> bookings = this.bookingRepository.getAll();
 
@@ -38,6 +42,7 @@ public class BookingServiceImpl implements BookingService<Booking> {
                                     .getRoomNumber();
 
             Room resultRoom = roomService.searchByRoomNumber(roomNumber);
+
             booking.setRoom(resultRoom);
 
             int customerId = booking.getCustomer()
@@ -97,5 +102,32 @@ public class BookingServiceImpl implements BookingService<Booking> {
     @Override
     public void setBookingRepository(BookingRepository<Booking> bookingRepository) {
         this.bookingRepository = bookingRepository;
+    }
+
+    @Override
+    public Booking searchById(Integer bookingId) {
+
+        Booking booking = this.bookingRepository.searchById(bookingId);
+        int roomNumber = booking.getRoom()
+                                .getRoomNumber();
+
+        Room resultRoom = roomService.searchByRoomNumber(roomNumber);
+
+        booking.setRoom(resultRoom);
+
+        int customerId = booking.getCustomer()
+                                .getId();
+        Customer resultCustomer = customerService.searchByCustomerId(customerId);
+        booking.setCustomer(resultCustomer);
+
+        return booking;
+    }
+
+    public void setRoomService(RoomService<Room> roomService) {
+        this.roomService = roomService;
+    }
+
+    public void setCustomerService(CustomerService<Customer> customerService) {
+        this.customerService = customerService;
     }
 }

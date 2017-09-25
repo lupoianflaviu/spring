@@ -1,5 +1,7 @@
 package ro.sci.hotel.repository;
 
+import org.apache.ibatis.annotations.Select;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public interface BookingRepository<T> {
      *
      * @return List<T> Booking lists
      */
+    @Select("SELECT * FROM booking")
     List<T> getAll();
 
     /**
@@ -91,4 +94,6 @@ public interface BookingRepository<T> {
      * @return List<T> searched bookings list
      */
     List<T> searchByCustomerIdAndRoomNumber(Integer customerId, Integer roomNumber);
+
+    T searchById(Integer bookingId);
 }

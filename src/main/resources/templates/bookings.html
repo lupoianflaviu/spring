@@ -9,7 +9,7 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <table>
-    <p th:text="'ID ' + 'Price' + 'Currency' + 'StartDate' + 'EndDate' + ' Room Number ' + ' Customer Id'"/>
+    <p th:text="'ID ' + ' Customer ' + ' Room ' + ' StartDate ' + ' EndDate '"/>
     <th:block th:each="booking : ${bookings}">
     <tr>
         <td th:text="${booking.id}">...</td>
@@ -17,15 +17,16 @@
         <td th:text="${booking.room}">...</td>
         <td th:text="${booking.startDate}">...</td>
         <td th:text="${booking.endDate}">...</td>
-        <!--<td th:text="${booking.pricePerDay}">...</td>-->
-        <!--<td th:text="${booking.currency}">...</td>-->
     </tr>
     </th:block>
 </table>
 <div class="btn-group">
-    <button type="button" class="btn btn-success">Create Booking</button>
-    <button type="button" class="btn btn-warning">Update Booking</button>
-    <button type="button" class="btn btn-danger">Delete Booking</button>
+    <a href="/bookings/submit" class="btn btn-info" role="button">Book Now</a>
+    <a href="/bookings/update" class="btn btn-info" role="button">Update Booking</a>
+    <a href="/submit" class="btn btn-info" role="button">Delete Booking</a>
+    <!--<button type="button" class="btn btn-succes">Create Booking</button>-->
+    <!--<button type="button" class="btn btn-warning">Update Booking</button>-->
+    <!--<button type="button" class="btn btn-danger">Delete Booking</button>-->
 </div>
 </body>
 </html>

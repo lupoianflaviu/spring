@@ -1,12 +1,12 @@
 package ro.sci.hotel.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.repository.PriceRepository;
-import ro.sci.hotel.repository.PriceRepositoryImpl;
 
 /**
  * Implementation for PriceService interface
@@ -14,35 +14,41 @@ import ro.sci.hotel.repository.PriceRepositoryImpl;
 @Service("priceService")
 public class PriceServiceImpl implements PriceService<Price> {
 
-    PriceRepository<Price> pricePriceRepository = new PriceRepositoryImpl();
+    @Autowired
+    private PriceRepository<Price> priceRepository;
 
     @Override
     public List<Price> getAll() {
 
-        return pricePriceRepository.getAll();
+        return priceRepository.getAll();
     }
 
     @Override
     public void create(Price price) {
 
-        pricePriceRepository.create(price);
+        priceRepository.create(price);
     }
 
     @Override
     public void update(Price price) {
 
-        pricePriceRepository.update(price);
+        priceRepository.update(price);
     }
 
     @Override
     public void delete(Price price) {
 
-        pricePriceRepository.delete(price);
+        priceRepository.delete(price);
     }
 
     @Override
     public Price searchById(Integer id) {
 
-        return pricePriceRepository.searchById(id);
+        return priceRepository.searchById(id);
+    }
+
+    @Override
+    public void setPriceRepository(PriceRepository<Price> priceRepository) {
+        this.priceRepository = priceRepository;
     }
 }

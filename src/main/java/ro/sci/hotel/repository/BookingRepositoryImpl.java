@@ -293,4 +293,36 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
     public List<Booking> searchByCustomerIdAndRoomNumber(Integer customerId, Integer roomNumber) {
         return null;
     }
+
+    @Override
+    public Booking searchById(Integer bookingId) {
+        Booking booking = new Booking();
+
+        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement("SELECT * FROM booking WHERE id=?")) {
+
+            stm.setDouble(1, bookingId);
+
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+
+                Room room = new Room();
+                Customer customer = new Customer();
+                booking.setId(rs.getInt(ID));
+                room.setRoomNumber(rs.getInt(ROOMNUMBER));
+                customer.setId(rs.getInt(CUSTOMERID));
+                booking.setRoom(room);
+                booking.setCustomer(customer);
+                booking.setStartDate(rs.getDate(STARTDATE));
+                booking.setEndDate(rs.getDate(ENDDATE));
+            }
+
+
+        } catch (SQLException ex) {
+            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+            throw new RuntimeException(EXCEPTION_THROWN);
+        }
+
+        return booking;
+    }
 }

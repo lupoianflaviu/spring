@@ -1,12 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Booking Form Submission</title>
+    <title>Update Booking</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 <h1>Form</h1>
-<form action="#" th:action="@{/bookings/submit}" method="post">
+<form action="#" th:action="@{/bookings/update}" method="put">
+    <p>Booking id: <input type="text" th:field="*{booking.id}" /></p>
     <p>Room Number: <input type="text" th:field="*{booking.room}" /></p>
     <p>Customer Id: <input type="text" th:field="*{booking.customer}" /></p>
     <p>StartDate: <input type="text" th:field="*{booking.startDate}" /></p>
