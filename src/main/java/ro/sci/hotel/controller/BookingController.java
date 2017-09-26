@@ -89,7 +89,7 @@ public class BookingController {
         model.addAttribute("room", currentRoom);
         model.addAttribute("customer", currentCustomer);
 
-        return "updatebooking";
+        return "deletebooking";
     }
 
 
@@ -105,11 +105,11 @@ public class BookingController {
 
         model.addAttribute("booking", booking);
 
-        return "results";
+        return "deletebooking";
     }
 
     // ------------------- Update a Booking ------------------------------------------------
-    //not working
+    //needs testing
     @RequestMapping(value = "/bookings/update/{id}", method = RequestMethod.GET)
     public String updateBookingForm(@PathVariable("id") Integer id,  Model model) {
 
@@ -121,20 +121,21 @@ public class BookingController {
 
         return "updatebooking";
     }
-
-        @RequestMapping(value = "/bookings/update/{id}", method = RequestMethod.POST)
+//needs testing
+        @RequestMapping(value = "/bookings/update/{id}", method = RequestMethod.PUT)
         public String updateBooking(@PathVariable("id") Integer id, @RequestBody Booking booking) {
             LOGGER.log(Level.INFO, "Updating booking");
 
-            Booking currentBooking = bookingService.searchById(id);
+            Booking updatedBooking = new Booking();
+            updatedBooking.setId(booking.getId());
+            updatedBooking.setCustomer(booking.getCustomer());
+            updatedBooking.setRoom(roomService.searchByRoomNumber(booking.getRoom().getRoomNumber()));
+//            updatedBooking.setRoom(booking.getRoom());
+            updatedBooking.setStartDate(booking.getStartDate());
+            updatedBooking.setEndDate(booking.getEndDate());
+            updatedBooking.setPricePerDay(booking.getPricePerDay());
 
-            currentBooking.setCustomer(booking.getCustomer());
-            currentBooking.setRoom(booking.getRoom());
-            currentBooking.setStartDate(booking.getStartDate());
-            currentBooking.setEndDate(booking.getEndDate());
-            currentBooking.setPricePerDay(booking.getPricePerDay());
-
-            bookingService.update(currentBooking);
+            bookingService.update(updatedBooking);
 
             return "updatebooking";
         }
