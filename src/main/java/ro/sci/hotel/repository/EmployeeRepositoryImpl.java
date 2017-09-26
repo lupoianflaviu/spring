@@ -87,7 +87,7 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
                 employee.setEmployeeId(rs.getInt(ID));
                 employee.setFirstName(rs.getString(FIRSTNAME));
                 employee.setLastName(rs.getString(LASTNAME));
-                employee.setEmail(EMAIL);
+                employee.setEmail(rs.getString(EMAIL));
 //                employee.setEmployeeAddress();
                 employee.setEmployeePhoneNumber(rs.getString(PHONENUMBER));
 //              employee.setEmploymentDate(rs.getDate(EMPLOYMENTDATE));
@@ -155,6 +155,26 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
     public Employee searchByEmployeeId(Integer employeeId) {
 
         Employee employee= new Employee();
+        try(Connection conn =newConnection(); PreparedStatement stm = conn.prepareStatement("SELECT * FROM employee WHERE  employee_id=?")){
+
+            stm.setInt(1,employeeId);
+            ResultSet rs= stm.executeQuery();
+
+            while (rs.next()){
+                employee.setEmployeeId(rs.getInt(employeeId));
+                employee.setFirstName(rs.getString(FIRSTNAME));
+                employee.setLastName(rs.getString(LASTNAME));
+                employee.setEmail(rs.getString(EMAIL));
+                employee.setEmployeePhoneNumber(rs.getString(PHONENUMBER));
+                //employee.setDate(5,employee.getEmploymentDate());
+//                employee.setDouble(SALARY);
+                employee.setEmployeeRole(rs.getString(EMPLOYEEROLE));
+
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+            throw new RuntimeException(EXCEPTION_THROWN);
+        }
 
         return employee;
     }

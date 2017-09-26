@@ -14,7 +14,7 @@ import java.util.List;
 @Service("employeeService")
 public class EmployeeServiceImpl implements EmployeeService<Employee>{
 
-
+    @Autowired
     private EmployeeRepository<Employee> employeeRepository;
 
 
@@ -27,9 +27,8 @@ public class EmployeeServiceImpl implements EmployeeService<Employee>{
 
         for (Employee employee : employees) {
 
-            int idAdresa = employee.getEmployeeId();
 
-            Address address = addressService.searchByEmployeeId(idAdresa);
+            Address address = addressService.searchByEmployeeId(employee.getEmployeeId());
             employee.setEmployeeAddress(address);
         }
         return employees;
@@ -52,7 +51,14 @@ public class EmployeeServiceImpl implements EmployeeService<Employee>{
 
     @Override
     public Employee searchByEmployeeId(Integer employeeId) {
-        return this.employeeRepository.searchByEmployeeId(employeeId);
+
+        Employee employee = this.employeeRepository.searchByEmployeeId(employeeId);
+
+        Address address = addressService.searchByEmployeeId(employee.getEmployeeId());
+
+        employee.setEmployeeAddress(address);
+
+        return employee;
     }
 
     @Override

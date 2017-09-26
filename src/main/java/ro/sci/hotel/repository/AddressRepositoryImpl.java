@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Repository
+@Repository("addressRepository")
 public class AddressRepositoryImpl extends BaseRepository  implements AddressRepository<Address> {
 
     private static final Logger LOGGER = Logger.getLogger("AddressRepositoryImpl");
@@ -88,12 +88,12 @@ public class AddressRepositoryImpl extends BaseRepository  implements AddressRep
     }
 
     @Override
-    public Address searchByEmployeeId(Integer employee_id) {
+    public Address searchByEmployeeId(Integer employeeId) {
 
         Address address = new Address();
 
         try(Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement("select * from employee_address WHERE employee_id=?")){
-            stm.setInt(1,employee_id);
+            stm.setInt(1,employeeId);
 
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
