@@ -6,7 +6,8 @@
 </head>
 <body>
 <h1>Form</h1>
-<form action="#" th:action="@{/bookings/delete/{id}}" method="DELETE">
+<!--<form action="#" th:action="@{/bookings/delete/{id}}" method="delete">-->
+<form th:object="${booking}" th:action="@{/bookings/delete/{id}}" th:method="delete">
     <p>Booking id: <input type="text" th:field="*{booking.id}" /></p>
     <p>Room Number: <input type="text" th:field="*{booking.room}" /></p>
     <p>Customer Id: <input type="text" th:field="*{booking.customer}" /></p>
