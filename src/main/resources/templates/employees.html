@@ -7,21 +7,23 @@
 <body>
     <table>
         <p th:text="'ID '
-        + 'firstName'
-        + 'lastName'
-        + 'email'
-        + 'EmployeeAddress'
-        + 'employeePhoneNumber'
-        + 'employmentDate'
-        + 'Price'
-        + 'employeeRole'"/>
+        + 'firstName '
+        + 'lastName '
+        + 'email '
+        + 'employeeAddress '
+        + 'employeePhoneNumber '
+        + 'employmentDate '
+        + 'Price '
+        + 'employeeRole '"/>
         <th:block th:each="employee : ${employees}">
             <tr>
                 <td th:text="${employee.employeeId}">...</td>
                 <td th:text="${employee.firstName}">...</td>
                 <td th:text="${employee.lastName}">...</td>
                 <td th:text="${employee.email}">...</td>
-                <td th:text="${employee.employeeAddress}">...</td>
+                <td th:text="${employee.employeeAddress.streetAddress}">...</td>
+                <td th:text="${employee.employeeAddress.city}">...</td>
+                <td th:text="${employee.employeeAddress.country}">...</td>
                 <td th:text="${employee.employeePhoneNumber}">...</td>
                 <!--<td th:text="${employee.employmentDate}">...</td>-->
                 <!--<td th:text="${employee.price}">...</td>-->
