@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import ro.sci.hotel.model.employee.Address;
 import ro.sci.hotel.model.employee.Employee;
+import ro.sci.hotel.model.employee.Login;
 import ro.sci.hotel.repository.EmployeeRepository;
 
 import java.util.List;
@@ -64,6 +65,11 @@ public class EmployeeServiceImpl implements EmployeeService<Employee>{
     @Override
     public List<Employee> searchByFirstName(String firstName) {
         return this.employeeRepository.searchByFirstName(firstName);
+    }
+
+    @Override
+    public Employee validateEmployee(Login login) {
+        return this.employeeRepository.validateEmployee(login);
     }
 
     @Override

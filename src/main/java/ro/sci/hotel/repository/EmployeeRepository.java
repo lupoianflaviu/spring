@@ -1,6 +1,7 @@
 package ro.sci.hotel.repository;
 
 import ro.sci.hotel.model.employee.Employee;
+import ro.sci.hotel.model.employee.Login;
 
 import java.util.List;
 
@@ -44,6 +45,14 @@ public interface EmployeeRepository<T>{
      * @param firstName
      * @return list of employee with a certain firstName;
      */
+
+    /**
+     * Validates if a user exists
+     * @param login
+     * @return
+     */
+    T validateEmployee(Login login);
+
     List<T>searchByFirstName(String firstName);
 
 }

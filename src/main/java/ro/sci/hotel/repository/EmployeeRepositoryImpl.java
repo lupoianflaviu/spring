@@ -2,6 +2,7 @@ package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
 import ro.sci.hotel.model.employee.Employee;
+import ro.sci.hotel.model.employee.Login;
 import ro.sci.hotel.model.util.Currency;
 import ro.sci.hotel.model.util.Price;
 
@@ -40,6 +41,10 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
     private static final String EMAIL = "email";
 
+    private static final String USERNAME = "username";
+
+    private static final String PASSWORD = "password";
+
     private static final String PHONENUMBER = "employee_phone_number";
 
     private static final String EMPLOYMENTDATE = "employment_date";
@@ -62,6 +67,8 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             "VALUES (?,?,?,?,?,?,?)";
 
     private static final  String DELETE_EMPLOYEE="Delete from employees where id=(?)";
+
+    private static final  String  SQL_SELECT_USERNAME_PASSWORD="SELECT * FROM employee where username=? AND password=?";
 
     private static final  String SQL_SEARCH_BY_ID ="SELECT" +
             "first_name" +
@@ -161,7 +168,7 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             ResultSet rs= stm.executeQuery();
 
             while (rs.next()){
-                employee.setEmployeeId(rs.getInt(employeeId));
+                employee.setEmployeeId(rs.getInt(ID));
                 employee.setFirstName(rs.getString(FIRSTNAME));
                 employee.setLastName(rs.getString(LASTNAME));
                 employee.setEmail(rs.getString(EMAIL));
@@ -172,10 +179,29 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.WARNING, DATABASE_ERROR);
-            throw new RuntimeException(EXCEPTION_THROWN);
+//            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+//            throw new RuntimeException(EXCEPTION_THROWN);
+            e.printStackTrace();
         }
 
+        return employee;
+    }
+
+    @Override
+    public Employee validateEmployee(Login login) {
+
+        Employee employee = new Employee();
+
+        try (Connection conn = newConnection(); Statement stm = conn.createStatement(); ResultSet rs = stm.executeQuery(SQL_SELECT_USERNAME_PASSWORD)) {
+
+            while (rs.next()) {
+
+                employee.setUsername(rs.getString(USERNAME));
+                employee.setPassword(rs.getString(PASSWORD));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return employee;
     }
 
