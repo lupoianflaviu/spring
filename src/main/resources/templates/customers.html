@@ -10,14 +10,14 @@
     <block>
         <tr th:each="customer: ${customers}">
             <td th:text="${customer.id}">...</td>
-            <td th:text="${customer.firstname}">...</td>
-            <td th:text="${customer.lastname}">...</td>
+            <td th:text="${customer.firstName}">...</td>
+            <td th:text="${customer.lastName}">...</td>
             <td th:text="${customer.email}">...</td>
-            <td th:text="${customer.phonenumber}">...</td>
-            <td th:text="${customer.streetadress}">...</td>
-            <td th:text="${customer.city}">...</td>
-            <td th:text="${customer.country}">...</td>
-            <td th:text="${customer.paymentmethod}">...</td>
+            <td th:text="${customer.phoneNumber}">...</td>
+            <td th:text="${customer.customerAddress.streetAddress}">...</td>
+            <td th:text="${customer.customerAddress.city}">...</td>
+            <td th:text="${customer.customerAddress.country}">...</td>
+            <td th:text="${customer.paymentMethod}">...</td>
         </tr>
     </block>
 </table>

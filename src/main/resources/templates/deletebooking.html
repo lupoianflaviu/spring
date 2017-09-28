@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Delete Booking</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Form</h1>
+<!--<form action="#" th:action="@{/bookings/delete/{id}}" method="delete">-->
+<form th:object="${booking}" th:action="@{/bookings/delete/{id}}" th:method="delete">
+    <p>Booking id: <input type="text" th:field="*{booking.id}" /></p>
+    <p>Room Number: <input type="text" th:field="*{booking.room}" /></p>
+    <p>Customer Id: <input type="text" th:field="*{booking.customer}" /></p>
+    <p>StartDate: <input type="text" th:field="*{booking.startDate}" /></p>
+    <p>EndDate: <input type="text" th:field="*{booking.endDate}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>>

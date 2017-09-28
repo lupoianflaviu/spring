@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.Comparator;
 import java.util.List;
 
 import ro.sci.hotel.model.booking.Booking;
@@ -50,6 +51,8 @@ public class BookingServiceImpl implements BookingService<Booking> {
             Customer resultCustomer = customerService.searchByCustomerId(customerId);
             booking.setCustomer(resultCustomer);
         }
+        //to check sorting by id
+        bookings.sort(Comparator.comparing(Booking::getId));
 
         return bookings;
     }

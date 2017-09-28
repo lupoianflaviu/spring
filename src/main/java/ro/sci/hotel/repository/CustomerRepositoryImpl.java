@@ -54,9 +54,9 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
 
     private static final String STREETADDRESS = "streetaddress";
 
-    private static final String CITY = "CITY";
+    private static final String CITY = "city";
 
-    private static final String COUNTRY = "COUNTRY";
+    private static final String COUNTRY = "country";
 
     private static final String PAYMENTMETHOD = "paymentmethod";
 
