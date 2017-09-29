@@ -1,5 +1,6 @@
 package ro.sci.hotel.repository;
 
+import org.springframework.stereotype.Repository;
 import ro.sci.hotel.model.event.Event;
 import ro.sci.hotel.model.event.EventRoom;
 import ro.sci.hotel.model.util.Price;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
-
+@Repository
 public class EventRoomRepositoryImpl extends BaseRepository implements EventRoomRepository {
     @Override
     public List getAll() {
