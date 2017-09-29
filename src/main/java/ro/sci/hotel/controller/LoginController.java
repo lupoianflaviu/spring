@@ -39,9 +39,9 @@ public class LoginController {
     public ModelAndView loginProcess(@ModelAttribute("login") Login login) {
         ModelAndView mav = null;
         Employee employee = employeeService.validateEmployee(login);
-        if (null != employee) {
+        if (employee.getPassword()!=null && employee.getUsername()!=null && employee.getEmployeeRole().equals("admin")) {
             mav = new ModelAndView("welcome");
-            mav.addObject("firstname", employee.getFirstName());
+            mav.addObject("employee", employee);
         } else {
             mav = new ModelAndView("login");
             mav.addObject("message", "Username or Password is wrong!!");

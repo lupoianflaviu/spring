@@ -192,12 +192,19 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
         Employee employee = new Employee();
 
-        try (Connection conn = newConnection(); Statement stm = conn.createStatement(); ResultSet rs = stm.executeQuery(SQL_SELECT_USERNAME_PASSWORD)) {
+        try(Connection conn =newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_SELECT_USERNAME_PASSWORD)) {
+
+            stm.setString(1,login.getUsername());
+            stm.setString(2,login.getPassword());
+            ResultSet rs= stm.executeQuery();
 
             while (rs.next()) {
-
+                employee.setEmployeeId(rs.getInt(ID));
                 employee.setUsername(rs.getString(USERNAME));
                 employee.setPassword(rs.getString(PASSWORD));
+                employee.setFirstName(rs.getString(FIRSTNAME));
+                employee.setLastName(rs.getString(LASTNAME));
+                employee.setEmployeeRole(rs.getString(EMPLOYEEROLE));
             }
         } catch (SQLException e) {
             e.printStackTrace();
