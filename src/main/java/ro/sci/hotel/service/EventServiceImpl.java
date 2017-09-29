@@ -1,15 +1,42 @@
 package ro.sci.hotel.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.event.Event;
+import ro.sci.hotel.model.event.EventRoom;
+import ro.sci.hotel.repository.EventRepository;
 
 import java.util.Date;
 import java.util.List;
 
+@Repository
 public class EventServiceImpl implements EventService {
+
+    @Autowired
+    private EventRepository<Event> eventRepository;
+    @Autowired
+    private EventRoomService<EventRoom> eventRoomService;
+
     @Override
     public List getAll() {
-        return null;
+        {
+            List<Event> events = this.eventRepository.getAll();
+
+            for (Event event : events) {
+
+
+                int eventRoomId = event.getEventRoom().getId();
+
+                EventRoom eventRoom = eventRoomService.searchByEventRoomId(eventRoomId);
+
+                event.setEventRoom(eventRoom);
+
+
+            }
+
+            return events;
+        }
     }
 
     @Override
