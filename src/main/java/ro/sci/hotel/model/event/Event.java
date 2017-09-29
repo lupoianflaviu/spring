@@ -5,35 +5,28 @@ import ro.sci.hotel.model.util.Price;
 import java.util.Date;
 
 public class Event {
-    private String roomnName;
-    private int roomCapacity;
-    private Price pricePerDay;
+    private int id;
+
+
     private Date startDate;
     private Date endDate;
+    private double totalPrice;
+    private EventRoom eventRoom;
 
-
-    public String getRoomnName() {
-        return roomnName;
+    public EventRoom getEventRoom() {
+        return eventRoom;
     }
 
-    public void setRoomnName(String roomnName) {
-        this.roomnName = roomnName;
+    public void setEventRoom(EventRoom eventRoom) {
+        this.eventRoom = eventRoom;
     }
 
-    public int getRoomCapacity() {
-        return roomCapacity;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setRoomCapacity(int roomCapacity) {
-        this.roomCapacity = roomCapacity;
-    }
-
-    public Price getPricePerDay() {
-        return pricePerDay;
-    }
-
-    public void setPricePerDay(Price pricePerDay) {
-        this.pricePerDay = pricePerDay;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Date getStartDate() {
@@ -51,5 +44,9 @@ public class Event {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    public int getId() {  return id;    }
+
+    public void setId(int id) { this.id = id;    }
 
 }
