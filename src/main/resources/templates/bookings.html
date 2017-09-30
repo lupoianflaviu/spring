@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
     <title>Saved Bookings</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -8,8 +8,19 @@
 <body>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<table>
-    <p th:text="'ID ' + ' Customer ' + ' Room ' + ' StartDate ' + ' EndDate '"/>
+<h1>HOTEL MANAGEMENT</h1>
+<h2>VIEW ALL BOOKINGS</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>CUSTOMER</th>
+        <th>ROOM</th>
+        <th>START DATE</th>
+        <th>END DATE</th>
+    </tr>
+    </thead>
+    <tbody>
     <th:block th:each="booking : ${bookings}">
     <tr>
         <td th:text="${booking.id}">...</td>
@@ -19,6 +30,7 @@
         <td th:text="${booking.endDate}">...</td>
     </tr>
     </th:block>
+    </tbody>
 </table>
 <div class="btn-group">
     <a href="/bookings/submit" class="btn btn-info" role="button">Book Now</a>
