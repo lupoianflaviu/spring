@@ -3,10 +3,20 @@ package ro.sci.hotel.model.employee;
 /**
  * Created by tudorradovici on 14/09/17.
  */
-public class EmployeeAddress {
+public class Address {
+
+    private int employeeId;
     private String streetAddress;
     private String city;
     private String country;
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
 
     public String getStreetAddress() {
         return streetAddress;
@@ -31,4 +41,15 @@ public class EmployeeAddress {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "employeeId=" + employeeId +
+                ", streetAddress='" + streetAddress + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                '}';
+    }
+
 }

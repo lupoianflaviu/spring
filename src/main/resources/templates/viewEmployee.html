@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>View Employee</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="webjars/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen"> </link>
+</head>
+<body>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<table>
+    <p th:text="'ID '
+        + 'firstName '
+        + 'lastName '
+        + 'email '
+        + 'employeeAddress '
+        + 'employeePhoneNumber '
+        + 'employmentDate '
+        + 'Price '
+        + 'employeeRole '"/>
+    <th:block th:each="employee : ${employees}">
+        <tr>
+            <td th:text="${employee.employeeId}">...</td>
+            <td th:text="${employee.firstName}">...</td>
+            <td th:text="${employee.lastName}">...</td>
+            <td th:text="${employee.email}">...</td>
+            <td th:text="${employee.employeeAddress.streetAddress}">...</td>
+            <td th:text="${employee.employeeAddress.city}">...</td>
+            <td th:text="${employee.employeeAddress.country}">...</td>
+            <td th:text="${employee.employeePhoneNumber}">...</td>
+            <!--<td th:text="${employee.employmentDate}">...</td>-->
+            <!--<td th:text="${employee.price}">...</td>-->
+            <td th:text="${employee.employeeRole}">...</td>
+        </tr>
+    </th:block>
+
+</table>
+
+</body>
+</html>

@@ -2,6 +2,7 @@ package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
 import ro.sci.hotel.model.employee.Employee;
+import ro.sci.hotel.model.employee.Login;
 import ro.sci.hotel.model.util.Currency;
 import ro.sci.hotel.model.util.Price;
 
@@ -19,6 +20,7 @@ import static javax.swing.UIManager.getInt;
  * Created by tudorradovici on 17/09/17.
  */
 @Repository("employeeRepository")
+
 public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRepository<Employee> {
 
     private static final Logger LOGGER = Logger.getLogger("Employee");
@@ -38,6 +40,10 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
     private static final String LASTNAME = "last_name";
 
     private static final String EMAIL = "email";
+
+    private static final String USERNAME = "username";
+
+    private static final String PASSWORD = "password";
 
     private static final String PHONENUMBER = "employee_phone_number";
 
@@ -61,6 +67,8 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             "VALUES (?,?,?,?,?,?,?)";
 
     private static final  String DELETE_EMPLOYEE="Delete from employees where id=(?)";
+
+    private static final  String  SQL_SELECT_USERNAME_PASSWORD="SELECT * FROM employee where username=? AND password=?";
 
     private static final  String SQL_SEARCH_BY_ID ="SELECT" +
             "first_name" +
@@ -86,11 +94,11 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
                 employee.setEmployeeId(rs.getInt(ID));
                 employee.setFirstName(rs.getString(FIRSTNAME));
                 employee.setLastName(rs.getString(LASTNAME));
-                employee.setEmail(EMAIL);
-                //employee.setEmployeeAddress();
+                employee.setEmail(rs.getString(EMAIL));
+//                employee.setEmployeeAddress();
                 employee.setEmployeePhoneNumber(rs.getString(PHONENUMBER));
-           //     employee.setEmploymentDate(rs.getDate(EMPLOYMENTDATE));
-              //  employee.setSalary(new Price(rs.getDouble(PRICE), Currency.valueOf(rs.getString(CURRENCY))));
+//              employee.setEmploymentDate(rs.getDate(EMPLOYMENTDATE));
+//              employee.setSalary(new Price(rs.getDouble(PRICE), Currency.valueOf(rs.getString(CURRENCY))));
                 employee.setEmployeeRole(rs.getString(EMPLOYEEROLE));
 
                 employees.add(employee);
@@ -98,8 +106,6 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             }
         } catch (SQLException e) {
             LOGGER.log(Level.WARNING, DATABASE_ERROR);
-            e.printStackTrace();
-            //throw new RuntimeException(EXCEPTION_THROWN);
         }
         return employees;
     }
@@ -153,11 +159,50 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
     }
 
     @Override
-    public List<Employee> searchByEmployeeId(Integer employeeId) {
+    public Employee searchByEmployeeId(Integer employeeId) {
 
-        List<Employee> employees = new ArrayList<>();
+        Employee employee= new Employee();
+        try(Connection conn =newConnection(); PreparedStatement stm = conn.prepareStatement("SELECT * FROM employee WHERE  employee_id=?")){
 
-        return employees;
+            stm.setInt(1,employeeId);
+            ResultSet rs= stm.executeQuery();
+
+            while (rs.next()){
+                employee.setEmployeeId(rs.getInt(ID));
+                employee.setFirstName(rs.getString(FIRSTNAME));
+                employee.setLastName(rs.getString(LASTNAME));
+                employee.setEmail(rs.getString(EMAIL));
+                employee.setEmployeePhoneNumber(rs.getString(PHONENUMBER));
+                //employee.setDate(5,employee.getEmploymentDate());
+//                employee.setDouble(SALARY);
+                employee.setEmployeeRole(rs.getString(EMPLOYEEROLE));
+
+            }
+        } catch (SQLException e) {
+//            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+//            throw new RuntimeException(EXCEPTION_THROWN);
+            e.printStackTrace();
+        }
+
+        return employee;
+    }
+
+    @Override
+    public Employee validateEmployee(Login login) {
+
+        Employee employee = new Employee();
+
+        try (Connection conn = newConnection(); Statement stm = conn.createStatement(); ResultSet rs = stm.executeQuery(SQL_SELECT_USERNAME_PASSWORD)) {
+
+            while (rs.next()) {
+
+                employee.setUsername(rs.getString(USERNAME));
+                employee.setPassword(rs.getString(PASSWORD));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employee;
     }
 
     @Override

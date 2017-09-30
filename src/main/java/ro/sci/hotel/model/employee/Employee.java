@@ -8,12 +8,13 @@ import java.sql.Date;
  * Created by tudorradovici on 14/09/17.
  */
 public class Employee {
-
     private int employeeId;
     private String firstName;
     private String lastName;
     private String email;
-    private EmployeeAddress employeeAddress;
+    private String username;
+    private String password;
+    private Address employeeAddress;
     private String employeePhoneNumber;
     private Date employmentDate;
     private Price salary;
@@ -23,8 +24,8 @@ public class Employee {
         return employeeId;
     }
 
-    public void setEmployeeId(int id) {
-        this.employeeId = id;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getFirstName() {
@@ -51,11 +52,27 @@ public class Employee {
         this.email = email;
     }
 
-    public EmployeeAddress getEmployeeAddress() {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Address getEmployeeAddress() {
         return employeeAddress;
     }
 
-    public void setEmployeeAddress(EmployeeAddress employeeAddress) {
+    public void setEmployeeAddress(Address employeeAddress) {
         this.employeeAddress = employeeAddress;
     }
 
