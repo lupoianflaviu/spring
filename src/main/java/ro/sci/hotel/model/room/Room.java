@@ -1,12 +1,19 @@
 package ro.sci.hotel.model.room;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import ro.sci.hotel.model.util.Price;
 
 /**
  * Hotel room model
  */
+@Entity
 public class Room {
-
+    @Id
+    @GeneratedValue
     private int roomNumber;
     private RoomType roomType;
     private BedType bedType;
@@ -14,6 +21,7 @@ public class Room {
     private boolean oceanView = false;
     private boolean airConditioning = false;
     private boolean balcony = false;
+    @OneToOne
     private Price pricePerNight;
 
     public int getRoomNumber() {

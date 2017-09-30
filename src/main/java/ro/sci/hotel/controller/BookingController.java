@@ -127,7 +127,8 @@ public class BookingController {
             LOGGER.log(Level.INFO, "Updating booking");
 
             Booking updatedBooking = new Booking();
-            updatedBooking.setId(booking.getId());
+            updatedBooking.setId(id);
+//            updatedBooking.setId(booking.getId());
             updatedBooking.setCustomer(booking.getCustomer());
             updatedBooking.setRoom(roomService.searchByRoomNumber(booking.getRoom().getRoomNumber()));
 //            updatedBooking.setRoom(booking.getRoom());

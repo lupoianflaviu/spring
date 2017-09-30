@@ -1,9 +1,16 @@
 package ro.sci.hotel.model.util;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Price model
  */
+@Entity
 public class Price {
+    @Id
+    @GeneratedValue
     private int id;
     private double value = 0;
     private Currency currency;

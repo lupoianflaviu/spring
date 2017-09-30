@@ -55,7 +55,7 @@ public class BookingServiceImpl implements BookingService<Booking> {
             Customer resultCustomer = customerService.searchByCustomerId(customerId);
             booking.setCustomer(resultCustomer);
         }
-        //to check sorting by id
+
         bookings.sort(Comparator.comparing(Booking::getId));
 
         return bookings;
