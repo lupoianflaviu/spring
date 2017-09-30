@@ -2,6 +2,11 @@ package ro.sci.hotel.model.booking;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.util.Price;
@@ -9,13 +14,18 @@ import ro.sci.hotel.model.util.Price;
 /**
  * Customer Booking model
  */
+@Entity
 public class Booking {
-
+    @Id
+    @GeneratedValue
     private int id;
+    @OneToOne
     private Price pricePerDay;
     private Date startDate;
     private Date endDate;
+    @OneToOne
     private Room room;
+    @OneToOne
     private Customer customer;
 
     public int getId() {

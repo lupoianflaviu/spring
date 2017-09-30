@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import ro.sci.hotel.model.booking.Booking;
 import ro.sci.hotel.model.customer.Customer;
@@ -18,6 +20,8 @@ import ro.sci.hotel.repository.BookingRepository;
  */
 @Service("bookingService")
 public class BookingServiceImpl implements BookingService<Booking> {
+
+    private static final Logger LOGGER = Logger.getLogger("Hotel");
 
     @Autowired
     private BookingRepository<Booking> bookingRepository;
@@ -51,7 +55,7 @@ public class BookingServiceImpl implements BookingService<Booking> {
             Customer resultCustomer = customerService.searchByCustomerId(customerId);
             booking.setCustomer(resultCustomer);
         }
-        //to check sorting by id
+
         bookings.sort(Comparator.comparing(Booking::getId));
 
         return bookings;
@@ -59,6 +63,22 @@ public class BookingServiceImpl implements BookingService<Booking> {
 
     @Override
     public void create(Booking booking, Room room, Customer customer) {
+        //to check logic
+        List<Booking> bookings = getAll();
+
+        for (Booking savedBooking : bookings) {
+
+            if (booking.getRoom() == savedBooking.getRoom() && (booking.getStartDate()
+                                                                       .compareTo(savedBooking.getEndDate()) <= 0 || booking.getEndDate()
+                                                                                                                            .compareTo(
+                                                                                                                                    savedBooking.getStartDate())
+                    >= 0 || booking.getStartDate()
+                                   .compareTo(booking.getEndDate()) >= 0)) {
+                LOGGER.log(Level.WARNING, "Selected Room is already reserved OR wrong period is given!");
+                return;
+            }
+        }
+
         this.bookingRepository.create(booking, room, customer);
     }
 
