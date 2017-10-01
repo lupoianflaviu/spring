@@ -1,22 +1,22 @@
 package ro.sci.hotel.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ro.sci.hotel.model.booking.Booking;
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.room.Room;
+import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.repository.BookingRepository;
 import ro.sci.hotel.repository.BookingRepositoryImpl;
 import ro.sci.hotel.repository.RoomRepository;
 import ro.sci.hotel.repository.RoomRepositoryImpl;
-import ro.sci.hotel.service.BookingService;
-import ro.sci.hotel.service.BookingServiceImpl;
-import ro.sci.hotel.service.RoomService;
-import ro.sci.hotel.service.RoomServiceImpl;
+import ro.sci.hotel.service.*;
 
 /**
  * Controller for room model
@@ -24,39 +24,43 @@ import ro.sci.hotel.service.RoomServiceImpl;
 @Controller
 public class RoomController {
 
+    @Autowired
     private RoomRepository<Room> roomRepository;
+    @Autowired
     private RoomService<Room> roomService;
+    @Autowired
+    private PriceService<Price> priceService;
 
-    private void init() {
-        this.roomRepository = new RoomRepositoryImpl();
-        this.roomService = new RoomServiceImpl();
-        this.roomService.setRoomRepository(roomRepository);
-    }
-
+    // show all rooms
     @RequestMapping(value = "/rooms", method = RequestMethod.GET)
     public ModelAndView showRooms() {
-        init();
 
         return new ModelAndView("rooms", "rooms", roomService.getAll());
     }
 
-//    //not tested
-//    @RequestMapping(value = "/submit", method = RequestMethod.GET)
-//    public String bookingForm(Model model) {
-//        model.addAttribute("booking", new Booking());
-//        model.addAttribute("room", new Room());
-//        model.addAttribute("customer", new Customer());
-//        return "submit";
-//    }
-//
-//    //not tested
-//    @RequestMapping(value = "/submit", method = RequestMethod.POST)
-//    public String createBooking(@ModelAttribute Booking booking, @ModelAttribute Room room, @ModelAttribute Customer customer, Model model) {
-//        model.addAttribute("booking", booking);
-//        model.addAttribute("room", room);
-//        model.addAttribute("customer", customer);
-//        roomService.create(booking, room, customer);
-//
-//        return "results";
-//    }
+    // show room by room number
+    @RequestMapping(value = "/rooms/{id}", method = RequestMethod.GET)
+    public ModelAndView roomForm(@PathVariable("id") Integer id) {
+
+        Room room = roomService.searchByRoomNumber(id);
+
+        return new ModelAndView("viewroom", "room", room);
+    }
+
+//submit a new room
+
+    @RequestMapping(value = "/rooms/submit", method = RequestMethod.GET)
+    public String roomForm(Model model) {
+        model.addAttribute("room", new Room());
+        return "submitroom";
+    }
+
+    @RequestMapping(value = "/rooms/submit", method = RequestMethod.POST)
+    public String createRoom(@ModelAttribute Room room, @ModelAttribute Price price, Model model) {
+
+        roomService.create(room, price);
+        model.addAttribute("room", room);
+
+        return "resultsroom";
+    }
 }

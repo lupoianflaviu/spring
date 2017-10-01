@@ -3,6 +3,7 @@ package ro.sci.hotel.service;
 import ro.sci.hotel.model.room.BedType;
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
+import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.repository.RoomRepository;
 
 import java.sql.Date;
@@ -22,10 +23,8 @@ public interface RoomService<T> {
 
     /**
      * Create a room
-     *
-     * @param t new room
      */
-    void create(T t);
+    void create(Room room, Price price);
 
     /**
      * Detele a room entry from db

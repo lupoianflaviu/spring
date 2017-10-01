@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Rooms</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <table>
-    <p th:text="' Room Number ' + ' Room Type ' +  'Bed Type ' +  'Bed Number ' + ' Ocean View ' + ' Air Conditioning ' + ' Balcony '"/>
+    <p th:text="' Room Number ' + ' Room Type ' +  'Bed Type ' +  'Bed Number ' + ' Ocean View ' + ' Air Conditioning ' + ' Balcony ' + ' Price '"/>
     <block>
         <tr th:each="room: ${rooms}">
             <td th:text="${room.roomNumber}">...</td>
@@ -16,6 +16,7 @@
             <td th:text="${room.oceanView}">...</td>
             <td th:text="${room.airConditioning}">...</td>
             <td th:text="${room.balcony}">...</td>
+            <td th:text="${room.pricePerNight}">...</td>
         </tr>
     </block>
 </table>
