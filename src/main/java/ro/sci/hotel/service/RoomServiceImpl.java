@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
 import ro.sci.hotel.model.util.Price;
@@ -24,12 +25,23 @@ public class RoomServiceImpl implements RoomService<Room> {
 
     @Override
     public List<Room> getAll() {
-        return this.roomRepository.getAll();
+        List<Room> rooms = this.roomRepository.getAll();
+
+        for (Room room : rooms) {
+
+            int priceId = room.getPricePerNight().getId();
+
+            Price resultPrice= priceService.searchById(priceId);
+
+            room.setPricePerNight(resultPrice);
+        }
+
+        return rooms;
     }
 
     @Override
-    public void create(Room room) {
-        this.roomRepository.create(room);
+    public void create(Room room, Price price) {
+        this.roomRepository.create(room, price);
     }
 
     @Override
@@ -45,8 +57,7 @@ public class RoomServiceImpl implements RoomService<Room> {
     @Override
     public Room searchByRoomNumber(Integer roomNumber) {
         Room room = this.roomRepository.searchByRoomNumber(roomNumber);
-        Price resultPrice = priceService.searchById(room.getPricePerNight()
-                                                        .getId());
+        Price resultPrice = priceService.searchById(room.getPricePerNight().getId());
         room.setPricePerNight(resultPrice);
 
         return room;
