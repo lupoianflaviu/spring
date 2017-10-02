@@ -20,8 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
     @Autowired
-    private EmployeeRepository<Employee> employeeRepository;
-    @Autowired
     private EmployeeService<Employee> employeeService;
     @Autowired
     private AddressRepository<Address> addressRepository;
