@@ -76,7 +76,6 @@ public class BookingController {
     }
 
     // ------------------- Delete a Booking ------------------------------------------------
-    //not working
     @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.GET)
     public String deleteBookingForm(@PathVariable("id") Integer id, Model model) {
 
@@ -93,8 +92,6 @@ public class BookingController {
         return "deletebooking";
     }
 
-
-    //not working
     @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public String deleteBooking(@PathVariable("id") Integer id, Model model) {
