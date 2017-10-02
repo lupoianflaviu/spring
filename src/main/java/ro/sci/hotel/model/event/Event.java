@@ -1,15 +1,13 @@
 package ro.sci.hotel.model.event;
 
-import ro.sci.hotel.model.util.Price;
-
 import java.util.Date;
 
 public class Event {
     private int id;
 
 
-    private Date startDate;
-    private Date endDate;
+    private Date startdate;
+    private Date enddate;
     private double totalPrice;
     private EventRoom eventRoom;
 
@@ -29,20 +27,20 @@ public class Event {
         this.totalPrice = totalPrice;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getStartdate() {
+        return startdate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartdate(Date startdate) {
+        this.startdate = startdate;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Date getEnddate() {
+        return enddate;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setEnddate(Date enddate) {
+        this.enddate = enddate;
     }
 
     public int getId() {  return id;    }

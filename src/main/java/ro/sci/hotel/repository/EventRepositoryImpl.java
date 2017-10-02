@@ -35,7 +35,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
 
     private static final String EVENT_UPDATE_IN_DB_IS_COMPLETED = "Event update in db has completed";
 
-    private static final String SQL_SELECT_ALL__FROM_EVENTS = "SELECT * FROM events";
+    private static final String SQL_SELECT_ALL__FROM_EVENTS = "SELECT * FROM event";
 
     private static final String ID = "id";
 
@@ -51,7 +51,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
 
 
     @Override
-    public List getAll() {
+    public List<Event> getAll() {
         {
             List<Event> events = new ArrayList<>();
 
@@ -63,8 +63,8 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
                     EventRoom room = new EventRoom();
                     room.getRoomnName();
                     event.setId(rs.getInt(ID));
-                    event.setStartDate(rs.getDate(STARTDATE));
-                    event.setEndDate(rs.getDate(ENDDATE));
+                    event.setStartdate(rs.getDate(STARTDATE));
+                    event.setEnddate(rs.getDate(ENDDATE));
                     room.setId(rs.getInt("eventroomid"));
                     event.setEventRoom(room);
 

@@ -14,8 +14,8 @@ public interface EventRoomService <T> {
     List<T> getAll();
 
     /**
-     * @param eventRoom
-     * @param eventRoom
+     * @param price
+     *  @param eventRoom
      */
     void createEvent(T eventRoom, Price price);
 

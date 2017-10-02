@@ -19,21 +19,18 @@ public class EventServiceImpl implements EventService {
     private EventRoomService<EventRoom> eventRoomService;
 
     @Override
-    public List getAll() {
+    public List<Event> getAll() {
         {
             List<Event> events = this.eventRepository.getAll();
 
-            for (Event event : events) {
-
-
-                int eventRoomId = event.getEventRoom().getId();
-
-                EventRoom eventRoom = eventRoomService.searchByEventRoomId(eventRoomId);
-
-                event.setEventRoom(eventRoom);
-
-
-            }
+//            for (Event event : events) {
+//
+//                int eventRoomId = event.getEventRoom().getId();
+//
+//                EventRoom eventRoom = eventRoomService.searchByEventRoomId(eventRoomId);
+//
+//                event.setEventRoom(eventRoom);
+//            }
 
             return events;
         }
