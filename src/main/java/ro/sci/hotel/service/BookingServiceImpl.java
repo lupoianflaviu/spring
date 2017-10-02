@@ -54,6 +54,8 @@ public class BookingServiceImpl implements BookingService<Booking> {
                                     .getId();
             Customer resultCustomer = customerService.searchByCustomerId(customerId);
             booking.setCustomer(resultCustomer);
+
+            booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight().getValue());
         }
 
         bookings.sort(Comparator.comparing(Booking::getId));
@@ -142,6 +144,8 @@ public class BookingServiceImpl implements BookingService<Booking> {
                                 .getId();
         Customer resultCustomer = customerService.searchByCustomerId(customerId);
         booking.setCustomer(resultCustomer);
+
+        booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight().getValue());
 
         return booking;
     }

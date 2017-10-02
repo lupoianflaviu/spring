@@ -27,6 +27,7 @@ public class Booking {
     private Room room;
     @OneToOne
     private Customer customer;
+    private Double totalBookingPrice;
 
     public int getId() {
         return id;
@@ -113,5 +114,13 @@ public class Booking {
         result = 31 * result + (room != null ? room.hashCode() : 0);
         result = 31 * result + (customer != null ? customer.hashCode() : 0);
         return result;
+    }
+
+    public Double getTotalBookingPrice() {
+        return totalBookingPrice;
+    }
+
+    public void setTotalBookingPrice(Double totalBookingPrice) {
+        this.totalBookingPrice = totalBookingPrice;
     }
 }

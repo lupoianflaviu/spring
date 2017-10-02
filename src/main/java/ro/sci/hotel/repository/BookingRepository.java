@@ -53,6 +53,8 @@ public interface BookingRepository<T> {
      */
     List<T> searchByCustomerId(Integer customerId);
 
+    Double calculateDays(Integer id);
+
     /**
      * Search bookings by room number
      *
