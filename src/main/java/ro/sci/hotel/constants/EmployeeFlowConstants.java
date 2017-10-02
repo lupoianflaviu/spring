@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 public final class EmployeeFlowConstants {
 
 
-private EmployeeFlowConstants(){ }
+private  EmployeeFlowConstants(){ }
 
     public static final String DATABASE_ERROR = "Database error!";
 

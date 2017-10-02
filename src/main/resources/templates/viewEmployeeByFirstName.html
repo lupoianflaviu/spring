@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-<form th:object="${book}" th:action="@{/employee/search/firstname}" method="get">
+<form th:object="${employee}" th:action="@{/employee/search/firstname}" method="get">
     <input type="text" name="search" id="search" th:value="${search}" />
     <input type="submit" value="Search" />
     <div th:if="${not #lists.isEmpty(search)}">

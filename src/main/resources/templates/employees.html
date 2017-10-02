@@ -14,6 +14,31 @@
         + 'employeePhoneNumber '
         + 'employmentDate '
         + 'Price '
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         + 'employeeRole '"/>
         <th:block th:each="employee : ${employees}">
             <tr>
@@ -25,7 +50,7 @@
                 <td th:text="${employee.employeeAddress.city}">...</td>
                 <td th:text="${employee.employeeAddress.country}">...</td>
                 <td th:text="${employee.employeePhoneNumber}">...</td>
-                <!--<td th:text="${employee.employmentDate}">...</td>-->
+                <td th:text="${employee.employmentDate}">...</td>
                 <!--<td th:text="${employee.price}">...</td>-->
                 <td th:text="${employee.employeeRole}">...</td>
             </tr>
