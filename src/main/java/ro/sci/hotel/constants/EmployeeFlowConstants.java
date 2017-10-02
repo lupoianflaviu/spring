@@ -2,10 +2,10 @@ package ro.sci.hotel.constants;
 
 import java.util.logging.Logger;
 
-public final class EmployeeFlowConstats {
+public final class EmployeeFlowConstants {
 
 
-private EmployeeFlowConstats (){ }
+private EmployeeFlowConstants(){ }
 
     public static final String DATABASE_ERROR = "Database error!";
 
@@ -52,13 +52,8 @@ private EmployeeFlowConstats (){ }
 
     public static final  String  SQL_SELECT_USERNAME_PASSWORD="SELECT * FROM employee where username=? AND password=?";
 
-    public static final  String SQL_SEARCH_BY_ID ="SELECT" +
-            "first_name" +
-            "last_name" +
-            "email" +
-            "employee_phone_number" +
-            "employee_date" +
-            "salary" +
-            "employee_role" +
-            "FROM employee WHERE id=(?)";
+    public static final String SQL_SELECT_BY_FIRST_NAME ="SELECT * FROM employee where  first_name=? ";
+
+    public static final String SQL_SELECT_BY_ID = "SELECT * FROM employee WHERE  employee_id=?";
+
 }

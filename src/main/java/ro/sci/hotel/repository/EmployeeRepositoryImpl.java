@@ -1,16 +1,13 @@
 package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
-import ro.sci.hotel.constants.EmployeeFlowConstats;
+import ro.sci.hotel.constants.EmployeeFlowConstants;
 import ro.sci.hotel.model.employee.Employee;
 import ro.sci.hotel.model.employee.Login;
-import ro.sci.hotel.model.util.Currency;
-import ro.sci.hotel.model.util.Price;
 
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,26 +28,26 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
         List<Employee> employees = new ArrayList<>();
 
-        try (Connection conn = newConnection(); Statement stm = conn.createStatement(); ResultSet rs = stm.executeQuery(EmployeeFlowConstats.SQL_SELECT_ALL_FROM_EMPLOYEE)) {
+        try (Connection conn = newConnection(); Statement stm = conn.createStatement(); ResultSet rs = stm.executeQuery(EmployeeFlowConstants.SQL_SELECT_ALL_FROM_EMPLOYEE)) {
 
             while (rs.next()) {
 
                 Employee employee = new Employee();
-                employee.setEmployeeId(rs.getInt(EmployeeFlowConstats.ID));
-                employee.setFirstName(rs.getString(EmployeeFlowConstats.FIRSTNAME));
-                employee.setLastName(rs.getString(EmployeeFlowConstats.LASTNAME));
-                employee.setEmail(rs.getString(EmployeeFlowConstats.EMAIL));
+                employee.setEmployeeId(rs.getInt(EmployeeFlowConstants.ID));
+                employee.setFirstName(rs.getString(EmployeeFlowConstants.FIRSTNAME));
+                employee.setLastName(rs.getString(EmployeeFlowConstants.LASTNAME));
+                employee.setEmail(rs.getString(EmployeeFlowConstants.EMAIL));
 //                employee.setEmployeeAddress();
-                employee.setEmployeePhoneNumber(rs.getString(EmployeeFlowConstats.PHONENUMBER));
+                employee.setEmployeePhoneNumber(rs.getString(EmployeeFlowConstants.PHONENUMBER));
 //              employee.setEmploymentDate(rs.getDate(EMPLOYMENTDATE));
 //              employee.setSalary(new Price(rs.getDouble(PRICE), Currency.valueOf(rs.getString(CURRENCY))));
-                employee.setEmployeeRole(rs.getString(EmployeeFlowConstats.EMPLOYEEROLE));
+                employee.setEmployeeRole(rs.getString(EmployeeFlowConstants.EMPLOYEEROLE));
 
                 employees.add(employee);
 
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.WARNING, EmployeeFlowConstats.DATABASE_ERROR);
+            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
         }
         return employees;
     }
@@ -58,7 +55,7 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
     @Override
     public void create(Employee employee) {
         try(Connection conn = newConnection();
-            PreparedStatement stm = conn.prepareStatement(EmployeeFlowConstats.SQL_INSERT_EMPLOYEE)){
+            PreparedStatement stm = conn.prepareStatement(EmployeeFlowConstants.SQL_INSERT_EMPLOYEE)){
 
             conn.setAutoCommit(false);
 
@@ -75,26 +72,26 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             stm.execute();
 
         } catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, EmployeeFlowConstats.DATABASE_ERROR);
-            throw new RuntimeException(EmployeeFlowConstats.EXCEPTION_THROWN);
+            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
+            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
         }
-        LOGGER.log(Level.INFO, EmployeeFlowConstats.WRITING_DB_FINISHED);
+        LOGGER.log(Level.INFO, EmployeeFlowConstants.WRITING_DB_FINISHED);
     }
 
     @Override
     public void delete(Employee employee) {
         try(Connection conn = newConnection();
-        PreparedStatement stm=conn.prepareStatement(EmployeeFlowConstats.DELETE_EMPLOYEE)){
+        PreparedStatement stm=conn.prepareStatement(EmployeeFlowConstants.DELETE_EMPLOYEE)){
 
             stm.setInt(1,employee.getEmployeeId());
             stm.execute();
 
 
         } catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, EmployeeFlowConstats.DATABASE_ERROR);
-            throw new RuntimeException(EmployeeFlowConstats.EXCEPTION_THROWN);
+            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
+            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
         }
-        LOGGER.log(Level.INFO,EmployeeFlowConstats.Employee_DELETED);
+        LOGGER.log(Level.INFO, EmployeeFlowConstants.Employee_DELETED);
 
     }
 
@@ -107,20 +104,20 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
     public Employee searchByEmployeeId(Integer employeeId) {
 
         Employee employee= new Employee();
-        try(Connection conn =newConnection(); PreparedStatement stm = conn.prepareStatement("SELECT * FROM employee WHERE  employee_id=?")){
+        try(Connection conn =newConnection(); PreparedStatement stm = conn.prepareStatement(EmployeeFlowConstants.SQL_SELECT_BY_ID)){
 
             stm.setInt(1,employeeId);
             ResultSet rs= stm.executeQuery();
 
             while (rs.next()){
-                employee.setEmployeeId(rs.getInt(EmployeeFlowConstats.ID));
-                employee.setFirstName(rs.getString(EmployeeFlowConstats.FIRSTNAME));
-                employee.setLastName(rs.getString(EmployeeFlowConstats.LASTNAME));
-                employee.setEmail(rs.getString(EmployeeFlowConstats.EMAIL));
-                employee.setEmployeePhoneNumber(rs.getString(EmployeeFlowConstats.PHONENUMBER));
+                employee.setEmployeeId(rs.getInt(EmployeeFlowConstants.ID));
+                employee.setFirstName(rs.getString(EmployeeFlowConstants.FIRSTNAME));
+                employee.setLastName(rs.getString(EmployeeFlowConstants.LASTNAME));
+                employee.setEmail(rs.getString(EmployeeFlowConstants.EMAIL));
+                employee.setEmployeePhoneNumber(rs.getString(EmployeeFlowConstants.PHONENUMBER));
                 //employee.setDate(5,employee.getEmploymentDate());
 //                employee.setDouble(SALARY);
-                employee.setEmployeeRole(rs.getString(EmployeeFlowConstats.EMPLOYEEROLE));
+                employee.setEmployeeRole(rs.getString(EmployeeFlowConstants.EMPLOYEEROLE));
 
             }
         } catch (SQLException e) {
@@ -137,19 +134,19 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
         Employee employee = new Employee();
 
-        try(Connection conn =newConnection(); PreparedStatement stm = conn.prepareStatement(EmployeeFlowConstats.SQL_SELECT_USERNAME_PASSWORD)) {
+        try(Connection conn =newConnection(); PreparedStatement stm = conn.prepareStatement(EmployeeFlowConstants.SQL_SELECT_USERNAME_PASSWORD)) {
 
             stm.setString(1,login.getUsername());
             stm.setString(2,login.getPassword());
             ResultSet rs= stm.executeQuery();
 
             while (rs.next()) {
-                employee.setEmployeeId(rs.getInt(EmployeeFlowConstats.ID));
-                employee.setUsername(rs.getString(EmployeeFlowConstats.USERNAME));
-                employee.setPassword(rs.getString(EmployeeFlowConstats.PASSWORD));
-                employee.setFirstName(rs.getString(EmployeeFlowConstats.FIRSTNAME));
-                employee.setLastName(rs.getString(EmployeeFlowConstats.LASTNAME));
-                employee.setEmployeeRole(rs.getString(EmployeeFlowConstats.EMPLOYEEROLE));
+                employee.setEmployeeId(rs.getInt(EmployeeFlowConstants.ID));
+                employee.setUsername(rs.getString(EmployeeFlowConstants.USERNAME));
+                employee.setPassword(rs.getString(EmployeeFlowConstants.PASSWORD));
+                employee.setFirstName(rs.getString(EmployeeFlowConstants.FIRSTNAME));
+                employee.setLastName(rs.getString(EmployeeFlowConstants.LASTNAME));
+                employee.setEmployeeRole(rs.getString(EmployeeFlowConstants.EMPLOYEEROLE));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -159,6 +156,31 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
     @Override
     public List<Employee> searchByFirstName(String firstName) {
-        return null;
+        List<Employee> employees = new ArrayList<>();
+
+        try(Connection conn =newConnection(); PreparedStatement stm = conn.prepareStatement(EmployeeFlowConstants.SQL_SELECT_BY_FIRST_NAME)){
+
+            stm.setString(1,firstName);
+            ResultSet rs= stm.executeQuery();
+
+            while (rs.next()) {
+                Employee employee = new Employee();
+                employee.setEmployeeId(rs.getInt(EmployeeFlowConstants.ID));
+                employee.setFirstName(rs.getString(EmployeeFlowConstants.FIRSTNAME));
+                employee.setLastName(rs.getString(EmployeeFlowConstants.LASTNAME));
+                employee.setEmail(rs.getString(EmployeeFlowConstants.EMAIL));
+                employee.setEmployeePhoneNumber(rs.getString(EmployeeFlowConstants.PHONENUMBER));
+//              employee.setEmploymentDate(rs.getDate(EMPLOYMENTDATE));
+//              employee.setSalary(new Price(rs.getDouble(PRICE), Currency.valueOf(rs.getString(CURRENCY))));
+                employee.setEmployeeRole(rs.getString(EmployeeFlowConstants.EMPLOYEEROLE));
+
+                employees.add(employee);
+
+            }
+        } catch (SQLException e) {
+//            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
+            e.printStackTrace();
+        }
+        return employees;
     }
 }

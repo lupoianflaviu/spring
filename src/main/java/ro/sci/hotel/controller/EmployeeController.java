@@ -3,10 +3,7 @@ package ro.sci.hotel.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ro.sci.hotel.model.employee.Address;
 import ro.sci.hotel.model.employee.Employee;
@@ -17,6 +14,7 @@ import ro.sci.hotel.service.AddressService;
 import ro.sci.hotel.service.EmployeeService;
 import ro.sci.hotel.service.EmployeeServiceImpl;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -46,12 +44,19 @@ public class EmployeeController {
 
     //Show an employee by a ID
 
-    @RequestMapping(value = "/employee/{employeeId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/employee/search/{employeeId}", method = RequestMethod.GET)
     public ModelAndView showEmployeeById(@PathVariable("employeeId") Integer employeeId) {
-
-//        Employee employee = employeeService.searchByEmployeeId(employeeId);
 
         return new ModelAndView("viewEmployee", "employees", employeeService.searchByEmployeeId(employeeId));
     }
 
+    //Show employees by First Name
+
+    @RequestMapping(value = "/employee/search/firstname", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView employeesByFirstName(@RequestParam(value = "search", required = false, defaultValue = "") String firstName) {
+        List<Employee>employees = employeeService.searchByFirstName(firstName);
+        return new ModelAndView("viewEmployeeByFirstName", "search", employees);
+
+    }
 }

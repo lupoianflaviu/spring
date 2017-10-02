@@ -10,6 +10,7 @@ import ro.sci.hotel.model.employee.Employee;
 import ro.sci.hotel.model.employee.Login;
 import ro.sci.hotel.repository.EmployeeRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("employeeService")
@@ -65,6 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService<Employee>{
     @Override
     public List<Employee> searchByFirstName(String firstName) {
         return this.employeeRepository.searchByFirstName(firstName);
+
     }
 
     @Override
