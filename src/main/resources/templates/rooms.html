@@ -1,14 +1,32 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
     <title>Rooms</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="webjars/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen"> </link>
 </head>
 <body>
-<table>
-    <p th:text="' Room Number ' + ' Room Type ' +  'Bed Type ' +  'Bed Number ' + ' Ocean View ' + ' Air Conditioning ' + ' Balcony ' + ' Price '"/>
-    <block>
-        <tr th:each="room: ${rooms}">
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<h1>HOTEL MANAGEMENT</h1>
+<h2>VIEW ALL ROOMS</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>ROOM NUMBER</th>
+        <th>ROOM TYPE</th>
+        <th>BED TYPE</th>
+        <th>BED NUMBER</th>
+        <th>OCEAN VIEW</th>
+        <th>AIR CONDITIONING</th>
+        <th>BALCONY</th>
+        <th>PRICE</th>
+        <th>CURRENCY</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="room : ${rooms}">
+        <tr>
             <td th:text="${room.roomNumber}">...</td>
             <td th:text="${room.roomType}">...</td>
             <td th:text="${room.bedType}">...</td>
@@ -16,9 +34,19 @@
             <td th:text="${room.oceanView}">...</td>
             <td th:text="${room.airConditioning}">...</td>
             <td th:text="${room.balcony}">...</td>
-            <td th:text="${room.pricePerNight}">...</td>
+            <td th:text="${room.pricePerNight.value}">...</td>
+            <td th:text="${room.pricePerNight.currency}">...</td>
         </tr>
-    </block>
+    </th:block>
+    </tbody>
 </table>
+<div class="btn-group">
+    <a href="/rooms/submit" class="btn btn-info" role="button">Create New Room</a>
+    <a href="/rooms/update" class="btn btn-info" role="button">Update Room</a>
+    <a href="/submit" class="btn btn-info" role="button">Delete Room</a>
+    <!--<button type="button" class="btn btn-succes">Create Booking</button>-->
+    <!--<button type="button" class="btn btn-warning">Update Booking</button>-->
+    <!--<button type="button" class="btn btn-danger">Delete Booking</button>-->
+</div>
 </body>
 </html>

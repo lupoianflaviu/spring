@@ -68,7 +68,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
                 room.setOceanView(rs.getBoolean(OCEANVIEW));
                 room.setAirConditioning(rs.getBoolean(AIRCONDITIONING));
                 room.setBalcony(rs.getBoolean(BALCONY));
-                price.setValue(rs.getInt(PRICEID));
+                price.setId(rs.getInt(PRICEID));
                 room.setPricePerNight(price);
                 rooms.add(room);
             }
