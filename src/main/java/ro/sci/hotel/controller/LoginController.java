@@ -20,8 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
     @Autowired
-    private EmployeeRepository<Employee> employeeRepository;
-    @Autowired
     private EmployeeService<Employee> employeeService;
     @Autowired
     private AddressRepository<Address> addressRepository;
@@ -35,13 +33,15 @@ public class LoginController {
         return mav;
     }
 
+
+
     @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
     public ModelAndView loginProcess(@ModelAttribute("login") Login login) {
         ModelAndView mav = null;
         Employee employee = employeeService.validateEmployee(login);
-        if (null != employee) {
+        if (employee.getPassword()!=null && employee.getUsername()!=null && employee.getEmployeeRole().equals("admin")) {
             mav = new ModelAndView("welcome");
-            mav.addObject("firstname", employee.getFirstName());
+            mav.addObject("employee", employee);
         } else {
             mav = new ModelAndView("login");
             mav.addObject("message", "Username or Password is wrong!!");

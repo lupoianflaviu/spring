@@ -16,7 +16,7 @@ public class RegistrationController {
     public EmployeeService employeeService;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public ModelAndView showRegister(HttpServletRequest request, HttpServletResponse response){
+    public ModelAndView showRegister(){
         ModelAndView mav = new ModelAndView("register");
         mav.addObject("employee", new Employee());
 
@@ -24,8 +24,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
-    public ModelAndView addEmployee(HttpServletRequest request, HttpServletResponse response,
-                                    @ModelAttribute("employee") Employee employee){
+    public ModelAndView addEmployee( @ModelAttribute("employee") Employee employee){
         employeeService.create(employee);
         return new ModelAndView("welcome","firstname",employee.getFirstName());
     }

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by tudorradovici on 17/09/17.
  */
-public interface EmployeeRepository<T>{
+public interface EmployeeRepository<T> {
     /**
      *
      * @return List of all employees.
