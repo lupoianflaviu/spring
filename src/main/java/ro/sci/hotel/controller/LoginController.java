@@ -33,6 +33,8 @@ public class LoginController {
         return mav;
     }
 
+
+
     @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
     public ModelAndView loginProcess(@ModelAttribute("login") Login login) {
         ModelAndView mav = null;
