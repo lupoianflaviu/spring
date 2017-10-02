@@ -95,7 +95,7 @@ public class BookingController {
 
 
     //not working
-    @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public String deleteBooking(@PathVariable("id") Integer id, Model model) {
 
@@ -111,7 +111,7 @@ public class BookingController {
 
     // ------------------- Update a Booking ------------------------------------------------
     @RequestMapping(value = "/bookings/{id}", method = RequestMethod.POST)
-    public String updateBooking(@PathVariable("id") Integer id, Booking booking) {
+    public String updateBooking(@PathVariable("id") Integer id, @ModelAttribute Booking booking) {
 
         LOGGER.log(Level.INFO, "Updating booking");
         Booking updatedBooking = bookingService.searchById(id);
