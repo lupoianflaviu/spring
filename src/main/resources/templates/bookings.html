@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" >
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Saved Bookings</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="webjars/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen"> </link>
+    <link href="webjars/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    </link>
 </head>
 <body>
 <script src="http://code.jquery.com/jquery.js"></script>
@@ -18,27 +19,28 @@
         <th>ROOM</th>
         <th>START DATE</th>
         <th>END DATE</th>
+        <th>Update</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
     <th:block th:each="booking : ${bookings}">
-    <tr>
-        <td th:text="${booking.id}">...</td>
-        <td th:text="${booking.customer}">...</td>
-        <td th:text="${booking.room}">...</td>
-        <td th:text="${booking.startDate}">...</td>
-        <td th:text="${booking.endDate}">...</td>
-    </tr>
+        <tr>
+            <td th:text="${booking.id}">...</td>
+            <td th:text="${booking.customer}">...</td>
+            <td th:text="${booking.room}">...</td>
+            <td th:text="${booking.startDate}">...</td>
+            <td th:text="${booking.endDate}">...</td>
+            <td><a th:href="@{/bookings/{id}(id=${booking.id})}">Update</a></td>
+            <td><a th:href="@{/bookings/delete/{id}(id=${booking.id})}">Delete</a></td>
+        </tr>
     </th:block>
     </tbody>
 </table>
 <div class="btn-group">
     <a href="/bookings/submit" class="btn btn-info" role="button">Book Now</a>
-    <a href="/bookings/update" class="btn btn-info" role="button">Update Booking</a>
-    <a href="/submit" class="btn btn-info" role="button">Delete Booking</a>
-    <!--<button type="button" class="btn btn-succes">Create Booking</button>-->
-    <!--<button type="button" class="btn btn-warning">Update Booking</button>-->
-    <!--<button type="button" class="btn btn-danger">Delete Booking</button>-->
+    <!--<a href="/bookings/update" class="btn btn-info" role="button">Update Booking</a>-->
+    <!--<a href="/submit" class="btn btn-info" role="button">Delete Booking</a>-->
 </div>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <body>
 <h1>HOTEL MANAGEMENT</h1>
 <h2>DELETE THIS BOOKING</h2>
-<form action="#" th:action="@{/bookings/delete/{id}(id=${booking.id})}" method="delete">
+<form action="#" th:action="@{/bookings/delete/{id}(id=${booking.id})}" method="post">
     <p>Booking id: <input type="text" th:field="*{booking.id}" /></p>
     <p>Room Number: <input type="text" th:field="*{booking.room}" /></p>
     <p>Customer Id: <input type="text" th:field="*{booking.customer}" /></p>
