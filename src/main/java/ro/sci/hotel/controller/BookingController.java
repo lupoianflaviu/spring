@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -57,7 +56,7 @@ public class BookingController {
 
         Booking booking = bookingService.searchById(id);
 
-        return new ModelAndView("viewbooking", "booking", booking);
+        return new ModelAndView("updatebooking", "booking", booking);
     }
 
     // ------------------- Submit New Booking ------------------------------------------------
@@ -79,11 +78,13 @@ public class BookingController {
     // ------------------- Delete a Booking ------------------------------------------------
     //not working
     @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.GET)
-    public String deleteBookingForm(@PathVariable("id") Integer id,  Model model) {
+    public String deleteBookingForm(@PathVariable("id") Integer id, Model model) {
 
         Booking currentBooking = bookingService.searchById(id);
-        Room currentRoom = roomService.searchByRoomNumber(currentBooking.getRoom().getRoomNumber());
-        Customer currentCustomer = customerService.searchByCustomerId(currentBooking.getCustomer().getId());
+        Room currentRoom = roomService.searchByRoomNumber(currentBooking.getRoom()
+                                                                        .getRoomNumber());
+        Customer currentCustomer = customerService.searchByCustomerId(currentBooking.getCustomer()
+                                                                                    .getId());
 
         model.addAttribute("booking", currentBooking);
         model.addAttribute("room", currentRoom);
@@ -109,35 +110,18 @@ public class BookingController {
     }
 
     // ------------------- Update a Booking ------------------------------------------------
-    //needs testing
-    @RequestMapping(value = "/bookings/update/{id}", method = RequestMethod.GET)
-    public String updateBookingForm(@PathVariable("id") Integer id,  Model model) {
+    @RequestMapping(value = "/bookings/{id}", method = RequestMethod.POST)
+    public String updateBooking(@PathVariable("id") Integer id, Booking booking) {
 
-        Booking currentBooking = bookingService.searchById(id);
-        Room currentRoom = roomService.searchByRoomNumber(currentBooking.getRoom().getRoomNumber());
-        Customer currentCustomer = customerService.searchByCustomerId(currentBooking.getCustomer().getId());
+        LOGGER.log(Level.INFO, "Updating booking");
+        Booking updatedBooking = bookingService.searchById(id);
+        updatedBooking.setRoom(roomService.searchByRoomNumber(booking.getRoom()
+                                                                     .getRoomNumber()));
+        updatedBooking.setStartDate(booking.getStartDate());
+        updatedBooking.setEndDate(booking.getEndDate());
 
-        model.addAttribute("booking", currentBooking);
+        bookingService.update(updatedBooking);
 
         return "updatebooking";
     }
-//needs testing
-        @RequestMapping(value = "/bookings/update/{id}", method = RequestMethod.PUT)
-        public String updateBooking(@PathVariable("id") Integer id, @RequestBody Booking booking) {
-            LOGGER.log(Level.INFO, "Updating booking");
-
-            Booking updatedBooking = new Booking();
-            updatedBooking.setId(id);
-//            updatedBooking.setId(booking.getId());
-            updatedBooking.setCustomer(booking.getCustomer());
-            updatedBooking.setRoom(roomService.searchByRoomNumber(booking.getRoom().getRoomNumber()));
-//            updatedBooking.setRoom(booking.getRoom());
-            updatedBooking.setStartDate(booking.getStartDate());
-            updatedBooking.setEndDate(booking.getEndDate());
-            updatedBooking.setPricePerDay(booking.getPricePerDay());
-
-            bookingService.update(updatedBooking);
-
-            return "updatebooking";
-        }
 }
