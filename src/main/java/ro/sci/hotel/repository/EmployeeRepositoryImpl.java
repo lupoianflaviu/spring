@@ -38,7 +38,7 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
                 employee.setLastName(rs.getString(EmployeeFlowConstants.LASTNAME));
                 employee.setEmail(rs.getString(EmployeeFlowConstants.EMAIL));
                 employee.setEmployeePhoneNumber(rs.getString(EmployeeFlowConstants.PHONENUMBER));
-              employee.setEmploymentDate(rs.getDate(EmployeeFlowConstants.EMPLOYMENTDATE));
+                employee.setEmploymentDate(rs.getDate(EmployeeFlowConstants.EMPLOYMENTDATE));
 //              employee.setSalary(new Price(rs.getDouble(PRICE), Currency.valueOf(rs.getString(CURRENCY))));
                 employee.setEmployeeRole(rs.getString(EmployeeFlowConstants.EMPLOYEEROLE));
 
@@ -61,18 +61,21 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             stm.setString(1,employee.getFirstName());
             stm.setString(2,employee.getLastName());
             stm.setString(3,employee.getEmail());
-            stm.setString(4,employee.getEmployeePhoneNumber());
-            //stm.setDate(5,employee.getEmploymentDate());
-            stm.setDouble(6, employee.getSalary().getValue());
-            stm.setString(7,employee.getEmployeeRole());
+            stm.setString(4,employee.getUsername());
+            stm.setString(5,employee.getPassword());
+            stm.setString(6,employee.getEmployeePhoneNumber());
+            stm.setDate(7,employee.getEmploymentDate());
+//            stm.setDouble(6, employee.getSalary().getValue());
+            stm.setString(8,employee.getEmployeeRole());
 
             conn.commit();
             conn.setAutoCommit(true);
             stm.execute();
 
-        } catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
-            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
+        } catch (SQLException e) {
+//            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
+//            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
+            e.printStackTrace();
         }
         LOGGER.log(Level.INFO, EmployeeFlowConstants.WRITING_DB_FINISHED);
     }

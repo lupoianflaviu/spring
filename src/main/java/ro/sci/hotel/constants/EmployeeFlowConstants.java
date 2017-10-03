@@ -38,15 +38,8 @@ private  EmployeeFlowConstants(){ }
     public static final String CURRENCY = "currency";
 
     public static final String SQL_SELECT_ALL_FROM_EMPLOYEE = "SELECT employee_id, first_name, last_name, email, employee_phone_number, employment_date, price, employee_role FROM employee";
-    public static final String SQL_INSERT_EMPLOYEE= "INSERT INTO employees " +
-            "(first_name," +
-            "last_name" +
-            "email" +
-            "employee_phone_number" +
-            "employement_date" +
-            "salary" +
-            "employee_role)" +
-            "VALUES (?,?,?,?,?,?,?)";
+
+    public static final String SQL_INSERT_EMPLOYEE= "INSERT INTO employee (first_name, last_name,email,username,password, employee_phone_number, employment_date,employee_role) VALUES (?,?,?,?,?,?,?,?)";
 
     public static final  String DELETE_EMPLOYEE="Delete from employees where id=(?)";
 

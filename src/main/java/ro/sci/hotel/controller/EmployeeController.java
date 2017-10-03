@@ -34,6 +34,21 @@ public class EmployeeController {
     @Autowired
     private AddressService<Address> addressService;
 
+    //Create a new Employee
+    @RequestMapping(value = "/employee/create/newemployee", method = RequestMethod.GET)
+    public String bookingForm(Model model) {
+        model.addAttribute("employee", new Employee());
+        return "newemployee";
+    }
+
+    @RequestMapping(value = "/employee/create/newemployee", method = RequestMethod.POST)
+    public String createEmployee (@ModelAttribute Employee employee, Model model) {
+
+        employeeService.create(employee);
+        model.addAttribute("employee", employee);
+
+        return "results";
+    }
 
     //Show all employees
 
