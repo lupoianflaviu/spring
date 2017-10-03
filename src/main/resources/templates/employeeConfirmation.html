@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Booking Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Result</h1>
+<p th:text="'Employee First Name: ' + ${employee.firstName}" />
+<p th:text="'Employee Last Name: ' + ${employee.lastName}" />
+<a href="/employee/create/newemployee">Create a new employee</a>
+</body>
+</html>

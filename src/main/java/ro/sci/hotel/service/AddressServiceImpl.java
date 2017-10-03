@@ -19,7 +19,7 @@ public class AddressServiceImpl implements AddressService<Address> {
 
     @Override
     public void create(Address address) {
-
+        this.addressRepository.create(address);
     }
 
     @Override

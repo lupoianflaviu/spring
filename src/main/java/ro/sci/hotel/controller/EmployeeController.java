@@ -38,16 +38,19 @@ public class EmployeeController {
     @RequestMapping(value = "/employee/create/newemployee", method = RequestMethod.GET)
     public String bookingForm(Model model) {
         model.addAttribute("employee", new Employee());
+        model.addAttribute("address",new Address());
         return "newemployee";
     }
 
     @RequestMapping(value = "/employee/create/newemployee", method = RequestMethod.POST)
-    public String createEmployee (@ModelAttribute Employee employee, Model model) {
+    public String createEmployee (@ModelAttribute Employee employee, @ModelAttribute Address address, Model model) {
 
         employeeService.create(employee);
+        addressService.create(address);
         model.addAttribute("employee", employee);
+        model.addAttribute("address",address);
 
-        return "results";
+        return "employeeConfirmation";
     }
 
     //Show all employees

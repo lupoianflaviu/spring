@@ -5,8 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Form</h1>
+<h1>Employee Form</h1>
 <form action="#" th:action="@{/employee/create/newemployee}" method="post">
+    <p>ID <input type="number" th:field="*{employee.employeeId}" /></p>
     <p>First Name: <input type="text" th:field="*{employee.firstName}" /></p>
     <p>Last Name: <input type="text" th:field="*{employee.lastName}" /></p>
     <p>email: <input type="text" th:field="*{employee.email}" /></p>
@@ -15,6 +16,10 @@
     <p>Phone Number: <input type="text" th:field="*{employee.employeePhoneNumber}" /></p>
     <p>Employment Date: <input type="date" th:field="*{employee.employmentDate}" /></p>
     <p>Employee Role: <input type="text" th:field="*{employee.employeeRole}" /></p>
+    <h2>Employee Address</h2>
+    <p>Street <input type="text" th:field="*{address.streetAddress}" /></p>
+    <p>City <input type="text" th:field="*{address.city}" /></p>
+    <p>Country <input type="text" th:field="*{address.country}" /></p>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
 </body>
