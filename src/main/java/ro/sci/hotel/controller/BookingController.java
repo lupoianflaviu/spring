@@ -97,7 +97,7 @@ public class BookingController {
 
     @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public String deleteBooking(@PathVariable("id") Integer id, Model model) {
+    public ModelAndView deleteBooking(@PathVariable("id") Integer id, Model model) {
 
         LOGGER.log(Level.INFO, "Deleting booking with id " + id);
 
@@ -106,12 +106,12 @@ public class BookingController {
 
         model.addAttribute("booking", booking);
 
-        return "deletebooking";
+        return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }
 
     // ------------------- Update a Booking ------------------------------------------------
     @RequestMapping(value = "/bookings/{id}", method = RequestMethod.POST)
-    public String updateBooking(@PathVariable("id") Integer id, @ModelAttribute Booking booking) {
+    public ModelAndView updateBooking(@PathVariable("id") Integer id, @ModelAttribute Booking booking) {
 
         LOGGER.log(Level.INFO, "Updating booking");
         Booking updatedBooking = bookingService.searchById(id);
@@ -122,14 +122,13 @@ public class BookingController {
 
         bookingService.update(updatedBooking);
 
-        return "updatebooking";
+        return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }
 
-    //---------------Searches with facets-----------------------------------------------------
-    //not working
+    //---------------Searches by criteria-----------------------------------------------------
     @RequestMapping(value = "/bookings/search/roomnumber", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView bookingsByRoomNumber(@RequestParam(value = "search", required = false, defaultValue = "") Integer roomNumber) {
+    public ModelAndView bookingsByRoomNumber(@RequestParam(value = "search", required = false, defaultValue = "0") Integer roomNumber) {
 
         List<Booking> bookings = bookingService.searchByRoomNumber(roomNumber);
 
