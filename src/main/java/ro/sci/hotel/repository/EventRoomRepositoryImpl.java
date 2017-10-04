@@ -13,7 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
+
 @Repository
 public class EventRoomRepositoryImpl extends BaseRepository implements EventRoomRepository {
     @Override
@@ -27,7 +27,7 @@ public class EventRoomRepositoryImpl extends BaseRepository implements EventRoom
                 Price price = new Price();
                 EventRoom room = new EventRoom();
 
-                room.setRoomnName(rs.getString("roomname"));
+                room.setRoomName(rs.getString("roomname"));
                 room.setRoomCapacity(rs.getInt("roomcapacity"));
                 room.setFloorRoom(rs.getInt("floorroom"));
                 room.setId(rs.getInt("id"));
@@ -87,7 +87,7 @@ public class EventRoomRepositoryImpl extends BaseRepository implements EventRoom
                     EventRoom room = new EventRoom();
 
                     room.setId(rs.getInt("id"));
-                    room.setRoomnName(rs.getString("roomname"));
+                    room.setRoomName(rs.getString("roomname"));
                   //  event.setEventRoom(room);
                     //event.setStartdate(rs.getDate("startdate"));
                     //event.setEnddate(rs.getDate("enddate"));

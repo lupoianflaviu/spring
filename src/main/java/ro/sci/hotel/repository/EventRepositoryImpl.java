@@ -61,7 +61,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
 
                     Event event = new Event();
                     EventRoom room = new EventRoom();
-                    room.getRoomnName();
+                    room.getRoomName();
                     event.setId(rs.getInt(ID));
                     event.setStartdate(rs.getDate(STARTDATE));
                     event.setEnddate(rs.getDate(ENDDATE));

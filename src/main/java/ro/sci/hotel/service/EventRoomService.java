@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EventRoomService <T> {
     /**
-     * read all the events from DB
+     * read all the event Rooms from DB
      * @return List<T> events list
      */
 
