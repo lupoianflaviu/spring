@@ -101,7 +101,26 @@ public class BookingServiceImpl implements BookingService<Booking> {
 
     @Override
     public List<Booking> searchByRoomNumber(Integer roomNumber) {
-        return this.bookingRepository.searchByRoomNumber(roomNumber);
+
+        List<Booking> bookings = this.bookingRepository.searchByRoomNumber(roomNumber);
+
+        for (Booking booking : bookings) {
+
+            Room resultRoom = roomService.searchByRoomNumber(roomNumber);
+
+            booking.setRoom(resultRoom);
+
+            int customerId = booking.getCustomer()
+                                    .getId();
+            Customer resultCustomer = customerService.searchByCustomerId(customerId);
+            booking.setCustomer(resultCustomer);
+
+            booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight().getValue());
+        }
+
+        bookings.sort(Comparator.comparing(Booking::getId));
+
+        return bookings;
     }
 
     @Override

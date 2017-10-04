@@ -1,9 +1,8 @@
 package ro.sci.hotel.service;
 
-import ro.sci.hotel.model.customer.Customer;
-import ro.sci.hotel.repository.CustomerRepository;
-
 import java.util.List;
+
+import ro.sci.hotel.repository.CustomerRepository;
 
 /**
  * Customer service interface for repository manipulation
@@ -47,10 +46,10 @@ public interface CustomerService<T> {
 
     /**
      * Search room by price
-     * @param firstName searched
+     * @param lastName searched
      * @return List<T> searched customer list
      */
-    List<T> searchByFirstName(String firstName);
+    List<T> searchByLastName(String lastName);
 
     void setCustomerRepository(CustomerRepository<T> customerRepository);
 }

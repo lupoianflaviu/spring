@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title></title>
+</head>
+<body>
+<form th:object="${bookings}" th:action="@{/bookings/search/customername}" method="get">
+    <input type="text" name="search" id="search" th:value="${search}" />
+    <input type="submit" value="Search" />
+    <div th:if="${not #lists.isEmpty(search)}">
+        <h2>Employees with</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>CUSTOMER</th>
+                <th>ROOM</th>
+                <th>START DATE</th>
+                <th>END DATE</th>
+                <th>TOTAL</th>
+            </tr>
+            <tr th:each="booking: ${search}">
+                <td th:text="${booking.id}">Id</td>
+                <td th:text="${booking.customer}">Customer</td>
+                <td th:text="${booking.room}">Room</td>
+                <td th:text="${booking.startDate}">StartDate</td>
+                <td th:text="${booking.endDate}">EndDate</td>
+                <td th:text="${booking.totalBookingPrice}">Total</td>
+            </tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>
