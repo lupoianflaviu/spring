@@ -98,4 +98,6 @@ public interface BookingRepository<T> {
     List<T> searchByCustomerIdAndRoomNumber(Integer customerId, Integer roomNumber);
 
     T searchById(Integer bookingId);
+
+//    List<T> searchByCustomerLastName(String lastName);
 }

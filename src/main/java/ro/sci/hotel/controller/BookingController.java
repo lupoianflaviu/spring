@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -120,5 +123,17 @@ public class BookingController {
         bookingService.update(updatedBooking);
 
         return "updatebooking";
+    }
+
+    //---------------Searches with facets-----------------------------------------------------
+    //not working
+    @RequestMapping(value = "/bookings/search/roomnumber", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView bookingsByRoomNumber(@RequestParam(value = "search", required = false, defaultValue = "") Integer roomNumber) {
+
+        List<Booking> bookings = bookingService.searchByRoomNumber(roomNumber);
+
+        return new ModelAndView("bookingsbyroomnumber", "search", bookings);
+
     }
 }
