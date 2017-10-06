@@ -65,7 +65,7 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             stm.setString(5,employee.getPassword());
             stm.setString(6,employee.getEmployeePhoneNumber());
             stm.setDate(7,employee.getEmploymentDate());
-//            stm.setDouble(6, employee.getSalary().getValue());
+//          stm.setDouble(6, employee.getSalary().getValue());
             stm.setString(8,employee.getEmployeeRole());
 
             conn.commit();
