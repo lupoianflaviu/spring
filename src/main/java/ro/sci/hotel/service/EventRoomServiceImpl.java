@@ -36,7 +36,7 @@ public class EventRoomServiceImpl implements EventRoomService {
     }
 
     @Override
-    public void createEvent(Object eventRoom, Price price) {
+    public void createEventRoom(EventRoom eventRoom) {
 
     }
 

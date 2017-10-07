@@ -15,7 +15,7 @@ public interface PriceRepository<T> {
 
     /**
      * Create a price entry in db
-     * @param price to create
+     * @param price to createEvent
      */
     void create(T price);
 

@@ -24,7 +24,7 @@ public interface EventService<T> {
          *
          * @param event to be added in db
          */
-        void create(Event event,Customer customer);
+        void createEvent(Event event);
 
         /**
          * Detele an event entry from repository

@@ -37,7 +37,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void create(Event event, Customer customer) {
+    public void createEvent(Event event) {
 
     }
 

@@ -21,10 +21,8 @@ public interface EventRepository<T> {
 
     /**
      * @param event
-     * @param eventRoom
-     * @param customer
      */
-    void createEvent(Event event, EventRoom eventRoom, Customer customer);
+    void createEvent(Event event);
 
     /**
      *  delete an event entry from DB

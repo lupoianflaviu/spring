@@ -1,5 +1,6 @@
 package ro.sci.hotel.service;
 
+import ro.sci.hotel.model.event.EventRoom;
 import ro.sci.hotel.model.util.Price;
 
 import java.util.Date;
@@ -14,10 +15,9 @@ public interface EventRoomService <T> {
     List<T> getAll();
 
     /**
-     * @param price
      *  @param eventRoom
      */
-    void createEvent(T eventRoom, Price price);
+    void createEventRoom(EventRoom eventRoom);
 
     /**
      *  delete an event entry from DB

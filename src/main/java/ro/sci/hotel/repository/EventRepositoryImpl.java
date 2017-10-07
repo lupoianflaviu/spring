@@ -26,10 +26,10 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
 
     private static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
 
-    private static final String SQL_INSERT_INTO_EVENTROOM_VALUES =
-            "INSERT INTO eventroom(roomname,roomcapacity,floorroom,priceid) values(?,?,?,?)";
+    private static final String SQL_INSERT_INTO_EVENT =
+            "INSERT INTO eventroom(id,startdate,enddate,eventroomid) values(?,?,?,?)";
 
-    private static final String EVENT_DELETE_IS_COMPLETED = "Deletion of booking completed";
+    private static final String EVENT_DELETE_IS_COMPLETED = "Deletion of event completed";
 
     private static final String SQL_UPDATE_EVENT_WHERE_ID = "UPDATE event " + "SET startdate=?, enddate=?, WHERE id = ?";
 
@@ -38,10 +38,6 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
     private static final String SQL_SELECT_ALL__FROM_EVENTS = "SELECT * FROM event";
 
     private static final String ID = "id";
-
-    private static final String ROOMNAME = "roomname";
-
-    private static final String CUSTOMERID = "customerid";
 
     private static final String STARTDATE = "startdate";
 
@@ -82,7 +78,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
     }
 
     @Override
-    public void createEvent(Event event, EventRoom eventRoom, Customer customer) {
+    public void createEvent(Event event) {
 
     }
 

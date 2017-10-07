@@ -2,6 +2,7 @@ package ro.sci.hotel.repository;
 
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+import ro.sci.hotel.model.event.EventRoom;
 import ro.sci.hotel.model.util.Price;
 
 import java.util.Date;
@@ -17,9 +18,8 @@ public interface EventRoomRepository<T> {
 
     /**
      * @param eventRoom
-     * @param eventRoom
-        */
-    void createEvent(T eventRoom, Price price);
+     */
+    void createEventRoom(EventRoom eventRoom);
 
     /**
      *  delete an event entry from DB
