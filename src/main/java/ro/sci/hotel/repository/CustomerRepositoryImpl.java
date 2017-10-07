@@ -132,7 +132,7 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
     }
 
     @Override
-    public List<Customer> searchByFirstName(String firstName) {
+    public List<Customer> searchByLastName(String lastName) {
         return null;
     }
 }

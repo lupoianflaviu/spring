@@ -45,8 +45,8 @@ public interface CustomerRepository<T> {
 
     /**
      * Search room by price
-     * @param firstName searched
+     * @param lastName searched
      * @return List<T> searched customer list
      */
-    List<T> searchByFirstName(String firstName);
+    List<T> searchByLastName(String lastName);
 }

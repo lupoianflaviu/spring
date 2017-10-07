@@ -43,8 +43,8 @@ public class CustomerServiceImpl implements CustomerService<Customer> {
     }
 
     @Override
-    public List<Customer> searchByFirstName(String firstName) {
-        return this.customerRepository.searchByFirstName(firstName);
+    public List<Customer> searchByLastName(String lastName) {
+        return this.customerRepository.searchByLastName(lastName);
     }
 
     @Override

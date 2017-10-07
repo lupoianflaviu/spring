@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -76,7 +79,6 @@ public class BookingController {
     }
 
     // ------------------- Delete a Booking ------------------------------------------------
-    //not working
     @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.GET)
     public String deleteBookingForm(@PathVariable("id") Integer id, Model model) {
 
@@ -93,11 +95,9 @@ public class BookingController {
         return "deletebooking";
     }
 
-
-    //not working
     @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public String deleteBooking(@PathVariable("id") Integer id, Model model) {
+    public ModelAndView deleteBooking(@PathVariable("id") Integer id, Model model) {
 
         LOGGER.log(Level.INFO, "Deleting booking with id " + id);
 
@@ -106,12 +106,12 @@ public class BookingController {
 
         model.addAttribute("booking", booking);
 
-        return "deletebooking";
+        return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }
 
     // ------------------- Update a Booking ------------------------------------------------
     @RequestMapping(value = "/bookings/{id}", method = RequestMethod.POST)
-    public String updateBooking(@PathVariable("id") Integer id, @ModelAttribute Booking booking) {
+    public ModelAndView updateBooking(@PathVariable("id") Integer id, @ModelAttribute Booking booking) {
 
         LOGGER.log(Level.INFO, "Updating booking");
         Booking updatedBooking = bookingService.searchById(id);
@@ -122,6 +122,17 @@ public class BookingController {
 
         bookingService.update(updatedBooking);
 
-        return "updatebooking";
+        return new ModelAndView("bookings", "bookings", bookingService.getAll());
+    }
+
+    //---------------Searches by criteria-----------------------------------------------------
+    @RequestMapping(value = "/bookings/search/roomnumber", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView bookingsByRoomNumber(@RequestParam(value = "search", required = false, defaultValue = "0") Integer roomNumber) {
+
+        List<Booking> bookings = bookingService.searchByRoomNumber(roomNumber);
+
+        return new ModelAndView("bookingsbyroomnumber", "search", bookings);
+
     }
 }

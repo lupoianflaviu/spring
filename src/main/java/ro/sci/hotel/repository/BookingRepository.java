@@ -53,6 +53,8 @@ public interface BookingRepository<T> {
      */
     List<T> searchByCustomerId(Integer customerId);
 
+    Double calculateDays(Integer id);
+
     /**
      * Search bookings by room number
      *
@@ -96,4 +98,6 @@ public interface BookingRepository<T> {
     List<T> searchByCustomerIdAndRoomNumber(Integer customerId, Integer roomNumber);
 
     T searchById(Integer bookingId);
+
+//    List<T> searchByCustomerLastName(String lastName);
 }
