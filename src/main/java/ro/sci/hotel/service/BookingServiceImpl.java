@@ -93,6 +93,21 @@ public class BookingServiceImpl implements BookingService<Booking> {
 
     @Override
     public void update(Booking booking) {
+        List<Booking> bookings = getAll();
+
+        for (Booking savedBooking : bookings) {
+            if ((booking.getRoom()
+                        .getRoomNumber() == savedBooking.getRoom()
+                                                        .getRoomNumber())) {
+                if ((booking.getStartDate()
+                            .compareTo(booking.getEndDate()) >= 0) || (searchByDate(booking.getStartDate(), booking.getEndDate()).size() > 0)) {
+
+                    LOGGER.log(Level.WARNING, "Wrong period is given!");
+                    throw new ValidationException("Wrong period is given!");
+                }
+            }
+        }
+
         this.bookingRepository.update(booking);
     }
 
