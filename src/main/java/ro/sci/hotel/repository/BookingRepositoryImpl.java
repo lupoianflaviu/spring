@@ -238,11 +238,11 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
         return searchedBookings;
     }
 
-    @Override //to update
+    @Override
     public List<Booking> searchByDate(Date startDate, Date endDate) {
         List<Booking> searchedBookings = new ArrayList<>();
 
-        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement("SELECT * FROM booking WHERE startdate=? AND enddate=?")) {
+        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement("SELECT * FROM booking WHERE startdate>=? AND enddate<=?")) {
 
             stm.setDate(1, startDate);
             stm.setDate(2, endDate);
@@ -255,11 +255,13 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
                 Room room = new Room();
                 Customer customer = new Customer();
                 booking.setId(rs.getInt(ID));
-                //to verify these 2 initializations
                 room.setRoomNumber(rs.getInt(ROOMNUMBER));
                 customer.setId(rs.getInt(CUSTOMERID));
+                booking.setRoom(room);
+                booking.setCustomer(customer);
                 booking.setStartDate(rs.getDate(STARTDATE));
                 booking.setEndDate(rs.getDate(ENDDATE));
+                booking.setTotalBookingPrice(calculateDays(booking.getId()));
 
                 searchedBookings.add(booking);
             }
@@ -273,7 +275,7 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
         return searchedBookings;
     }
 
-    @Override //to update
+    @Override
     public List<Booking> searchByPrice(Double price) {
         List<Booking> searchedBookings = new ArrayList<>();
 
@@ -289,11 +291,13 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
                 Room room = new Room();
                 Customer customer = new Customer();
                 booking.setId(rs.getInt(ID));
-                //to verify these 2 initializations
                 room.setRoomNumber(rs.getInt(ROOMNUMBER));
                 customer.setId(rs.getInt(CUSTOMERID));
+                booking.setRoom(room);
+                booking.setCustomer(customer);
                 booking.setStartDate(rs.getDate(STARTDATE));
                 booking.setEndDate(rs.getDate(ENDDATE));
+                booking.setTotalBookingPrice(calculateDays(booking.getId()));
 
                 searchedBookings.add(booking);
             }
@@ -305,11 +309,6 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
         }
 
         return searchedBookings;
-    }
-
-    @Override
-    public List<Booking> searchByEvent(Integer eventId) {
-        return null;
     }
 
     @Override
@@ -349,40 +348,4 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
 
         return booking;
     }
-
-//    @Override
-//    public List<Booking> searchByCustomerLastName(String lastName) {
-//        List<Booking> searchedBookings = new ArrayList<>();
-//
-//        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement("SELECT * FROM booking WHERE lastname=?")) {
-//
-//            stm.setString(1, lastName);
-//
-//            ResultSet rs = stm.executeQuery();
-//
-//            while (rs.next()) {
-//
-//                Booking booking = new Booking();
-//                Room room = new Room();
-//                Customer customer = new Customer();
-//                booking.setId(rs.getInt(ID));
-//                room.setRoomNumber(rs.getInt(ROOMNUMBER));
-//                customer.setId(rs.getInt(CUSTOMERID));
-//                booking.setRoom(room);
-//                booking.setCustomer(customer);
-//                booking.setStartDate(rs.getDate(STARTDATE));
-//                booking.setEndDate(rs.getDate(ENDDATE));
-//                booking.setTotalBookingPrice(calculateDays(booking.getId()));
-//
-//                searchedBookings.add(booking);
-//            }
-//
-//
-//        } catch (SQLException ex) {
-//            LOGGER.log(Level.WARNING, DATABASE_ERROR);
-//            throw new RuntimeException(EXCEPTION_THROWN);
-//        }
-//
-//        return searchedBookings;
-//    }
 }

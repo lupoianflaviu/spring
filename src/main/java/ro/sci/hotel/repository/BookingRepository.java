@@ -81,14 +81,6 @@ public interface BookingRepository<T> {
     List<T> searchByPrice(Double price);
 
     /**
-     * Search bookings by event id
-     *
-     * @param eventId searched
-     * @return List<T> searched bookings list
-     */
-    List<T> searchByEvent(Integer eventId);
-
-    /**
      * Search bookings by customer id and room number
      *
      * @param customerId searched
@@ -97,7 +89,10 @@ public interface BookingRepository<T> {
      */
     List<T> searchByCustomerIdAndRoomNumber(Integer customerId, Integer roomNumber);
 
+    /**
+     * Search by booking id
+     * @param bookingId id
+     * @return
+     */
     T searchById(Integer bookingId);
-
-//    List<T> searchByCustomerLastName(String lastName);
 }
