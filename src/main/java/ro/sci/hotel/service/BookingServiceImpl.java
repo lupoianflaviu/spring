@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.validation.ValidationException;
+
 import ro.sci.hotel.model.booking.Booking;
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.room.Room;
@@ -55,7 +57,8 @@ public class BookingServiceImpl implements BookingService<Booking> {
             Customer resultCustomer = customerService.searchByCustomerId(customerId);
             booking.setCustomer(resultCustomer);
 
-            booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight().getValue());
+            booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight()
+                                                                                    .getValue());
         }
 
         bookings.sort(Comparator.comparing(Booking::getId));
@@ -65,19 +68,18 @@ public class BookingServiceImpl implements BookingService<Booking> {
 
     @Override
     public void create(Booking booking, Room room, Customer customer) {
-        //to check logic
         List<Booking> bookings = getAll();
 
         for (Booking savedBooking : bookings) {
+            if ((booking.getRoom()
+                        .getRoomNumber() == savedBooking.getRoom()
+                                                        .getRoomNumber())) {
+                if ((booking.getStartDate()
+                            .compareTo(booking.getEndDate()) >= 0) || (searchByDate(booking.getStartDate(), booking.getEndDate()).size() > 0)) {
 
-            if (booking.getRoom() == savedBooking.getRoom() && (booking.getStartDate()
-                                                                       .compareTo(savedBooking.getEndDate()) <= 0 || booking.getEndDate()
-                                                                                                                            .compareTo(
-                                                                                                                                    savedBooking.getStartDate())
-                    >= 0 || booking.getStartDate()
-                                   .compareTo(booking.getEndDate()) >= 0)) {
-                LOGGER.log(Level.WARNING, "Selected Room is already reserved OR wrong period is given!");
-                return;
+                    LOGGER.log(Level.WARNING, "Wrong period is given!");
+                    throw new ValidationException("Wrong period is given!");
+                }
             }
         }
 
@@ -115,7 +117,8 @@ public class BookingServiceImpl implements BookingService<Booking> {
             Customer resultCustomer = customerService.searchByCustomerId(customerId);
             booking.setCustomer(resultCustomer);
 
-            booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight().getValue());
+            booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight()
+                                                                                    .getValue());
         }
 
         bookings.sort(Comparator.comparing(Booking::getId));
@@ -125,17 +128,34 @@ public class BookingServiceImpl implements BookingService<Booking> {
 
     @Override
     public List<Booking> searchByDate(Date startDate, Date endDate) {
-        return this.bookingRepository.searchByDate(startDate, endDate);
+        List<Booking> bookings = this.bookingRepository.searchByDate(startDate, endDate);
+
+        for (Booking booking : bookings) {
+
+            int roomNumber = booking.getRoom()
+                                    .getRoomNumber();
+
+            Room resultRoom = roomService.searchByRoomNumber(roomNumber);
+
+            booking.setRoom(resultRoom);
+
+            int customerId = booking.getCustomer()
+                                    .getId();
+            Customer resultCustomer = customerService.searchByCustomerId(customerId);
+            booking.setCustomer(resultCustomer);
+
+            booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight()
+                                                                                    .getValue());
+        }
+
+        bookings.sort(Comparator.comparing(Booking::getId));
+
+        return bookings;
     }
 
     @Override
     public List<Booking> searchByPrice(Double price) {
         return this.bookingRepository.searchByPrice(price);
-    }
-
-    @Override
-    public List<Booking> searchByEvent(Integer eventId) {
-        return this.bookingRepository.searchByEvent(eventId);
     }
 
     @Override
@@ -164,7 +184,8 @@ public class BookingServiceImpl implements BookingService<Booking> {
         Customer resultCustomer = customerService.searchByCustomerId(customerId);
         booking.setCustomer(resultCustomer);
 
-        booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight().getValue());
+        booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight()
+                                                                                .getValue());
 
         return booking;
     }

@@ -102,7 +102,9 @@ public class Booking {
             return false;
         if (room != null ? !room.equals(booking.room) : booking.room != null)
             return false;
-        return customer != null ? customer.equals(booking.customer) : booking.customer == null;
+        if (customer != null ? !customer.equals(booking.customer) : booking.customer != null)
+            return false;
+        return totalBookingPrice != null ? totalBookingPrice.equals(booking.totalBookingPrice) : booking.totalBookingPrice == null;
     }
 
     @Override
@@ -113,6 +115,7 @@ public class Booking {
         result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
         result = 31 * result + (room != null ? room.hashCode() : 0);
         result = 31 * result + (customer != null ? customer.hashCode() : 0);
+        result = 31 * result + (totalBookingPrice != null ? totalBookingPrice.hashCode() : 0);
         return result;
     }
 

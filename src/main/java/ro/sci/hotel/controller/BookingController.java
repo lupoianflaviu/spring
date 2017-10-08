@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.xml.bind.ValidationException;
+
 import ro.sci.hotel.model.booking.Booking;
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.room.Room;
@@ -46,14 +48,23 @@ public class BookingController {
     @Autowired
     private RoomService<Room> roomService;
 
-    // ------------------- Show All Bookings ------------------------------------------------
+    /**
+     * Show all bookings in database
+     *
+     * @return bookings.html
+     */
     @RequestMapping(value = "/bookings", method = RequestMethod.GET)
     public ModelAndView showBookings() {
 
         return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }
 
-    // ------------------- Show Desired Bookings ------------------------------------------------
+    /**
+     * Show booking by id
+     *
+     * @param id number of booking
+     * @return updatebooking.html
+     */
     @RequestMapping(value = "/bookings/{id}", method = RequestMethod.GET)
     public ModelAndView showForm(@PathVariable("id") Integer id) {
 
@@ -62,15 +73,30 @@ public class BookingController {
         return new ModelAndView("updatebooking", "booking", booking);
     }
 
-    // ------------------- Submit New Booking ------------------------------------------------
+    /**
+     * Submit new booking request method GET
+     *
+     * @param model booking
+     * @return submit.html
+     */
     @RequestMapping(value = "/bookings/submit", method = RequestMethod.GET)
     public String bookingForm(Model model) {
         model.addAttribute("booking", new Booking());
         return "submit";
     }
 
+    /**
+     * Post new booking details
+     *
+     * @param booking  new booking
+     * @param room     booking room
+     * @param customer booking customer
+     * @param model    booking
+     * @return results.html
+     */
     @RequestMapping(value = "/bookings/submit", method = RequestMethod.POST)
-    public String createBooking(@ModelAttribute Booking booking, @ModelAttribute Room room, @ModelAttribute Customer customer, Model model) {
+    public String createBooking(@ModelAttribute Booking booking, @ModelAttribute Room room, @ModelAttribute Customer customer, Model model)
+            throws ValidationException {
 
         bookingService.create(booking, room, customer);
         model.addAttribute("booking", booking);
@@ -78,7 +104,13 @@ public class BookingController {
         return "results";
     }
 
-    // ------------------- Delete a Booking ------------------------------------------------
+    /**
+     * Delete selected booking, GET booking by ID
+     *
+     * @param id    booking id
+     * @param model booking, room, customer
+     * @return deletebooking.html
+     */
     @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.GET)
     public String deleteBookingForm(@PathVariable("id") Integer id, Model model) {
 
@@ -95,6 +127,13 @@ public class BookingController {
         return "deletebooking";
     }
 
+    /**
+     * Delete selected booking, request method POST
+     *
+     * @param id    booking id
+     * @param model booking
+     * @return bookings.html
+     */
     @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public ModelAndView deleteBooking(@PathVariable("id") Integer id, Model model) {
@@ -109,7 +148,13 @@ public class BookingController {
         return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }
 
-    // ------------------- Update a Booking ------------------------------------------------
+    /**
+     * Update selected booking's room and starDate and endDate
+     *
+     * @param id      booking id
+     * @param booking booking to be updated
+     * @return bookings.html
+     */
     @RequestMapping(value = "/bookings/{id}", method = RequestMethod.POST)
     public ModelAndView updateBooking(@PathVariable("id") Integer id, @ModelAttribute Booking booking) {
 
@@ -125,7 +170,12 @@ public class BookingController {
         return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }
 
-    //---------------Searches by criteria-----------------------------------------------------
+    /**
+     * Search bookings by roomNumber
+     *
+     * @param roomNumber the number of room
+     * @return bookingsbyroomnumber.html
+     */
     @RequestMapping(value = "/bookings/search/roomnumber", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView bookingsByRoomNumber(@RequestParam(value = "search", required = false, defaultValue = "0") Integer roomNumber) {

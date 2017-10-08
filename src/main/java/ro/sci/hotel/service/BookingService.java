@@ -74,13 +74,6 @@ public interface BookingService<T> {
      */
     List<T> searchByPrice(Double price);
 
-    /**
-     * Search bookings by event id
-     *
-     * @param eventId searched
-     * @return List<T> searched bookings list
-     */
-    List<T> searchByEvent(Integer eventId);
 
     /**
      * Search bookings by customer id and room number
@@ -98,5 +91,10 @@ public interface BookingService<T> {
      */
     void setBookingRepository(BookingRepository<Booking> bookingRepository);
 
+    /**
+     * Search by booking id
+     *
+     * @param bookingId id
+     */
     T searchById(Integer bookingId);
 }
