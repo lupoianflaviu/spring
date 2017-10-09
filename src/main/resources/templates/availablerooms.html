@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title></title>
+</head>
+<body>
+<h1>HOTEL MANAGEMENT</h1>
+<h2>SHOW AVAILABLE ROOMS BY INTERVAL</h2>
+<div class="btn-group">
+    <a href="/bookings/submit" class="btn btn-info" role="button">Book Now</a>
+    <a href="/bookings" class="btn btn-info" role="button">Show All Bookings</a>
+</div>
+<form th:object="${room}" th:action="@{/bookings/search/availablerooms}" method="get">
+    <input type="text" name="search" id="search" th:value="${room}"/>
+    <input type="text" name="search2" id="search2" th:value="${room}"/>
+    <input type="submit" value="Search"/>
+    <div th:if="${not #lists.isEmpty(search)}">
+        <table class="table table-striped">
+            <tr>
+                <th>ROOM NUMBER</th>
+                <th>ROOM TYPE</th>
+                <th>BED TYPE</th>
+                <th>BED NUMBER</th>
+                <th>OCEAN VIEW</th>
+                <th>AIR CONDITIONING</th>
+                <th>BALCONY</th>
+                <th>PRICE</th>
+                <th>CURRENCY</th>
+            </tr>
+            <tr th:each="room: ${search}">
+                <td th:text="${room.roomNumber}">...</td>
+                <td th:text="${room.roomType}">...</td>
+                <td th:text="${room.bedType}">...</td>
+                <td th:text="${room.bedNumber}">...</td>
+                <td th:text="${room.oceanView}">...</td>
+                <td th:text="${room.airConditioning}">...</td>
+                <td th:text="${room.balcony}">...</td>
+                <td th:text="${room.pricePerNight.value}">...</td>
+                <td th:text="${room.pricePerNight.currency}">...</td>
+            </tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>

@@ -1,19 +1,18 @@
 package ro.sci.hotel.constants;
 
-import java.util.logging.Logger;
-
 public final class EmployeeFlowConstants {
 
 
-private  EmployeeFlowConstants(){ }
+    private EmployeeFlowConstants() {
+    }
 
     public static final String DATABASE_ERROR = "Database error!";
 
     public static final String EXCEPTION_THROWN = "Exception thrown";
 
-    public static final String WRITING_DB_FINISHED="Writing in db has finished!";
+    public static final String WRITING_DB_FINISHED = "Writing in db has finished!";
 
-    public static final String Employee_DELETED="Deletion of employee by ID successful";
+    public static final String Employee_DELETED = "Deletion of employee by ID successful";
 
     public static final String ID = "employee_id";
 
@@ -37,22 +36,17 @@ private  EmployeeFlowConstants(){ }
 
     public static final String CURRENCY = "currency";
 
-    public static final String SQL_SELECT_ALL_FROM_EMPLOYEE = "SELECT employee_id, first_name, last_name, email, employee_phone_number, employment_date, price, employee_role FROM employee";
-    public static final String SQL_INSERT_EMPLOYEE= "INSERT INTO employees " +
-            "(first_name," +
-            "last_name" +
-            "email" +
-            "employee_phone_number" +
-            "employement_date" +
-            "salary" +
-            "employee_role)" +
-            "VALUES (?,?,?,?,?,?,?)";
+    public static final String SQL_SELECT_ALL_FROM_EMPLOYEE =
+            "SELECT employee_id, first_name, last_name, email, employee_phone_number, employment_date, price, employee_role FROM employee";
+    public static final String SQL_INSERT_EMPLOYEE =
+            "INSERT INTO employees " + "(first_name," + "last_name" + "email" + "employee_phone_number" + "employement_date" + "salary" + "employee_role)"
+                    + "VALUES (?,?,?,?,?,?,?)";
 
-    public static final  String DELETE_EMPLOYEE="Delete from employees where id=(?)";
+    public static final String DELETE_EMPLOYEE = "Delete from employees where id=(?)";
 
-    public static final  String  SQL_SELECT_USERNAME_PASSWORD="SELECT * FROM employee where username=? AND password=?";
+    public static final String SQL_SELECT_USERNAME_PASSWORD = "SELECT * FROM employee where username=? AND password=?";
 
-    public static final String SQL_SELECT_BY_FIRST_NAME ="SELECT * FROM employee where  first_name=? ";
+    public static final String SQL_SELECT_BY_FIRST_NAME = "SELECT * FROM employee where  first_name=? ";
 
     public static final String SQL_SELECT_BY_ID = "SELECT * FROM employee WHERE  employee_id=?";
 

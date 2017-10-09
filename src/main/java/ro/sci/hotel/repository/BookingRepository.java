@@ -81,15 +81,6 @@ public interface BookingRepository<T> {
     List<T> searchByPrice(Double price);
 
     /**
-     * Search bookings by customer id and room number
-     *
-     * @param customerId searched
-     * @param roomNumber searched
-     * @return List<T> searched bookings list
-     */
-    List<T> searchByCustomerIdAndRoomNumber(Integer customerId, Integer roomNumber);
-
-    /**
      * Search by booking id
      * @param bookingId id
      * @return
