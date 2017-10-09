@@ -1,9 +1,11 @@
 package ro.sci.hotel.service;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
@@ -174,8 +176,27 @@ public class BookingServiceImpl implements BookingService<Booking> {
     }
 
     @Override
-    public List<Booking> searchByCustomerIdAndRoomNumber(Integer customerId, Integer roomNumber) {
-        return this.bookingRepository.searchByCustomerIdAndRoomNumber(customerId, roomNumber);
+    public List<Room> searchAvailableRoomsByDate(Date startDate, Date endDate) {
+
+        List<Booking> bookings = searchByDate(startDate, endDate);
+        List<Room> reservedRooms = new ArrayList<>();
+
+        for (Booking booking : bookings) {
+
+            reservedRooms.add(booking.getRoom());
+        }
+
+        for (Room room : reservedRooms) {
+
+            Price resultPrice = priceService.searchById(room.getPricePerNight().getId());
+            room.setPricePerNight(resultPrice);
+        }
+
+        List<Room> availableRooms = (List<Room>) CollectionUtils.subtract(roomService.getAll(), reservedRooms);
+
+        availableRooms.sort(Comparator.comparing(Room::getRoomNumber));
+        return availableRooms;
+
     }
 
     @Override

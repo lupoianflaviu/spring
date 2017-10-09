@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -184,5 +185,21 @@ public class BookingController {
 
         return new ModelAndView("bookingsbyroomnumber", "search", bookings);
 
+    }
+
+    /**
+     * Show avaiable rooms by Date
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    @RequestMapping(value = "/bookings/search/availablerooms", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView availableRooms(@RequestParam(value = "search", required = false, defaultValue = "2017-01-01") String startDate,
+            @RequestParam(value = "search2", required = false, defaultValue = "2017-01-01") String endDate) {
+
+        List<Room> rooms = bookingService.searchAvailableRoomsByDate(Date.valueOf(startDate), Date.valueOf(endDate));
+
+        return new ModelAndView("availablerooms", "search", rooms);
     }
 }

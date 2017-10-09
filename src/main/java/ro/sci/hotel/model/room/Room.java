@@ -115,9 +115,7 @@ public class Room {
             return false;
         if (roomType != room.roomType)
             return false;
-        if (bedType != room.bedType)
-            return false;
-        return pricePerNight != null ? pricePerNight.equals(room.pricePerNight) : room.pricePerNight == null;
+        return bedType == room.bedType;
     }
 
     @Override
@@ -129,7 +127,6 @@ public class Room {
         result = 31 * result + (oceanView ? 1 : 0);
         result = 31 * result + (airConditioning ? 1 : 0);
         result = 31 * result + (balcony ? 1 : 0);
-        result = 31 * result + (pricePerNight != null ? pricePerNight.hashCode() : 0);
         return result;
     }
 }
