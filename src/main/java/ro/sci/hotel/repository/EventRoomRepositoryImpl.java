@@ -14,8 +14,35 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
+
 @Repository
 public class EventRoomRepositoryImpl extends BaseRepository implements EventRoomRepository {
+    private static final String DATABASE_ERROR = "Database error!";
+
+    private static final String EXCEPTION_THROWN = "Exception thrown";
+
+    private static final Logger LOGGER = Logger.getLogger("Hotel");
+
+    private static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
+
+    private static final String SQL_INSERT_INTO_EVENTROOM =
+            "INSERT INTO eventroom(roomname,roomcapacity,floorroom) values(?,?,?)";
+
+    private static final String EVENTROOM_DELETE_IS_COMPLETED = "Deletion of eventroom completed";
+
+    private static final String SQL_UPDATE_EVENTROOM_WHERE_ID = "UPDATE event " + "SET startdate=?, enddate=?, WHERE id = ?";
+
+    private static final String EVENT_UPDATE_IN_DB_IS_COMPLETED = "Event update in db has completed";
+
+    private static final String SQL_SELECT_ALL__FROM_EVENTROOM = "SELECT * FROM eventroom";
+
+    private static final String ID = "id";
+
+    private static final String ROOMNAME = "roomname";
+
+    private static final String SQL_DELETE_FROM_EVENTROOM_WHERE_ID = "DELETE FROM eventroom where id=?";
+
     @Override
     public List getAll() {
         List<EventRoom> eventRooms = new ArrayList<>();
@@ -27,14 +54,12 @@ public class EventRoomRepositoryImpl extends BaseRepository implements EventRoom
                 Price price = new Price();
                 EventRoom room = new EventRoom();
 
-                room.setRoomnName(rs.getString("roomname"));
+                room.setRoomName(rs.getString("roomname"));
                 room.setRoomCapacity(rs.getInt("roomcapacity"));
                 room.setFloorRoom(rs.getInt("floorroom"));
                 room.setId(rs.getInt("id"));
                 price.setId(rs.getInt("priceid"));
                 room.setPricePerDay(price);
-
-
                 eventRooms.add(room);
             }
         } catch (SQLException ex) {
@@ -47,7 +72,22 @@ public class EventRoomRepositoryImpl extends BaseRepository implements EventRoom
 
 
     @Override
-    public void createEvent(Object eventRoom, Price price) {
+    public void createEventRoom(EventRoom eventRoom) {
+        try (Connection conn = newConnection();
+             PreparedStatement stm = conn.prepareStatement(SQL_INSERT_INTO_EVENTROOM)) {
+
+
+            stm.setString(1, eventRoom.getRoomName());
+            stm.setInt(2, eventRoom.getRoomCapacity());
+            stm.setInt(3, eventRoom.getFloorRoom());
+            stm.execute();
+
+        } catch (SQLException ex) {
+            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+            throw new RuntimeException(EXCEPTION_THROWN);
+        }
+
+        LOGGER.log(Level.INFO, WRITING_IN_DB_HAS_FINISHED);
 
     }
 
@@ -87,8 +127,8 @@ public class EventRoomRepositoryImpl extends BaseRepository implements EventRoom
                     EventRoom room = new EventRoom();
 
                     room.setId(rs.getInt("id"));
-                    room.setRoomnName(rs.getString("roomname"));
-                  //  event.setEventRoom(room);
+                    room.setRoomName(rs.getString("roomname"));
+                    //  event.setEventRoom(room);
                     //event.setStartdate(rs.getDate("startdate"));
                     //event.setEnddate(rs.getDate("enddate"));
                 }

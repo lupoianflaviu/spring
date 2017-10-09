@@ -3,13 +3,12 @@ package ro.sci.hotel.model.event;
 import ro.sci.hotel.model.util.Price;
 
 public class EventRoom {
-private int id;
-    private String roomnName;
+    private int id;
+    private String roomName;
     private int roomCapacity;
     private String roomOrientation;
     private int floorRoom;
     private Price pricePerDay;
-
 
 
     public int getFloorRoom() {
@@ -28,12 +27,12 @@ private int id;
         this.roomOrientation = roomOrientation;
     }
 
-    public String getRoomnName() {
-        return roomnName;
+    public String getRoomName() {
+        return roomName;
     }
 
-    public void setRoomnName(String roomnName) {
-        this.roomnName = roomnName;
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public int getRoomCapacity() {
@@ -52,7 +51,12 @@ private int id;
         this.pricePerDay = pricePerDay;
     }
 
-    public int getId() {       return id;   }
+    public int getId() {
+        return id;
+    }
 
-    public void setId(int id) {        this.id = id;    }}
+    public void setId(int id) {
+        this.id = id;
+    }
+}
 

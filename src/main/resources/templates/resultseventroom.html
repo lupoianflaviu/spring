@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Submision Event Room</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Room Name</th>
+        <th>Room Capacity</th>
+        <th>Floor Room</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${eventroom.roomName}">...</td>
+        <td th:text="${eventroom.roomCapacity}">...</td>
+        <td th:text="${eventroom.floorRoom}">...</td>
+        </tr>
+    </tbody>
+</table>
+<a href="/eventrooms/submit">Submit another booking</a>
+
+</body>
+</html>
