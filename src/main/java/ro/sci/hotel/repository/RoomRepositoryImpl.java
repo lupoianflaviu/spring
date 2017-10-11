@@ -1,6 +1,7 @@
 package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +20,7 @@ import ro.sci.hotel.model.util.Price;
 /**
  * Room repository implementation
  */
-@Repository("roomRepository")
+@Repository()
 public class RoomRepositoryImpl extends BaseRepository implements RoomRepository<Room>{
 
     private static final String DATABASE_ERROR = "Database error!";

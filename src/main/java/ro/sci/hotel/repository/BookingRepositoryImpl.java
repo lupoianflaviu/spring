@@ -20,7 +20,7 @@ import ro.sci.hotel.model.room.Room;
 /**
  * Implementation of Booking Repository Interface
  */
-@Repository("bookingRepository")
+@Repository()
 public class BookingRepositoryImpl extends BaseRepository implements BookingRepository<Booking> {
 
     @Override
