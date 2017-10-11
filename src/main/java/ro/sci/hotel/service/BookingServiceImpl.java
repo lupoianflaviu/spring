@@ -188,7 +188,8 @@ public class BookingServiceImpl implements BookingService<Booking> {
 
         for (Room room : reservedRooms) {
 
-            Price resultPrice = priceService.searchById(room.getPricePerNight().getId());
+            Price resultPrice = priceService.searchById(room.getPricePerNight()
+                                                            .getId());
             room.setPricePerNight(resultPrice);
         }
 
