@@ -6,7 +6,6 @@ import java.util.List;
 import ro.sci.hotel.model.booking.Booking;
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.room.Room;
-import ro.sci.hotel.repository.BookingRepository;
 
 /**
  * Service interface for Booking Repository manipulation
@@ -74,14 +73,14 @@ public interface BookingService<T> {
      */
     List<T> searchByPrice(Double price);
 
-    List<Room> searchAvailableRoomsByDate(Date startDate, Date endDate);
-
     /**
-     * Setter for booking repository injection
+     * Search available rooms with given interval
      *
-     * @param bookingRepository Booking repository
+     * @param startDate Booking start date
+     * @param endDate   Booking end date
+     * @return A List of available rooms
      */
-    void setBookingRepository(BookingRepository<Booking> bookingRepository);
+    List<Room> searchAvailableRoomsByDate(Date startDate, Date endDate);
 
     /**
      * Search by booking id

@@ -53,6 +53,11 @@ public interface BookingRepository<T> {
      */
     List<T> searchByCustomerId(Integer customerId);
 
+    /**
+     * Calculates the number of days a room is booked given a booking id
+     * @param id Booking Id
+     * @return Double representing number of days
+     */
     Double calculateDays(Integer id);
 
     /**
@@ -75,7 +80,7 @@ public interface BookingRepository<T> {
     /**
      * Search bookings by price
      *
-     * @param price seached
+     * @param price searched
      * @return List<T> searched bookings list
      */
     List<T> searchByPrice(Double price);
@@ -83,7 +88,7 @@ public interface BookingRepository<T> {
     /**
      * Search by booking id
      * @param bookingId id
-     * @return
+     * @return Found booking
      */
     T searchById(Integer bookingId);
 }

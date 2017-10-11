@@ -2,20 +2,7 @@ package ro.sci.hotel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.sql.Date;
-
 import org.springframework.context.annotation.ComponentScan;
-import ro.sci.hotel.model.booking.Booking;
-import ro.sci.hotel.model.room.BedType;
-import ro.sci.hotel.model.room.Room;
-import ro.sci.hotel.model.room.RoomType;
-import ro.sci.hotel.model.util.Currency;
-import ro.sci.hotel.model.util.Price;
-import ro.sci.hotel.repository.BookingRepository;
-import ro.sci.hotel.repository.BookingRepositoryImpl;
-import ro.sci.hotel.service.BookingService;
-import ro.sci.hotel.service.BookingServiceImpl;
 
 /**
  * Hotel Management

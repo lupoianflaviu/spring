@@ -73,9 +73,7 @@ public class BookingServiceImpl implements BookingService<Booking> {
         List<Booking> bookings = getAll();
 
         for (Booking savedBooking : bookings) {
-            if ((booking.getRoom()
-                        .getRoomNumber() == savedBooking.getRoom()
-                                                        .getRoomNumber())) {
+            if (isSameRoom(booking, savedBooking)) {
                 if ((booking.getStartDate()
                             .compareTo(booking.getEndDate()) >= 0) || (searchByDate(booking.getStartDate(), booking.getEndDate()).size() > 0)) {
 
@@ -88,6 +86,18 @@ public class BookingServiceImpl implements BookingService<Booking> {
         this.bookingRepository.create(booking, room, customer);
     }
 
+    /**
+     * Returns true if two bookings have the same room assigned. Used in create and update booking methods
+     * @param booking First booking
+     * @param savedBooking Second booking
+     * @return true if it is the same room / false if the rooms are different
+     */
+    private boolean isSameRoom(Booking booking, Booking savedBooking) {
+        return booking.getRoom()
+                    .getRoomNumber() == savedBooking.getRoom()
+                                                    .getRoomNumber();
+    }
+
     @Override
     public void delete(Booking booking) {
         this.bookingRepository.delete(booking);
@@ -98,9 +108,7 @@ public class BookingServiceImpl implements BookingService<Booking> {
         List<Booking> bookings = getAll();
 
         for (Booking savedBooking : bookings) {
-            if ((booking.getRoom()
-                        .getRoomNumber() == savedBooking.getRoom()
-                                                        .getRoomNumber())) {
+            if ((isSameRoom(booking, savedBooking))) {
                 if ((booking.getStartDate()
                             .compareTo(booking.getEndDate()) >= 0) || (searchByDate(booking.getStartDate(), booking.getEndDate()).size() > 0)) {
 
@@ -201,11 +209,6 @@ public class BookingServiceImpl implements BookingService<Booking> {
     }
 
     @Override
-    public void setBookingRepository(BookingRepository<Booking> bookingRepository) {
-        this.bookingRepository = bookingRepository;
-    }
-
-    @Override
     public Booking searchById(Integer bookingId) {
 
         Booking booking = this.bookingRepository.searchById(bookingId);
@@ -225,13 +228,5 @@ public class BookingServiceImpl implements BookingService<Booking> {
                                                                                 .getValue());
 
         return booking;
-    }
-
-    public void setRoomService(RoomService<Room> roomService) {
-        this.roomService = roomService;
-    }
-
-    public void setCustomerService(CustomerService<Customer> customerService) {
-        this.customerService = customerService;
     }
 }
