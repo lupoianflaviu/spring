@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
 import ro.sci.hotel.model.util.Price;
@@ -14,7 +13,7 @@ import ro.sci.hotel.repository.RoomRepository;
 /**
  * Room service implementation
  */
-@Service("roomService")
+@Service()
 public class RoomServiceImpl implements RoomService<Room> {
 
     @Autowired

@@ -22,7 +22,7 @@ import ro.sci.hotel.repository.BookingRepository;
 /**
  * Implementation for Booking Service interface
  */
-@Service("bookingService")
+@Service()
 public class BookingServiceImpl implements BookingService<Booking> {
 
     private static final Logger LOGGER = Logger.getLogger("Hotel");
