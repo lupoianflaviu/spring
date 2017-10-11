@@ -2,13 +2,13 @@ package ro.sci.hotel.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ro.sci.hotel.model.event.Event;
-import ro.sci.hotel.model.event.EventRoom;
-import ro.sci.hotel.model.util.Price;
-import ro.sci.hotel.repository.EventRoomRepository;
 
 import java.util.Date;
 import java.util.List;
+
+import ro.sci.hotel.model.event.EventRoom;
+import ro.sci.hotel.model.util.Price;
+import ro.sci.hotel.repository.EventRoomRepository;
 
 @Service
 public class EventRoomServiceImpl implements EventRoomService {
@@ -37,7 +37,7 @@ public class EventRoomServiceImpl implements EventRoomService {
 
     @Override
     public void createEventRoom(EventRoom eventRoom) {
-
+        this.eventRoomRepository.createEventRoom(eventRoom);
     }
 
     @Override
