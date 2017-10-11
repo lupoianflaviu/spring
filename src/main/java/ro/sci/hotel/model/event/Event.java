@@ -1,55 +1,50 @@
 package ro.sci.hotel.model.event;
 
-import ro.sci.hotel.model.util.Price;
-
 import java.util.Date;
 
 public class Event {
-    private String roomnName;
-    private int roomCapacity;
-    private Price pricePerDay;
-    private Date startDate;
-    private Date endDate;
+    private int id;
 
 
-    public String getRoomnName() {
-        return roomnName;
+    private Date startdate;
+    private Date enddate;
+    private double totalPrice;
+    private EventRoom eventRoom;
+
+    public EventRoom getEventRoom() {
+        return eventRoom;
     }
 
-    public void setRoomnName(String roomnName) {
-        this.roomnName = roomnName;
+    public void setEventRoom(EventRoom eventRoom) {
+        this.eventRoom = eventRoom;
     }
 
-    public int getRoomCapacity() {
-        return roomCapacity;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setRoomCapacity(int roomCapacity) {
-        this.roomCapacity = roomCapacity;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
-    public Price getPricePerDay() {
-        return pricePerDay;
+    public Date getStartdate() {
+        return startdate;
     }
 
-    public void setPricePerDay(Price pricePerDay) {
-        this.pricePerDay = pricePerDay;
+    public void setStartdate(Date startdate) {
+        this.startdate = startdate;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getEnddate() {
+        return enddate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setEnddate(Date enddate) {
+        this.enddate = enddate;
     }
 
-    public Date getEndDate() {
-        return endDate;
-    }
+    public int getId() {  return id;    }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
+    public void setId(int id) { this.id = id;    }
 
 }

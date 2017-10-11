@@ -74,22 +74,7 @@ public interface BookingService<T> {
      */
     List<T> searchByPrice(Double price);
 
-    /**
-     * Search bookings by event id
-     *
-     * @param eventId searched
-     * @return List<T> searched bookings list
-     */
-    List<T> searchByEvent(Integer eventId);
-
-    /**
-     * Search bookings by customer id and room number
-     *
-     * @param customerId searched
-     * @param roomNumber searched
-     * @return List<T> searched bookings list
-     */
-    List<T> searchByCustomerIdAndRoomNumber(Integer customerId, Integer roomNumber);
+    List<Room> searchAvailableRoomsByDate(Date startDate, Date endDate);
 
     /**
      * Setter for booking repository injection
@@ -98,5 +83,10 @@ public interface BookingService<T> {
      */
     void setBookingRepository(BookingRepository<Booking> bookingRepository);
 
+    /**
+     * Search by booking id
+     *
+     * @param bookingId id
+     */
     T searchById(Integer bookingId);
 }

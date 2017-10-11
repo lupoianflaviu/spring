@@ -1,7 +1,9 @@
 package ro.sci.hotel.repository;
 
 import ro.sci.hotel.model.room.BedType;
+import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
+import ro.sci.hotel.model.util.Price;
 
 import java.util.List;
 
@@ -22,7 +24,7 @@ public interface RoomRepository<T> {
      *
      * @param t new room
      */
-    void create(T t);
+    void create(Room room, Price price);
 
     /**
      * Detele a room entry from db

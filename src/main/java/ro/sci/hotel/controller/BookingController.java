@@ -6,14 +6,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.xml.bind.ValidationException;
 
 import ro.sci.hotel.model.booking.Booking;
 import ro.sci.hotel.model.customer.Customer;
@@ -44,31 +49,55 @@ public class BookingController {
     @Autowired
     private RoomService<Room> roomService;
 
-    // ------------------- Show All Bookings ------------------------------------------------
+    /**
+     * Show all bookings in database
+     *
+     * @return bookings.html
+     */
     @RequestMapping(value = "/bookings", method = RequestMethod.GET)
     public ModelAndView showBookings() {
 
         return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }
 
-    // ------------------- Show Desired Bookings ------------------------------------------------
+    /**
+     * Show booking by id
+     *
+     * @param id number of booking
+     * @return updatebooking.html
+     */
     @RequestMapping(value = "/bookings/{id}", method = RequestMethod.GET)
     public ModelAndView showForm(@PathVariable("id") Integer id) {
 
         Booking booking = bookingService.searchById(id);
 
-        return new ModelAndView("viewbooking", "booking", booking);
+        return new ModelAndView("updatebooking", "booking", booking);
     }
 
-    // ------------------- Submit New Booking ------------------------------------------------
+    /**
+     * Submit new booking request method GET
+     *
+     * @param model booking
+     * @return submit.html
+     */
     @RequestMapping(value = "/bookings/submit", method = RequestMethod.GET)
     public String bookingForm(Model model) {
         model.addAttribute("booking", new Booking());
         return "submit";
     }
 
+    /**
+     * Post new booking details
+     *
+     * @param booking  new booking
+     * @param room     booking room
+     * @param customer booking customer
+     * @param model    booking
+     * @return results.html
+     */
     @RequestMapping(value = "/bookings/submit", method = RequestMethod.POST)
-    public String createBooking(@ModelAttribute Booking booking, @ModelAttribute Room room, @ModelAttribute Customer customer, Model model) {
+    public String createBooking(@ModelAttribute Booking booking, @ModelAttribute Room room, @ModelAttribute Customer customer, Model model)
+            throws ValidationException {
 
         bookingService.create(booking, room, customer);
         model.addAttribute("booking", booking);
@@ -76,14 +105,21 @@ public class BookingController {
         return "results";
     }
 
-    // ------------------- Delete a Booking ------------------------------------------------
-    //not working
+    /**
+     * Delete selected booking, GET booking by ID
+     *
+     * @param id    booking id
+     * @param model booking, room, customer
+     * @return deletebooking.html
+     */
     @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.GET)
-    public String deleteBookingForm(@PathVariable("id") Integer id,  Model model) {
+    public String deleteBookingForm(@PathVariable("id") Integer id, Model model) {
 
         Booking currentBooking = bookingService.searchById(id);
-        Room currentRoom = roomService.searchByRoomNumber(currentBooking.getRoom().getRoomNumber());
-        Customer currentCustomer = customerService.searchByCustomerId(currentBooking.getCustomer().getId());
+        Room currentRoom = roomService.searchByRoomNumber(currentBooking.getRoom()
+                                                                        .getRoomNumber());
+        Customer currentCustomer = customerService.searchByCustomerId(currentBooking.getCustomer()
+                                                                                    .getId());
 
         model.addAttribute("booking", currentBooking);
         model.addAttribute("room", currentRoom);
@@ -92,11 +128,16 @@ public class BookingController {
         return "deletebooking";
     }
 
-
-    //not working
-    @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.DELETE)
+    /**
+     * Delete selected booking, request method POST
+     *
+     * @param id    booking id
+     * @param model booking
+     * @return bookings.html
+     */
+    @RequestMapping(value = "/bookings/delete/{id}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public String deleteBooking(@PathVariable("id") Integer id, Model model) {
+    public ModelAndView deleteBooking(@PathVariable("id") Integer id, Model model) {
 
         LOGGER.log(Level.INFO, "Deleting booking with id " + id);
 
@@ -105,38 +146,60 @@ public class BookingController {
 
         model.addAttribute("booking", booking);
 
-        return "deletebooking";
+        return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }
 
-    // ------------------- Update a Booking ------------------------------------------------
-    //needs testing
-    @RequestMapping(value = "/bookings/update/{id}", method = RequestMethod.GET)
-    public String updateBookingForm(@PathVariable("id") Integer id,  Model model) {
+    /**
+     * Update selected booking's room and starDate and endDate
+     *
+     * @param id      booking id
+     * @param booking booking to be updated
+     * @return bookings.html
+     */
+    @RequestMapping(value = "/bookings/{id}", method = RequestMethod.POST)
+    public ModelAndView updateBooking(@PathVariable("id") Integer id, @ModelAttribute Booking booking) {
 
-        Booking currentBooking = bookingService.searchById(id);
-        Room currentRoom = roomService.searchByRoomNumber(currentBooking.getRoom().getRoomNumber());
-        Customer currentCustomer = customerService.searchByCustomerId(currentBooking.getCustomer().getId());
+        LOGGER.log(Level.INFO, "Updating booking");
+        Booking updatedBooking = bookingService.searchById(id);
+        updatedBooking.setRoom(roomService.searchByRoomNumber(booking.getRoom()
+                                                                     .getRoomNumber()));
+        updatedBooking.setStartDate(booking.getStartDate());
+        updatedBooking.setEndDate(booking.getEndDate());
 
-        model.addAttribute("booking", currentBooking);
+        bookingService.update(updatedBooking);
 
-        return "updatebooking";
+        return new ModelAndView("bookings", "bookings", bookingService.getAll());
     }
-//needs testing
-        @RequestMapping(value = "/bookings/update/{id}", method = RequestMethod.PUT)
-        public String updateBooking(@PathVariable("id") Integer id, @RequestBody Booking booking) {
-            LOGGER.log(Level.INFO, "Updating booking");
 
-            Booking updatedBooking = new Booking();
-            updatedBooking.setId(booking.getId());
-            updatedBooking.setCustomer(booking.getCustomer());
-            updatedBooking.setRoom(roomService.searchByRoomNumber(booking.getRoom().getRoomNumber()));
-//            updatedBooking.setRoom(booking.getRoom());
-            updatedBooking.setStartDate(booking.getStartDate());
-            updatedBooking.setEndDate(booking.getEndDate());
-            updatedBooking.setPricePerDay(booking.getPricePerDay());
+    /**
+     * Search bookings by roomNumber
+     *
+     * @param roomNumber the number of room
+     * @return bookingsbyroomnumber.html
+     */
+    @RequestMapping(value = "/bookings/search/roomnumber", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView bookingsByRoomNumber(@RequestParam(value = "search", required = false, defaultValue = "0") Integer roomNumber) {
 
-            bookingService.update(updatedBooking);
+        List<Booking> bookings = bookingService.searchByRoomNumber(roomNumber);
 
-            return "updatebooking";
-        }
+        return new ModelAndView("bookingsbyroomnumber", "search", bookings);
+
+    }
+
+    /**
+     * Show avaiable rooms by Date
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    @RequestMapping(value = "/bookings/search/availablerooms", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView availableRooms(@RequestParam(value = "search", required = false, defaultValue = "2017-01-01") String startDate,
+            @RequestParam(value = "search2", required = false, defaultValue = "2017-01-01") String endDate) {
+
+        List<Room> rooms = bookingService.searchAvailableRoomsByDate(Date.valueOf(startDate), Date.valueOf(endDate));
+
+        return new ModelAndView("availablerooms", "search", rooms);
+    }
 }

@@ -2,6 +2,11 @@ package ro.sci.hotel.model.booking;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.util.Price;
@@ -9,14 +14,20 @@ import ro.sci.hotel.model.util.Price;
 /**
  * Customer Booking model
  */
+@Entity
 public class Booking {
-
+    @Id
+    @GeneratedValue
     private int id;
+    @OneToOne
     private Price pricePerDay;
     private Date startDate;
     private Date endDate;
+    @OneToOne
     private Room room;
+    @OneToOne
     private Customer customer;
+    private Double totalBookingPrice;
 
     public int getId() {
         return id;
@@ -91,7 +102,9 @@ public class Booking {
             return false;
         if (room != null ? !room.equals(booking.room) : booking.room != null)
             return false;
-        return customer != null ? customer.equals(booking.customer) : booking.customer == null;
+        if (customer != null ? !customer.equals(booking.customer) : booking.customer != null)
+            return false;
+        return totalBookingPrice != null ? totalBookingPrice.equals(booking.totalBookingPrice) : booking.totalBookingPrice == null;
     }
 
     @Override
@@ -102,6 +115,15 @@ public class Booking {
         result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
         result = 31 * result + (room != null ? room.hashCode() : 0);
         result = 31 * result + (customer != null ? customer.hashCode() : 0);
+        result = 31 * result + (totalBookingPrice != null ? totalBookingPrice.hashCode() : 0);
         return result;
+    }
+
+    public Double getTotalBookingPrice() {
+        return totalBookingPrice;
+    }
+
+    public void setTotalBookingPrice(Double totalBookingPrice) {
+        this.totalBookingPrice = totalBookingPrice;
     }
 }

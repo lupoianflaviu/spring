@@ -1,12 +1,19 @@
 package ro.sci.hotel.model.room;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import ro.sci.hotel.model.util.Price;
 
 /**
  * Hotel room model
  */
+@Entity
 public class Room {
-
+    @Id
+    @GeneratedValue
     private int roomNumber;
     private RoomType roomType;
     private BedType bedType;
@@ -14,6 +21,7 @@ public class Room {
     private boolean oceanView = false;
     private boolean airConditioning = false;
     private boolean balcony = false;
+    @OneToOne
     private Price pricePerNight;
 
     public int getRoomNumber() {
@@ -107,9 +115,7 @@ public class Room {
             return false;
         if (roomType != room.roomType)
             return false;
-        if (bedType != room.bedType)
-            return false;
-        return pricePerNight != null ? pricePerNight.equals(room.pricePerNight) : room.pricePerNight == null;
+        return bedType == room.bedType;
     }
 
     @Override
@@ -121,7 +127,6 @@ public class Room {
         result = 31 * result + (oceanView ? 1 : 0);
         result = 31 * result + (airConditioning ? 1 : 0);
         result = 31 * result + (balcony ? 1 : 0);
-        result = 31 * result + (pricePerNight != null ? pricePerNight.hashCode() : 0);
         return result;
     }
 }

@@ -1,8 +1,13 @@
 package ro.sci.hotel.model.customer;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Customer address blueprint
  */
+@Entity
 public class CustomerAddress {
 
     public CustomerAddress(String city) {
@@ -14,7 +19,9 @@ public class CustomerAddress {
         this.city = city;
         this.country = country;
     }
-
+    @Id
+    @GeneratedValue
+    private int id;
     private String streetAddress;
     private String city;
     private String country;
@@ -41,6 +48,14 @@ public class CustomerAddress {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

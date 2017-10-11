@@ -3,30 +3,46 @@
 <head>
     <title>Saved Bookings</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="webjars/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen"> </link>
+    <link href="webjars/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    </link>
 </head>
 <body>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<table>
-    <p th:text="'ID ' + ' Customer ' + ' Room ' + ' StartDate ' + ' EndDate '"/>
-    <th:block th:each="booking : ${bookings}">
-    <tr>
-        <td th:text="${booking.id}">...</td>
-        <td th:text="${booking.customer}">...</td>
-        <td th:text="${booking.room}">...</td>
-        <td th:text="${booking.startDate}">...</td>
-        <td th:text="${booking.endDate}">...</td>
-    </tr>
-    </th:block>
-</table>
+<h1>HOTEL MANAGEMENT</h1>
+<h2>VIEW ALL BOOKINGS</h2>
 <div class="btn-group">
     <a href="/bookings/submit" class="btn btn-info" role="button">Book Now</a>
-    <a href="/bookings/update" class="btn btn-info" role="button">Update Booking</a>
-    <a href="/submit" class="btn btn-info" role="button">Delete Booking</a>
-    <!--<button type="button" class="btn btn-succes">Create Booking</button>-->
-    <!--<button type="button" class="btn btn-warning">Update Booking</button>-->
-    <!--<button type="button" class="btn btn-danger">Delete Booking</button>-->
+    <a href="/bookings/search/availablerooms" class="btn btn-info" role="button">Search Available Rooms</a>
+    <a href="/bookings/search/roomnumber" class="btn btn-info" role="button">Search Room Booking</a>
 </div>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>CUSTOMER</th>
+        <th>ROOM</th>
+        <th>START DATE</th>
+        <th>END DATE</th>
+        <th>TOTAL</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="booking : ${bookings}">
+        <tr>
+            <td th:text="${booking.id}">...</td>
+            <td th:text="${booking.customer}">...</td>
+            <td th:text="${booking.room}">...</td>
+            <td th:text="${booking.startDate}">...</td>
+            <td th:text="${booking.endDate}">...</td>
+            <td th:text="${booking.totalBookingPrice}">...</td>
+            <td><a th:href="@{/bookings/{id}(id=${booking.id})}">Update</a></td>
+            <td><a th:href="@{/bookings/delete/{id}(id=${booking.id})}">Delete</a></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
 </body>
 </html>

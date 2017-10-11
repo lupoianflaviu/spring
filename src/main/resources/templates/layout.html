@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<head>
+    <!--/*  Each token will be replaced by their respective titles in the resulting page. */-->
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Task List</title>
+    ...
+</head>
+<body>
+<!--/* Standard layout can be mixed with Layout Dialect */-->
+<div th:replace="fragments/header :: header">
+    ...
+</div>
+<div class="container">
+    <div layout:fragment="content">
+
+        <h1>Decorator</h1>
+        <p>
+
+        </p>
+    </div>
+    <div th:replace="fragments/footer :: footer">&copy; Hotel</div>
+</div>
+</body>
+</html>

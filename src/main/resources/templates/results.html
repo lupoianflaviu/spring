@@ -5,11 +5,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Result</h1>
-<p th:text="'room number: ' + ${booking.room}" />
-<p th:text="'customer id: ' + ${booking.customer}" />
-<p th:text="'startDate: ' + ${booking.startDate}" />
-<p th:text="'endDate: ' + ${booking.endDate}" />
-<a href="/submit">Submit another booking</a>
+<h1>HOTEL MANAGEMENT</h1>
+<h2>SAVED BOOKING DETAILS</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ROOM DETAILS</th>
+        <th>CUSTOMER DETAILS</th>
+        <th>START DATE</th>
+        <th>END DATE</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${booking.room}">...</td>
+        <td th:text="${booking.customer}">...</td>
+        <td th:text="${booking.startDate}">...</td>
+        <td th:text="${booking.endDate}">...</td>
+    </tr>
+    </tbody>
+</table>
+<a href="/bookings/submit">Submit another booking</a>
+<a href="/bookings">Show Bookings</a>
 </body>
 </html>

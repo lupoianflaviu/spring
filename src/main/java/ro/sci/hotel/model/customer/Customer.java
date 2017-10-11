@@ -1,15 +1,23 @@
 package ro.sci.hotel.model.customer;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 /**
  * Customer Class contains customers model.
  */
+@Entity
 public class Customer {
-
+    @Id
+    @GeneratedValue
     private int id;
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
+    @OneToOne
     private CustomerAddress customerAddress;
     private PaymentMethod paymentMethod;
 

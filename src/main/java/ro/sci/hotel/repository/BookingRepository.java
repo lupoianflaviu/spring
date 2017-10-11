@@ -53,6 +53,8 @@ public interface BookingRepository<T> {
      */
     List<T> searchByCustomerId(Integer customerId);
 
+    Double calculateDays(Integer id);
+
     /**
      * Search bookings by room number
      *
@@ -79,21 +81,9 @@ public interface BookingRepository<T> {
     List<T> searchByPrice(Double price);
 
     /**
-     * Search bookings by event id
-     *
-     * @param eventId searched
-     * @return List<T> searched bookings list
+     * Search by booking id
+     * @param bookingId id
+     * @return
      */
-    List<T> searchByEvent(Integer eventId);
-
-    /**
-     * Search bookings by customer id and room number
-     *
-     * @param customerId searched
-     * @param roomNumber searched
-     * @return List<T> searched bookings list
-     */
-    List<T> searchByCustomerIdAndRoomNumber(Integer customerId, Integer roomNumber);
-
     T searchById(Integer bookingId);
 }
