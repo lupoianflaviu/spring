@@ -90,8 +90,8 @@ public class Room {
 
     @Override
     public String toString() {
-        return roomNumber + " , " + roomType + " , " + bedType + " , " + bedNumber + " , " + oceanView + " , " + airConditioning + " , " + balcony + " , "
-                + pricePerNight;
+        return "roomNumber=" + roomNumber + ", roomType=" + roomType + ", bedType=" + bedType + ", bedNumber=" + bedNumber + ", oceanView="
+                + oceanView + ", airConditioning=" + airConditioning + ", balcony=" + balcony + ", pricePerNight=" + pricePerNight;
     }
 
     @Override

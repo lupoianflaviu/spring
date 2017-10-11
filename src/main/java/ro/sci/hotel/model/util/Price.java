@@ -49,6 +49,6 @@ public class Price {
 
     @Override
     public String toString() {
-        return id + " , " + value + " , " + currency;
+        return value + " " + currency;
     }
 }

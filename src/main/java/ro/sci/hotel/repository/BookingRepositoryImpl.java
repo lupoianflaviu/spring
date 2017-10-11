@@ -27,8 +27,9 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
     public List<Booking> getAll() {
         List<Booking> bookings = new ArrayList<>();
 
-        try (Connection conn = newConnection(); Statement stm = conn.createStatement(); ResultSet rs = stm.executeQuery(
-                BookingFlowConstants.SQL_SELECT_ALL__FROM_BOOKING)) {
+        try (Connection conn = newConnection();
+                Statement stm = conn.createStatement();
+                ResultSet rs = stm.executeQuery(BookingFlowConstants.SQL_SELECT_ALL__FROM_BOOKING)) {
 
             while (rs.next()) {
 
@@ -43,6 +44,13 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
         return bookings;
     }
 
+
+    /**
+     * Provides common initialization of booking fields
+     *
+     * @param bookings List of bookings result
+     * @param rs       ResultSet
+     */
     private void initializeBookingFields(List<Booking> bookings, ResultSet rs) throws SQLException {
         Booking booking = new Booking();
         Room room = new Room();
@@ -148,8 +156,8 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
     public Double calculateDays(Integer id) {
         Double result = 0d;
 
-        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement(
-                BookingFlowConstants.SQL_SELECT_ENDDATE_STARTDATE_FROM_BOOKING_WHERE_ID)) {
+        try (Connection conn = newConnection();
+                PreparedStatement stm = conn.prepareStatement(BookingFlowConstants.SQL_SELECT_ENDDATE_STARTDATE_FROM_BOOKING_WHERE_ID)) {
 
             stm.setDouble(1, id);
 
@@ -195,8 +203,8 @@ public class BookingRepositoryImpl extends BaseRepository implements BookingRepo
     public List<Booking> searchByDate(Date startDate, Date endDate) {
         List<Booking> searchedBookings = new ArrayList<>();
 
-        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement(
-                BookingFlowConstants.SQL_SELECT_FROM_BOOKING_WHERE_STARTDATE_AND_ENDDATE)) {
+        try (Connection conn = newConnection();
+                PreparedStatement stm = conn.prepareStatement(BookingFlowConstants.SQL_SELECT_FROM_BOOKING_WHERE_STARTDATE_AND_ENDDATE)) {
 
             stm.setDate(1, startDate);
             stm.setDate(2, endDate);

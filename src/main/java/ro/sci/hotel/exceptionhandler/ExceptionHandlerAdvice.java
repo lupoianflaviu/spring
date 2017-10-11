@@ -13,7 +13,8 @@ import java.util.logging.Logger;
 import javax.validation.ValidationException;
 
 /**
- * Error handling class
+ * Exceptions handling class
+ * What response to receive when an exception appears
  */
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
@@ -62,5 +63,16 @@ public class ExceptionHandlerAdvice {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                              .body("Illegal Argument: Please check that the entered values ARE correctly written and CAN BE converted in the required Type. Example: Did you write a correct DATE type? Did you put a character where only numbers are allowed? ");
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity handleRuntimeException(RuntimeException e) {
+
+        String stackTrace = ExceptionUtils.getStackTrace(e);
+
+        LOGGER.log(Level.WARNING, stackTrace);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                             .body("Runtime Exception: Please check SQL Query for accessing database information!  ");
     }
 }

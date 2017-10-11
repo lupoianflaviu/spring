@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 public class BookingFlowConstants {
 
-    public static final String DATABASE_ERROR = "Database error!";
+    public static final String DATABASE_ERROR = "Database access error! Please check Sql Query";
     public static final String EXCEPTION_THROWN = "Exception thrown";
     public static final Logger LOGGER = Logger.getLogger("Hotel");
     public static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
