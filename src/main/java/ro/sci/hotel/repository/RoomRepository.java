@@ -1,6 +1,5 @@
 package ro.sci.hotel.repository;
 
-import ro.sci.hotel.model.room.BedType;
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
 import ro.sci.hotel.model.util.Price;
@@ -22,7 +21,8 @@ public interface RoomRepository<T> {
     /**
      * Create a room
      *
-     * @param t new room
+     * @param room  to be added in db
+     * @param price that is in db
      */
     void create(Room room, Price price);
 
@@ -42,6 +42,7 @@ public interface RoomRepository<T> {
 
     /**
      * Search room by room number
+     *
      * @param roomNumber searched
      * @return T searched room
      */
@@ -49,6 +50,7 @@ public interface RoomRepository<T> {
 
     /**
      * Search room by price
+     *
      * @param price seached
      * @return List<T> searched room list
      */
@@ -56,6 +58,7 @@ public interface RoomRepository<T> {
 
     /**
      * Search room by type
+     *
      * @param roomType seached
      * @return List<T> searched room list
      */

@@ -1,28 +1,27 @@
 package ro.sci.hotel.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ro.sci.hotel.model.booking.Booking;
-import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.util.Price;
-import ro.sci.hotel.repository.BookingRepository;
-import ro.sci.hotel.repository.BookingRepositoryImpl;
 import ro.sci.hotel.repository.RoomRepository;
-import ro.sci.hotel.repository.RoomRepositoryImpl;
-import ro.sci.hotel.service.*;
+import ro.sci.hotel.service.PriceService;
+import ro.sci.hotel.service.RoomService;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Controller for room model
  */
 @Controller
 public class RoomController {
+
+    private static final Logger LOGGER = Logger.getLogger("Hotel");
 
     @Autowired
     private RoomRepository<Room> roomRepository;
@@ -47,8 +46,7 @@ public class RoomController {
         return new ModelAndView("viewroom", "room", room);
     }
 
-//submit a new room
-
+    //submit a new room
     @RequestMapping(value = "/rooms/submit", method = RequestMethod.GET)
     public String roomForm(Model model) {
         model.addAttribute("room", new Room());
@@ -63,4 +61,48 @@ public class RoomController {
 
         return "resultsroom";
     }
+
+    //delete a room
+    @RequestMapping(value = "/rooms/delete/{id}", method = RequestMethod.GET)
+    public String deleteRoomForm(@PathVariable("id") Integer id, Model model) {
+
+        Room currentRoom = roomService.searchByRoomNumber(id);
+        model.addAttribute("room", currentRoom);
+
+        return "deleteroom";
+    }
+
+    @RequestMapping(value = "/rooms/delete/{id}", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public ModelAndView deleteRoom(@PathVariable("id") Integer id, Model model) {
+
+        LOGGER.log(Level.INFO, "Deleting room with id " + id);
+
+        Room room = roomService.searchByRoomNumber(id);
+        roomService.delete(room);
+
+        model.addAttribute("room", room);
+
+        return new ModelAndView("rooms", "rooms", roomService.getAll());
+    }
+
+    //update a room
+    @RequestMapping(value = "/rooms/{id}", method = RequestMethod.POST)
+    public ModelAndView updateRoom(@PathVariable("id") Integer id, @ModelAttribute Room room) {
+
+        LOGGER.log(Level.INFO, "Updating room");
+        Room updatedRoom = roomService.searchByRoomNumber(id);
+
+        updatedRoom.setRoomType(room.getRoomType());
+        updatedRoom.setBedType(room.getBedType());
+        updatedRoom.setBedNumber(room.getBedNumber());
+        updatedRoom.setOceanView(room.isOceanView());
+        updatedRoom.setAirConditioning(room.isAirConditioning());
+        updatedRoom.setPricePerNight(room.getPricePerNight());
+
+        roomService.update(updatedRoom);
+
+        return new ModelAndView("rooms", "rooms", roomService.getAll());
+    }
+
 }

@@ -1,13 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Room Form Submission</title>
+    <title>Delete Room</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <h1>HOTEL MANAGEMENT</h1>
-<h2>CREATE NEW ROOM</h2>
-<form action="#" th:action="@{/rooms/submit}" method="post">
+<h2>DELETE THIS ROOM</h2>
+<form action="#" th:action="@{/rooms/delete/{id}(id=${room.roomNumber})}" method="post">
     <p>Room Number: <input type="text" th:field="*{room.roomNumber}"/></p>
     <p>Room Type: <input type="text" th:field="*{room.roomType}"/></p>
     <p>Bed Type: <input type="text" th:field="*{room.bedType}"/></p>
@@ -15,8 +15,8 @@
     <p>Ocean View: <input type="text" th:field="*{room.oceanView}"/></p>
     <p>Air Conditioning: <input type="text" th:field="*{room.airConditioning}"/></p>
     <p>Balcony: <input type="text" th:field="*{room.balcony}"/></p>
-    <p>Price per Night: <input type="text" th:field="*{room.pricePerNight}"/></p>
-    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    <p>Price Per Night: <input type="text" th:field="*{room.pricePerNight}"/></p>
+    <p><input type="submit" value="Delete"/> <input type="reset" value="Reset"/></p>
 </form>
 </body>
 </html>

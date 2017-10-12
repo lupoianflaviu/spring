@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Room</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>HOTEL MANAGEMENT</h1>
+<h2>UPDATE ROOM</h2>
+<p> INFO: Only fields marked with * can be updated</p>
+<form action="#" th:action="@{/rooms/{id}(id=${room.roomNumber})}" method="post" id="formupdate">
+    <p>Room Number: <input type="text" th:field="*{room.roomNumber}" disabled="disabled"/></p>
+    <p>Room Type*: <input type="text" th:field="*{room.roomType}"/></p>
+    <p>Bed Type*: <input type="text" th:field="*{room.bedType}"/></p>
+    <p>Bed Number*: <input type="text" th:field="*{room.bedNumber}"/></p>
+    <p>Ocean View*: <input type="text" th:field="*{room.oceanView}"/></p>
+    <p>Air Conditioning*: <input type="text" th:field="*{room.airConditioning}"/></p>
+    <p>Balcony: <input type="text" th:field="*{room.balcony}" disabled="disabled"/></p>
+    <p>Price Per Night*: <input type="text" th:field="*{room.pricePerNight}"/></p>
+    <p><input type="submit" value="Update"/> <input type="reset" value="Reset"/></p>
+</form>
+</body>
+</html>
