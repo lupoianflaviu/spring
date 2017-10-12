@@ -19,14 +19,19 @@ public class Booking {
     @Id
     @GeneratedValue
     private int id;
+
     @OneToOne
     private Price pricePerDay;
+
     private Date startDate;
     private Date endDate;
+
     @OneToOne
     private Room room;
+
     @OneToOne
     private Customer customer;
+
     private Double totalBookingPrice;
 
     public int getId() {
@@ -76,7 +81,6 @@ public class Booking {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
 
     @Override
     public String toString() {

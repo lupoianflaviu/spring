@@ -46,19 +46,17 @@ public class BookingServiceImpl implements BookingService<Booking> {
         List<Booking> bookings = this.bookingRepository.getAll();
 
         for (Booking booking : bookings) {
-
+            //set Room for Booking
             int roomNumber = booking.getRoom()
                                     .getRoomNumber();
-
             Room resultRoom = roomService.searchByRoomNumber(roomNumber);
-
             booking.setRoom(resultRoom);
-
+            //set Customer for Booking
             int customerId = booking.getCustomer()
                                     .getId();
             Customer resultCustomer = customerService.searchByCustomerId(customerId);
             booking.setCustomer(resultCustomer);
-
+            //set TotalBookingPrice for Booking
             booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight()
                                                                                     .getValue());
         }
@@ -71,9 +69,11 @@ public class BookingServiceImpl implements BookingService<Booking> {
     @Override
     public void create(Booking booking, Room room, Customer customer) {
         List<Booking> bookings = getAll();
-
+        //check if same Room and is not booked
         for (Booking savedBooking : bookings) {
+
             if (isSameRoom(booking, savedBooking)) {
+
                 if ((booking.getStartDate()
                             .compareTo(booking.getEndDate()) >= 0) || (searchByDate(booking.getStartDate(), booking.getEndDate()).size() > 0)) {
 
@@ -88,14 +88,15 @@ public class BookingServiceImpl implements BookingService<Booking> {
 
     /**
      * Returns true if two bookings have the same room assigned. Used in create and update booking methods
-     * @param booking First booking
+     *
+     * @param booking      First booking
      * @param savedBooking Second booking
      * @return true if it is the same room / false if the rooms are different
      */
     private boolean isSameRoom(Booking booking, Booking savedBooking) {
         return booking.getRoom()
-                    .getRoomNumber() == savedBooking.getRoom()
-                                                    .getRoomNumber();
+                      .getRoomNumber() == savedBooking.getRoom()
+                                                      .getRoomNumber();
     }
 
     @Override
@@ -106,9 +107,11 @@ public class BookingServiceImpl implements BookingService<Booking> {
     @Override
     public void update(Booking booking) {
         List<Booking> bookings = getAll();
-
+        //check if same Room and is not booked
         for (Booking savedBooking : bookings) {
+
             if ((isSameRoom(booking, savedBooking))) {
+
                 if ((booking.getStartDate()
                             .compareTo(booking.getEndDate()) >= 0) || (searchByDate(booking.getStartDate(), booking.getEndDate()).size() > 0)) {
 
@@ -132,16 +135,16 @@ public class BookingServiceImpl implements BookingService<Booking> {
         List<Booking> bookings = this.bookingRepository.searchByRoomNumber(roomNumber);
 
         for (Booking booking : bookings) {
-
+            //Set Room for booking
             Room resultRoom = roomService.searchByRoomNumber(roomNumber);
 
             booking.setRoom(resultRoom);
-
+            //Set Customer for booking
             int customerId = booking.getCustomer()
                                     .getId();
             Customer resultCustomer = customerService.searchByCustomerId(customerId);
             booking.setCustomer(resultCustomer);
-
+            //Set TotalBookingPrice for booking
             booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight()
                                                                                     .getValue());
         }
@@ -156,19 +159,17 @@ public class BookingServiceImpl implements BookingService<Booking> {
         List<Booking> bookings = this.bookingRepository.searchByDate(startDate, endDate);
 
         for (Booking booking : bookings) {
-
+            //Set Room for booking
             int roomNumber = booking.getRoom()
                                     .getRoomNumber();
-
             Room resultRoom = roomService.searchByRoomNumber(roomNumber);
-
             booking.setRoom(resultRoom);
-
+            //Set Customer for booking
             int customerId = booking.getCustomer()
                                     .getId();
             Customer resultCustomer = customerService.searchByCustomerId(customerId);
             booking.setCustomer(resultCustomer);
-
+            //Set TotalBookingPrice for booking
             booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight()
                                                                                     .getValue());
         }
@@ -204,6 +205,7 @@ public class BookingServiceImpl implements BookingService<Booking> {
         List<Room> availableRooms = (List<Room>) CollectionUtils.subtract(roomService.getAll(), reservedRooms);
 
         availableRooms.sort(Comparator.comparing(Room::getRoomNumber));
+
         return availableRooms;
 
     }
@@ -212,18 +214,17 @@ public class BookingServiceImpl implements BookingService<Booking> {
     public Booking searchById(Integer bookingId) {
 
         Booking booking = this.bookingRepository.searchById(bookingId);
+        //Set Room for booking
         int roomNumber = booking.getRoom()
                                 .getRoomNumber();
-
         Room resultRoom = roomService.searchByRoomNumber(roomNumber);
-
         booking.setRoom(resultRoom);
-
+        //Set Customer for booking
         int customerId = booking.getCustomer()
                                 .getId();
         Customer resultCustomer = customerService.searchByCustomerId(customerId);
         booking.setCustomer(resultCustomer);
-
+        //Set TotalBookingPrice for booking
         booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight()
                                                                                 .getValue());
 
