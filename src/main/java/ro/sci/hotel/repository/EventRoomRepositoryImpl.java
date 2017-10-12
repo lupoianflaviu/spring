@@ -1,9 +1,6 @@
 package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
-import ro.sci.hotel.model.event.Event;
-import ro.sci.hotel.model.event.EventRoom;
-import ro.sci.hotel.model.util.Price;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +13,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import ro.sci.hotel.model.event.Event;
+import ro.sci.hotel.model.event.EventRoom;
+import ro.sci.hotel.model.util.Price;
+
 @Repository
 public class EventRoomRepositoryImpl extends BaseRepository implements EventRoomRepository {
     private static final String DATABASE_ERROR = "Database error!";
@@ -27,7 +28,7 @@ public class EventRoomRepositoryImpl extends BaseRepository implements EventRoom
     private static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
 
     private static final String SQL_INSERT_INTO_EVENTROOM =
-            "INSERT INTO eventroom(roomname,roomcapacity,floorroom) values(?,?,?)";
+            "INSERT INTO eventroom(roomname,roomcapacity,floorroom,priceid) values(?,?,?,?)";
 
     private static final String EVENTROOM_DELETE_IS_COMPLETED = "Deletion of eventroom completed";
 
@@ -80,6 +81,7 @@ public class EventRoomRepositoryImpl extends BaseRepository implements EventRoom
             stm.setString(1, eventRoom.getRoomName());
             stm.setInt(2, eventRoom.getRoomCapacity());
             stm.setInt(3, eventRoom.getFloorRoom());
+            stm.setInt(4, eventRoom.getPricePerDay().getId());
             stm.execute();
 
         } catch (SQLException ex) {
