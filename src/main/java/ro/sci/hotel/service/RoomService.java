@@ -1,12 +1,10 @@
 package ro.sci.hotel.service;
 
-import ro.sci.hotel.model.room.BedType;
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
 import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.repository.RoomRepository;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -27,7 +25,7 @@ public interface RoomService<T> {
     void create(Room room, Price price);
 
     /**
-     * Detele a room entry from db
+     * Delete a room entry from db
      *
      * @param t room to be deleted
      */
@@ -42,6 +40,7 @@ public interface RoomService<T> {
 
     /**
      * Search room by room number
+     *
      * @param roomNumber searched
      * @return T searched room
      */
@@ -49,6 +48,7 @@ public interface RoomService<T> {
 
     /**
      * Search room by price
+     *
      * @param price seached
      * @return List<T> searched room list
      */
@@ -56,6 +56,7 @@ public interface RoomService<T> {
 
     /**
      * Search room by type
+     *
      * @param roomType seached
      * @return List<T> searched room list
      */

@@ -2,18 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Room Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <h1>Result</h1>
-<p th:text="'room number: ' + ${room.roomNumber}" />
-<p th:text="'room type: ' + ${room.roomType}" />
-<p th:text="'room bed type: ' + ${room.bedType}" />
-<p th:text="'room bed number: ' + ${room.bedNumber}" />
-<p th:text="'room ocean view: ' + ${room.oceanView}" />
-<p th:text="'room air conditioning: ' + ${room.airConditioning}" />
-<p th:text="'room balcony: ' + ${room.balcony}" />
-<p th:text="'room price per night: ' + ${room.pricePerNight}" />
+<p th:text="'room number: ' + ${room.roomNumber}"/>
+<p th:text="'room type: ' + ${room.roomType}"/>
+<p th:text="'room bed type: ' + ${room.bedType}"/>
+<p th:text="'room bed number: ' + ${room.bedNumber}"/>
+<p th:text="'room ocean view: ' + ${room.oceanView}"/>
+<p th:text="'room air conditioning: ' + ${room.airConditioning}"/>
+<p th:text="'room balcony: ' + ${room.balcony}"/>
+<p th:text="'room price per night: ' + ${room.pricePerNight}"/>
 <a href="/submit">Submit another room</a>
 </body>
 </html>
