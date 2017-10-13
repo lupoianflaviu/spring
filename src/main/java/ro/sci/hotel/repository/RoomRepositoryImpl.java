@@ -1,16 +1,21 @@
 package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
-import ro.sci.hotel.model.room.BedType;
-import ro.sci.hotel.model.room.Room;
-import ro.sci.hotel.model.room.RoomType;
-import ro.sci.hotel.model.util.Price;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import ro.sci.hotel.model.room.BedType;
+import ro.sci.hotel.model.room.Room;
+import ro.sci.hotel.model.room.RoomType;
+import ro.sci.hotel.model.util.Price;
 
 /**
  * Room repository implementation
@@ -47,13 +52,13 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
     private static final String SQL_INSERT_INTO_ROOMS_ID_ROOMTYPE_BEDTYPE_BEDNUMBER_OCEANVIEW_AIRCONDITIONING_BALCONY_PRICEID_VALUES =
             "INSERT INTO room(id,roomtype,bedtype,bednumber,oceanview,airconditioning,balcony,priceid) values(?,?,?,?,?,?,?,?)";
 
-    public static final String SQL_DELETE_FROM_BOOKING_WHERE_ID = "DELETE FROM room where id=?";
+    private static final String SQL_DELETE_FROM_BOOKING_WHERE_ID = "DELETE FROM room where id=?";
 
-    public static final String ROOM_DELETE_HAS_COMPLETED = "Deletion of room completed";
+    private static final String ROOM_DELETE_HAS_COMPLETED = "Deletion of room completed";
 
-    public static final String SQL_UPDATE_ROOM_WHERE_ID = "UPDATE room " + "SET id=?, roomtype=?, bedtype=?, bednumber=?, oceanview=?, airconditioning=?, balcony=?, priceid=?, WHERE id = ?";
+    private static final String SQL_UPDATE_ROOM_WHERE_ID = "UPDATE room " + "SET roomtype=?, bedtype=?, bednumber=?, oceanview=?, airconditioning=?, balcony=?, priceid=? WHERE id = ?";
 
-    public static final String ROOM_UPDATE_IN_DB_HAS_COMPLETED = "Room update in db has completed";
+    private static final String ROOM_UPDATE_IN_DB_HAS_COMPLETED = "Room update in db has completed";
 
 
     @Override
@@ -136,14 +141,15 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
     public void update(Room room) {
         try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_UPDATE_ROOM_WHERE_ID)) {
 
-            stm.setInt(1, room.getRoomNumber());
-            stm.setString(2, String.valueOf(room.getRoomType()));
-            stm.setString(3, String.valueOf(room.getBedType()));
-            stm.setInt(4, room.getBedNumber());
-            stm.setBoolean(5, room.isBalcony());
-            stm.setBoolean(6, room.isAirConditioning());
-            stm.setBoolean(7, room.isBalcony());
-            stm.setInt(8, room.getPricePerNight().getId());
+            stm.setString(1, String.valueOf(room.getRoomType()));
+            stm.setString(2, String.valueOf(room.getBedType()));
+            stm.setInt(3, room.getBedNumber());
+            stm.setBoolean(4, room.isOceanView());
+            stm.setBoolean(5, room.isAirConditioning());
+            stm.setBoolean(6, room.isBalcony());
+            stm.setInt(7, room.getPricePerNight().getId());
+
+            stm.setInt(8, room.getRoomNumber());
 
             stm.executeUpdate();
 
