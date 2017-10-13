@@ -1,6 +1,9 @@
 package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
+import ro.sci.hotel.model.event.Event;
+import ro.sci.hotel.model.event.EventRoom;
+import ro.sci.hotel.model.util.Price;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,10 +15,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import ro.sci.hotel.model.event.Event;
-import ro.sci.hotel.model.event.EventRoom;
-import ro.sci.hotel.model.util.Price;
 
 @Repository
 public class EventRoomRepositoryImpl extends BaseRepository implements EventRoomRepository {
