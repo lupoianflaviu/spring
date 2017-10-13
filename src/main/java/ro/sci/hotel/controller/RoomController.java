@@ -4,16 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.repository.RoomRepository;
 import ro.sci.hotel.service.PriceService;
 import ro.sci.hotel.service.RoomService;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Controller for room model
@@ -43,7 +48,7 @@ public class RoomController {
 
         Room room = roomService.searchByRoomNumber(id);
 
-        return new ModelAndView("viewroom", "room", room);
+        return new ModelAndView("updateroom", "room", room);
     }
 
     //submit a new room
@@ -98,6 +103,7 @@ public class RoomController {
         updatedRoom.setBedNumber(room.getBedNumber());
         updatedRoom.setOceanView(room.isOceanView());
         updatedRoom.setAirConditioning(room.isAirConditioning());
+        updatedRoom.setBalcony(room.isBalcony());
         updatedRoom.setPricePerNight(room.getPricePerNight());
 
         roomService.update(updatedRoom);
