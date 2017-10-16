@@ -8,11 +8,12 @@ import ro.sci.hotel.model.event.Event;
 import ro.sci.hotel.model.event.EventRoom;
 
 /**
- * Booking repository interface for DAO
+ * Event repository interface for DAO
  */
 public interface EventRepository<T> {
     /**
      * read all the events from DB
+     *
      * @return List<T> events list
      */
     @Select("SELECT * FROM event")
@@ -24,30 +25,23 @@ public interface EventRepository<T> {
     void createEvent(Event event, EventRoom eventRoomId);
 
     /**
-     *  delete an event entry from DB
+     * delete an event entry from DB
+     *
      * @param t Event to be deleted
      */
     void delete(T t);
 
     /**
      * update an event in the DB
+     *
      * @param t Event to be updated
      */
     void update(T t);
 
     /**
      * search by event room name
-     * @param eventRoomName
+     *
      * @return List<T> searched events List
-     *     */
-    List<T> searchByEventRoomName(String eventRoomName);
-
-    /**
-     * search an event Room by date
-     * @param date search on a given date if the room is free or not
-     * @return true or false
      */
-    // void searchedByDate(Date date);
-
-
+    List<T> searchByEventRoomName(String eventRoomName);
 }

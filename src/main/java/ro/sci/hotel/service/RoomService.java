@@ -1,11 +1,11 @@
 package ro.sci.hotel.service;
 
+import java.util.List;
+
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
 import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.repository.RoomRepository;
-
-import java.util.List;
 
 /**
  * Room service interface for repository manipulation

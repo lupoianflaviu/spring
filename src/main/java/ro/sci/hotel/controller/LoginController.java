@@ -14,6 +14,9 @@ import ro.sci.hotel.repository.AddressRepository;
 import ro.sci.hotel.service.AddressService;
 import ro.sci.hotel.service.EmployeeService;
 
+/**
+ * Login controller
+ */
 @Controller
 public class LoginController {
     @Autowired
@@ -23,6 +26,10 @@ public class LoginController {
     @Autowired
     private AddressService<Address> addressService;
 
+    /**
+     * Login form
+     * @return new Login
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showLogin() {
         ModelAndView mav = new ModelAndView("login");
@@ -30,8 +37,11 @@ public class LoginController {
         return mav;
     }
 
-
-
+    /**
+     * Post request for user login
+     * @param login
+     * @return
+     */
     @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
     public ModelAndView loginProcess(@ModelAttribute("login") Login login) {
         ModelAndView mav = null;

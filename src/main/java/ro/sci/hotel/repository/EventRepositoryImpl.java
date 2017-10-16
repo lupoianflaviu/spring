@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import ro.sci.hotel.model.event.Event;
 import ro.sci.hotel.model.event.EventRoom;
+
 @Repository
 public class EventRepositoryImpl extends BaseRepository implements EventRepository {
 
@@ -26,14 +27,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
 
     private static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
 
-    private static final String SQL_INSERT_INTO_EVENT =
-            "INSERT INTO event(id,startdate,enddate,eventroomid) values(nextval('event_id_seq'),?,?,?)";
-
-    private static final String EVENT_DELETE_IS_COMPLETED = "Deletion of event completed";
-
-    private static final String SQL_UPDATE_EVENT_WHERE_ID = "UPDATE event " + "SET startdate=?, enddate=?, WHERE id = ?";
-
-    private static final String EVENT_UPDATE_IN_DB_IS_COMPLETED = "Event update in db has completed";
+    private static final String SQL_INSERT_INTO_EVENT = "INSERT INTO event(id,startdate,enddate,eventroomid) values(nextval('event_id_seq'),?,?,?)";
 
     private static final String SQL_SELECT_ALL__FROM_EVENTS = "SELECT * FROM event";
 
@@ -42,9 +36,6 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
     private static final String STARTDATE = "startdate";
 
     private static final String ENDDATE = "enddate";
-
-    private static final String SQL_DELETE_FROM_EVENT_WHERE_ID = "DELETE FROM event where id=?";
-
 
     @Override
     public List<Event> getAll() {
@@ -80,13 +71,12 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
     @Override
     public void createEvent(Event event, EventRoom eventRoom) {
         {
-            try (Connection conn = newConnection();
-                 PreparedStatement stm = conn.prepareStatement(SQL_INSERT_INTO_EVENT)) {
+            try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_INSERT_INTO_EVENT)) {
 
                 stm.setDate(1, event.getStartDate());
                 stm.setDate(2, event.getEndDate());
-              //  stm.setInt(3,event.getId());
-                stm.setInt(3, event.getEventRoomId().getId());
+                stm.setInt(3, event.getEventRoomId()
+                                   .getId());
                 stm.execute();
 
             } catch (SQLException ex) {
@@ -102,17 +92,19 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
 
     @Override
     public void delete(Object o) {
-
+        LOGGER.log(Level.INFO, "NOT Implemented");
     }
 
     @Override
     public void update(Object o) {
-
+        LOGGER.log(Level.INFO, "NOT Implemented");
     }
 
     @Override
     public List searchByEventRoomName(String eventRoomName) {
+        LOGGER.log(Level.INFO, "NOT Implemented");
+
         return null;
     }
 
-    }
+}

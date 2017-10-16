@@ -12,6 +12,7 @@ public class Price {
     @Id
     @GeneratedValue
     private int id;
+
     private double value = 0;
     private Currency currency;
 

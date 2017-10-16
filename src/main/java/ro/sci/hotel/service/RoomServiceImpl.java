@@ -2,12 +2,13 @@ package ro.sci.hotel.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
 import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.repository.RoomRepository;
-
-import java.util.List;
 
 /**
  * Room service implementation
@@ -26,8 +27,10 @@ public class RoomServiceImpl implements RoomService<Room> {
         List<Room> rooms = this.roomRepository.getAll();
 
         for (Room room : rooms) {
-            int priceId = room.getPricePerNight().getId();
-            Price resultPrice = priceService.searchById(room.getPricePerNight().getId());
+            int priceId = room.getPricePerNight()
+                              .getId();
+            Price resultPrice = priceService.searchById(room.getPricePerNight()
+                                                            .getId());
             room.setPricePerNight(resultPrice);
         }
 
@@ -52,7 +55,8 @@ public class RoomServiceImpl implements RoomService<Room> {
     @Override
     public Room searchByRoomNumber(Integer roomNumber) {
         Room room = this.roomRepository.searchByRoomNumber(roomNumber);
-        Price resultPrice = priceService.searchById(room.getPricePerNight().getId());
+        Price resultPrice = priceService.searchById(room.getPricePerNight()
+                                                        .getId());
         room.setPricePerNight(resultPrice);
 
         return room;

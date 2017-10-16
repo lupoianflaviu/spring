@@ -1,7 +1,7 @@
 package ro.sci.hotel.model.employee;
 
 /**
- * Created by tudorradovici on 14/09/17.
+ * Employee address blueprint
  */
 public class Address {
 
@@ -44,12 +44,8 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "employeeId=" + employeeId +
-                ", streetAddress='" + streetAddress + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                '}';
+        return "Address{" + "employeeId=" + employeeId + ", streetAddress='" + streetAddress + '\'' + ", city='" + city + '\'' + ", country='" + country + '\''
+                + '}';
     }
 
 }

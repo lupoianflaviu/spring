@@ -1,10 +1,10 @@
 package ro.sci.hotel.repository;
 
 
+import java.util.List;
+
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.customer.CustomerAddress;
-
-import java.util.List;
 
 /**
  * Customer repository interface for DAO
@@ -41,6 +41,7 @@ public interface CustomerRepository<T> {
 
     /**
      * Search customer by id
+     *
      * @param id searched
      * @return T searched customer
      */
@@ -48,6 +49,7 @@ public interface CustomerRepository<T> {
 
     /**
      * Search room by price
+     *
      * @param lastName searched
      * @return List<T> searched customer list
      */

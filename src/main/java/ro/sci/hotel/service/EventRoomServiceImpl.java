@@ -10,6 +10,9 @@ import ro.sci.hotel.model.event.EventRoom;
 import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.repository.EventRoomRepository;
 
+/**
+ * Implementation for EventRoomService
+ */
 @Service
 public class EventRoomServiceImpl implements EventRoomService {
     @Autowired
@@ -23,7 +26,8 @@ public class EventRoomServiceImpl implements EventRoomService {
 
         for (EventRoom eventRoom : eventRooms) {
 
-            int priceId = eventRoom.getPricePerDay().getId();
+            int priceId = eventRoom.getPricePerDay()
+                                   .getId();
 
             Price price = priceService.searchById(priceId);
 
@@ -63,10 +67,7 @@ public class EventRoomServiceImpl implements EventRoomService {
 
 
 
-
-
-
-             return eventRoom;
+            return eventRoom;
         }
     }
 

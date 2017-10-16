@@ -1,20 +1,20 @@
 package ro.sci.hotel.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import ro.sci.hotel.model.employee.Address;
 import ro.sci.hotel.model.employee.Employee;
 import ro.sci.hotel.model.employee.Login;
 import ro.sci.hotel.repository.EmployeeRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Implemeantation for EmployeeService
+ */
 @Service("employeeService")
-public class EmployeeServiceImpl implements EmployeeService<Employee>{
+public class EmployeeServiceImpl implements EmployeeService<Employee> {
 
     @Autowired
     private EmployeeRepository<Employee> employeeRepository;
@@ -84,6 +84,6 @@ public class EmployeeServiceImpl implements EmployeeService<Employee>{
 
     @Override
     public void setEmployeeRepository(EmployeeRepository<Employee> employeeRepository) {
-        this.employeeRepository =employeeRepository;
+        this.employeeRepository = employeeRepository;
     }
 }

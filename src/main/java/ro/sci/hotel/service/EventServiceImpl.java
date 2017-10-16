@@ -11,6 +11,9 @@ import ro.sci.hotel.model.event.EventRoom;
 import ro.sci.hotel.repository.EventRepository;
 import ro.sci.hotel.repository.EventRoomRepository;
 
+/**
+ * EventService implementation
+ */
 @Repository
 public class EventServiceImpl implements EventService {
 
@@ -27,21 +30,12 @@ public class EventServiceImpl implements EventService {
         {
             List<Event> events = this.eventRepository.getAll();
 
-//            for (Event event : events) {
-//
-//                int eventRoomId = event.getEventRoomId().getId();
-//
-//                EventRoom eventRoom = eventRoomService.searchByEventRoomId(eventRoomId);
-//
-//                event.setEventRoomId(eventRoom);
-//            }
-
             return events;
         }
     }
 
     @Override
-    public void createEvent(Event event,EventRoom eventRoomId) {
+    public void createEvent(Event event, EventRoom eventRoomId) {
         this.eventRepository.createEvent(event, eventRoomId);
 
     }
@@ -79,10 +73,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event searchById(Integer eventId) {
 
- //Event event= this.eventRoomService.searchByEventRoomId(eventId);
-
-
-
-        return   null;  }
+        return null;
     }
+}
 

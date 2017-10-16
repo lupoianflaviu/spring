@@ -42,7 +42,6 @@ public class EmployeeController {
     private AddressService<Address> addressService;
 
     //Create a new Employee
-
     @RequestMapping(value = "/employee/create/newemployee", method = RequestMethod.GET)
     public String bookingForm(Model model) {
         model.addAttribute("employee", new Employee());
@@ -62,14 +61,12 @@ public class EmployeeController {
     }
 
     //Show all employees
-
     @RequestMapping(value = "/employee", method = RequestMethod.GET)
     public ModelAndView showEmployees() {
         return new ModelAndView("employees", "employees", employeeService.getAll());
     }
 
     //Show an employee by a ID
-
     @RequestMapping(value = "/employee/search/{employeeId}", method = RequestMethod.GET)
     public ModelAndView showEmployeeById(@PathVariable("employeeId") Integer employeeId) {
 
@@ -79,7 +76,6 @@ public class EmployeeController {
     }
 
     //Show employees by First Name
-
     @RequestMapping(value = "/employee/search/firstname", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView employeesByFirstName(@RequestParam(value = "search", required = false, defaultValue = "0") String firstName) {
