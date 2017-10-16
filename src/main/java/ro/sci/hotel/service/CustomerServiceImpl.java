@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import ro.sci.hotel.model.customer.Customer;
+import ro.sci.hotel.model.customer.CustomerAddress;
 import ro.sci.hotel.repository.CustomerRepository;
 
 /**
@@ -23,7 +24,7 @@ public class CustomerServiceImpl implements CustomerService<Customer> {
     }
 
     @Override
-    public void create(Customer customer) {
+    public void create(Customer customer, CustomerAddress customerAddress) {
         this.customerRepository.create(customer);
     }
 

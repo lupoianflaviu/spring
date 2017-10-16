@@ -52,7 +52,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
     private static final String SQL_INSERT_INTO_ROOMS_ID_ROOMTYPE_BEDTYPE_BEDNUMBER_OCEANVIEW_AIRCONDITIONING_BALCONY_PRICEID_VALUES =
             "INSERT INTO room(id,roomtype,bedtype,bednumber,oceanview,airconditioning,balcony,priceid) values(?,?,?,?,?,?,?,?)";
 
-    private static final String SQL_DELETE_FROM_BOOKING_WHERE_ID = "DELETE FROM room where id=?";
+    private static final String SQL_DELETE_FROM_ROOM_WHERE_ID = "DELETE FROM room where id=?";
 
     private static final String ROOM_DELETE_HAS_COMPLETED = "Deletion of room completed";
 
@@ -123,7 +123,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
     @Override
     public void delete(Room room) {
         try (Connection conn = newConnection();
-             PreparedStatement stm = conn.prepareStatement(SQL_DELETE_FROM_BOOKING_WHERE_ID)) {
+             PreparedStatement stm = conn.prepareStatement(SQL_DELETE_FROM_ROOM_WHERE_ID)) {
 
             stm.setInt(1, room.getRoomNumber());
             stm.executeUpdate();

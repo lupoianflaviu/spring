@@ -1,14 +1,20 @@
 package ro.sci.hotel.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ro.sci.hotel.model.customer.Customer;
+import ro.sci.hotel.model.customer.CustomerAddress;
 import ro.sci.hotel.repository.CustomerRepository;
 import ro.sci.hotel.repository.CustomerRepositoryImpl;
 import ro.sci.hotel.service.CustomerService;
 import ro.sci.hotel.service.CustomerServiceImpl;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Controller for customer model
@@ -16,18 +22,85 @@ import ro.sci.hotel.service.CustomerServiceImpl;
 @Controller
 public class CustomerController {
 
+    private static final Logger LOGGER = Logger.getLogger("Hotel");
+
+    @Autowired
     private CustomerRepository<Customer> customerRepository;
+
+    @Autowired
     private CustomerService<Customer> customerService;
 
-    private void init() {
-        this.customerRepository = new CustomerRepositoryImpl();
-        this.customerService = new CustomerServiceImpl();
-        this.customerService.setCustomerRepository(customerRepository);
-    }
-
+    //show all customers
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public ModelAndView showCustomers() {
-        init();
+
+        return new ModelAndView("customers", "customers", customerService.getAll());
+    }
+
+    //show customer by id
+    @RequestMapping(value = "/customers/{id}", method = RequestMethod.GET)
+    public ModelAndView customerForm(@PathVariable("id") Integer id) {
+
+        Customer customer = customerService.searchByCustomerId(id);
+
+        return new ModelAndView("updatecustomer", "customer", customer);
+    }
+
+    //create new customer
+    @RequestMapping(value = "/customers/submit", method = RequestMethod.GET)
+    public String customerForm(Model model) {
+        model.addAttribute("customer", new Customer());
+        return "submitcustomer";
+    }
+
+    @RequestMapping(value = "/customers/submit", method = RequestMethod.POST)
+    public String createCustomer(@ModelAttribute Customer customer, @ModelAttribute CustomerAddress customerAddress, Model model) {
+
+        customerService.create(customer, customerAddress);
+        model.addAttribute("customer", customer);
+
+        return "resultscustomer";
+    }
+
+    //delete a customer
+    @RequestMapping(value = "/customers/delete/{id}", method = RequestMethod.GET)
+    public String deleteCustomerForm(@PathVariable("id") Integer id, Model model) {
+
+        Customer currentCustomer = customerService.searchByCustomerId(id);
+        model.addAttribute("customer", currentCustomer);
+
+        return "deletecustomer";
+    }
+
+    @RequestMapping(value = "/customers/delete/{id}", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public ModelAndView deleteCustomer(@PathVariable("id") Integer id, Model model) {
+
+        LOGGER.log(Level.INFO, "Deleting customer with id " + id);
+
+        Customer customer = customerService.searchByCustomerId(id);
+        customerService.delete(customer);
+
+        model.addAttribute("customer", customer);
+
+        return new ModelAndView("customers", "customers", customerService.getAll());
+    }
+
+    //update a customer
+    @RequestMapping(value = "/customers/{id}", method = RequestMethod.POST)
+    public ModelAndView updateCustomer(@PathVariable("id") Integer id, @ModelAttribute Customer customer) {
+
+        LOGGER.log(Level.INFO, "Updating customer");
+        Customer updatedCustomer = customerService.searchByCustomerId(id);
+
+        updatedCustomer.setFirstName(customer.getFirstName());
+        updatedCustomer.setLastName(customer.getLastName());
+        updatedCustomer.setEmail(customer.getEmail());
+        updatedCustomer.setPhoneNumber(customer.getPhoneNumber());
+        updatedCustomer.setCustomerAddress(customer.getCustomerAddress());
+        updatedCustomer.setPaymentMethod(customer.getPaymentMethod());
+
+        customerService.update(updatedCustomer);
 
         return new ModelAndView("customers", "customers", customerService.getAll());
     }

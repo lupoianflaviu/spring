@@ -9,22 +9,18 @@ import javax.persistence.Id;
  */
 @Entity
 public class CustomerAddress {
-
-    public CustomerAddress(String city) {
-        this.city = city;
-    }
-
-    public CustomerAddress(String streetAddress, String city, String country) {
-        this.streetAddress = streetAddress;
-        this.city = city;
-        this.country = country;
-    }
     @Id
     @GeneratedValue
     private int id;
     private String streetAddress;
     private String city;
     private String country;
+
+    public CustomerAddress(String streetAddress, String city, String country) {
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.country = country;
+    }
 
     public String getStreetAddress() {
         return streetAddress;
