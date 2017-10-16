@@ -66,7 +66,7 @@ public class EmployeeController {
     @RequestMapping(value = "/employee/search/{employeeId}", method = RequestMethod.GET)
     public ModelAndView showEmployeeById(@PathVariable("employeeId") Integer employeeId) {
 
-        return new ModelAndView("viewEmployee", "employees", employeeService.searchByEmployeeId(employeeId));
+        return new ModelAndView("updateemployee", "employees", employeeService.searchByEmployeeId(employeeId));
     }
 
     //Show employees by First Name
@@ -80,7 +80,7 @@ public class EmployeeController {
     }
 
     //Update an employee
-    @RequestMapping(value = "employee/update/{employeeId}", method = RequestMethod.POST)
+    @RequestMapping(value = "employee/search/{employeeId}", method = RequestMethod.POST)
     public ModelAndView updateEmployee(@PathVariable("employeeId") Integer employeeId, @ModelAttribute Employee employee){
         Employee updateEmployee=employeeService.searchByEmployeeId(employeeId);
 
@@ -89,6 +89,6 @@ public class EmployeeController {
         updateEmployee.setLastName(employee.getLastName());
         updateEmployee.setLastName(employee.getLastName());
 
-        return new ModelAndView("updateEmployee","employee",employee);
+        return new ModelAndView("updateemployee","employee",employee);
     }
 }
