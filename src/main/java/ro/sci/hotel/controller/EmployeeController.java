@@ -80,7 +80,7 @@ public class EmployeeController {
     }
 
     //Update an employee
-    @RequestMapping(value = "employee/search/{employeeId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/employee/search/{employeeId}", method = RequestMethod.POST)
     public ModelAndView updateEmployee(@PathVariable("employeeId") Integer employeeId, @ModelAttribute Employee employee){
         Employee updateEmployee=employeeService.searchByEmployeeId(employeeId);
 

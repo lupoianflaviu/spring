@@ -35,8 +35,8 @@
         <td th:text="${employee.employmentDate}">...</td>
         <!--<td th:text="${employee.price}">...</td>-->
         <td th:text="${employee.employeeRole}">...</td>
-        <td><a th:href="@{employee/update/{employeeId}(employeeId=${employee.employeeId})}">Update</a></td>
-        <td><a th:href="@{employee/delete/{employeeId}(employeeId=${employee.employeeId})}">Delete</a></td>
+        <td><a th:href="@{employee/search/{employeeId}(employeeId=${employee.employeeId})}">Update</a></td>
+        <td><a th:href="@{employee/search/{employeeId}(employeeId=${employee.employeeId})}">Delete</a></td>
         </tr>
         </th:block>
         </tbody>
