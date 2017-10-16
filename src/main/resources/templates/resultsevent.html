@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Submision Event</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Event Room Id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${event.startdate}">...</td>
+        <td th:text="${event.enddate}">...</td>
+        <td th:text="${event.eventRoomId}">...</td>
+    </tr>
+    </tbody>
+</table>
+<a href="/events/submit">Submit another event</a>
+
+</body>
+</html>

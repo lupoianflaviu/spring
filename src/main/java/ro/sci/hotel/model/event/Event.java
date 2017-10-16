@@ -1,31 +1,30 @@
 package ro.sci.hotel.model.event;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class Event {
     private int id;
-
-
     private Date startdate;
     private Date enddate;
-    private double totalPrice;
-    private EventRoom eventRoom;
+   // private double totalPrice;
+    private EventRoom eventRoomId;
 
-    public EventRoom getEventRoom() {
-        return eventRoom;
+    public EventRoom getEventRoomId() {
+        return eventRoomId;
     }
 
-    public void setEventRoom(EventRoom eventRoom) {
-        this.eventRoom = eventRoom;
+    public void setEventRoomId(EventRoom eventRoomId) {
+        this.eventRoomId = eventRoomId;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+//    public double getTotalPrice() {
+//        return totalPrice;
+//    }
+//
+//    public void setTotalPrice(double totalPrice) {
+//        this.totalPrice = totalPrice;
+//    }
 
     public Date getStartdate() {
         return startdate;
@@ -43,8 +42,12 @@ public class Event {
         this.enddate = enddate;
     }
 
-    public int getId() {  return id;    }
+    public int getId() {
+        return id;
+    }
 
-    public void setId(int id) { this.id = id;    }
+    public void setId(int id) {
+        this.id = id;
+    }
 
 }

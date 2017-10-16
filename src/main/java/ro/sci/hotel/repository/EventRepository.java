@@ -48,7 +48,7 @@ public interface EventRepository<T> {
      * @param date search on a given date if the room is free or not
      * @return true or false
      */
-     void searchedByDate(Date date);
+    // void searchedByDate(Date date);
 
 
 }

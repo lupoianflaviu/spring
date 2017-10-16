@@ -2,6 +2,8 @@ package ro.sci.hotel.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,4 +32,20 @@ public class EventController {
 
         return new ModelAndView("events", "events", eventService.getAll());
     }
+    // ------------------- Submit New Events ------------------------------------------------
+    @RequestMapping(value = "/events/submit", method = RequestMethod.GET)
+    public String bookingForm(Model model) {
+        model.addAttribute("event", new Event());
+        return "submitevent";
+    }
+    @RequestMapping(value = "/events/submit", method = RequestMethod.POST)
+    public String createEventRoom(@ModelAttribute Event event, Model model) {
+
+        eventService.createEvent(event);
+        model.addAttribute("event",event);
+
+        return "resultsevent";
+    }
+
+
 }
