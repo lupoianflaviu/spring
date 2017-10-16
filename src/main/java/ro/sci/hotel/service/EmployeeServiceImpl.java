@@ -29,7 +29,6 @@ public class EmployeeServiceImpl implements EmployeeService<Employee>{
 
         for (Employee employee : employees) {
 
-
             Address address = addressService.searchByEmployeeId(employee.getEmployeeId());
             employee.setEmployeeAddress(address);
         }
@@ -48,6 +47,14 @@ public class EmployeeServiceImpl implements EmployeeService<Employee>{
 
     @Override
     public void update(Employee employee) {
+        List<Employee> employees = this.employeeRepository.getAll();
+
+        for (Employee savedEmployees : employees) {
+
+
+            Address address = addressService.searchByEmployeeId(savedEmployees.getEmployeeId());
+            employee.setEmployeeAddress(address);
+        }
         this.employeeRepository.update(employee);
     }
 

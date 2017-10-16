@@ -5,56 +5,41 @@
     <title>Title</title>
 </head>
 <body>
-    <table>
-        <p th:text="'ID '
-        + 'firstName '
-        + 'lastName '
-        + 'email '
-        + 'employeeAddress '
-        + 'employeePhoneNumber '
-        + 'employmentDate '
-        + 'Price '
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        + 'employeeRole '"/>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Employee Id</th>
+            <th>First Name </th>
+            <th>Last Name </th>
+            <th>Email </th>
+            <th>Street</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Phone Number </th>
+            <th>Hire Date </th>
+            <!--<th>Salary</th>-->
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
         <th:block th:each="employee : ${employees}">
-            <tr>
-                <td th:text="${employee.employeeId}">...</td>
-                <td th:text="${employee.firstName}">...</td>
-                <td th:text="${employee.lastName}">...</td>
-                <td th:text="${employee.email}">...</td>
-                <td th:text="${employee.employeeAddress.streetAddress}">...</td>
-                <td th:text="${employee.employeeAddress.city}">...</td>
-                <td th:text="${employee.employeeAddress.country}">...</td>
-                <td th:text="${employee.employeePhoneNumber}">...</td>
-                <td th:text="${employee.employmentDate}">...</td>
-                <!--<td th:text="${employee.price}">...</td>-->
-                <td th:text="${employee.employeeRole}">...</td>
-            </tr>
+        <tr>
+        <td th:text="${employee.employeeId}">...</td>
+        <td th:text="${employee.firstName}">...</td>
+        <td th:text="${employee.lastName}">...</td>
+        <td th:text="${employee.email}">...</td>
+        <td th:text="${employee.employeeAddress.streetAddress}">...</td>
+        <td th:text="${employee.employeeAddress.city}">...</td>
+        <td th:text="${employee.employeeAddress.country}">...</td>
+        <td th:text="${employee.employeePhoneNumber}">...</td>
+        <td th:text="${employee.employmentDate}">...</td>
+        <!--<td th:text="${employee.price}">...</td>-->
+        <td th:text="${employee.employeeRole}">...</td>
+        <td><a th:href="@{employee/update/{employeeId}(employeeId=${employee.employeeId})}">Update</a></td>
+        <td><a th:href="@{employee/delete/{employeeId}(employeeId=${employee.employeeId})}">Delete</a></td>
+        </tr>
         </th:block>
+        </tbody>
     </table>
 <div class="btn - group">
     <button type="button" class="btn btn-success">Create Employee</button>

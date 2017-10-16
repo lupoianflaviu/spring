@@ -35,6 +35,7 @@ public class EmployeeController {
     private AddressService<Address> addressService;
 
     //Create a new Employee
+
     @RequestMapping(value = "/employee/create/newemployee", method = RequestMethod.GET)
     public String bookingForm(Model model) {
         model.addAttribute("employee", new Employee());
@@ -76,5 +77,18 @@ public class EmployeeController {
         List<Employee>employees = employeeService.searchByFirstName(firstName);
         return new ModelAndView("viewEmployeeByFirstName", "search", employees);
 
+    }
+
+    //Update an employee
+    @RequestMapping(value = "employee/update/{employeeId}", method = RequestMethod.POST)
+    public ModelAndView updateEmployee(@PathVariable("employeeId") Integer employeeId, @ModelAttribute Employee employee){
+        Employee updateEmployee=employeeService.searchByEmployeeId(employeeId);
+
+        updateEmployee.setEmployeeId(employee.getEmployeeId());
+        updateEmployee.setFirstName(employee.getFirstName());
+        updateEmployee.setLastName(employee.getLastName());
+        updateEmployee.setLastName(employee.getLastName());
+
+        return new ModelAndView("updateEmployee","employee",employee);
     }
 }
