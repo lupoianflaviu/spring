@@ -22,7 +22,7 @@ public class AddressRepositoryImpl extends BaseRepository  implements AddressRep
     private static final String WRITING_DB_FINISHED="Writing in db has finished!";
 
     private static final String SQL_SELECT_ALL_FROM_ADDRESS="SELECT employee_id, street_address, city, country FROM employee_address";
-    private static final String SQL_INSERT_ADDRESS="INSERT INTO EMPLOYEE(employee_id, street_address, city, country) VALUES (?,?,?,?)";
+    private static final String SQL_INSERT_ADDRESS="INSERT INTO employee_address(employee_id, street_address, city, country) VALUES (?,?,?,?)";
     private static final String ID="employee_id";
     private static final String STREET_ADDRESS="street_address";
     private static final String CITY="city";
@@ -61,7 +61,7 @@ public class AddressRepositoryImpl extends BaseRepository  implements AddressRep
 
             conn.setAutoCommit(false);
 
-            stm.setInt(1,address.getEmployeeId());
+            stm.setInt(1,   address.getEmployeeId());
             stm.setString(2,address.getStreetAddress());
             stm.setString(3,address.getCity());
             stm.setString(4,address.getCountry());
