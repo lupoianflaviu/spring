@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Customer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>HOTEL MANAGEMENT</h1>
+<h2>UPDATE CUSTOMER</h2>
+<p> INFO: Only fields marked with * can be updated</p>
+<form action="#" th:action="@{/customers/{id}(id=${customer.id})}" method="post" id="formupdate">
+    <p>ID: <input type="text" th:field="*{customer.id}" disabled="disabled"/></p>
+    <p>First Name*: <input type="text" th:field="*{customer.firstName}"/></p>
+    <p>Last Name*: <input type="text" th:field="*{customer.lastName}"/></p>
+    <p>Email*: <input type="text" th:field="*{customer.email}"/></p>
+    <p>Phone Number*: <input type="text" th:field="*{customer.phoneNumber}"/></p>
+    <p>Street Address*: <input type="text" th:field="*{customer.customerAddress.streetAddress}"/></p>
+    <p>City*: <input type="text" th:field="*{customer.customerAddress.city}"/></p>
+    <p>Country*: <input type="text" th:field="*{customer.customerAddress.country}"/></p>
+    <p>Payment Method*: <input type="number" th:field="*{customer.paymentMethod}"/></p>
+    <p><input type="submit" value="Update"/> <input type="reset" value="Reset"/></p>
+</form>
+<div class="btn-group">
+    <a href="/customers" class="btn btn-info" role="button">View All</a>
+</div>
+</body>
+</html>

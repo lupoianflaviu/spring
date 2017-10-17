@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Result</h1>
+<p th:text="'customer id: ' + ${customer.id}"/>
+<p th:text="'first name: ' + ${customer.firstName}"/>
+<p th:text="'last name: ' + ${customer.lastName}"/>
+<p th:text="'email: ' + ${customer.email}"/>
+<p th:text="'phone number: ' + ${customer.phoneNumber}"/>
+<p th:text="'street address: ' + ${customer.customerAddress.streetAddress}"/>
+<p th:text="'city: ' + ${customer.customerAddress.city}"/>
+<p th:text="'country: ' + ${customer.customerAddress.country}"/>
+<p th:text="'payment method: ' + ${customer.paymentMethod}"/>
+<a href="/submit">Submit another customer</a>
+</body>
+</html>

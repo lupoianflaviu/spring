@@ -29,18 +29,9 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
 
     private static final Logger LOGGER = Logger.getLogger("Hotel");
 
-    //    private static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
-    //
-    //    private static final String SQL_INSERT_INTO_BOOKING_ROOMNUMBER_CUSTOMERID_STARTDATE_ENDDATE_VALUES =
-    //            "INSERT INTO booking(roomnumber,customerid,startdate,enddate) values(?,?,?,?)";
-    //
-    //    private static final String BOOKING_DELETE_HAS_COMPLETED = "Deletion of booking completed";
-    //
-    //    private static final String SQL_UPDATE_BOOKING_WHERE_ID = "UPDATE booking " + "SET roomnumber=?, customerid=?, startdate=?, enddate=? WHERE id = ?";
-    //
-    //    private static final String BOOKING_UPDATE_IN_DB_HAS_COMPLETED = "Booking update in db has completed";
+    private static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
 
-    private static final String SQL_SELECT_ALL__FROM_CUSTOMERS = "SELECT * FROM customers";
+    private static final String SQL_SELECT_ALL__FROM_CUSTOMERS = "SELECT * FROM customer";
 
     private static final String ID = "id";
 
@@ -60,7 +51,16 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
 
     private static final String PAYMENTMETHOD = "paymentmethod";
 
-    //    private static final String SQL_DELETE_FROM_BOOKING_WHERE_ID = "DELETE FROM booking where id=?";
+    private static final String SQL_INSERT_INTO_CUSTOMER_ID_FIRSTNAME_LASTNAME_EMAIL_PHONENUMBER_STREETADDRESS_CITY_COUNTRY_PAYMENTMETHOD_VALUES =
+            "INSERT INTO customer(id,firstname,lastname,email,phonenumber,streetaddress,city,country,paymentmethod) values(?,?,?,?,?,?,?,?,?)";
+
+    private static final String SQL_DELETE_FROM_CUSTOMER_WHERE_ID = "DELETE FROM customer where id=?";
+
+    private static final String CUSTOMER_DELETE_HAS_COMPLETED = "Deletion of customer completed";
+
+    private static final String SQL_UPDATE_CUSTOMER_WHERE_ID = "UPDATE customer " + "SET firstname=?, lastname=?, email=?, oceanview=?, phonenumber=?, streetaddress=?, city=?, country=?, paymentmethod=? WHERE id = ?";
+
+    private static final String CUSTOMER_UPDATE_IN_DB_HAS_COMPLETED = "Customer update in db has completed";
 
     @Override
     public List<Customer> getAll() {
@@ -93,15 +93,67 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
     @Override
     public void create(Customer customer) {
 
+        try (Connection conn = newConnection();
+             PreparedStatement stm = conn.prepareStatement(SQL_INSERT_INTO_CUSTOMER_ID_FIRSTNAME_LASTNAME_EMAIL_PHONENUMBER_STREETADDRESS_CITY_COUNTRY_PAYMENTMETHOD_VALUES)) {
+
+
+            stm.setInt(1, customer.getId());
+            stm.setString(2, customer.getFirstName());
+            stm.setString(3, customer.getLastName());
+            stm.setString(4, customer.getEmail());
+            stm.setString(5, customer.getPhoneNumber());
+            stm.setString(6, String.valueOf(new CustomerAddress(STREETADDRESS, CITY, COUNTRY)));
+            stm.setString(7, String.valueOf(customer.getPaymentMethod()));
+
+
+            stm.execute();
+
+        } catch (SQLException ex) {
+            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+            throw new RuntimeException(EXCEPTION_THROWN);
+        }
+
+        LOGGER.log(Level.INFO, WRITING_IN_DB_HAS_FINISHED);
     }
 
     @Override
     public void delete(Customer customer) {
 
+        try (Connection conn = newConnection();
+             PreparedStatement stm = conn.prepareStatement(SQL_DELETE_FROM_CUSTOMER_WHERE_ID)) {
+
+            stm.setInt(1, customer.getId());
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+            throw new RuntimeException(EXCEPTION_THROWN);
+        }
+
+        LOGGER.log(Level.INFO, CUSTOMER_DELETE_HAS_COMPLETED);
     }
 
     @Override
     public void update(Customer customer) {
+        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_UPDATE_CUSTOMER_WHERE_ID)) {
+
+            stm.setString(1, customer.getFirstName());
+            stm.setString(2, customer.getLastName());
+            stm.setString(3, customer.getEmail());
+            stm.setString(4, customer.getPhoneNumber());
+            stm.setString(5, String.valueOf(customer.getCustomerAddress()));
+            stm.setString(6, String.valueOf(customer.getPaymentMethod()));
+
+            stm.setInt(8, customer.getId());
+
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+            throw new RuntimeException(EXCEPTION_THROWN);
+        }
+
+        LOGGER.log(Level.INFO, CUSTOMER_UPDATE_IN_DB_HAS_COMPLETED);
 
     }
 

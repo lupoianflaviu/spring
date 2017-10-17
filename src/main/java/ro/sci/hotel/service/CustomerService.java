@@ -2,6 +2,8 @@ package ro.sci.hotel.service;
 
 import java.util.List;
 
+import ro.sci.hotel.model.customer.Customer;
+import ro.sci.hotel.model.customer.CustomerAddress;
 import ro.sci.hotel.repository.CustomerRepository;
 
 /**
@@ -19,9 +21,8 @@ public interface CustomerService<T> {
     /**
      * Create a customer
      *
-     * @param t new customer
      */
-    void create(T t);
+    void create(Customer customer, CustomerAddress customerAddress);
 
     /**
      * Detele a customer entry from db
