@@ -1,16 +1,16 @@
 package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
-import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.event.Event;
 import ro.sci.hotel.model.event.EventRoom;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +27,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
     private static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
 
     private static final String SQL_INSERT_INTO_EVENT =
-            "INSERT INTO eventroom(id,startdate,enddate,eventroomid) values(?,?,?,?)";
+            "INSERT INTO event(startdate,enddate,eventroomid) values(?,?,?)";
 
     private static final String EVENT_DELETE_IS_COMPLETED = "Deletion of event completed";
 
@@ -62,7 +62,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
                     event.setStartdate(rs.getDate(STARTDATE));
                     event.setEnddate(rs.getDate(ENDDATE));
                     room.setId(rs.getInt("eventroomid"));
-                    event.setEventRoom(room);
+                    event.setEventRoomId(room);
 
                     events.add(event);
                 }
@@ -79,6 +79,25 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
 
     @Override
     public void createEvent(Event event) {
+        {
+            try (Connection conn = newConnection();
+                 PreparedStatement stm = conn.prepareStatement(SQL_INSERT_INTO_EVENT)) {
+
+
+                stm.setDate(1, event.getStartdate());
+                stm.setDate(2, event.getEnddate());
+              //  stm.setInt(3,event.getId());
+                stm.setInt(3, event.getEventRoomId().getId());
+                stm.execute();
+
+            } catch (SQLException ex) {
+                LOGGER.log(Level.WARNING, DATABASE_ERROR);
+                throw new RuntimeException(EXCEPTION_THROWN);
+            }
+
+            LOGGER.log(Level.INFO, WRITING_IN_DB_HAS_FINISHED);
+
+        }
 
     }
 
@@ -97,8 +116,4 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
         return null;
     }
 
-    @Override
-    public void searchedByDate(Date date) {
-
     }
-}

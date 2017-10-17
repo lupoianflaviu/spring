@@ -25,11 +25,11 @@ public class EventServiceImpl implements EventService {
 
 //            for (Event event : events) {
 //
-//                int eventRoomId = event.getEventRoom().getId();
+//                int eventRoomId = event.getEventRoomId().getId();
 //
 //                EventRoom eventRoom = eventRoomService.searchByEventRoomId(eventRoomId);
 //
-//                event.setEventRoom(eventRoom);
+//                event.setEventRoomId(eventRoom);
 //            }
 
             return events;
@@ -37,7 +37,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void createEvent(Event event) {
+    public void createEvent(Event event) {   this.eventRepository.createEvent(event);
 
     }
 
@@ -72,7 +72,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Object searchById(Integer eventId) {
-        return null;
+    public Event searchById(Integer eventId) { return null;    }
     }
-}
+

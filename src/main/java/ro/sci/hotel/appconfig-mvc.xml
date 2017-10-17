@@ -18,6 +18,7 @@
                 <bean class="ro.sci.hotel.convertor.StringToRoomConverter"/>
                 <bean class="ro.sci.hotel.convertor.StringToPriceConverter"/>
                 <bean class="ro.sci.hotel.convertor.StringToBookingConverter"/>
+                <bean class="ro.sci.hotel.convertor.StringToEventRoomConverter"/>
             </list>
         </property>
     </bean>
