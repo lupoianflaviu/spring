@@ -9,8 +9,8 @@
 <h1>HOTEL MANAGEMENT</h1>
 <h2>Create New Event</h2>
 <form action="#" th:action="@{/events/submit}" method="post">
-    <p>Event Start Date: <input type="text" th:field="*{event.startdate}" /></p>
-    <p>Event End Date: <input type="text" th:field="*{event.enddate}" /></p>
+    <p>Event Start Date: <input type="text" th:field="*{event.startDate}" /></p>
+    <p>Event End Date: <input type="text" th:field="*{event.endDate}" /></p>
     <p>Event Room Id: <input type="text" th:field="*{event.eventRoomId}" /></p>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>

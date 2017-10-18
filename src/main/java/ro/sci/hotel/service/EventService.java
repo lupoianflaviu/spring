@@ -1,11 +1,10 @@
 package ro.sci.hotel.service;
 
-import ro.sci.hotel.model.customer.Customer;
+import java.sql.Date;
+import java.util.List;
+
 import ro.sci.hotel.model.event.Event;
 import ro.sci.hotel.model.event.EventRoom;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Service interface for Event Repository manipulation

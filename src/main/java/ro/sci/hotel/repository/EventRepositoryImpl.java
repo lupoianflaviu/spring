@@ -1,8 +1,6 @@
 package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
-import ro.sci.hotel.model.event.Event;
-import ro.sci.hotel.model.event.EventRoom;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,10 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import ro.sci.hotel.model.event.Event;
+import ro.sci.hotel.model.event.EventRoom;
 @Repository
 public class EventRepositoryImpl extends BaseRepository implements EventRepository {
 
@@ -86,7 +86,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
                 stm.setDate(1, event.getStartdate());
                 stm.setDate(2, event.getEnddate());
               //  stm.setInt(3,event.getId());
-                stm.setInt(3, event.getEventRoomId().getId());
+                stm.setInt(3, eventRoom.getId());
                 stm.execute();
 
             } catch (SQLException ex) {

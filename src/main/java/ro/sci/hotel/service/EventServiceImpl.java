@@ -2,13 +2,13 @@ package ro.sci.hotel.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ro.sci.hotel.model.customer.Customer;
+
+import java.sql.Date;
+import java.util.List;
+
 import ro.sci.hotel.model.event.Event;
 import ro.sci.hotel.model.event.EventRoom;
 import ro.sci.hotel.repository.EventRepository;
-
-import java.util.Date;
-import java.util.List;
 
 @Repository
 public class EventServiceImpl implements EventService {
