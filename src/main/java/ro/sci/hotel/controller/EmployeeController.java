@@ -39,7 +39,7 @@ public class EmployeeController {
     @RequestMapping(value = "/employee/create/newemployee", method = RequestMethod.GET)
     public String bookingForm(Model model) {
         model.addAttribute("employee", new Employee());
-        model.addAttribute("address",new Address());
+        model.addAttribute("address", new Address());
         return "newemployee";
     }
 
@@ -91,4 +91,12 @@ public class EmployeeController {
 
         return new ModelAndView("updateemployee","employee",employee);
     }
+
+//    //Delete Employee
+//    @RequestMapping(value = "/employees/delete/{employeeId}",method = RequestMethod.GET)
+//    public String deleteEmployee(@PathVariable("employeeId")Integer employeeId, Model model){
+//
+//        return new ModelAndView();
+//
+//    }
 }
