@@ -1,17 +1,28 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Update Employee</title>
+    <title>Update Booking</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 <h1>HOTEL MANAGEMENT</h1>
-<h2>UPDATE EMPLOYEE</h2>
+<h2>UPDATE Employee</h2>
 <p> INFO: Only fields marked with * can be updated</p>
-<form action="#" th:action="@{/employees/{id}(id=${employee.employeeId})}" method="post" id="formupdate">
+<div class="btn-group">
+    <a href="/home" class="btn btn-info" role="button">HOME</a>
+</div>
+<form action="#" th:action="@{/employee/search/{employeeId}(employeeId=${employee.employeeId})}" method="post" id="formupdate">
     <p>Employee Id: <input type="number" th:field="*{employee.employeeId}" disabled="disabled"/></p>
-    <p>First Name*: <input type="text" th:field="*{employee.firstName}" /></p>
-    <p>Last Name*: <input type="text" th:field="*{employee.lastName}" /></p>
+    <p>Email*: <input type="email" th:field="*{employee.email}" /></p>
+    <p>Username: <input type="text" th:field="*{employee.username}" disabled="disabled"/></p>
+    <p>Password: <input type="text" th:field="*{employee.password}" disabled="disabled"/></p>
+    <p>Phone Number: <input type="text" th:field="*{employee.password}" disabled="disabled"/></p>
+    <p>Employment Date: <input type="date" th:field="*{employee.employmentDate}" disabled="disabled"/></p>
+    <p>Employment Role: <input type="text" th:field="*{employee.employeeRole}" disabled="disabled"/></p>
+    <h2>Employee Address</h2>
+    <p>Street <input type="text" th:field="*{address.streetAddress}"/></p>
+    <p>City <input type="text" th:field="*{address.city}"/></p>
+    <p>Country <input type="text" th:field="*{address.country}"/></p>
     <p><input type="submit" value="Update" /> <input type="reset" value="Reset" /></p>
 </form>
 </body>

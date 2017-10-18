@@ -8,6 +8,9 @@
 <body>
 <h1>HOTEL MANAGEMENT</h1>
 <h2>Create New Event</h2>
+<div class="btn-group">
+    <a href="/home" class="btn btn-info" role="button">HOME</a>
+</div>
 <form action="#" th:action="@{/events/submit}" method="post">
     <p>Event Start Date: <input type="text" th:field="*{event.startDate}" /></p>
     <p>Event End Date: <input type="text" th:field="*{event.endDate}" /></p>

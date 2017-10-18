@@ -6,6 +6,9 @@
 </head>
 <body>
 <h1>Employee Form</h1>
+<div class="btn-group">
+    <a href="/home" class="btn btn-info" role="button">HOME</a>
+</div>
 <form action="#" th:action="@{/employee/create/newemployee}" method="post">
     <p>ID <input type="number" th:field="*{employee.employeeId}" /></p>
     <p>First Name: <input type="text" th:field="*{employee.firstName}" /></p>
