@@ -39,8 +39,9 @@ public class EventController {
         model.addAttribute("event", new Event());
         return "submitevent";
     }
+
     @RequestMapping(value = "/events/submit", method = RequestMethod.POST)
-    public String createEventRoom(@ModelAttribute Event event, @ModelAttribute EventRoom eventRoom, Model model) {
+    public String createEventRoom(@ModelAttribute Event event, @ModelAttribute EventRoom eventRoom , Model model) {
 
         eventService.createEvent(event,eventRoom);
         model.addAttribute("event",event);

@@ -41,7 +41,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void createEvent(Event event,EventRoom eventRoom) {   this.eventRepository.createEvent(event,eventRoom);
+    public void createEvent(Event event,EventRoom eventRoom) {
+        this.eventRepository.createEvent(event,eventRoom);
 
     }
 

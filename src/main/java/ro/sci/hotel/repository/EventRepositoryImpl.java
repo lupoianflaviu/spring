@@ -27,7 +27,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
     private static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
 
     private static final String SQL_INSERT_INTO_EVENT =
-            "INSERT INTO event(startdate,enddate,eventroomid) values(?,?,?)";
+            "INSERT INTO event(id,startdate,enddate,eventroomid) values(nextval('event_id_seq'),?,?,?)";
 
     private static final String EVENT_DELETE_IS_COMPLETED = "Deletion of event completed";
 

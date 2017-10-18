@@ -115,7 +115,9 @@ public class EventRoomRepositoryImpl extends BaseRepository implements EventRoom
     @Override
     public Object searchByEventRoomId(Integer eventRoomId) {
         {
-            Event event = new Event();
+
+            EventRoom eventRoom = null;
+            //Event event = new Event();
 
             try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement("SELECT * FROM eventroom WHERE id=?")) {
 
@@ -125,9 +127,9 @@ public class EventRoomRepositoryImpl extends BaseRepository implements EventRoom
 
                 while (rs.next()) {
 
-                    EventRoom room = new EventRoom();
+                     eventRoom = new EventRoom();
 
-                    room.setId(rs.getInt("id"));
+                    eventRoom.setId(rs.getInt("id"));
                    // room.setRoomName(rs.getString("roomname"));
 
                                    }
@@ -138,7 +140,8 @@ public class EventRoomRepositoryImpl extends BaseRepository implements EventRoom
             }
 
 
-            return event;
+            //return event;
+            return eventRoom;
         }
     }
 }
