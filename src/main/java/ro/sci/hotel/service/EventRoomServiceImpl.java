@@ -56,18 +56,17 @@ public class EventRoomServiceImpl implements EventRoomService {
     }
 
     @Override
-    public EventRoom searchByEventRoomId(Integer eventRoomId) {
+    public Integer searchByEventRoomId(Integer eventRoomId) {
         {
 
             EventRoom eventRoom = this.eventRoomRepository.searchByEventRoomId(eventRoomId);
 
 
-
-            int evenRoomId = eventRoom.getId();
-
+         int eventRoomId1 = eventRoom.getId();
 
 
-             return eventRoom;
+
+             return eventRoomId1;
         }
     }
 

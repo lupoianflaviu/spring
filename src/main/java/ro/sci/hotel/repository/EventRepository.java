@@ -41,7 +41,7 @@ public interface EventRepository<T> {
      * @param eventRoomName
      * @return List<T> searched events List
      *     */
-    List<T> serachByEventRoomName(String eventRoomName);
+    List<T> searchByEventRoomName(String eventRoomName);
 
     /**
      * search an event Room by date

@@ -5,8 +5,8 @@ import java.sql.Date;
 
 public class Event {
     private int id;
-    private Date startdate;
-    private Date enddate;
+    private Date startDate;
+    private Date endDate;
    // private double totalPrice;
     private EventRoom eventRoomId;
 
@@ -31,26 +31,26 @@ public class Event {
     public String toString() {
         return "Event{" +
                 "id=" + id +
-                ", startdate=" + startdate +
-                ", enddate=" + enddate +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
                 ", eventRoomId=" + eventRoomId +
                 '}';
     }
 
-    public Date getStartdate() {
-        return startdate;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStartdate(Date startdate) {
-        this.startdate = startdate;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getEnddate() {
-        return enddate;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnddate(Date enddate) {
-        this.enddate = enddate;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public int getId() {

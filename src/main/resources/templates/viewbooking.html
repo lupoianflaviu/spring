@@ -9,7 +9,7 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <table>
-    <p th:text="'ID ' + ${booking.id} + ' Customer ' + ${booking.customer} + ' Room ' + ${booking.room} + ' StartDate ' + ${booking.startdate} + ' EndDate ' + ${booking.enddate}"/>
+    <p th:text="'ID ' + ${booking.id} + ' Customer ' + ${booking.customer} + ' Room ' + ${booking.room} + ' StartDate ' + ${booking.startDate} + ' EndDate ' + ${booking.endDate}"/>
 
     <th:block th:each="booking : ${bookings}">
         <tr>

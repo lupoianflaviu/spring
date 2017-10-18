@@ -10,11 +10,12 @@ import ro.sci.hotel.service.EventService;
 
 @Configuration
 public class StringToEventRoomConverter implements Converter<String,EventRoom> {
+
     @Autowired
-    public EventService<EventRoom> eventRoomService;
+    public EventRoomService<EventRoom>eventRoomService;
 
     @Override
     public EventRoom convert(String id) {
-        return eventRoomService.searchById(Integer.valueOf(id));
+        return eventRoomService.searchByEventRoomId(Integer.valueOf(id));
     }
 }

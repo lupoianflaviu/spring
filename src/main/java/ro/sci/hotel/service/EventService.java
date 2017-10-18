@@ -80,6 +80,6 @@ public interface EventService<T> {
          */
      //   void setEventRoomRepository(EventRepository<Event> eventRepository);
 
-        T searchById(Integer eventId);
+       T searchById(Integer eventId);
     }
 

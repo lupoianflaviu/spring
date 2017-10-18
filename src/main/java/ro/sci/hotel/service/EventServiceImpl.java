@@ -9,6 +9,7 @@ import java.util.List;
 import ro.sci.hotel.model.event.Event;
 import ro.sci.hotel.model.event.EventRoom;
 import ro.sci.hotel.repository.EventRepository;
+import ro.sci.hotel.repository.EventRoomRepository;
 
 @Repository
 public class EventServiceImpl implements EventService {
@@ -17,6 +18,9 @@ public class EventServiceImpl implements EventService {
     private EventRepository<Event> eventRepository;
     @Autowired
     private EventRoomService<EventRoom> eventRoomService;
+    @Autowired
+    private EventRoomRepository<EventRoom> eventRoomRepository;
+
 
     @Override
     public List<Event> getAll() {
@@ -72,6 +76,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event searchById(Integer eventId) { return null;    }
+    public Event searchById(Integer eventId) {
+
+ //Event event= this.eventRoomService.searchByEventRoomId(eventId);
+
+
+
+        return   null;  }
     }
 
