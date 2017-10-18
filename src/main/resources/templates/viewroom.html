@@ -11,6 +11,9 @@
 <h2>VIEW ROOM</h2>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<div class="btn-group">
+    <a href="/home" class="btn btn-info" role="button">HOME</a>
+</div>
 <p th:text="'Room Number ' + ${room.roomNumber} + ' Room Type ' + ${room.roomType} + ' Bed Type ' + ${room.bedType} + ' Bed Number ' + ${room.bedNumber} + ' Ocean View ' + ${room.oceanView} + ' Air Conditioning ' + ${room.airConditioning} + ' Balcony ' + ${room.balcony} + ' Price ' + ${room.pricePerNight.value} + ${room.pricePerNight.currency}"/>
 <div class="btn-group">
     <a href="/rooms" class="btn btn-info" role="button">View All</a>

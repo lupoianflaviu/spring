@@ -7,6 +7,9 @@
 <body>
 <h1>HOTEL MANAGEMENT</h1>
 <h2>DELETE THIS ROOM</h2>
+<div class="btn-group">
+    <a href="/home" class="btn btn-info" role="button">HOME</a>
+</div>
 <form action="#" th:action="@{/rooms/delete/{id}(id=${room.roomNumber})}" method="post">
     <p>Room Number: <input type="text" th:field="*{room.roomNumber}"/></p>
     <p>Room Type: <input type="text" th:field="*{room.roomType}"/></p>
