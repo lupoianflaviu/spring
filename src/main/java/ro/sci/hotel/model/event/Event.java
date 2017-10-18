@@ -26,6 +26,17 @@ public class Event {
 //        this.totalPrice = totalPrice;
 //    }
 
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", startdate=" + startdate +
+                ", enddate=" + enddate +
+                ", eventRoomId=" + eventRoomId +
+                '}';
+    }
+
     public Date getStartdate() {
         return startdate;
     }

@@ -2,6 +2,7 @@ package ro.sci.hotel.service;
 
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.event.Event;
+import ro.sci.hotel.model.event.EventRoom;
 
 import java.util.Date;
 import java.util.List;
@@ -24,7 +25,7 @@ public interface EventService<T> {
          *
          * @param event to be added in db
          */
-        void createEvent(Event event);
+        void createEvent(Event event, EventRoom eventRoom);
 
         /**
          * Detele an event entry from repository

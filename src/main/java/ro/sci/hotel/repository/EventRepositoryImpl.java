@@ -78,11 +78,10 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
     }
 
     @Override
-    public void createEvent(Event event) {
+    public void createEvent(Event event, EventRoom eventRoom) {
         {
             try (Connection conn = newConnection();
                  PreparedStatement stm = conn.prepareStatement(SQL_INSERT_INTO_EVENT)) {
-
 
                 stm.setDate(1, event.getStartdate());
                 stm.setDate(2, event.getEnddate());

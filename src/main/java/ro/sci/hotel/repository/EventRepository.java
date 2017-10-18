@@ -22,7 +22,7 @@ public interface EventRepository<T> {
     /**
      * @param event
      */
-    void createEvent(Event event);
+    void createEvent(Event event, EventRoom eventRoom);
 
     /**
      *  delete an event entry from DB
