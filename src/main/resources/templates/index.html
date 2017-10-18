@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+    <style>
+      .menu {
+        list-style-type: none;
+      }
+
+      .item {
+        display: inline-block;
+        position: relative;
+        margin-right: 40px;
+      }
+
+      .sub-menu {
+        display: none;
+        position: absolute;
+        top: 30px;
+      }
+
+    </style>
+
+</head>
+
+<body>
+<h1>Hello Plunker!</h1>
+
+
+<ul class="menu">
+    <li class="item">
+        <button id="showEmployeesMenu">Employees</button>
+        <ul class="sub-menu sub-menu-employees">
+            <li class="sub-item"><a href="/emplyee">Show all employees</a></li>
+            <li class="sub-item"><a href="/emplyee">New employee</a></li>
+            <li class="sub-item"><a href="/emplyee">Update employee</a></li>
+            <li class="sub-item"><a href="/emplyee">Delete employee</a></li>
+        </ul>
+    </li>
+    <li class="item">
+        <button id="showBookingMenu">Booking</button>
+
+        <ul class="sub-menu sub-menu-bookings">
+            <li class="sub-item"><a href="/emplyee">Show all bookings</a></li>
+            <li class="sub-item"><a href="/emplyee">New booking</a></li>
+            <li class="sub-item"><a href="/emplyee">Update booking</a></li>
+            <li class="sub-item"><a href="/emplyee">Delete booking</a></li>
+        </ul>
+    </li>
+</ul>
+
+
+<script>
+      var emplBtn = document.getElementById('showEmployeesMenu');
+      var bookBtn = document.getElementById('showBookingMenu');
+
+      emplBtn.addEventListener('click', function(){
+        var subMenu = document.querySelector('.sub-menu-employees');
+
+        if(subMenu.style.display == "block") {
+          subMenu.style.display = "none";
+        } else {
+          subMenu.style.display = "block";
+        }
+
+      });
+
+      bookBtn.addEventListener('click', function(){
+        var subMenu = document.querySelector('.sub-menu-bookings');
+
+        if(subMenu.style.display == "block") {
+          subMenu.style.display = "none";
+        } else {
+          subMenu.style.display = "block";
+        }
+      });
+
+    </script>
+</body>
+
+</html>
