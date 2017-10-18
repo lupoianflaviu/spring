@@ -7,6 +7,9 @@
 <body>
 <h1>HOTEL MANAGEMENT</h1>
 <h2>DELETE THIS CUSTOMER</h2>
+<div class="btn-group">
+    <a href="/home" class="btn btn-info" role="button">HOME</a>
+</div>
 <form action="#" th:action="@{/customers/delete/{id}(id=${customer.id})}" method="post">
     <p>ID: <input type="text" th:field="*{customer.id}"/></p>
     <p>First Name: <input type="text" th:field="*{customer.firstName}"/></p>
