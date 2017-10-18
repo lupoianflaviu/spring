@@ -1,10 +1,13 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<html xmlns:form="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Registration</title>
 </head>
 <body>
+<div class="btn-group">
+    <a href="/home" class="btn btn-info" role="button">HOME</a>
+</div>
 <form:form id="regForm" modelAttribute="user" action="registerProcess" method="post">
     <table align="center">
         <tr>

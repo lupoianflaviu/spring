@@ -7,6 +7,12 @@
 <body>
 <h1>HOTEL MANAGEMENT</h1>
 <h2>SEARCH BOOKING BY ROOM NUMBER</h2>
+<div class="btn-group">
+    <a href="/home" class="btn btn-info" role="button">HOME</a>
+    <a href="/bookings/submit" class="btn btn-info" role="button">Book Now</a>
+    <a href="/bookings/search/availablerooms" class="btn btn-info" role="button">Search Available Rooms</a>
+    <a href="/bookings/search/roomnumber" class="btn btn-info" role="button">Search Room Booking</a>
+</div>
 <form th:object="${booking}" th:action="@{/bookings/search/roomnumber}" method="get">
     <input type="text" name="search" id="search" th:value="${booking}" />
     <input type="submit" value="Search" />
