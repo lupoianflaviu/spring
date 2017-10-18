@@ -6,16 +6,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import ro.sci.hotel.model.employee.Address;
 import ro.sci.hotel.model.employee.Employee;
 import ro.sci.hotel.model.employee.Login;
 import ro.sci.hotel.repository.AddressRepository;
-import ro.sci.hotel.repository.EmployeeRepository;
 import ro.sci.hotel.service.AddressService;
 import ro.sci.hotel.service.EmployeeService;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class LoginController {
@@ -26,7 +23,7 @@ public class LoginController {
     @Autowired
     private AddressService<Address> addressService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showLogin() {
         ModelAndView mav = new ModelAndView("login");
         mav.addObject("login", new Login());

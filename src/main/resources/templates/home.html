@@ -1,17 +1,99 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Welcome</title>
+    <link rel="stylesheet" href="style.css"/>
+    <script src="script.js"></script>
+
+    <style>
+      .menu {
+        list-style-type: none;
+      }
+
+      .item {
+        display: inline-block;
+        position: relative;
+        margin-right: 40px;
+      }
+
+      .sub-menu {
+        display: none;
+        position: absolute;
+        top: 30px;
+      }
+
+    </style>
+
 </head>
+
 <body>
-<table align="center">
-    <tr>
-        <td><a href="login.html">Login</a>
-        </td>
-        <td><a href="register">Register</a>
-        </td>
-    </tr>
-</table>
+<h1>HOTEL MANAGEMENT</h1>
+<h2>Select Feature from menu</h2>
+
+<ul class="menu">
+    <li class="item">
+        <button id="showRoomMenu">Room</button>
+        <ul class="sub-menu sub-menu-room">
+            <li class="sub-item"><a href="/rooms">Show rooms</a></li>
+            <li class="sub-item"><a href="/rooms/submit">New room</a></li>
+        </ul>
+    </li>
+    <li class="item">
+        <button id="showEmployeesMenu">Employees</button>
+        <ul class="sub-menu sub-menu-employees">
+            <li class="sub-item"><a href="/employee">Show all employees</a></li>
+            <li class="sub-item"><a href="/employee/create/newemployee">New employee</a></li>
+        </ul>
+    </li>
+    <li class="item">
+        <button id="showBookingMenu">Booking</button>
+
+        <ul class="sub-menu sub-menu-bookings">
+            <li class="sub-item"><a href="/bookings">Show bookings</a></li>
+            <li class="sub-item"><a href="/bookings/submit">Book Now</a></li>
+        </ul>
+    </li>
+</ul>
+
+
+<script>
+      var roomBtn = document.getElementById('showRoomMenu');
+      var emplBtn = document.getElementById('showEmployeesMenu');
+      var bookBtn = document.getElementById('showBookingMenu');
+
+      roomBtn.addEventListener('click', function(){
+        var subMenu = document.querySelector('.sub-menu-room');
+
+        if(subMenu.style.display == "block") {
+          subMenu.style.display = "none";
+        } else {
+          subMenu.style.display = "block";
+        }
+
+      });
+
+      emplBtn.addEventListener('click', function(){
+        var subMenu = document.querySelector('.sub-menu-employees');
+
+        if(subMenu.style.display == "block") {
+          subMenu.style.display = "none";
+        } else {
+          subMenu.style.display = "block";
+        }
+
+      });
+
+      bookBtn.addEventListener('click', function(){
+        var subMenu = document.querySelector('.sub-menu-bookings');
+
+        if(subMenu.style.display == "block") {
+          subMenu.style.display = "none";
+        } else {
+          subMenu.style.display = "block";
+        }
+      });
+
+    </script>
 </body>
+
 </html>
