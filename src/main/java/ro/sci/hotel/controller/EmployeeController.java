@@ -108,7 +108,7 @@ public class EmployeeController {
     }
 
     //Delete Employee
-    @RequestMapping(value = "/employees/delete/{employeeId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/employee/delete/{employeeId}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public ModelAndView deleteEmployee(@PathVariable("employeeId") Integer employeeId, Model model) {
 
@@ -120,5 +120,15 @@ public class EmployeeController {
         model.addAttribute("employee", employee);
 
         return new ModelAndView("employees", "employees", employeeService.getAll());
+    }
+
+    @RequestMapping(value = "/employee/delete/{employeeId}", method = RequestMethod.GET)
+    public String deleteEmployeeForm(@PathVariable("employeeId") Integer employeeId, Model model) {
+
+        Employee deletedEmployee = employeeService.searchByEmployeeId(employeeId);
+
+        model.addAttribute("employee", deletedEmployee);
+
+        return "deleteemployee";
     }
 }

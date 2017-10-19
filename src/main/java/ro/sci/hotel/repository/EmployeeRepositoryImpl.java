@@ -62,15 +62,16 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
             conn.setAutoCommit(false);
 
-            stm.setString(1,employee.getFirstName());
-            stm.setString(2,employee.getLastName());
-            stm.setString(3,employee.getEmail());
-            stm.setString(4,employee.getUsername());
-            stm.setString(5,employee.getPassword());
-            stm.setString(6,employee.getEmployeePhoneNumber());
-            stm.setDate(7,employee.getEmploymentDate());
+            stm.setInt(1,employee.getEmployeeId());
+            stm.setString(2,employee.getFirstName());
+            stm.setString(3,employee.getLastName());
+            stm.setString(4,employee.getEmail());
+            stm.setString(5,employee.getUsername());
+            stm.setString(6,employee.getPassword());
+            stm.setString(7,employee.getEmployeePhoneNumber());
+            stm.setDate(8,employee.getEmploymentDate());
 //          stm.setDouble(6, employee.getSalary().getValue());
-            stm.setString(8,employee.getEmployeeRole());
+            stm.setString(9,employee.getEmployeeRole());
 
             conn.commit();
             conn.setAutoCommit(true);
@@ -93,9 +94,10 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             stm.execute();
 
 
-        } catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
-            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
+        } catch (SQLException e) {
+//            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
+//            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
+            e.printStackTrace();
         }
         LOGGER.log(Level.INFO, EmployeeFlowConstants.Employee_DELETED);
 

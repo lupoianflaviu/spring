@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Delete Employee</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>HOTEL MANAGEMENT</h1>
+<h2>DELETE THIS EMPLOYEE</h2>
+<div class="btn-group">
+    <input type="button" value="Home" onclick="window.location.href='/home'" />
+</div>
+<form action="#" th:action="@{/employee/delete/{employeeId}(employeeId=${employee.employeeId})}" method="post">
+    <p>Employee id: <input type="text" th:field="*{employee.employeeId}"/></p>
+    <p>First Name: <input type="text" th:field="*{employee.firstName}"/></p>
+    <p>Last Name: <input type="text" th:field="*{employee.lastName}"/></p>
+    <p>Email <input type="text" th:field="*{employee.email}"/></p>
+    <p>Email <input type="text" th:field="*{employee.employeePhoneNumber}"/></p>
+    <p>Email <input type="text" th:field="*{employee.employeeRole}"/></p>
+    <p>Street: <input type="text" th:field="*{employee.employeeAddress.streetAddress}"/></p>
+    <p>City: <input type="text" th:field="*{employee.employeeAddress.city}"/></p>
+    <p>Country: <input type="text" th:field="*{employee.employeeAddress.country}"/></p>
+    <p><input type="submit" value="Delete"/> <input type="reset" value="Reset"/></p>
+</form>
+</body>
+</html>

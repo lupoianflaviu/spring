@@ -1,16 +1,21 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Booking Form Submission</title>
+    <title>New Employee</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
 <body>
-<h1>Result</h1>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<h1>HOTEL MANAGEMENT</h1>
+<h2>New Employee created</h2>
+<h4>Result</h4>
 <div class="btn-group">
-    <a href="/home" class="btn btn-info" role="button">HOME</a>
+    <input type="button" value="Home" onclick="window.location.href='/home'" />
+    <input type="button" value="Search By First Name" onclick="window.location.href='/employee/search/firstname'" />
+    <input type="button" value="Show All" onclick="window.location.href='/employee'" />
 </div>
 <p th:text="'Employee First Name: ' + ${employee.firstName}" />
 <p th:text="'Employee Last Name: ' + ${employee.lastName}" />
-<a href="/employee/create/newemployee">Create a new employee</a>
+<input type="button" value="New Employee" onclick="window.location.href='/employee/create/newemployee'" />
 </body>
 </html>
