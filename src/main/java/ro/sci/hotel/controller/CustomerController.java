@@ -13,6 +13,7 @@ import ro.sci.hotel.repository.CustomerRepositoryImpl;
 import ro.sci.hotel.service.CustomerService;
 import ro.sci.hotel.service.CustomerServiceImpl;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -106,5 +107,14 @@ public class CustomerController {
         customerService.update(updatedCustomer);
 
         return new ModelAndView("customers", "customers", customerService.getAll());
+    }
+
+    //show customers by last name
+    @RequestMapping(value = "/customers/search/lastname", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView customersByLastName(@RequestParam(value = "search", required = false, defaultValue = "") String lastName) {
+        List<Customer> customers = customerService.searchByLastName(lastName);
+        return new ModelAndView("customersbylastname", "search", customers);
+
     }
 }
