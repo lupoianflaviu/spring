@@ -76,7 +76,7 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
                 customer.setLastName(rs.getString(LASTNAME));
                 customer.setEmail(rs.getString(EMAIL));
                 customer.setPhoneNumber(rs.getString(PHONENUMBER));
-                customer.setCustomerAddress(new CustomerAddress());
+                customer.setCustomerAddress(new CustomerAddress(rs.getString(STREETADDRESS), rs.getString(CITY), rs.getString(COUNTRY)));
                 customer.setPaymentMethod(PaymentMethod.valueOf(rs.getString(PAYMENTMETHOD)));
 
                 customers.add(customer);
@@ -102,8 +102,10 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
             stm.setString(3, customer.getLastName());
             stm.setString(4, customer.getEmail());
             stm.setString(5, customer.getPhoneNumber());
-            stm.setString(6, String.valueOf(new CustomerAddress()));
-            stm.setString(7, String.valueOf(customer.getPaymentMethod()));
+            stm.setString(6, String.valueOf(customer.getCustomerAddress().getStreetAddress()));
+            stm.setString(7, String.valueOf(customer.getCustomerAddress().getCity()));
+            stm.setString(8, String.valueOf(customer.getCustomerAddress().getCountry()));
+            stm.setString(9, String.valueOf(customer.getPaymentMethod()));
 
 
             stm.execute();
@@ -171,7 +173,7 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
                 customer.setLastName(rs.getString(LASTNAME));
                 customer.setEmail(rs.getString(EMAIL));
                 customer.setPhoneNumber(rs.getString(PHONENUMBER));
-                customer.setCustomerAddress(new CustomerAddress());
+                customer.setCustomerAddress(new CustomerAddress(rs.getString(STREETADDRESS), rs.getString(CITY), rs.getString(COUNTRY)));
                 customer.setPaymentMethod(PaymentMethod.valueOf(rs.getString(PAYMENTMETHOD)));
             }
         } catch (SQLException ex) {
