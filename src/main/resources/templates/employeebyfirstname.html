@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title></title>
+</head>
+<body>
+<h1>HOTEL MANAGEMENT</h1>
+<h2>SEARCH EMPLOYEE BY FIRST NAME</h2>
+<form th:object="${employee}" th:action="@{/employee/search/firstname}" method="get">
+    <input type="text" name="search" id="search" th:value="${employee}" />
+    <input type="submit" value="Search" />
+    <div th:if="${not #lists.isEmpty(search)}">
+        <h2>Employees with</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Employee Id</th>
+                <th>First Name </th>
+                <th>Last Name </th>
+                <th>Email </th>
+                <th>Street</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Phone Number </th>
+                <th>Hire Date </th>
+                <!--<th>Salary</th>-->
+                <th>Role</th>
+            </tr>
+            <tr th:each="employee: ${search}">
+                <td th:text="${employee.employeeId}">...</td>
+                <td th:text="${employee.firstName}">...</td>
+                <td th:text="${employee.lastName}">...</td>
+                <td th:text="${employee.email}">...</td>
+                <td th:text="${employee.employeePhoneNumber}">...</td>
+                <td th:text="${employee.employmentDate}">...</td>
+                <!--<td th:text="${employee.price}">...</td>-->
+                <td th:text="${employee.employeeRole}">...</td>
+                <td><a th:href="@{employee/search/{employeeId}(employeeId=${employee.employeeId})}">Update</a></td>
+                <td><a th:href="@{employee/search/{employeeId}(employeeId=${employee.employeeId})}">Delete</a></td>
+            </tr>
+            <tr></tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>

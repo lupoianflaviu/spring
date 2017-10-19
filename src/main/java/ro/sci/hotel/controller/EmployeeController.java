@@ -73,9 +73,9 @@ public class EmployeeController {
 
     @RequestMapping(value = "/employee/search/firstname", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView employeesByFirstName(@RequestParam(value = "search", required = false, defaultValue = "") String firstName) {
+    public ModelAndView employeesByFirstName(@RequestParam(value = "search", required = false, defaultValue = "0") String firstName) {
         List<Employee>employees = employeeService.searchByFirstName(firstName);
-        return new ModelAndView("viewEmployeeByFirstName", "search", employees);
+        return new ModelAndView("employeebyfirstname", "search", employees);
 
     }
 
