@@ -11,10 +11,19 @@ import javax.persistence.Id;
 public class CustomerAddress {
     @Id
     @GeneratedValue
+    private int id;
     private String streetAddress;
     private String city;
     private String country;
 
+    public CustomerAddress() {
+    }
+
+    public CustomerAddress(String streetAddress, String city, String country) {
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.country = country;
+    }
 
     public String getStreetAddress() {
         return streetAddress;
@@ -40,12 +49,16 @@ public class CustomerAddress {
         this.country = country;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return "CustomerAddress{" +
-                ", streetAddress='" + streetAddress + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                '}';
+        return streetAddress + " , " + city + " , " + country;
     }
 }
