@@ -60,6 +60,8 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
     private static final String ROOM_UPDATE_IN_DB_HAS_COMPLETED = "Room update in db has completed";
 
+    private static final String SQL_SELECT_BY_ROOM_TYPE ="SELECT * FROM room where  roomtype=? ";
+
 
     @Override
     public List<Room> getAll() {
@@ -198,7 +200,29 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
     @Override
     public List<Room> searchByType(RoomType roomType) {
-        return null;
-    }
+        List<Room> rooms = new ArrayList<>();
 
+        try(Connection conn =newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_SELECT_BY_ROOM_TYPE)){
+
+            stm.setString(1,String.valueOf(roomType));
+            ResultSet rs= stm.executeQuery();
+
+            while (rs.next()) {
+                Room room = new Room();
+                room.setRoomNumber(rs.getInt(ID));
+                room.setRoomType(RoomType.valueOf(rs.getString(ROOMTYPE)));
+                room.setBedType(BedType.valueOf(rs.getString(BEDTYPE)));
+                room.setBedNumber(rs.getInt(BEDNUMBER));
+                room.setOceanView(rs.getBoolean(OCEANVIEW));
+                room.setAirConditioning(rs.getBoolean(AIRCONDITIONING));
+                room.setBalcony(rs.getBoolean(BALCONY));
+                rooms.add(room);
+
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+            e.printStackTrace();
+        }
+        return rooms;
+    }
 }

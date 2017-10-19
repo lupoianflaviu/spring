@@ -113,7 +113,9 @@ public class CustomerController {
     @RequestMapping(value = "/customers/search/lastname", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView customersByLastName(@RequestParam(value = "search", required = false, defaultValue = "") String lastName) {
+
         List<Customer> customers = customerService.searchByLastName(lastName);
+
         return new ModelAndView("customersbylastname", "search", customers);
 
     }
