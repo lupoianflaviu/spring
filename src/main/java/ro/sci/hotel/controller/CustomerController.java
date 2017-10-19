@@ -50,6 +50,8 @@ public class CustomerController {
     @RequestMapping(value = "/customers/submit", method = RequestMethod.GET)
     public String customerForm(Model model) {
         model.addAttribute("customer", new Customer());
+        model.addAttribute("customerAddress", new CustomerAddress());
+
         return "submitcustomer";
     }
 
@@ -58,6 +60,7 @@ public class CustomerController {
 
         customerService.create(customer, customerAddress);
         model.addAttribute("customer", customer);
+        model.addAttribute("customerAddress", customerAddress);
 
         return "resultscustomer";
     }
