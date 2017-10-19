@@ -21,15 +21,23 @@
         position: absolute;
         top: 30px;
       }
+      .text{
+        padding: 170px;
+        }
+
+      .menu_styling{
+         text-align: center;
+        }
 
     </style>
 
 </head>
 
 <body>
-<h1>HOTEL MANAGEMENT</h1>
-<img src="Hotel.jpg" alt="Hotel Management"/>
-<h2>Select Feature from menu</h2>
+<h1 align="center">HOTEL MANAGEMENT</h1>
+<center><img  src="Hotel.jpg" alt="Hotel Management"/></center>
+<h2 align="center">Select Feature from menu</h2>
+<div class="menu_styling">
 <ul class="menu">
     <li class="item">
         <button id="showRoomMenu">Rooms</button>
@@ -50,6 +58,7 @@
         <ul class="sub-menu sub-menu-employees">
             <li class="sub-item"><a href="/employee">Show all employees</a></li>
             <li class="sub-item"><a href="/employee/create/newemployee">New employee</a></li>
+            <li class="sub-item"><a href="/employee/search/firstname">Search employee</a></li>
         </ul>
     </li>
     <li class="item">
@@ -79,6 +88,21 @@
         </ul>
     </li>
 </ul>
+</div>
+
++<div class="text">
+        <h2 align="center">Acest proiesct a fost realizat de catre:</h2>
+        <h4 align="center">Tudor Radovici</h4>
+        <h4 align="center">Flaviu Lupoian</h4>
+        <h4 align="center">Darius Petricele</h4>
+        <h4 align="center">Andrei Vintila</h4>
+
+        <h2 align="center">Coordonatori:</h2>
+        <h4 align="center">Boga Alex</h4>
+        <h4 align="center">Petrindean Ovidiu</h4>
+        <h4 align="center">Sebi Presecan</h4>
+    </div>
+
 
 
 <script>
