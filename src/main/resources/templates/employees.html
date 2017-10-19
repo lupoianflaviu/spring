@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Existing Employees</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="webjars/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
 </head>
 <body>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<h1>HOTEL MANAGEMENT</h1>
+<h2>VIEW ALL EMPLOYEES</h2>
 <div class="btn-group">
-    <a href="/home" class="btn btn-info" role="button">HOME</a>
+    <input type="button" value="Home" onclick="window.location.href='/home'" />
 </div>
     <table class="table table-bordered table-striped">
         <thead>
@@ -39,15 +44,13 @@
         <!--<td th:text="${employee.price}">...</td>-->
         <td th:text="${employee.employeeRole}">...</td>
         <td><a th:href="@{employee/search/{employeeId}(employeeId=${employee.employeeId})}">Update</a></td>
-        <td><a th:href="@{employee/search/{employeeId}(employeeId=${employee.employeeId})}">Delete</a></td>
+        <td><a th:href="@{employee/delete/{employeeId}(employeeId=${employee.employeeId})}">Delete</a></td>
         </tr>
         </th:block>
         </tbody>
     </table>
 <div class="btn - group">
-    <button type="button" class="btn btn-success">Create Employee</button>
-    <button type="button" class="btn btn-warning">Update Employee</button>
-    <button type="button" class="btn btn-danger">Delete Employee</button>
+    <input type="button" value="Create Employee" onclick="window.location.href='/employee/create/newemployee'" />
 </div>
 </body>
 </html>

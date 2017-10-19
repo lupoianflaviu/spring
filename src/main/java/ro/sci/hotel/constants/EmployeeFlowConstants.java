@@ -39,9 +39,11 @@ private  EmployeeFlowConstants(){ }
 
     public static final String SQL_SELECT_ALL_FROM_EMPLOYEE = "SELECT employee_id, first_name, last_name, email, employee_phone_number, employment_date, price, employee_role FROM employee";
 
-    public static final String SQL_INSERT_EMPLOYEE= "INSERT INTO employee (first_name, last_name,email,username,password, employee_phone_number, employment_date,employee_role) VALUES (?,?,?,?,?,?,?,?)";
+    public static final String SQL_INSERT_EMPLOYEE= "INSERT INTO employee (employee_id,first_name, last_name,email,username,password, employee_phone_number, employment_date,employee_role) VALUES (?,?,?,?,?,?,?,?,?)";
 
-    public static final  String DELETE_EMPLOYEE="Delete from employees where id=(?)";
+    public static final String SQL_UPDATE_EMPLOYEE="UPDATE employee  SET first_name=?, last_name=?, email=?, username=?,password=?, employee_phone_number=? WHERE employee_id = ?";
+
+    public static final  String DELETE_EMPLOYEE="Delete from employee where employee_id=?";
 
     public static final  String  SQL_SELECT_USERNAME_PASSWORD="SELECT * FROM employee where username=? AND password=?";
 

@@ -6,13 +6,17 @@ import ro.sci.hotel.model.employee.Employee;
 import ro.sci.hotel.model.employee.Login;
 
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static javax.swing.UIManager.getInt;
 
 /**
  * Created by tudorradovici on 17/09/17.
@@ -58,15 +62,16 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
             conn.setAutoCommit(false);
 
-            stm.setString(1,employee.getFirstName());
-            stm.setString(2,employee.getLastName());
-            stm.setString(3,employee.getEmail());
-            stm.setString(4,employee.getUsername());
-            stm.setString(5,employee.getPassword());
-            stm.setString(6,employee.getEmployeePhoneNumber());
-            stm.setDate(7,employee.getEmploymentDate());
+            stm.setInt(1,employee.getEmployeeId());
+            stm.setString(2,employee.getFirstName());
+            stm.setString(3,employee.getLastName());
+            stm.setString(4,employee.getEmail());
+            stm.setString(5,employee.getUsername());
+            stm.setString(6,employee.getPassword());
+            stm.setString(7,employee.getEmployeePhoneNumber());
+            stm.setDate(8,employee.getEmploymentDate());
 //          stm.setDouble(6, employee.getSalary().getValue());
-            stm.setString(8,employee.getEmployeeRole());
+            stm.setString(9,employee.getEmployeeRole());
 
             conn.commit();
             conn.setAutoCommit(true);
@@ -89,9 +94,10 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             stm.execute();
 
 
-        } catch (SQLException ex) {
-            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
-            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
+        } catch (SQLException e) {
+//            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
+//            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
+            e.printStackTrace();
         }
         LOGGER.log(Level.INFO, EmployeeFlowConstants.Employee_DELETED);
 
@@ -99,6 +105,21 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
     @Override
     public void update(Employee employee) {
+        try(Connection conn=newConnection();PreparedStatement stm=conn.prepareStatement(EmployeeFlowConstants.SQL_UPDATE_EMPLOYEE)){
+
+            stm.setInt(7,employee.getEmployeeId());
+            stm.setString(1,employee.getFirstName());
+            stm.setString(2,employee.getLastName());
+            stm.setString(3,employee.getEmail());
+            stm.setString(4,employee.getUsername());
+            stm.setString(5,employee.getPassword());
+            stm.setString(6,employee.getEmployeePhoneNumber());
+
+            stm.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -116,9 +137,11 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
                 employee.setFirstName(rs.getString(EmployeeFlowConstants.FIRSTNAME));
                 employee.setLastName(rs.getString(EmployeeFlowConstants.LASTNAME));
                 employee.setEmail(rs.getString(EmployeeFlowConstants.EMAIL));
+                employee.setUsername(rs.getString(EmployeeFlowConstants.USERNAME));
+                employee.setPassword(rs.getString(EmployeeFlowConstants.PASSWORD));
                 employee.setEmployeePhoneNumber(rs.getString(EmployeeFlowConstants.PHONENUMBER));
-                //employee.setDate(5,employee.getEmploymentDate());
-//                employee.setDouble(SALARY);
+                employee.setEmploymentDate(rs.getDate(EmployeeFlowConstants.EMPLOYMENTDATE));
+//              employee.setDouble(SALARY);
                 employee.setEmployeeRole(rs.getString(EmployeeFlowConstants.EMPLOYEEROLE));
 
             }
