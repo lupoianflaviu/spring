@@ -1,12 +1,11 @@
 package ro.sci.hotel.repository;
 
 import org.apache.ibatis.annotations.Select;
-import ro.sci.hotel.model.customer.Customer;
+
+import java.util.List;
+
 import ro.sci.hotel.model.event.Event;
 import ro.sci.hotel.model.event.EventRoom;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Booking repository interface for DAO
@@ -22,7 +21,7 @@ public interface EventRepository<T> {
     /**
      * @param event
      */
-    void createEvent(Event event, EventRoom eventRoom);
+    void createEvent(Event event, EventRoom eventRoomId);
 
     /**
      *  delete an event entry from DB

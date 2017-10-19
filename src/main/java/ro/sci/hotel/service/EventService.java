@@ -24,7 +24,7 @@ public interface EventService<T> {
          *
          * @param event to be added in db
          */
-        void createEvent(Event event, EventRoom eventRoom);
+        void createEvent(Event event, EventRoom eventRoomId);
 
         /**
          * Detele an event entry from repository
@@ -76,7 +76,6 @@ public interface EventService<T> {
         /**
          * Setter for booking repository injection
          *
-         * @param eventRepository Booking repository pe care trebuie sa il creez
          */
      //   void setEventRoomRepository(EventRepository<Event> eventRepository);
 

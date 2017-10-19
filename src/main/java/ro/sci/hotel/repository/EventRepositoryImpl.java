@@ -27,7 +27,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
     private static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
 
     private static final String SQL_INSERT_INTO_EVENT =
-            "INSERT INTO event(id,startdate,enddate,eventroomid) values(nextval('event_id_seq'),?,?,?)";
+            "INSERT INTO event(startdate,enddate,eventroomid) values(?,?,?)";
 
     private static final String EVENT_DELETE_IS_COMPLETED = "Deletion of event completed";
 
@@ -78,7 +78,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
     }
 
     @Override
-    public void createEvent(Event event, EventRoom eventRoom) {
+    public void createEvent(Event event, EventRoom eventRoomId) {
         {
             try (Connection conn = newConnection();
                  PreparedStatement stm = conn.prepareStatement(SQL_INSERT_INTO_EVENT)) {
@@ -86,7 +86,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
                 stm.setDate(1, event.getStartDate());
                 stm.setDate(2, event.getEndDate());
               //  stm.setInt(3,event.getId());
-                stm.setInt(3, eventRoom.getId());
+                stm.setInt(3, eventRoomId.getId());
                 stm.execute();
 
             } catch (SQLException ex) {
