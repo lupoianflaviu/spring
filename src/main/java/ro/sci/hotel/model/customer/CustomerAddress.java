@@ -16,6 +16,9 @@ public class CustomerAddress {
     private String city;
     private String country;
 
+    public CustomerAddress() {
+    }
+
     public CustomerAddress(String streetAddress, String city, String country) {
         this.streetAddress = streetAddress;
         this.city = city;
