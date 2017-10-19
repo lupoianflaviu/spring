@@ -62,6 +62,9 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
 
     private static final String CUSTOMER_UPDATE_IN_DB_HAS_COMPLETED = "Customer update in db has completed";
 
+    private static final String SQL_SELECT_BY_LAST_NAME ="SELECT * FROM customer where  lastname=? ";
+
+
     @Override
     public List<Customer> getAll() {
         List<Customer> customers = new ArrayList<>();
@@ -189,6 +192,31 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
 
     @Override
     public List<Customer> searchByLastName(String lastName) {
-        return null;
+        List<Customer> customers = new ArrayList<>();
+
+        try(Connection conn =newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_SELECT_BY_LAST_NAME)){
+
+            stm.setString(1,lastName);
+            ResultSet rs= stm.executeQuery();
+
+            while (rs.next()) {
+                Customer customer = new Customer();
+                customer.setId(rs.getInt(ID));
+                customer.setFirstName(rs.getString(FIRSTNAME));
+                customer.setLastName(rs.getString(LASTNAME));
+                customer.setEmail(rs.getString(EMAIL));
+                customer.setPhoneNumber(rs.getString(PHONENUMBER));
+                customer.setCustomerAddress(new CustomerAddress(rs.getString(STREETADDRESS), rs.getString(CITY), rs.getString(COUNTRY)));
+                customer.setPaymentMethod(PaymentMethod.valueOf(rs.getString(PAYMENTMETHOD)));
+
+
+                customers.add(customer);
+
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+            e.printStackTrace();
+        }
+        return customers;
     }
 }
