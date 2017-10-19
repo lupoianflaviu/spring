@@ -58,9 +58,12 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
 
     private static final String CUSTOMER_DELETE_HAS_COMPLETED = "Deletion of customer completed";
 
-    private static final String SQL_UPDATE_CUSTOMER_WHERE_ID = "UPDATE customer " + "SET firstname=?, lastname=?, email=?, oceanview=?, phonenumber=?, streetaddress=?, city=?, country=?, paymentmethod=? WHERE id = ?";
+    private static final String SQL_UPDATE_CUSTOMER_WHERE_ID = "UPDATE customer " + "SET firstname=?, lastname=?, email=?, phonenumber=?, streetaddress=?, city=?, country=?, paymentmethod=? WHERE id = ?";
 
     private static final String CUSTOMER_UPDATE_IN_DB_HAS_COMPLETED = "Customer update in db has completed";
+
+    private static final String SQL_SELECT_BY_LAST_NAME ="SELECT * FROM customer where  lastname=? ";
+
 
     @Override
     public List<Customer> getAll() {
@@ -91,7 +94,7 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
     }
 
     @Override
-    public void create(Customer customer) {
+    public void create(Customer customer, CustomerAddress customerAddress) {
 
         try (Connection conn = newConnection();
              PreparedStatement stm = conn.prepareStatement(SQL_INSERT_INTO_CUSTOMER_ID_FIRSTNAME_LASTNAME_EMAIL_PHONENUMBER_STREETADDRESS_CITY_COUNTRY_PAYMENTMETHOD_VALUES)) {
@@ -102,8 +105,10 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
             stm.setString(3, customer.getLastName());
             stm.setString(4, customer.getEmail());
             stm.setString(5, customer.getPhoneNumber());
-            stm.setString(6, String.valueOf(new CustomerAddress(STREETADDRESS, CITY, COUNTRY)));
-            stm.setString(7, String.valueOf(customer.getPaymentMethod()));
+            stm.setString(6, String.valueOf(customer.getCustomerAddress().getStreetAddress()));
+            stm.setString(7, String.valueOf(customer.getCustomerAddress().getCity()));
+            stm.setString(8, String.valueOf(customer.getCustomerAddress().getCountry()));
+            stm.setString(9, String.valueOf(customer.getPaymentMethod()));
 
 
             stm.execute();
@@ -141,10 +146,12 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
             stm.setString(2, customer.getLastName());
             stm.setString(3, customer.getEmail());
             stm.setString(4, customer.getPhoneNumber());
-            stm.setString(5, String.valueOf(customer.getCustomerAddress()));
-            stm.setString(6, String.valueOf(customer.getPaymentMethod()));
+            stm.setString(5, String.valueOf(customer.getCustomerAddress().getStreetAddress()));
+            stm.setString(6, String.valueOf(customer.getCustomerAddress().getCity()));
+            stm.setString(7, String.valueOf(customer.getCustomerAddress().getCountry()));
+            stm.setString(8, String.valueOf(customer.getPaymentMethod()));
 
-            stm.setInt(8, customer.getId());
+            stm.setInt(9, customer.getId());
 
             stm.executeUpdate();
 
@@ -185,6 +192,31 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
 
     @Override
     public List<Customer> searchByLastName(String lastName) {
-        return null;
+        List<Customer> customers = new ArrayList<>();
+
+        try(Connection conn =newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_SELECT_BY_LAST_NAME)){
+
+            stm.setString(1,lastName);
+            ResultSet rs= stm.executeQuery();
+
+            while (rs.next()) {
+                Customer customer = new Customer();
+                customer.setId(rs.getInt(ID));
+                customer.setFirstName(rs.getString(FIRSTNAME));
+                customer.setLastName(rs.getString(LASTNAME));
+                customer.setEmail(rs.getString(EMAIL));
+                customer.setPhoneNumber(rs.getString(PHONENUMBER));
+                customer.setCustomerAddress(new CustomerAddress(rs.getString(STREETADDRESS), rs.getString(CITY), rs.getString(COUNTRY)));
+                customer.setPaymentMethod(PaymentMethod.valueOf(rs.getString(PAYMENTMETHOD)));
+
+
+                customers.add(customer);
+
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.WARNING, DATABASE_ERROR);
+            e.printStackTrace();
+        }
+        return customers;
     }
 }
