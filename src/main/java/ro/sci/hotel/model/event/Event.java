@@ -3,11 +3,20 @@ package ro.sci.hotel.model.event;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Event {
+    @Id
+    @GeneratedValue
     private int id;
     private Date startDate;
     private Date endDate;
    // private double totalPrice;
+    @OneToOne
     private EventRoom eventRoomId;
 
     public EventRoom getEventRoomId() {
@@ -17,15 +26,6 @@ public class Event {
     public void setEventRoomId(EventRoom eventRoomId) {
         this.eventRoomId = eventRoomId;
     }
-
-//    public double getTotalPrice() {
-//        return totalPrice;
-//    }
-//
-//    public void setTotalPrice(double totalPrice) {
-//        this.totalPrice = totalPrice;
-//    }
-
 
     @Override
     public String toString() {
