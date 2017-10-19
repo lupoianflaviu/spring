@@ -16,9 +16,9 @@
     <p>Last Name: <input type="text" th:field="*{customer.lastName}"/></p>
     <p>Email: <input type="text" th:field="*{customer.email}"/></p>
     <p>Phone Number: <input type="text" th:field="*{customer.phoneNumber}"/></p>
-    <p>Street Address: <input type="text" th:field="*{customer.customerAddress}"/></p>
-    <!--<p>City: <input type="text" th:field="*{customer.customerAddress.city}"/></p>-->
-    <!--<p>Country: <input type="text" th:field="*{customer.customerAddress.country}"/></p>-->
+    <p>Street Address: <input type="text" th:field="*{customer.customerAddress.streetAddress}"/></p>
+    <p>City: <input type="text" th:field="*{customer.customerAddress.city}"/></p>
+    <p>Country: <input type="text" th:field="*{customer.customerAddress.country}"/></p>
     <p>Payment Method: <input type="text" th:field="*{customer.paymentMethod}"/></p>
     <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
 </form>
