@@ -20,9 +20,9 @@
     <p>Employment Date: <input type="date" th:field="*{employee.employmentDate}" disabled="disabled"/></p>
     <p>Employment Role: <input type="text" th:field="*{employee.employeeRole}" disabled="disabled"/></p>
     <h2>Employee Address</h2>
-    <p>Street <input type="text" th:field="*{address.streetAddress}"/></p>
-    <p>City <input type="text" th:field="*{address.city}"/></p>
-    <p>Country <input type="text" th:field="*{address.country}"/></p>
+    <p>Street <input type="text" th:field="*{employee.employeeAddress.streetAddress}"/></p>
+    <p>City <input type="text" th:field="*{employee.employeeAddress.city}"/></p>
+    <p>Country <input type="text" th:field="*{employee.employeeAddress.country}"/></p>
     <p><input type="submit" value="Update" /> <input type="reset" value="Reset" /></p>
 </form>
 </body>
