@@ -60,7 +60,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
     private static final String ROOM_UPDATE_IN_DB_HAS_COMPLETED = "Room update in db has completed";
 
-    private static final String SQL_SELECT_BY_ROOM_TYPE ="SELECT * FROM room where  roomtype=? ";
+    private static final String SQL_SELECT_BY_ROOM_TYPE ="SELECT * FROM room where roomtype=?";
 
 
     @Override

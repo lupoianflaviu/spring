@@ -12,21 +12,37 @@
 <div class="btn-group">
     <a href="/home" class="btn btn-info" role="button">HOME</a>
 </div>
-<table>
-    <p th:text="' ID ' + ' First Name ' +  'Last Name ' +  'Email ' + 'Phone Number ' + 'Street Adress ' + 'City ' + 'Country ' + 'Payment Method'"/>
-    <block>
-        <tr th:each="customer: ${customers}">
-            <td th:text="${customer.id}">...</td>
-            <td th:text="${customer.firstName}">...</td>
-            <td th:text="${customer.lastName}">...</td>
-            <td th:text="${customer.email}">...</td>
-            <td th:text="${customer.phoneNumber}">...</td>
-            <td th:text="${customer.customerAddress.streetAddress}">...</td>
-            <td th:text="${customer.customerAddress.city}">...</td>
-            <td th:text="${customer.customerAddress.country}">...</td>
-            <td th:text="${customer.paymentMethod}">...</td>
-        </tr>
-    </block>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>ROOM NUMBER</th>
+        <th>ROOM TYPE</th>
+        <th>BED TYPE</th>
+        <th>BED NUMBER</th>
+        <th>OCEAN VIEW</th>
+        <th>AIR CONDITIONING</th>
+        <th>BALCONY</th>
+        <th>PRICE</th>
+        <th>CURRENCY</th>
+    </tr>
+    </thead>
+    <tbody>
+        <th:block th:each="customer: ${customers}">
+            <tr>
+                <td th:text="${customer.id}">...</td>
+                <td th:text="${customer.firstName}">...</td>
+                <td th:text="${customer.lastName}">...</td>
+                <td th:text="${customer.email}">...</td>
+                <td th:text="${customer.phoneNumber}">...</td>
+                <td th:text="${customer.customerAddress.streetAddress}">...</td>
+                <td th:text="${customer.customerAddress.city}">...</td>
+                <td th:text="${customer.customerAddress.country}">...</td>
+                <td th:text="${customer.paymentMethod}">...</td>
+                <td><a th:href="@{/customers/{id}(id=${customer.id})}">Update</a></td>
+                <td><a th:href="@{/customers/delete/{id}(id=${customer.id})}">Delete</a></td>
+            </tr>
+        </th:block>
+    </tbody>
 </table>
 </body>
 </html>
