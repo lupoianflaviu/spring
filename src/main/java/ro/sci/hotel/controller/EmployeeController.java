@@ -4,20 +4,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
-import ro.sci.hotel.model.employee.Address;
-import ro.sci.hotel.model.employee.Employee;
-import ro.sci.hotel.repository.AddressRepository;
-import ro.sci.hotel.repository.EmployeeRepository;
-import ro.sci.hotel.repository.EmployeeRepositoryImpl;
-import ro.sci.hotel.service.AddressService;
-import ro.sci.hotel.service.EmployeeService;
-import ro.sci.hotel.service.EmployeeServiceImpl;
 
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import ro.sci.hotel.model.employee.Address;
+import ro.sci.hotel.model.employee.Employee;
+import ro.sci.hotel.repository.AddressRepository;
+import ro.sci.hotel.repository.EmployeeRepository;
+import ro.sci.hotel.service.AddressService;
+import ro.sci.hotel.service.EmployeeService;
 
 /**
  * Employee Model controller
@@ -68,7 +73,9 @@ public class EmployeeController {
     @RequestMapping(value = "/employee/search/{employeeId}", method = RequestMethod.GET)
     public ModelAndView showEmployeeById(@PathVariable("employeeId") Integer employeeId) {
 
-        return new ModelAndView("updateemployee", "employees", employeeService.searchByEmployeeId(employeeId));
+        Employee employee = employeeService.searchByEmployeeId(employeeId);
+
+        return new ModelAndView("updateemployee", "employee", employeeService.searchByEmployeeId(employeeId));
     }
 
     //Show employees by First Name
@@ -89,9 +96,15 @@ public class EmployeeController {
         updateEmployee.setEmployeeId(employee.getEmployeeId());
         updateEmployee.setFirstName(employee.getFirstName());
         updateEmployee.setLastName(employee.getLastName());
-        updateEmployee.setLastName(employee.getLastName());
+        updateEmployee.setEmail(employee.getEmail());
+        updateEmployee.setUsername(employee.getUsername());
+        updateEmployee.setPassword(employee.getPassword());
+        updateEmployee.setEmployeePhoneNumber(employee.getEmployeePhoneNumber());
+        updateEmployee.setEmployeeAddress(employee.getEmployeeAddress());
 
-        return new ModelAndView("updateemployee","employee",employee);
+        employeeService.update(updateEmployee);
+
+        return new ModelAndView("employees","employees", employeeService.getAll());
     }
 
     //Delete Employee
