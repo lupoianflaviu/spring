@@ -112,9 +112,9 @@ public class RoomController {
     //show rooms by room type
     @RequestMapping(value = "/rooms/search/roomtype", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView roomsByRoomType(@RequestParam(value = "search", required = false, defaultValue = "") String roomType) {
+    public ModelAndView roomsByRoomType(@RequestParam(value = "search", required = false, defaultValue = "") RoomType roomType) {
 
-        List<Room> rooms = roomService.searchByType(RoomType.valueOf(roomType));
+        List<Room> rooms = roomService.searchByType(roomType);
 
         return new ModelAndView("roomsbyroomtype", "search", rooms);
     }
