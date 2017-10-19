@@ -19,17 +19,6 @@ public class EventRoom {
     @OneToOne
     private Price pricePerDay;
 
-    @Override
-    public String toString() {
-        return "EventRoom{" +
-                "id=" + id +
-                ", roomName='" + roomName + '\'' +
-                ", roomCapacity=" + roomCapacity +
-                ", roomOrientation='" + roomOrientation + '\'' +
-                ", floorRoom=" + floorRoom +
-                ", pricePerDay=" + pricePerDay +
-                '}';
-    }
 
     public int getFloorRoom() {
         return floorRoom;
