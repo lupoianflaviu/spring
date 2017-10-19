@@ -86,7 +86,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
                 stm.setDate(1, event.getStartDate());
                 stm.setDate(2, event.getEndDate());
               //  stm.setInt(3,event.getId());
-                stm.setInt(3, eventRoom.getId());
+                stm.setInt(3, event.getEventRoomId().getId());
                 stm.execute();
 
             } catch (SQLException ex) {
