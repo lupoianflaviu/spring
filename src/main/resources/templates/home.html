@@ -6,180 +6,155 @@
     <script src="script.js"></script>
 
     <style>
-        .menu {
-            list-style-type: none;
-            align-content: center;
-        }
+      .menu {
+        list-style-type: none;
+      }
 
-        .item {
-            display: inline-block;
-            position: relative;
-            margin-right: 40px;
-        }
+      .item {
+        display: inline-block;
+        position: relative;
+        margin-right: 40px;
+      }
 
-        .sub-menu {
-            display: none;
-            position: absolute;
-            top: 30px;
-            bottom: 100px;
-        }
-        .text{
-            padding: 170px;
-        }
-
-        .menu_styling{
-            text-align: center;
-        }
+      .sub-menu {
+        display: none;
+        position: absolute;
+        top: 30px;
+      }
 
     </style>
 
 </head>
 
 <body>
-<h1 align="center">HOTEL MANAGEMENT</h1>
-<h2 align="center">Select Feature from menu</h2>
+<h1>HOTEL MANAGEMENT</h1>
+<img src="Hotel.jpg" alt="Hotel Management"/>
+<h2>Select Feature from menu</h2>
+<ul class="menu">
+    <li class="item">
+        <button id="showRoomMenu">Rooms</button>
+        <ul class="sub-menu sub-menu-room">
+            <li class="sub-item"><a href="/rooms">Show rooms</a></li>
+            <li class="sub-item"><a href="/rooms/submit">New room</a></li>
+        </ul>
+    </li>
+    <li class="item">
+        <button id="showCustomerMenu">Customers</button>
+        <ul class="sub-menu sub-menu-customer">
+            <li class="sub-item"><a href="/customers">Show customers</a></li>
+            <li class="sub-item"><a href="/customers/submit">New customer</a></li>
+        </ul>
+    </li>
+    <li class="item">
+        <button id="showEmployeesMenu">Employees</button>
+        <ul class="sub-menu sub-menu-employees">
+            <li class="sub-item"><a href="/employee">Show all employees</a></li>
+            <li class="sub-item"><a href="/employee/create/newemployee">New employee</a></li>
+        </ul>
+    </li>
+    <li class="item">
+        <button id="showBookingMenu">Booking</button>
 
-<div class="menu_styling">
-    <ul class="menu">
-        <li class="item">
-            <button id="showRoomMenu">Rooms</button>
-            <ul class="sub-menu sub-menu-room">
-                <li class="sub-item"><a href="/rooms">Show rooms</a></li>
-                <li class="sub-item"><a href="/rooms/submit">New room</a></li>
-            </ul>
-        </li>
-        <li class="item">
-            <button id="showCustomerMenu">Customers</button>
-            <ul class="sub-menu sub-menu-customer">
-                <li class="sub-item"><a href="/customers">Show customers</a></li>
-                <li class="sub-item"><a href="/customers/submit">New customer</a></li>
-            </ul>
-        </li>
-        <li class="item">
-            <button id="showEmployeesMenu">Employees</button>
-            <ul class="sub-menu sub-menu-employees">
-                <li class="sub-item"><a href="/employee">Show all employees</a></li>
-                <li class="sub-item"><a href="/employee/create/newemployee">New employee</a></li>
-                <li class="sub-item"><a href="/employee/search/firstname">Search employee</a></li>
-            </ul>
-        </li>
-        <li class="item">
-            <button id="showBookingMenu">Booking</button>
+        <ul class="sub-menu sub-menu-bookings">
+            <li class="sub-item"><a href="/bookings">Show bookings</a></li>
+            <li class="sub-item"><a href="/bookings/submit">Book Now</a></li>
+            <li class="sub-item"><a href="/bookings/search/availablerooms">Search Available Rooms</a></li>
+            <li class="sub-item"><a href="/bookings/search/roomnumber">Search Bookings By Room</a></li>
+        </ul>
+    </li>
+    <li class="item">
+        <button id="showEventRoomMenu">EventRooms</button>
 
-            <ul class="sub-menu sub-menu-bookings">
-                <li class="sub-item"><a href="/bookings">Show bookings</a></li>
-                <li class="sub-item"><a href="/bookings/submit">Book Now</a></li>
-                <li class="sub-item"><a href="/bookings/search/availablerooms">Search Available Rooms</a></li>
-                <li class="sub-item"><a href="/bookings/search/roomnumber">Search Bookings By Room</a></li>
-            </ul>
-        </li>
-        <li class="item">
-            <button id="showEventRoomMenu">EventRooms</button>
+        <ul class="sub-menu sub-menu-eventroom">
+            <li class="sub-item"><a href="/eventrooms">Show EventRooms</a></li>
+            <li class="sub-item"><a href="/eventrooms/submit">Add EventRoom</a></li>
+        </ul>
+    </li>
+    <li class="item">
+        <button id="showEventMenu">Events</button>
 
-            <ul class="sub-menu sub-menu-eventroom">
-                <li class="sub-item"><a href="/eventrooms">Show EventRooms</a></li>
-                <li class="sub-item"><a href="/eventrooms/submit">Add EventRoom</a></li>
-            </ul>
-        </li>
-        <li class="item">
-            <button id="showEventMenu">Events</button>
-
-            <ul class="sub-menu sub-menu-event">
-                <li class="sub-item"><a href="/events">Show Events</a></li>
-                <li class="sub-item"><a href="/events/submit">Add Event</a></li>
-            </ul>
-        </li>
-    </ul>
-</div>
+        <ul class="sub-menu sub-menu-event">
+            <li class="sub-item"><a href="/events">Show Events</a></li>
+            <li class="sub-item"><a href="/events/submit">Add Event</a></li>
+        </ul>
+    </li>
+</ul>
 
 
 <script>
-    var roomBtn = document.getElementById('showRoomMenu');
-    var customerBtn = document.getElementById('showCustomerMenu');
-    var emplBtn = document.getElementById('showEmployeesMenu');
-    var bookBtn = document.getElementById('showBookingMenu');
-    var eventroomBtn = document.getElementById('showEventRoomMenu');
-    var eventBtn = document.getElementById('showEventMenu');
+      var roomBtn = document.getElementById('showRoomMenu');
+      var customerBtn = document.getElementById('showCustomerMenu');
+      var emplBtn = document.getElementById('showEmployeesMenu');
+      var bookBtn = document.getElementById('showBookingMenu');
+      var eventroomBtn = document.getElementById('showEventRoomMenu');
+      var eventBtn = document.getElementById('showEventMenu');
 
-    roomBtn.addEventListener('click', function(){
+      roomBtn.addEventListener('click', function(){
         var subMenu = document.querySelector('.sub-menu-room');
 
         if(subMenu.style.display == "block") {
-            subMenu.style.display = "none";
+          subMenu.style.display = "none";
         } else {
-            subMenu.style.display = "block";
+          subMenu.style.display = "block";
         }
 
-    });
+      });
 
-    customerBtn.addEventListener('click', function(){
+      customerBtn.addEventListener('click', function(){
         var subMenu = document.querySelector('.sub-menu-customer');
 
         if(subMenu.style.display == "block") {
-            subMenu.style.display = "none";
+          subMenu.style.display = "none";
         } else {
-            subMenu.style.display = "block";
+          subMenu.style.display = "block";
         }
 
-    });
+      });
 
-    emplBtn.addEventListener('click', function(){
+      emplBtn.addEventListener('click', function(){
         var subMenu = document.querySelector('.sub-menu-employees');
 
         if(subMenu.style.display == "block") {
-            subMenu.style.display = "none";
+          subMenu.style.display = "none";
         } else {
-            subMenu.style.display = "block";
+          subMenu.style.display = "block";
         }
 
-    });
+      });
 
-    bookBtn.addEventListener('click', function(){
+      bookBtn.addEventListener('click', function(){
         var subMenu = document.querySelector('.sub-menu-bookings');
 
         if(subMenu.style.display == "block") {
-            subMenu.style.display = "none";
+          subMenu.style.display = "none";
         } else {
-            subMenu.style.display = "block";
+          subMenu.style.display = "block";
         }
-    });
+      });
 
-    eventroomBtn.addEventListener('click', function(){
+      eventroomBtn.addEventListener('click', function(){
         var subMenu = document.querySelector('.sub-menu-eventroom');
 
         if(subMenu.style.display == "block") {
-            subMenu.style.display = "none";
+          subMenu.style.display = "none";
         } else {
-            subMenu.style.display = "block";
+          subMenu.style.display = "block";
         }
 
-    });
+      });
 
-    eventBtn.addEventListener('click', function(){
+      eventBtn.addEventListener('click', function(){
         var subMenu = document.querySelector('.sub-menu-event');
 
         if(subMenu.style.display == "block") {
-            subMenu.style.display = "none";
+          subMenu.style.display = "none";
         } else {
-            subMenu.style.display = "block";
+          subMenu.style.display = "block";
         }
 
-    });
+      });
 
-</script>
+    </script>
 </body>
-
-<div class="text">
-    <h2 align="center">Acest proiesct a fost realizat de catre:</h2>
-    <h4 align="center">Tudor Radovici</h4>
-    <h4 align="center">Flaviu Lupoian</h4>
-    <h4 align="center">Darius Petricele</h4>
-    <h4 align="center">Andrei Vintila</h4>
-
-    <h2 align="center">Coordonatori:</h2>
-    <h4 align="center">Boga Alex</h4>
-    <h4 align="center">Petrindean Ovidiu</h4>
-    <h4 align="center">Sebi Presecan</h4>
-</div>
 
 </html>

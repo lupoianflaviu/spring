@@ -1,6 +1,9 @@
 package ro.sci.hotel.repository;
 
 
+import ro.sci.hotel.model.customer.Customer;
+import ro.sci.hotel.model.customer.CustomerAddress;
+
 import java.util.List;
 
 /**
@@ -20,7 +23,7 @@ public interface CustomerRepository<T> {
      *
      * @param t new customer
      */
-    void create(T t);
+    void create(Customer customer, CustomerAddress customerAddress);
 
     /**
      * Detele a customer entry from db

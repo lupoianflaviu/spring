@@ -7,6 +7,9 @@
 <body>
 <h1>HOTEL MANAGEMENT</h1>
 <h2>SUBMIT NEW BOOKING FORM</h2>
+<div class="btn-group">
+    <a href="/home" class="btn btn-info" role="button">HOME</a>
+</div>
 <form action="#" th:action="@{/bookings/submit}" method="post">
     <p>Room Number: <input type="text" th:field="*{booking.room}" /></p>
     <p>Customer Id: <input type="text" th:field="*{booking.customer}" /></p>

@@ -8,6 +8,9 @@
 <h1>HOTEL MANAGEMENT</h1>
 <h2>UPDATE ROOM</h2>
 <p> INFO: Only fields marked with * can be updated</p>
+<div class="btn-group">
+    <a href="/home" class="btn btn-info" role="button">HOME</a>
+</div>
 <form action="#" th:action="@{/rooms/{id}(id=${room.roomNumber})}" method="post" id="formupdate">
     <p>Room Number: <input type="text" th:field="*{room.roomNumber}" disabled="disabled"/></p>
     <p>Room Type*: <input type="text" th:field="*{room.roomType}"/></p>
