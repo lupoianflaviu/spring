@@ -4,17 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import ro.sci.hotel.model.room.Room;
+import ro.sci.hotel.model.room.RoomType;
 import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.repository.RoomRepository;
 import ro.sci.hotel.service.PriceService;
@@ -111,4 +109,13 @@ public class RoomController {
         return new ModelAndView("rooms", "rooms", roomService.getAll());
     }
 
+    //show rooms by room type
+    @RequestMapping(value = "/rooms/search/roomtype", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView roomsByRoomType(@RequestParam(value = "search", required = false, defaultValue = "") RoomType roomType) {
+
+        List<Room> rooms = roomService.searchByType(roomType);
+
+        return new ModelAndView("roomsbyroomtype", "search", rooms);
+    }
 }

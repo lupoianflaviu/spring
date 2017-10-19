@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Customers by Last Name</title>
+</head>
+<body>
+<h1>HOTEL MANAGEMENT</h1>
+<h2>SHOW CUSTOMERS BY LAST NAME</h2>
+<div class="btn-group">
+    <a href="/home" class="btn btn-info" role="button">HOME</a>
+    <a href="/customers/submit" class="btn btn-info" role="button">Create new customer</a>
+    <a href="/customers" class="btn btn-info" role="button">Show All Customers</a>
+</div>
+<form th:object="${customer}" th:action="@{/customers/search/lastname}" method="get">
+    <input type="text" name="search" id="search" th:value="${customer}"/>
+    <input type="submit" value="Search"/>
+    <div th:if="${not #lists.isEmpty(search)}">
+        <table class="table table-striped">
+            <tr>
+                <th>CUSTOMER ID</th>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>EMAIL</th>
+                <th>PHONE NUMBER</th>
+                <th>ADDRESS</th>
+                <th>CITY</th>
+                <th>COUNTRY</th>
+                <th>PAYMENT METHOD</th>
+            </tr>
+            <tr th:each="customer: ${search}">
+                <td th:text="${customer.id}">...</td>
+                <td th:text="${customer.firstName}">...</td>
+                <td th:text="${customer.lastName}">...</td>
+                <td th:text="${customer.email}">...</td>
+                <td th:text="${customer.phoneNumber}">...</td>
+                <td th:text="${customer.customerAddress.streetAddress}">...</td>
+                <td th:text="${customer.customerAddress.city}">...</td>
+                <td th:text="${customer.customerAddress.country}">...</td>
+                <td th:text="${customer.paymentMethod}">...</td>
+            </tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>
