@@ -9,16 +9,18 @@
 <h2>UPDATE Employee</h2>
 <p> INFO: Only fields marked with * can be updated</p>
 <div class="btn-group">
-    <a href="/home" class="btn btn-info" role="button">HOME</a>
+    <input type="button" value="Home" onclick="window.location.href='/home'" />
 </div>
 <form action="#" th:action="@{/employee/search/{employeeId}(employeeId=${employee.employeeId})}" method="post" id="formupdate">
     <p>Employee Id: <input type="number" th:field="*{employee.employeeId}" disabled="disabled"/></p>
     <p>Email*: <input type="email" th:field="*{employee.email}" /></p>
-    <p>Username: <input type="text" th:field="*{employee.username}" disabled="disabled"/></p>
-    <p>Password: <input type="text" th:field="*{employee.password}" disabled="disabled"/></p>
-    <p>Phone Number: <input type="text" th:field="*{employee.password}" disabled="disabled"/></p>
-    <p>Employment Date: <input type="date" th:field="*{employee.employmentDate}" disabled="disabled"/></p>
-    <p>Employment Role: <input type="text" th:field="*{employee.employeeRole}" disabled="disabled"/></p>
+    <p>First Name: <input type="text" th:field="*{employee.firstName}" /></p>
+    <p>Last Name: <input type="text" th:field="*{employee.lastName}" /></p>
+    <p>Username: <input type="text" th:field="*{employee.username}" /></p>
+    <p>Password: <input type="text" th:field="*{employee.password}" /></p>
+    <p>Phone Number: <input type="text" th:field="*{employee.employeePhoneNumber}"/></p>
+    <p>Employment Date: <input type="date" th:field="*{employee.employmentDate}" /></p>
+    <p>Employment Role: <input type="text" th:field="*{employee.employeeRole}" /></p>
     <h2>Employee Address</h2>
     <p>Street <input type="text" th:field="*{employee.employeeAddress.streetAddress}"/></p>
     <p>City <input type="text" th:field="*{employee.employeeAddress.city}"/></p>
@@ -27,3 +29,8 @@
 </form>
 </body>
 </html>
+
+
+
+
+
