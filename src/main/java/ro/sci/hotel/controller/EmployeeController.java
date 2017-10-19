@@ -1,6 +1,7 @@
 package ro.sci.hotel.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import ro.sci.hotel.service.EmployeeService;
 import ro.sci.hotel.service.EmployeeServiceImpl;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -92,11 +94,18 @@ public class EmployeeController {
         return new ModelAndView("updateemployee","employee",employee);
     }
 
-//    //Delete Employee
-//    @RequestMapping(value = "/employees/delete/{employeeId}",method = RequestMethod.GET)
-//    public String deleteEmployee(@PathVariable("employeeId")Integer employeeId, Model model){
-//
-//        return new ModelAndView();
-//
-//    }
+    //Delete Employee
+    @RequestMapping(value = "/employees/delete/{employeeId}", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public ModelAndView deleteEmployee(@PathVariable("employeeId") Integer employeeId, Model model) {
+
+        LOGGER.log(Level.INFO, "Deleting employee with id " + employeeId);
+
+        Employee employee = employeeService.searchByEmployeeId(employeeId);
+        employeeService.delete(employee);
+
+        model.addAttribute("employee", employee);
+
+        return new ModelAndView("employees", "employees", employeeService.getAll());
+    }
 }
