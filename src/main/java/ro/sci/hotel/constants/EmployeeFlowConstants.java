@@ -9,6 +9,8 @@ private  EmployeeFlowConstants(){ }
 
     public static final String DATABASE_ERROR = "Database error!";
 
+    public static final String LOGIN_ERROR = "Login Could not be validated";
+
     public static final String EXCEPTION_THROWN = "Exception thrown";
 
     public static final String WRITING_DB_FINISHED="Writing in db has finished!";

@@ -7,7 +7,6 @@ import ro.sci.hotel.model.employee.Login;
 
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -78,9 +77,8 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             stm.execute();
 
         } catch (SQLException e) {
-//            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
-//            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
+            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
         }
         LOGGER.log(Level.INFO, EmployeeFlowConstants.WRITING_DB_FINISHED);
     }
@@ -95,9 +93,8 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
 
         } catch (SQLException e) {
-//            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
-//            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
+            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
         }
         LOGGER.log(Level.INFO, EmployeeFlowConstants.Employee_DELETED);
 
@@ -118,7 +115,8 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
             stm.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
+            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
         }
 
     }
@@ -146,9 +144,8 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
             }
         } catch (SQLException e) {
-//            LOGGER.log(Level.WARNING, DATABASE_ERROR);
-//            throw new RuntimeException(EXCEPTION_THROWN);
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
+            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
         }
 
         return employee;
@@ -174,7 +171,8 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
                 employee.setEmployeeRole(rs.getString(EmployeeFlowConstants.EMPLOYEEROLE));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, EmployeeFlowConstants.LOGIN_ERROR);
+            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
         }
         return employee;
     }
@@ -195,7 +193,7 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
                 employee.setLastName(rs.getString(EmployeeFlowConstants.LASTNAME));
                 employee.setEmail(rs.getString(EmployeeFlowConstants.EMAIL));
                 employee.setEmployeePhoneNumber(rs.getString(EmployeeFlowConstants.PHONENUMBER));
-//              employee.setEmploymentDate(rs.getDate(EMPLOYMENTDATE));
+                employee.setEmploymentDate(rs.getDate(EmployeeFlowConstants.EMPLOYMENTDATE));
 //              employee.setSalary(new Price(rs.getDouble(PRICE), Currency.valueOf(rs.getString(CURRENCY))));
                 employee.setEmployeeRole(rs.getString(EmployeeFlowConstants.EMPLOYEEROLE));
 
@@ -203,7 +201,8 @@ public class EmployeeRepositoryImpl extends BaseRepository implements EmployeeRe
 
             }
         } catch (SQLException e) {
-//            LOGGER.log(Level.WARNING, EmployeeFlowConstants.DATABASE_ERROR);
+//            LOGGER.log(Level.WARNING, EmployeeFlowConstants.LOGIN_ERROR);
+//            throw new RuntimeException(EmployeeFlowConstants.EXCEPTION_THROWN);
             e.printStackTrace();
         }
         return employees;
