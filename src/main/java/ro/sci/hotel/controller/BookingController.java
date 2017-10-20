@@ -191,7 +191,7 @@ public class BookingController {
      * Show available rooms by Date
      *
      * @param startDate begining of stay
-     * @param endDate end of stay
+     * @param endDate   end of stay
      * @return availablerooms.html
      */
     @RequestMapping(value = "/bookings/search/availablerooms", method = RequestMethod.GET)
