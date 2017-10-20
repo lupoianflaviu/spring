@@ -7,6 +7,9 @@
 <body>
 <h1>HOTEL MANAGEMENT</h1>
 <h2>SEARCH EMPLOYEE BY FIRST NAME</h2>
+<div class="btn-group">
+    <input type="button" value="Home" onclick="window.location.href='/home'" />
+</div>
 <form th:object="${employee}" th:action="@{/employee/search/firstname}" method="get">
     <input type="text" name="search" id="search" th:value="${employee}" />
     <input type="submit" value="Search" />
