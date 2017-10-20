@@ -8,7 +8,7 @@ import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.service.CustomerService;
 
 /**
- * Covertor for submit form Converts customer id string to Customer type
+ * Converter for submit form Converts customer id string to Customer type
  *
  * @author flaviu.lupoian@jpard.com
  *
