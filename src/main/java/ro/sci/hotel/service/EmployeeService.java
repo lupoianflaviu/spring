@@ -1,10 +1,10 @@
 package ro.sci.hotel.service;
 
+import java.util.List;
+
 import ro.sci.hotel.model.employee.Employee;
 import ro.sci.hotel.model.employee.Login;
 import ro.sci.hotel.repository.EmployeeRepository;
-
-import java.util.List;
 
 public interface EmployeeService<T> {
     /**

@@ -1,17 +1,14 @@
 package ro.sci.hotel.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import ro.sci.hotel.model.employee.Address;
 import ro.sci.hotel.model.employee.Employee;
 import ro.sci.hotel.model.employee.Login;
 import ro.sci.hotel.repository.EmployeeRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service("employeeService")
 public class EmployeeServiceImpl implements EmployeeService<Employee>{

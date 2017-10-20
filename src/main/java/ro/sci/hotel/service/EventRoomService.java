@@ -1,10 +1,9 @@
 package ro.sci.hotel.service;
 
-import ro.sci.hotel.model.event.EventRoom;
-import ro.sci.hotel.model.util.Price;
-
 import java.util.Date;
 import java.util.List;
+
+import ro.sci.hotel.model.event.EventRoom;
 
 public interface EventRoomService <T> {
     /**

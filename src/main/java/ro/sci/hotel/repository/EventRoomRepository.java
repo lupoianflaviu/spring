@@ -1,12 +1,11 @@
 package ro.sci.hotel.repository;
 
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Repository;
-import ro.sci.hotel.model.event.EventRoom;
-import ro.sci.hotel.model.util.Price;
 
 import java.util.Date;
 import java.util.List;
+
+import ro.sci.hotel.model.event.EventRoom;
 
 public interface EventRoomRepository<T> {
     /**
