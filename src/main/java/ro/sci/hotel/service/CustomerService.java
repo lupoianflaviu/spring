@@ -20,7 +20,6 @@ public interface CustomerService<T> {
 
     /**
      * Create a customer
-     *
      */
     void create(Customer customer, CustomerAddress customerAddress);
 
@@ -40,6 +39,7 @@ public interface CustomerService<T> {
 
     /**
      * Search customer by id
+     *
      * @param id searched
      * @return T searched customer
      */
@@ -47,6 +47,7 @@ public interface CustomerService<T> {
 
     /**
      * Search room by price
+     *
      * @param lastName searched
      * @return List<T> searched customer list
      */

@@ -27,8 +27,10 @@ public class RoomServiceImpl implements RoomService<Room> {
         List<Room> rooms = this.roomRepository.getAll();
 
         for (Room room : rooms) {
-            int priceId = room.getPricePerNight().getId();
-            Price resultPrice = priceService.searchById(room.getPricePerNight().getId());
+            int priceId = room.getPricePerNight()
+                              .getId();
+            Price resultPrice = priceService.searchById(room.getPricePerNight()
+                                                            .getId());
             room.setPricePerNight(resultPrice);
         }
 
@@ -53,7 +55,8 @@ public class RoomServiceImpl implements RoomService<Room> {
     @Override
     public Room searchByRoomNumber(Integer roomNumber) {
         Room room = this.roomRepository.searchByRoomNumber(roomNumber);
-        Price resultPrice = priceService.searchById(room.getPricePerNight().getId());
+        Price resultPrice = priceService.searchById(room.getPricePerNight()
+                                                        .getId());
         room.setPricePerNight(resultPrice);
 
         return room;
