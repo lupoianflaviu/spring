@@ -8,6 +8,8 @@ import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.service.PriceService;
 
 /**
+ * Converter for String to Price
+ *
  * @author flaviu.lupoian@jpard.com
  *
  * date 2017.09.23

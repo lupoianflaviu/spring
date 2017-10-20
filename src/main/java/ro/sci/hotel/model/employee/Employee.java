@@ -5,7 +5,7 @@ import java.sql.Date;
 import ro.sci.hotel.model.util.Price;
 
 /**
- * Created by tudorradovici on 14/09/17.
+ * Employee entity
  */
 public class Employee {
     private int employeeId;

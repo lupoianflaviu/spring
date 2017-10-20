@@ -15,12 +15,14 @@ public class Room {
     @Id
     @GeneratedValue
     private int roomNumber;
+
     private RoomType roomType;
     private BedType bedType;
     private int bedNumber = 1;
     private boolean oceanView = false;
     private boolean airConditioning = false;
     private boolean balcony = false;
+
     @OneToOne
     private Price pricePerNight;
 
@@ -90,8 +92,8 @@ public class Room {
 
     @Override
     public String toString() {
-        return "roomNumber=" + roomNumber + ", roomType=" + roomType + ", bedType=" + bedType + ", bedNumber=" + bedNumber + ", oceanView="
-                + oceanView + ", airConditioning=" + airConditioning + ", balcony=" + balcony + ", pricePerNight=" + pricePerNight;
+        return "roomNumber=" + roomNumber + ", roomType=" + roomType + ", bedType=" + bedType + ", bedNumber=" + bedNumber + ", oceanView=" + oceanView
+                + ", airConditioning=" + airConditioning + ", balcony=" + balcony + ", pricePerNight=" + pricePerNight;
     }
 
     @Override

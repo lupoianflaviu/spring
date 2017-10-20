@@ -1,5 +1,8 @@
 package ro.sci.hotel.model.employee;
 
+/**
+ * Login Entity used for login process
+ */
 public class Login {
 
     private String username;
