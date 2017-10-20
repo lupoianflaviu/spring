@@ -63,6 +63,4 @@ public interface RoomRepository<T> {
      * @return List<T> searched room list
      */
     List<T> searchByType(RoomType roomType);
-
-
 }

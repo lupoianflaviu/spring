@@ -56,20 +56,19 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
     private static final String ROOM_DELETE_HAS_COMPLETED = "Deletion of room completed";
 
-    private static final String SQL_UPDATE_ROOM_WHERE_ID = "UPDATE room " + "SET roomtype=?, bedtype=?, bednumber=?, oceanview=?, airconditioning=?, balcony=?, priceid=? WHERE id = ?";
+    private static final String SQL_UPDATE_ROOM_WHERE_ID =
+            "UPDATE room " + "SET roomtype=?, bedtype=?, bednumber=?, oceanview=?, airconditioning=?, balcony=?, priceid=? WHERE id = ?";
 
     private static final String ROOM_UPDATE_IN_DB_HAS_COMPLETED = "Room update in db has completed";
 
-    private static final String SQL_SELECT_BY_ROOM_TYPE ="SELECT * FROM room where roomtype=?";
+    private static final String SQL_SELECT_BY_ROOM_TYPE = "SELECT * FROM room where roomtype=?";
 
 
     @Override
     public List<Room> getAll() {
         List<Room> rooms = new ArrayList<>();
 
-        try (Connection conn = newConnection();
-             Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery(SQL_SELECT_ALL__FROM_ROOMS)) {
+        try (Connection conn = newConnection(); Statement stm = conn.createStatement(); ResultSet rs = stm.executeQuery(SQL_SELECT_ALL__FROM_ROOMS)) {
 
             while (rs.next()) {
 
@@ -99,7 +98,8 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
     public void create(Room room, Price price) {
 
         try (Connection conn = newConnection();
-             PreparedStatement stm = conn.prepareStatement(SQL_INSERT_INTO_ROOMS_ID_ROOMTYPE_BEDTYPE_BEDNUMBER_OCEANVIEW_AIRCONDITIONING_BALCONY_PRICEID_VALUES)) {
+                PreparedStatement stm = conn.prepareStatement(
+                        SQL_INSERT_INTO_ROOMS_ID_ROOMTYPE_BEDTYPE_BEDNUMBER_OCEANVIEW_AIRCONDITIONING_BALCONY_PRICEID_VALUES)) {
 
 
             stm.setInt(1, room.getRoomNumber());
@@ -109,7 +109,8 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
             stm.setBoolean(5, room.isBalcony());
             stm.setBoolean(6, room.isAirConditioning());
             stm.setBoolean(7, room.isBalcony());
-            stm.setInt(8, room.getPricePerNight().getId());
+            stm.setInt(8, room.getPricePerNight()
+                              .getId());
 
 
             stm.execute();
@@ -124,8 +125,7 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
 
     @Override
     public void delete(Room room) {
-        try (Connection conn = newConnection();
-             PreparedStatement stm = conn.prepareStatement(SQL_DELETE_FROM_ROOM_WHERE_ID)) {
+        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_DELETE_FROM_ROOM_WHERE_ID)) {
 
             stm.setInt(1, room.getRoomNumber());
             stm.executeUpdate();
@@ -149,7 +149,8 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
             stm.setBoolean(4, room.isOceanView());
             stm.setBoolean(5, room.isAirConditioning());
             stm.setBoolean(6, room.isBalcony());
-            stm.setInt(7, room.getPricePerNight().getId());
+            stm.setInt(7, room.getPricePerNight()
+                              .getId());
 
             stm.setInt(8, room.getRoomNumber());
 
@@ -202,10 +203,10 @@ public class RoomRepositoryImpl extends BaseRepository implements RoomRepository
     public List<Room> searchByType(RoomType roomType) {
         List<Room> rooms = new ArrayList<>();
 
-        try(Connection conn =newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_SELECT_BY_ROOM_TYPE)){
+        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_SELECT_BY_ROOM_TYPE)) {
 
-            stm.setString(1,String.valueOf(roomType));
-            ResultSet rs= stm.executeQuery();
+            stm.setString(1, String.valueOf(roomType));
+            ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
                 Room room = new Room();
