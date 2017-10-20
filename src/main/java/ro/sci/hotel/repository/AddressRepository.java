@@ -1,8 +1,8 @@
 package ro.sci.hotel.repository;
 
-import ro.sci.hotel.model.employee.Address;
-
 import java.util.List;
+
+import ro.sci.hotel.model.employee.Address;
 
 public interface AddressRepository<T> {
 

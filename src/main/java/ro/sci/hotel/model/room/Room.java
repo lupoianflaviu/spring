@@ -1,11 +1,11 @@
 package ro.sci.hotel.model.room;
 
-import ro.sci.hotel.model.util.Price;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import ro.sci.hotel.model.util.Price;
 
 /**
  * Hotel room model

@@ -1,10 +1,10 @@
 package ro.sci.hotel.repository;
 
+import java.util.List;
+
 import ro.sci.hotel.model.room.Room;
 import ro.sci.hotel.model.room.RoomType;
 import ro.sci.hotel.model.util.Price;
-
-import java.util.List;
 
 /**
  * Room repository interface for DAO

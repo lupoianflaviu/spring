@@ -1,9 +1,9 @@
 package ro.sci.hotel.repository;
 
+import java.util.List;
+
 import ro.sci.hotel.model.employee.Employee;
 import ro.sci.hotel.model.employee.Login;
-
-import java.util.List;
 
 /**
  * Created by tudorradovici on 17/09/17.

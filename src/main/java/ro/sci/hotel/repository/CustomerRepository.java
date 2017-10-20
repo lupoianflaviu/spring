@@ -1,10 +1,10 @@
 package ro.sci.hotel.repository;
 
 
+import java.util.List;
+
 import ro.sci.hotel.model.customer.Customer;
 import ro.sci.hotel.model.customer.CustomerAddress;
-
-import java.util.List;
 
 /**
  * Customer repository interface for DAO

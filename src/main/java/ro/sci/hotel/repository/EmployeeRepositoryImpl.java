@@ -1,13 +1,8 @@
 package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
-import ro.sci.hotel.constants.EmployeeFlowConstants;
-import ro.sci.hotel.model.employee.Employee;
-import ro.sci.hotel.model.employee.Login;
-
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import ro.sci.hotel.constants.EmployeeFlowConstants;
+import ro.sci.hotel.model.employee.Employee;
+import ro.sci.hotel.model.employee.Login;
 
 
 /**
