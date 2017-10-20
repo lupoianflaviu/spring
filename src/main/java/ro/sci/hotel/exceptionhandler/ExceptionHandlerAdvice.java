@@ -13,8 +13,7 @@ import java.util.logging.Logger;
 import javax.validation.ValidationException;
 
 /**
- * Exceptions handling class
- * What response to receive when an exception appears
+ * Exceptions handling class What response to receive when an exception appears
  */
 @ControllerAdvice
 public class ExceptionHandlerAdvice {

@@ -63,7 +63,6 @@ public class EventRoomServiceImpl implements EventRoomService {
 
 
 
-            int evenRoomId = eventRoom.getId();
 
 
 

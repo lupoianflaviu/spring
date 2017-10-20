@@ -7,13 +7,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.logging.Logger;
+
 import ro.sci.hotel.model.event.Event;
+import ro.sci.hotel.model.event.EventRoom;
 import ro.sci.hotel.model.util.Price;
 import ro.sci.hotel.service.EventRoomService;
 import ro.sci.hotel.service.EventService;
 import ro.sci.hotel.service.PriceService;
-
-import java.util.logging.Logger;
 
 @Controller
 public class EventController {
@@ -38,10 +40,11 @@ public class EventController {
         model.addAttribute("event", new Event());
         return "submitevent";
     }
-    @RequestMapping(value = "/events/submit", method = RequestMethod.POST)
-    public String createEventRoom(@ModelAttribute Event event, Model model) {
 
-        eventService.createEvent(event);
+    @RequestMapping(value = "/events/submit", method = RequestMethod.POST)
+    public String createEventRoom(@ModelAttribute Event event, @ModelAttribute EventRoom eventRoomId , Model model) {
+
+        eventService.createEvent(event,eventRoomId);
         model.addAttribute("event",event);
 
         return "resultsevent";

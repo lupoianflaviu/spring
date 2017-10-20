@@ -51,11 +51,13 @@ public class BookingServiceImpl implements BookingService<Booking> {
                                     .getRoomNumber();
             Room resultRoom = roomService.searchByRoomNumber(roomNumber);
             booking.setRoom(resultRoom);
+
             //set Customer for Booking
             int customerId = booking.getCustomer()
                                     .getId();
             Customer resultCustomer = customerService.searchByCustomerId(customerId);
             booking.setCustomer(resultCustomer);
+
             //set TotalBookingPrice for Booking
             booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight()
                                                                                     .getValue());
@@ -69,6 +71,7 @@ public class BookingServiceImpl implements BookingService<Booking> {
     @Override
     public void create(Booking booking, Room room, Customer customer) {
         List<Booking> bookings = getAll();
+
         //check if same Room and is not booked
         for (Booking savedBooking : bookings) {
 
@@ -107,6 +110,7 @@ public class BookingServiceImpl implements BookingService<Booking> {
     @Override
     public void update(Booking booking) {
         List<Booking> bookings = getAll();
+
         //check if same Room and is not booked
         for (Booking savedBooking : bookings) {
 
@@ -139,11 +143,13 @@ public class BookingServiceImpl implements BookingService<Booking> {
             Room resultRoom = roomService.searchByRoomNumber(roomNumber);
 
             booking.setRoom(resultRoom);
+
             //Set Customer for booking
             int customerId = booking.getCustomer()
                                     .getId();
             Customer resultCustomer = customerService.searchByCustomerId(customerId);
             booking.setCustomer(resultCustomer);
+
             //Set TotalBookingPrice for booking
             booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight()
                                                                                     .getValue());
@@ -159,16 +165,19 @@ public class BookingServiceImpl implements BookingService<Booking> {
         List<Booking> bookings = this.bookingRepository.searchByDate(startDate, endDate);
 
         for (Booking booking : bookings) {
+
             //Set Room for booking
             int roomNumber = booking.getRoom()
                                     .getRoomNumber();
             Room resultRoom = roomService.searchByRoomNumber(roomNumber);
             booking.setRoom(resultRoom);
+
             //Set Customer for booking
             int customerId = booking.getCustomer()
                                     .getId();
             Customer resultCustomer = customerService.searchByCustomerId(customerId);
             booking.setCustomer(resultCustomer);
+
             //Set TotalBookingPrice for booking
             booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight()
                                                                                     .getValue());
@@ -219,11 +228,13 @@ public class BookingServiceImpl implements BookingService<Booking> {
                                 .getRoomNumber();
         Room resultRoom = roomService.searchByRoomNumber(roomNumber);
         booking.setRoom(resultRoom);
+
         //Set Customer for booking
         int customerId = booking.getCustomer()
                                 .getId();
         Customer resultCustomer = customerService.searchByCustomerId(customerId);
         booking.setCustomer(resultCustomer);
+
         //Set TotalBookingPrice for booking
         booking.setTotalBookingPrice(booking.getTotalBookingPrice() * resultRoom.getPricePerNight()
                                                                                 .getValue());
