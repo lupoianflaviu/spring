@@ -1,10 +1,10 @@
 package ro.sci.hotel.service;
 
-import ro.sci.hotel.model.customer.Customer;
-import ro.sci.hotel.model.event.Event;
-
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
+
+import ro.sci.hotel.model.event.Event;
+import ro.sci.hotel.model.event.EventRoom;
 
 /**
  * Service interface for Event Repository manipulation
@@ -24,7 +24,7 @@ public interface EventService<T> {
          *
          * @param event to be added in db
          */
-        void createEvent(Event event);
+        void createEvent(Event event, EventRoom eventRoomId);
 
         /**
          * Detele an event entry from repository
@@ -76,10 +76,9 @@ public interface EventService<T> {
         /**
          * Setter for booking repository injection
          *
-         * @param eventRepository Booking repository pe care trebuie sa il creez
          */
      //   void setEventRoomRepository(EventRepository<Event> eventRepository);
 
-        T searchById(Integer eventId);
+       T searchById(Integer eventId);
     }
 

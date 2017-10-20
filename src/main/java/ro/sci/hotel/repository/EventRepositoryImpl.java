@@ -1,8 +1,6 @@
 package ro.sci.hotel.repository;
 
 import org.springframework.stereotype.Repository;
-import ro.sci.hotel.model.event.Event;
-import ro.sci.hotel.model.event.EventRoom;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,10 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import ro.sci.hotel.model.event.Event;
+import ro.sci.hotel.model.event.EventRoom;
 @Repository
 public class EventRepositoryImpl extends BaseRepository implements EventRepository {
 
@@ -27,7 +27,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
     private static final String WRITING_IN_DB_HAS_FINISHED = "Writing in db has finished!";
 
     private static final String SQL_INSERT_INTO_EVENT =
-            "INSERT INTO event(startdate,enddate,eventroomid) values(?,?,?)";
+            "INSERT INTO event(id,startdate,enddate,eventroomid) values(nextval('event_id_seq'),?,?,?)";
 
     private static final String EVENT_DELETE_IS_COMPLETED = "Deletion of event completed";
 
@@ -59,8 +59,8 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
                     EventRoom room = new EventRoom();
                     room.getRoomName();
                     event.setId(rs.getInt(ID));
-                    event.setStartdate(rs.getDate(STARTDATE));
-                    event.setEnddate(rs.getDate(ENDDATE));
+                    event.setStartDate(rs.getDate(STARTDATE));
+                    event.setEndDate(rs.getDate(ENDDATE));
                     room.setId(rs.getInt("eventroomid"));
                     event.setEventRoomId(room);
 
@@ -78,14 +78,13 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
     }
 
     @Override
-    public void createEvent(Event event) {
+    public void createEvent(Event event, EventRoom eventRoom) {
         {
             try (Connection conn = newConnection();
                  PreparedStatement stm = conn.prepareStatement(SQL_INSERT_INTO_EVENT)) {
 
-
-                stm.setDate(1, event.getStartdate());
-                stm.setDate(2, event.getEnddate());
+                stm.setDate(1, event.getStartDate());
+                stm.setDate(2, event.getEndDate());
               //  stm.setInt(3,event.getId());
                 stm.setInt(3, event.getEventRoomId().getId());
                 stm.execute();
@@ -98,8 +97,8 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
             LOGGER.log(Level.INFO, WRITING_IN_DB_HAS_FINISHED);
 
         }
-
     }
+
 
     @Override
     public void delete(Object o) {
@@ -112,7 +111,7 @@ public class EventRepositoryImpl extends BaseRepository implements EventReposito
     }
 
     @Override
-    public List serachByEventRoomName(String eventRoomName) {
+    public List searchByEventRoomName(String eventRoomName) {
         return null;
     }
 

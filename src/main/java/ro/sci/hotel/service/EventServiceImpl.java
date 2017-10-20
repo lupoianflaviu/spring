@@ -2,13 +2,14 @@ package ro.sci.hotel.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ro.sci.hotel.model.customer.Customer;
+
+import java.sql.Date;
+import java.util.List;
+
 import ro.sci.hotel.model.event.Event;
 import ro.sci.hotel.model.event.EventRoom;
 import ro.sci.hotel.repository.EventRepository;
-
-import java.util.Date;
-import java.util.List;
+import ro.sci.hotel.repository.EventRoomRepository;
 
 @Repository
 public class EventServiceImpl implements EventService {
@@ -17,6 +18,9 @@ public class EventServiceImpl implements EventService {
     private EventRepository<Event> eventRepository;
     @Autowired
     private EventRoomService<EventRoom> eventRoomService;
+    @Autowired
+    private EventRoomRepository<EventRoom> eventRoomRepository;
+
 
     @Override
     public List<Event> getAll() {
@@ -37,7 +41,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void createEvent(Event event) {   this.eventRepository.createEvent(event);
+    public void createEvent(Event event,EventRoom eventRoomId) {
+        this.eventRepository.createEvent(event, eventRoomId);
 
     }
 
@@ -72,6 +77,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event searchById(Integer eventId) { return null;    }
+    public Event searchById(Integer eventId) {
+
+ //Event event= this.eventRoomService.searchByEventRoomId(eventId);
+
+
+
+        return   null;  }
     }
 
