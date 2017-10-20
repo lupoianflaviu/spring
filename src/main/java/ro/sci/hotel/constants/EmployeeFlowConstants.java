@@ -1,10 +1,14 @@
 package ro.sci.hotel.constants;
 
+import java.util.logging.Logger;
+
 public final class EmployeeFlowConstants {
 
 
     private EmployeeFlowConstants() {
     }
+
+    public static final Logger LOGGER = Logger.getLogger("Hotel");
 
     public static final String DATABASE_ERROR = "Database error!";
 
@@ -15,6 +19,8 @@ public final class EmployeeFlowConstants {
     public static final String WRITING_DB_FINISHED = "Writing in db has finished!";
 
     public static final String Employee_DELETED = "Deletion of employee by ID successful";
+
+    public static final String EMPLOYEE_UPDATE_IN_DB_SUCCESSFUL = "Employee update in db has been completed";
 
     public static final String ID = "employee_id";
 
