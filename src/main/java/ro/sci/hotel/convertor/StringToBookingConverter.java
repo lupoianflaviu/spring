@@ -8,8 +8,8 @@ import ro.sci.hotel.model.booking.Booking;
 import ro.sci.hotel.service.BookingService;
 
 /**
- *
  * Convertor for booking id into a Booking.
+ *
  * @author flaviu.lupoian@jpard.com
  *
  * date 2017.09.24
