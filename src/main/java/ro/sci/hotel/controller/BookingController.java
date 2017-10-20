@@ -57,7 +57,7 @@ public class BookingController {
     @RequestMapping(value = "/bookings", method = RequestMethod.GET)
     public ModelAndView showBookings() {
 
-        return new ModelAndView("bookings", "bookings", bookingService.getAll());
+        return new ModelAndView("booking/bookings", "bookings", bookingService.getAll());
     }
 
     /**
@@ -71,7 +71,7 @@ public class BookingController {
 
         Booking booking = bookingService.searchById(id);
 
-        return new ModelAndView("updatebooking", "booking", booking);
+        return new ModelAndView("booking/updatebooking", "booking", booking);
     }
 
     /**
@@ -83,7 +83,7 @@ public class BookingController {
     @RequestMapping(value = "/bookings/submit", method = RequestMethod.GET)
     public String bookingForm(Model model) {
         model.addAttribute("booking", new Booking());
-        return "submit";
+        return "booking/submit";
     }
 
     /**
@@ -102,7 +102,7 @@ public class BookingController {
         bookingService.create(booking, room, customer);
         model.addAttribute("booking", booking);
 
-        return "results";
+        return "booking/results";
     }
 
     /**
@@ -125,7 +125,7 @@ public class BookingController {
         model.addAttribute("room", currentRoom);
         model.addAttribute("customer", currentCustomer);
 
-        return "deletebooking";
+        return "booking/deletebooking";
     }
 
     /**
@@ -146,7 +146,7 @@ public class BookingController {
 
         model.addAttribute("booking", booking);
 
-        return new ModelAndView("bookings", "bookings", bookingService.getAll());
+        return new ModelAndView("booking/bookings", "bookings", bookingService.getAll());
     }
 
     /**
@@ -168,7 +168,7 @@ public class BookingController {
 
         bookingService.update(updatedBooking);
 
-        return new ModelAndView("bookings", "bookings", bookingService.getAll());
+        return new ModelAndView("booking/bookings", "bookings", bookingService.getAll());
     }
 
     /**
@@ -183,7 +183,7 @@ public class BookingController {
 
         List<Booking> bookings = bookingService.searchByRoomNumber(roomNumber);
 
-        return new ModelAndView("bookingsbyroomnumber", "search", bookings);
+        return new ModelAndView("booking/bookingsbyroomnumber", "search", bookings);
 
     }
 
@@ -201,6 +201,6 @@ public class BookingController {
 
         List<Room> rooms = bookingService.searchAvailableRoomsByDate(Date.valueOf(startDate), Date.valueOf(endDate));
 
-        return new ModelAndView("availablerooms", "search", rooms);
+        return new ModelAndView("booking/availablerooms", "search", rooms);
     }
 }
