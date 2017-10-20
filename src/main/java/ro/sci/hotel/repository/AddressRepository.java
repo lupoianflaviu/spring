@@ -4,6 +4,10 @@ import java.util.List;
 
 import ro.sci.hotel.model.employee.Address;
 
+/**
+ * Address repository for DAO
+ * @param <T>
+ */
 public interface AddressRepository<T> {
 
     /**

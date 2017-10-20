@@ -58,11 +58,12 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
 
     private static final String CUSTOMER_DELETE_HAS_COMPLETED = "Deletion of customer completed";
 
-    private static final String SQL_UPDATE_CUSTOMER_WHERE_ID = "UPDATE customer " + "SET firstname=?, lastname=?, email=?, phonenumber=?, streetaddress=?, city=?, country=?, paymentmethod=? WHERE id = ?";
+    private static final String SQL_UPDATE_CUSTOMER_WHERE_ID =
+            "UPDATE customer " + "SET firstname=?, lastname=?, email=?, phonenumber=?, streetaddress=?, city=?, country=?, paymentmethod=? WHERE id = ?";
 
     private static final String CUSTOMER_UPDATE_IN_DB_HAS_COMPLETED = "Customer update in db has completed";
 
-    private static final String SQL_SELECT_BY_LAST_NAME ="SELECT * FROM customer where  lastname=? ";
+    private static final String SQL_SELECT_BY_LAST_NAME = "SELECT * FROM customer where  lastname=? ";
 
 
     @Override
@@ -97,7 +98,8 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
     public void create(Customer customer, CustomerAddress customerAddress) {
 
         try (Connection conn = newConnection();
-             PreparedStatement stm = conn.prepareStatement(SQL_INSERT_INTO_CUSTOMER_ID_FIRSTNAME_LASTNAME_EMAIL_PHONENUMBER_STREETADDRESS_CITY_COUNTRY_PAYMENTMETHOD_VALUES)) {
+                PreparedStatement stm = conn.prepareStatement(
+                        SQL_INSERT_INTO_CUSTOMER_ID_FIRSTNAME_LASTNAME_EMAIL_PHONENUMBER_STREETADDRESS_CITY_COUNTRY_PAYMENTMETHOD_VALUES)) {
 
 
             stm.setInt(1, customer.getId());
@@ -105,9 +107,12 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
             stm.setString(3, customer.getLastName());
             stm.setString(4, customer.getEmail());
             stm.setString(5, customer.getPhoneNumber());
-            stm.setString(6, String.valueOf(customer.getCustomerAddress().getStreetAddress()));
-            stm.setString(7, String.valueOf(customer.getCustomerAddress().getCity()));
-            stm.setString(8, String.valueOf(customer.getCustomerAddress().getCountry()));
+            stm.setString(6, String.valueOf(customer.getCustomerAddress()
+                                                    .getStreetAddress()));
+            stm.setString(7, String.valueOf(customer.getCustomerAddress()
+                                                    .getCity()));
+            stm.setString(8, String.valueOf(customer.getCustomerAddress()
+                                                    .getCountry()));
             stm.setString(9, String.valueOf(customer.getPaymentMethod()));
 
 
@@ -124,8 +129,7 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
     @Override
     public void delete(Customer customer) {
 
-        try (Connection conn = newConnection();
-             PreparedStatement stm = conn.prepareStatement(SQL_DELETE_FROM_CUSTOMER_WHERE_ID)) {
+        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_DELETE_FROM_CUSTOMER_WHERE_ID)) {
 
             stm.setInt(1, customer.getId());
             stm.executeUpdate();
@@ -146,9 +150,12 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
             stm.setString(2, customer.getLastName());
             stm.setString(3, customer.getEmail());
             stm.setString(4, customer.getPhoneNumber());
-            stm.setString(5, String.valueOf(customer.getCustomerAddress().getStreetAddress()));
-            stm.setString(6, String.valueOf(customer.getCustomerAddress().getCity()));
-            stm.setString(7, String.valueOf(customer.getCustomerAddress().getCountry()));
+            stm.setString(5, String.valueOf(customer.getCustomerAddress()
+                                                    .getStreetAddress()));
+            stm.setString(6, String.valueOf(customer.getCustomerAddress()
+                                                    .getCity()));
+            stm.setString(7, String.valueOf(customer.getCustomerAddress()
+                                                    .getCountry()));
             stm.setString(8, String.valueOf(customer.getPaymentMethod()));
 
             stm.setInt(9, customer.getId());
@@ -194,10 +201,10 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
     public List<Customer> searchByLastName(String lastName) {
         List<Customer> customers = new ArrayList<>();
 
-        try(Connection conn =newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_SELECT_BY_LAST_NAME)){
+        try (Connection conn = newConnection(); PreparedStatement stm = conn.prepareStatement(SQL_SELECT_BY_LAST_NAME)) {
 
-            stm.setString(1,lastName);
-            ResultSet rs= stm.executeQuery();
+            stm.setString(1, lastName);
+            ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
                 Customer customer = new Customer();
