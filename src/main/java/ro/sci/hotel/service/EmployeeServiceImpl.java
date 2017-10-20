@@ -10,8 +10,11 @@ import ro.sci.hotel.model.employee.Employee;
 import ro.sci.hotel.model.employee.Login;
 import ro.sci.hotel.repository.EmployeeRepository;
 
+/**
+ * Implemeantation for EmployeeService
+ */
 @Service("employeeService")
-public class EmployeeServiceImpl implements EmployeeService<Employee>{
+public class EmployeeServiceImpl implements EmployeeService<Employee> {
 
     @Autowired
     private EmployeeRepository<Employee> employeeRepository;
@@ -80,6 +83,6 @@ public class EmployeeServiceImpl implements EmployeeService<Employee>{
 
     @Override
     public void setEmployeeRepository(EmployeeRepository<Employee> employeeRepository) {
-        this.employeeRepository =employeeRepository;
+        this.employeeRepository = employeeRepository;
     }
 }

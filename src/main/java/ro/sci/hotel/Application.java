@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
  * Hotel Management
  *
  * @author Andrei Vintila, Darius Petricele, Flaviu Lupoian, Tudor Radovici
- * @version 1.1
+ * @version 1.0
  */
 @SpringBootApplication
 @ComponentScan("ro.sci.hotel")

@@ -7,6 +7,10 @@ import java.util.List;
 
 import ro.sci.hotel.model.employee.Address;
 import ro.sci.hotel.repository.AddressRepository;
+
+/**
+ * Address service implementation
+ */
 @Service("Address Service")
 public class AddressServiceImpl implements AddressService<Address> {
 
