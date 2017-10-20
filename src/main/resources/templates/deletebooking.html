@@ -8,17 +8,18 @@
 <h1>HOTEL MANAGEMENT</h1>
 <h2>DELETE THIS BOOKING</h2>
 <div class="btn-group">
-    <a href="/home" class="btn btn-info" role="button">HOME</a>
-    <a href="/bookings/submit" class="btn btn-info" role="button">Book Now</a>
-    <a href="/bookings/search/availablerooms" class="btn btn-info" role="button">Search Available Rooms</a>
-    <a href="/bookings/search/roomnumber" class="btn btn-info" role="button">Search Room Booking</a>
+    <input type="button" value="Home" onclick="window.location.href='/home'" />
+    <input type="button" value="All Bookings" onclick="window.location.href='/bookings'" />
+    <input type="button" value="Book Now" onclick="window.location.href='/bookings/submit'" />
+    <input type="button" value="Available Rooms" onclick="window.location.href='/bookings/search/availablerooms'" />
+    <input type="button" value="Booked Rooms" onclick="window.location.href='/bookings/search/roomnumber'" />
 </div>
 <form action="#" th:action="@{/bookings/delete/{id}(id=${booking.id})}" method="post">
-    <p>Booking id: <input type="text" th:field="*{booking.id}"/></p>
-    <p>Room Number: <input type="text" th:field="*{room.roomNumber}"/></p>
-    <p>Customer Id: <input type="text" th:field="*{customer.id}"/></p>
-    <p>StartDate: <input type="text" th:field="*{booking.startDate}"/></p>
-    <p>EndDate: <input type="text" th:field="*{booking.endDate}"/></p>
+    <p>Booking id: <input type="text" th:field="*{booking.id}" disabled="disabled"/></p>
+    <p>Room Number: <input type="text" th:field="*{room.roomNumber}" disabled="disabled"/></p>
+    <p>Customer Id: <input type="text" th:field="*{customer.id}" disabled="disabled"/></p>
+    <p>StartDate: <input type="text" th:field="*{booking.startDate}" disabled="disabled" /></p>
+    <p>EndDate: <input type="text" th:field="*{booking.endDate}" disabled="disabled"/></p>
     <p><input type="submit" value="Delete"/> <input type="reset" value="Reset"/></p>
 </form>
 </body>
