@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * Hotel Management Web App
+ * Hotel Management Application
  *
  * @author Andrei Vintila, Darius Petricele, Flaviu Lupoian, Tudor Radovici
  * @version 1.0
